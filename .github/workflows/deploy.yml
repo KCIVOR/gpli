@@ -1,0 +1,40 @@
+name: Auto Deploy to Production (cPanel)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf "%s" "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keygen -p -m PEM -f ~/.ssh/id_ed25519 -N "" -q
+          ssh-keyscan -H 89.116.134.177 >> ~/.ssh/known_hosts
+
+      - name: Deploy to cPanel
+        run: |
+          rsync -avz \
+            -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no -o LogLevel=ERROR -T -o 'UserKnownHostsFile=/dev/null'" \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.gitignore' \
+            --exclude='application/config/database.php' \
+            --exclude='uploads/' \
+            --exclude='backups/' \
+            --exclude='application/logs/' \
+            --exclude='.DS_Store' \
+            --exclude='Thumbs.db' \
+            --exclude='desktop.ini' \
+            --exclude='*.log' \
+            ./ \
+            startuplabcc@89.116.134.177:/home/startuplabcc/public_html/lms
