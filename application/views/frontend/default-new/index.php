@@ -35,8 +35,8 @@
     </head>
 
     <body class="<?php echo $this->session->userdata('theme_mode'); ?>">
-        <div style="background:#ff5722;color:#fff;text-align:center;padding:6px;font-weight:bold;">
-            Deploy test — <?php echo date('Y-m-d H:i:s'); ?>
+        <div style="background:#2196f3;color:#fff;text-align:center;padding:6px;font-weight:bold;">
+            Deploy test #2 — <?php echo date('Y-m-d H:i:s'); ?>
         </div>
         <?php
             //user wishlist items
