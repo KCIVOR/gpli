@@ -1,0 +1,26 @@
+# Environment-specific — never overwrite the live server's real values
+application/config/database.php
+
+# User-uploaded content — lives on the server, not in git
+uploads/*
+!uploads/.gitkeep
+
+# Runtime logs
+application/logs/*.php
+!application/logs/index.html
+
+# Local backups folder
+backups/*
+!backups/.gitkeep
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Never commit SSH keys if they ever end up in this folder
+deploy_key
+deploy_key.pub
+deploy_key_v2
+deploy_key_v2.pub
+*.pem
