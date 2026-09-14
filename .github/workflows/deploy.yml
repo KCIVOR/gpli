@@ -43,5 +43,9 @@ jobs:
             --exclude='*.log' \
             --exclude='*.md' \
             --exclude='docs/' \
+            --exclude='assets/design-system/reference/' \
+            --exclude='assets/design-system/dropdown-bs5-verify.html' \
+            --exclude='assets/design-system/email-preview.html' \
+            --exclude='geeseprojdesignsystem.html' \
             ./ \
             startuplabcc@89.116.134.177:/home/startuplabcc/public_html/lms
