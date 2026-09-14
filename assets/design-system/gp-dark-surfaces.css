@@ -1,0 +1,284 @@
+/**
+ * Leftover LMS chrome for Dark and System+OS-dark only.
+ * Light and System+OS-light keep existing Hyper / frontend colors.
+ */
+
+.gp-ds[data-theme="dark"] {
+  background: var(--gp-bg) !important;
+  color: var(--gp-fg);
+  color-scheme: dark;
+}
+
+/* Chrome/Edge paint a white sheet on autofilled or valued fields */
+.gp-ds[data-theme="dark"] input,
+.gp-ds[data-theme="dark"] textarea,
+.gp-ds[data-theme="dark"] select {
+  color-scheme: dark;
+}
+
+.gp-ds[data-theme="dark"] input:-webkit-autofill,
+.gp-ds[data-theme="dark"] input:-webkit-autofill:hover,
+.gp-ds[data-theme="dark"] input:-webkit-autofill:focus,
+.gp-ds[data-theme="dark"] input:-webkit-autofill:active,
+.gp-ds[data-theme="dark"] textarea:-webkit-autofill,
+.gp-ds[data-theme="dark"] select:-webkit-autofill {
+  -webkit-text-fill-color: var(--gp-fg) !important;
+  caret-color: var(--gp-fg);
+  border-color: var(--gp-border-strong);
+  transition: background-color 99999s ease-out 0s;
+  box-shadow: 0 0 0 1000px var(--gp-surface-sunk) inset !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--gp-surface-sunk) inset !important;
+}
+
+/* Leftover theme CSS that hard-codes #fff (style.css / new-style.css / playing-page) */
+.gp-ds[data-theme="dark"] .menu-header,
+.gp-ds[data-theme="dark"] .blog-item,
+.gp-ds[data-theme="dark"] .course-item-one,
+.gp-ds[data-theme="dark"] .course-item-5,
+.gp-ds[data-theme="dark"] .course-item-6,
+.gp-ds[data-theme="dark"] .category-item,
+.gp-ds[data-theme="dark"] .service-item-one,
+.gp-ds[data-theme="dark"] .price-item-5,
+.gp-ds[data-theme="dark"] .upcoming-course-six,
+.gp-ds[data-theme="dark"] .custom-accordion-two .accordion-item,
+.gp-ds[data-theme="dark"] .custom-accordion-two .accordion-button,
+.gp-ds[data-theme="dark"] .course-playing,
+.gp-ds[data-theme="dark"] .course-content,
+.gp-ds[data-theme="dark"] .course-content-items,
+.gp-ds[data-theme="dark"] .accordion-item,
+.gp-ds[data-theme="dark"] .accordion-button,
+.gp-ds[data-theme="dark"] .scrollable-tab-btn-left,
+.gp-ds[data-theme="dark"] .scrollable-tab-btn-right {
+  background: var(--gp-surface) !important;
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .content-page,
+.gp-ds[data-theme="dark"] .footer {
+  background: transparent;
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .card,
+.gp-ds[data-theme="dark"] .modal-content,
+.gp-ds[data-theme="dark"] .dropdown-menu,
+.gp-ds[data-theme="dark"] .offcanvas {
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .table,
+.gp-ds[data-theme="dark"] .table > :not(caption) > * > * {
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .form-control,
+.gp-ds[data-theme="dark"] .form-select,
+.gp-ds[data-theme="dark"] select.form-control,
+.gp-ds[data-theme="dark"] textarea.form-control {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .sign-up,
+.gp-ds[data-theme="dark"] .sing-up-right {
+  background-color: var(--gp-bg) !important;
+  color: var(--gp-fg);
+}
+
+.gp-ds[data-theme="dark"] .bg-white,
+.gp-ds[data-theme="dark"] .btn-light {
+  background-color: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
+  border-color: var(--gp-border) !important;
+}
+
+.gp-ds[data-theme="dark"] .text-muted,
+.gp-ds[data-theme="dark"] .text-secondary {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds[data-theme="dark"] .wish-list-body,
+.gp-ds[data-theme="dark"] .common-card,
+.gp-ds[data-theme="dark"] .profile,
+.gp-ds[data-theme="dark"] .my-course-1-full-body,
+.gp-ds[data-theme="dark"] .my-course-1-full-body-card,
+.gp-ds[data-theme="dark"] .student-profile-info,
+.gp-ds[data-theme="dark"] .wish-list-course {
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .btn-profile-menu {
+  color: var(--gp-fg);
+}
+
+.gp-ds[data-theme="dark"] .dataTables_wrapper,
+.gp-ds[data-theme="dark"] table.dataTable,
+.gp-ds[data-theme="dark"] .page-link {
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .fc,
+.gp-ds[data-theme="dark"] .fc-theme-standard td,
+.gp-ds[data-theme="dark"] .fc-theme-standard th,
+.gp-ds[data-theme="dark"] .fc-scrollgrid {
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .shopping-cart,
+.gp-ds[data-theme="dark"] .checkout,
+.gp-ds[data-theme="dark"] .payment-box {
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .nav-pills,
+.gp-ds[data-theme="dark"] .form-wizard-header,
+.gp-ds[data-theme="dark"] .scrollable-tab,
+.gp-ds[data-theme="dark"] .nav-pills .nav-link {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .nav-pills .nav-link.active,
+.gp-ds[data-theme="dark"] .nav-pills .show > .nav-link {
+  background: var(--gp-primary);
+  color: #fff;
+}
+
+.gp-ds[data-theme="dark"] .note-editor,
+.gp-ds[data-theme="dark"] .note-toolbar,
+.gp-ds[data-theme="dark"] .note-editing-area,
+.gp-ds[data-theme="dark"] .note-editable,
+.gp-ds[data-theme="dark"] .note-statusbar {
+  background: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
+  border-color: var(--gp-border) !important;
+}
+
+.gp-ds[data-theme="dark"] .select2-container--default .select2-selection--single,
+.gp-ds[data-theme="dark"] .select2-dropdown,
+.gp-ds[data-theme="dark"] .select2-container--default .select2-results__option {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds[data-theme="dark"] .dataTables_length,
+.gp-ds[data-theme="dark"] .dataTables_filter,
+.gp-ds[data-theme="dark"] .dataTables_info,
+.gp-ds[data-theme="dark"] .dataTables_paginate,
+.gp-ds[data-theme="dark"] .dataTables_wrapper .form-control,
+.gp-ds[data-theme="dark"] .dataTables_wrapper .form-select {
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+@media (prefers-color-scheme: dark) {
+  .gp-ds[data-theme="system"] {
+    background: var(--gp-bg);
+    color: var(--gp-fg);
+    color-scheme: dark;
+  }
+
+  .gp-ds[data-theme="system"] input,
+  .gp-ds[data-theme="system"] textarea,
+  .gp-ds[data-theme="system"] select {
+    color-scheme: dark;
+  }
+
+  .gp-ds[data-theme="system"] input:-webkit-autofill,
+  .gp-ds[data-theme="system"] input:-webkit-autofill:hover,
+  .gp-ds[data-theme="system"] input:-webkit-autofill:focus,
+  .gp-ds[data-theme="system"] input:-webkit-autofill:active,
+  .gp-ds[data-theme="system"] textarea:-webkit-autofill,
+  .gp-ds[data-theme="system"] select:-webkit-autofill {
+    -webkit-text-fill-color: var(--gp-fg) !important;
+    caret-color: var(--gp-fg);
+    transition: background-color 99999s ease-out 0s;
+    box-shadow: 0 0 0 1000px var(--gp-surface-sunk) inset !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--gp-surface-sunk) inset !important;
+  }
+
+  .gp-ds[data-theme="system"] .content-page,
+  .gp-ds[data-theme="system"] .footer,
+  .gp-ds[data-theme="system"] .card,
+  .gp-ds[data-theme="system"] .modal-content,
+  .gp-ds[data-theme="system"] .dropdown-menu,
+  .gp-ds[data-theme="system"] .offcanvas,
+  .gp-ds[data-theme="system"] .table,
+  .gp-ds[data-theme="system"] .table > :not(caption) > * > *,
+  .gp-ds[data-theme="system"] .dataTables_wrapper,
+  .gp-ds[data-theme="system"] table.dataTable,
+  .gp-ds[data-theme="system"] .page-link,
+  .gp-ds[data-theme="system"] .fc,
+  .gp-ds[data-theme="system"] .fc-theme-standard td,
+  .gp-ds[data-theme="system"] .fc-theme-standard th,
+  .gp-ds[data-theme="system"] .fc-scrollgrid,
+  .gp-ds[data-theme="system"] .shopping-cart,
+  .gp-ds[data-theme="system"] .checkout,
+  .gp-ds[data-theme="system"] .payment-box,
+  .gp-ds[data-theme="system"] .wish-list-body,
+  .gp-ds[data-theme="system"] .common-card,
+  .gp-ds[data-theme="system"] .profile,
+  .gp-ds[data-theme="system"] .my-course-1-full-body,
+  .gp-ds[data-theme="system"] .my-course-1-full-body-card {
+    background: var(--gp-surface);
+    color: var(--gp-fg);
+    border-color: var(--gp-border);
+  }
+
+  .gp-ds[data-theme="system"] .sign-up,
+  .gp-ds[data-theme="system"] .sing-up-right {
+    background-color: var(--gp-bg) !important;
+    color: var(--gp-fg);
+  }
+
+  .gp-ds[data-theme="system"] .form-control,
+  .gp-ds[data-theme="system"] .form-select,
+  .gp-ds[data-theme="system"] select.form-control,
+  .gp-ds[data-theme="system"] textarea.form-control,
+  .gp-ds[data-theme="system"] .bg-white,
+  .gp-ds[data-theme="system"] .btn-light {
+    background: var(--gp-surface-sunk) !important;
+    color: var(--gp-fg) !important;
+    border-color: var(--gp-border) !important;
+  }
+
+  .gp-ds[data-theme="system"] .text-muted,
+  .gp-ds[data-theme="system"] .text-secondary,
+  .gp-ds[data-theme="system"] .btn-profile-menu {
+    color: var(--gp-fg-muted) !important;
+  }
+
+  .gp-ds[data-theme="system"] .nav-pills,
+  .gp-ds[data-theme="system"] .form-wizard-header,
+  .gp-ds[data-theme="system"] .scrollable-tab,
+  .gp-ds[data-theme="system"] .nav-pills .nav-link,
+  .gp-ds[data-theme="system"] .note-editor,
+  .gp-ds[data-theme="system"] .note-toolbar,
+  .gp-ds[data-theme="system"] .note-editable,
+  .gp-ds[data-theme="system"] .select2-container--default .select2-selection--single,
+  .gp-ds[data-theme="system"] .dataTables_length,
+  .gp-ds[data-theme="system"] .dataTables_filter,
+  .gp-ds[data-theme="system"] .dataTables_info {
+    background: var(--gp-surface-sunk) !important;
+    color: var(--gp-fg) !important;
+    border-color: var(--gp-border) !important;
+  }
+}

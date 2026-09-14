@@ -329,7 +329,7 @@ Medium/high-risk phases (Phase 2 sub-phases, Phase 4, Phase 5b/5c) wait for your
 | Tokens | Not started | `gp-tokens.css` | `.gp-ds` | N/A | N/A | |
 | Theme toggle | Not started | `gp-theme-toggle.js` | `.gp-ds .theme-toggle` | N/A | N/A | |
 | Buttons | Not started | `gp-components-core.css` | `.gp-ds .btn*` | ☐ | N/A | |
-| Cards | Not started | same | `.gp-ds .card` | ☐ | ☐ | 184 files (unverified) |
+| Cards | R4 batch 1: this batch converted 10; remaining still hand-written; wrapper-only | same | `.gp-ds .card` | ☐ | wrapper-only | Converted 10 simple add/edit forms via `gp_ds_card`. Remaining still hand-written. |
 | Badges | Not started | same | `.gp-ds .badge` | ☐ | ☐ | 94 files (unverified) |
 | Alerts | Not started | same | `.gp-ds .alert` | ☐ | ☐ | 36 files (unverified) |
 | Forms | Not started | same | `.gp-ds .form-control` etc. | ☐ | N/A | |
@@ -364,3 +364,17 @@ Medium/high-risk phases (Phase 2 sub-phases, Phase 4, Phase 5b/5c) wait for your
 - Zero change to application logic, routing, permissions, or JS business behavior anywhere (verified per-phase).
 - Every migrated page renders correctly in Light, System, and Dark.
 - Every phase has a completed before/after record (§10) and is individually revertible.
+
+---
+
+## 14. Later to-do — new work uses official pieces
+
+**Status:** Later. Not in force yet. Do not start until the reusable-components plan’s Phases R1–R7 are done, or you explicitly pull it forward.
+
+**What it is:** After the official helpers exist and the safe converts are finished, **new** view markup for buttons, badges, alerts, page titles, simple cards, and static tables must call `gp_ds_*`. Existing pages are not rewritten just to comply.
+
+**What it is not:** A repo-wide conversion of historic buttons, fields, DataTables, payment SDK markup, or plugin widgets.
+
+**R8 (12 Sep 2026):** Comment is in place on the helper. Historic pages were not rewritten.
+
+**Owner document:** [`DESIGN_SYSTEM_REUSABLE_COMPONENTS_PLAN.md`](./DESIGN_SYSTEM_REUSABLE_COMPONENTS_PLAN.md) Phase R8.

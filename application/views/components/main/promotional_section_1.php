@@ -1,52 +1,28 @@
-<!------------- Become Students Section start --------->
-<section class="student py-5 pt-0">
+<?php if (! (get_frontend_settings('promotional_section') == 1)) return; ?>
+<?php $gp_bg = gp_landing_bg_attrs('dual'); ?>
+<section class="gp-landing gp-landing-dual-wrap<?php echo $gp_bg['class']; ?>"<?php echo $gp_bg['style']; ?>>
     <div class="container">
-        <div class="row eStudent">
-            <div class="col-lg-6  <?php if (get_settings('allow_instructor') != 1) echo 'w-100'; ?> wow  animate__animated animate__fadeInUp opacityOnUp" data-wow-duration="1000" data-wow-delay="650">
-                <div class="student-body-1">
-                    <div class="row">
-                        <div class="col-lg-8 col-md-8 col-sm-12">
-                            <div class="student-body-text">
-                                <!-- <img loading="lazy" src="<?php echo base_url('assets/frontend/default-new/image/2.png') ?>"> -->
-                                <h1><?php echo site_phrase('join_now_to_start_learning'); ?></h1>
-                                <p><?php echo site_phrase('Learn from our quality instructors!') ?> </p>
-                                <?php if (get_settings('public_signup') == 'enable'): ?>
-                                    <a href="<?php echo site_url('sign_up'); ?>"><?php echo site_phrase('get_started'); ?></a>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-12 ">
-                            <!-- <img loading="lazy" class="man" src="<?php echo base_url('assets/frontend/default-new/image/instractorN.png') ?>"> -->
-                        </div>
-                    </div>
-                </div>
+        <div class="gp-landing-dual">
+            <div class="gp-landing-dual-card gp-landing-dual-learn">
+                <h3><?php echo site_phrase('join_now_to_start_learning'); ?></h3>
+                <p><?php echo site_phrase('Learn from our quality instructors!'); ?></p>
+                <?php if (get_settings('public_signup') == 'enable'): ?>
+                    <?php echo gp_ds_button(site_phrase('get_started'), ['variant' => 'primary', 'href' => site_url('sign_up'), 'extra_class' => 'gp-landing-btn-on-dark'], true); ?>
+                <?php endif; ?>
             </div>
-            <?php if (get_settings('allow_instructor') == 1) : ?>
-                <div class="col-lg-6  wow  animate__animated animate__fadeInUp opacityOnUp" data-wow-duration="1000" data-wow-delay="700">
-                    <div class="student-body-2">
-                        <div class="row">
-                            <div class="col-lg-8  col-md-8 col-sm-12">
-                                <div class="student-body-text">
-                                    <img loading="lazy" src="<?php echo base_url('assets/frontend/default-new/image/2.png') ?>">
-                                    <h1><?php echo site_phrase('become_a_new_instructor'); ?></h1>
-                                    <p><?php echo site_phrase('Teach_thousands_of_students_and_earn_money!') ?> </p>
-                                    <?php if (get_settings('public_signup') == 'enable'): ?>
-                                        <?php if ($this->session->userdata('user_id')): ?>
-                                            <a href="<?php echo site_url('user/become_an_instructor'); ?>"><?php echo site_phrase('join_now'); ?></a>
-                                        <?php else: ?>
-                                            <a href="<?php echo site_url('sign_up?instructor=yes'); ?>"><?php echo site_phrase('join_now'); ?></a>
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
-                                <img loading="lazy" class="man" src="<?php echo base_url('assets/frontend/default-new/image/student-2.png') ?>">
-                            </div>
-                        </div>
-                    </div>
+            <?php if (get_settings('allow_instructor') == 1): ?>
+                <div class="gp-landing-dual-card gp-landing-dual-teach">
+                    <h3><?php echo site_phrase('become_a_new_instructor'); ?></h3>
+                    <p><?php echo site_phrase('Teach_thousands_of_students_and_earn_money!'); ?></p>
+                    <?php if (get_settings('public_signup') == 'enable'): ?>
+                        <?php if ($this->session->userdata('user_id')): ?>
+                            <?php echo gp_ds_button(site_phrase('join_now'), ['variant' => 'outline', 'href' => site_url('user/become_an_instructor')], true); ?>
+                        <?php else: ?>
+                            <?php echo gp_ds_button(site_phrase('join_now'), ['variant' => 'outline', 'href' => site_url('sign_up?instructor=yes')], true); ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
                 </div>
             <?php endif; ?>
         </div>
     </div>
 </section>
-<!------------- Become Students Section End --------->

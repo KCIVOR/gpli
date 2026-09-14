@@ -678,6 +678,12 @@ class Admin extends CI_Controller
             redirect(site_url('admin/home_page_builder?tab=pre-built-home-settings'), 'refresh');
         }
 
+        if ($param1 == 'landing_page_extras') {
+            $this->crud_model->update_landing_page_extras();
+            $this->session->set_flashdata('flash_message', get_phrase('frontend_settings_updated'));
+            redirect(site_url('admin/home_page_builder?tab=pre-built-home-settings'), 'refresh');
+        }
+
         if ($param1 == 'website_faq') {
             $this->crud_model->update_website_faq();
             $this->session->set_flashdata('flash_message', get_phrase('Website FAQS updated successfully'));

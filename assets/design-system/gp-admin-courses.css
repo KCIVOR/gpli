@@ -1,0 +1,1787 @@
+/**
+ * Geese Project — Admin Courses
+ * Tokens from gp-tokens.css only. No one-off hex.
+ *
+ * In-scope page_name values:
+ *   courses-server-side (admin + instructor /user/courses), course_add, course_edit,
+ *   categories, category_add, category_edit,
+ *   coupons, coupon_add, coupon_edit, lessons,
+ *   curriculum + section/lesson/quiz/resource popups,
+ *   enrol list, academic progress, BBB tab,
+ *   change author / status mail / add-course shortcut modals,
+ *   addon tab leftover wrap (#assignment, #noticeboard,
+ *   #course_analytics, #jitsi-live-class, #live-class)
+ *
+ * Forbidden:
+ *   rewriting DataTables JS
+ *   changing form names / ids / actions
+ *   editing controllers
+ *
+ * Hooks later phases must keep:
+ *   #course-datatable-server-side
+ *   #category_id, #status, #instructor_id, #price
+ *   #basicwizard
+ *   showAjaxModal, confirm_modal
+ */
+
+.gp-ds .gp-courses-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/*
+ * Compact chrome buttons — DS §05 marketing padding (15px 26px) is too large
+ * next to page titles (~1.15rem) and 38px form controls. Leftover Hyper
+ * .btn-sm is color-only under .gp-ds, so size is scoped here.
+ * Icon-only leftover controls (.btn-icon) keep their own size.
+ */
+.gp-ds .row:has(+ .gp-courses-page) .gp-page-title-actions .btn,
+.gp-ds .gp-courses-page .btn:not(.btn-icon):not(.action-icon),
+.gp-ds .gp-courses-page a.btn:not(.btn-icon):not(.action-icon),
+.gp-ds .gp-courses-page button.btn:not(.btn-icon):not(.action-icon),
+.gp-ds .gp-course-wizard .btn:not(.btn-icon):not(.action-icon),
+.gp-ds .gp-courses-modal .btn:not(.btn-icon):not(.action-icon):not(.p-1),
+.gp-ds .empty-state .btn {
+  padding: 8px 14px !important; /* leftover Hyper + DS §05 marketing size */
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  min-height: 38px !important;
+}
+
+.gp-ds .gp-courses-page .btn-sm:not(.btn-icon),
+.gp-ds .gp-course-wizard .btn-sm:not(.btn-icon) {
+  padding: 6px 10px !important;
+  min-height: 32px !important;
+  font-size: 12px !important;
+}
+
+.gp-ds .gp-courses-page .gp-dash-stats {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+@media (max-width: 1199.98px) {
+  .gp-ds .gp-courses-page .gp-dash-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575.98px) {
+  .gp-ds .gp-courses-page .gp-dash-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Filter toolbar */
+.gp-ds .gp-courses-page .gp-courses-toolbar {
+  margin-bottom: 0;
+}
+
+.gp-ds .gp-courses-page .gp-courses-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: end;
+}
+
+.gp-ds .gp-courses-page .gp-courses-filters--4 {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+}
+
+.gp-ds .gp-courses-page .gp-courses-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.gp-ds .gp-courses-page .gp-courses-filter label {
+  margin: 0;
+  font-family: var(--gp-font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  word-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-courses-page .btn,
+.gp-ds .row:has(+ .gp-courses-page) .gp-page-title-actions .btn,
+.gp-ds .gp-courses-page .gp-dash-stat-label,
+.gp-ds .gp-courses-page .header-title
+{
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-courses-page .gp-dash-panel > .card-body > .header-title {
+  margin: 0 0 16px;
+}
+
+.gp-ds .gp-courses-page .gp-courses-filter--action {
+  justify-content: flex-end;
+}
+
+.gp-ds .gp-courses-page .gp-courses-filter--action .btn {
+  white-space: nowrap;
+}
+
+/* Leftover Hyper form-control + Select2 — scoped to this page */
+.gp-ds .gp-courses-page .form-control,
+.gp-ds .gp-courses-page select.form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-courses-page .form-control:focus,
+.gp-ds .gp-courses-page select.form-control:focus {
+  background: var(--gp-surface);
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-courses-page .select2-container {
+  width: 100% !important; /* leftover Select2 inline width */
+}
+
+.gp-ds .gp-courses-page .select2-container--default .select2-selection--single {
+  height: 38px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-courses-page .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 36px;
+  color: var(--gp-fg);
+  padding-left: 12px;
+}
+
+.gp-ds .gp-courses-page .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 36px;
+}
+
+.gp-ds .gp-courses-page .select2-container--default.select2-container--focus .select2-selection--single,
+.gp-ds .gp-courses-page .select2-container--default.select2-container--open .select2-selection--single {
+  border-color: var(--gp-border-strong);
+}
+
+/* DataTables chrome — leftover Hyper search / buttons / pagination */
+.gp-ds .gp-courses-page .dataTables_wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 12px;
+  padding-top: 0;
+}
+
+.gp-ds .gp-courses-page .dataTables_wrapper .dataTables_filter {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: stretch;
+  float: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  font-family: var(--gp-font-body);
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-courses-page .dataTables_wrapper .dataTables_filter label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  font-weight: 600;
+}
+
+.gp-ds .gp-courses-page .dataTables_wrapper .dt-buttons {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  float: none;
+  display: flex;
+  align-items: center;
+  width: auto;
+  max-width: max-content;
+  gap: 8px;
+  margin: 0;
+}
+
+.gp-ds .gp-courses-page .dataTables_wrapper > .row,
+.gp-ds .gp-courses-page .dataTables_wrapper > .table-responsive,
+.gp-ds .gp-courses-page .dataTables_wrapper table,
+.gp-ds .gp-courses-page .dataTables_wrapper .dataTables_scroll,
+.gp-ds .gp-courses-page .dataTables_wrapper .dataTables_processing {
+  grid-column: 1 / -1;
+}
+
+.gp-ds .gp-courses-page .dataTables_wrapper .dataTables_info {
+  grid-column: 1;
+}
+
+.gp-ds .gp-courses-page .dataTables_wrapper .dataTables_paginate {
+  grid-column: 2;
+  justify-self: end;
+}
+
+.gp-ds .gp-courses-page .dataTables_wrapper .dt-buttons .btn,
+.gp-ds .gp-courses-page .dataTables_wrapper .dt-button,
+.gp-ds .gp-courses-page .dataTables_wrapper .dt-buttons .btn-secondary {
+  --bs-btn-color: var(--gp-fg);
+  --bs-btn-hover-color: var(--gp-fg);
+  --bs-btn-bg: var(--gp-surface);
+  --bs-btn-hover-bg: var(--gp-surface-sunk);
+  --bs-btn-border-color: var(--gp-border-strong);
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.18em;
+  color: var(--gp-fg) !important; /* leftover Hyper + DS .btn-secondary is white */
+  -webkit-text-fill-color: var(--gp-fg);
+  background: var(--gp-surface) !important;
+  background-color: var(--gp-surface) !important;
+  border: 1px solid var(--gp-border-strong) !important;
+  border-radius: var(--gp-radius);
+  box-shadow: none;
+  width: auto !important; /* leftover Hyper stretches .dt-buttons .btn */
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  min-height: 38px;
+  overflow: visible;
+}
+
+.gp-ds .gp-courses-page .dataTables_wrapper .dt-buttons .btn:hover,
+.gp-ds .gp-courses-page .dataTables_wrapper .dt-button:hover,
+.gp-ds .gp-courses-page .dataTables_wrapper .dt-buttons .btn-secondary:hover {
+  color: var(--gp-fg) !important;
+  -webkit-text-fill-color: var(--gp-fg);
+  background: var(--gp-surface-sunk) !important;
+  background-color: var(--gp-surface-sunk) !important;
+  border-color: var(--gp-border-strong) !important;
+}
+
+.gp-ds .gp-courses-page .dataTables_wrapper .dataTables_filter input {
+  flex: 1 1 auto;
+  display: block;
+  width: 100% !important; /* leftover Hyper DataTables uses width: auto */
+  min-width: 0;
+  min-height: 42px;
+  margin-left: 0;
+  padding: 10px 14px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-courses-page .dataTables_filter input:focus {
+  border-color: var(--gp-border-strong);
+  outline: none;
+}
+
+.gp-ds .gp-courses-page .dataTables_info {
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-courses-page .dataTables_processing {
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-courses-page .dataTables_paginate .pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.gp-ds .gp-courses-page .dataTables_paginate .page-item {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+
+.gp-ds .gp-courses-page .dataTables_paginate .page-link,
+.gp-ds .gp-courses-page .dataTables_paginate a.paginate_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  margin: 0;
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--gp-fg) !important;
+  background: var(--gp-surface) !important;
+  border: 1px solid var(--gp-border-strong) !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none;
+  opacity: 1 !important; /* leftover Hyper + DS .pagination disabled is 0.4 */
+}
+
+.gp-ds .gp-courses-page .dataTables_paginate .page-item.disabled .page-link,
+.gp-ds .gp-courses-page .dataTables_paginate a.paginate_button.disabled {
+  color: var(--gp-fg-muted) !important;
+  background: var(--gp-surface-sunk) !important;
+  border-color: var(--gp-border) !important;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.gp-ds .gp-courses-page .dataTables_paginate a.paginate_button.current,
+.gp-ds .gp-courses-page .dataTables_paginate .page-item.active .page-link {
+  background: var(--gp-primary) !important;
+  background-color: var(--gp-primary) !important;
+  border-color: var(--gp-primary) !important;
+  color: var(--gp-on-primary) !important;
+}
+
+.gp-ds .gp-courses-page .dataTables_paginate a.paginate_button:hover:not(.disabled):not(.current),
+.gp-ds .gp-courses-page .dataTables_paginate .page-item:not(.active):not(.disabled) .page-link:hover {
+  background: var(--gp-surface-sunk) !important;
+  border-color: var(--gp-border-strong) !important;
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-courses-page table.dataTable thead th {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg-faint);
+  border-bottom-color: var(--gp-border);
+}
+
+.gp-ds .gp-courses-page table.dataTable tbody td {
+  color: var(--gp-fg);
+  border-bottom-color: var(--gp-border);
+}
+
+@media (max-width: 991.98px) {
+  .gp-ds .gp-courses-page .gp-courses-filters {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .gp-ds .gp-courses-page .gp-courses-filter--action {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .gp-ds .gp-courses-page .gp-courses-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .gp-ds .gp-courses-page .dataTables_wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .gp-ds .gp-courses-page .dataTables_wrapper .dt-buttons,
+  .gp-ds .gp-courses-page .dataTables_wrapper .dataTables_filter,
+  .gp-ds .gp-courses-page .dataTables_wrapper .dataTables_info,
+  .gp-ds .gp-courses-page .dataTables_wrapper .dataTables_paginate {
+    grid-column: 1;
+    justify-self: stretch;
+  }
+}
+
+/* Category grid — DS §06 cards */
+.gp-ds .gp-courses-page .gp-category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 1199.98px) {
+  .gp-ds .gp-courses-page .gp-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767.98px) {
+  .gp-ds .gp-courses-page .gp-category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gp-ds .gp-courses-page .gp-category-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+  overflow: hidden;
+}
+
+.gp-ds .gp-courses-page .gp-category-card-media {
+  aspect-ratio: 400 / 255;
+  background: var(--gp-surface-sunk);
+  overflow: hidden;
+}
+
+.gp-ds .gp-courses-page .gp-category-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gp-ds .gp-courses-page .gp-category-card-body {
+  padding: 16px 16px 12px;
+}
+
+.gp-ds .gp-courses-page .gp-category-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 6px;
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-page .gp-category-card-title i {
+  color: var(--gp-primary);
+}
+
+.gp-ds .gp-courses-page .gp-category-card-meta {
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-courses-page .gp-category-subs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--gp-border);
+}
+
+.gp-ds .gp-courses-page .gp-category-sub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--gp-border);
+  font-size: 13.5px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-page .gp-category-sub:last-child {
+  border-bottom: none;
+}
+
+.gp-ds .gp-courses-page .gp-category-sub-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.gp-ds .gp-courses-page .gp-category-sub-name i {
+  color: var(--gp-primary);
+}
+
+.gp-ds .gp-courses-page .gp-category-sub-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.gp-ds .gp-courses-page .action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg-muted);
+  text-decoration: none;
+}
+
+.gp-ds .gp-courses-page .action-icon:hover {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-page .gp-category-sub .category-action:last-child .action-icon:hover,
+.gp-ds .gp-courses-page .gp-category-card-actions .category-action:last-child .action-icon:hover {
+  background: var(--gp-danger-soft);
+  color: var(--gp-danger);
+}
+
+.gp-ds .gp-courses-page .gp-category-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px 14px;
+  margin-top: auto;
+  border-top: 1px solid var(--gp-border);
+}
+
+/* Always-visible actions — beats leftover hover hide() so they stay usable */
+.gp-ds .gp-courses-page .category-action,
+.gp-ds .gp-courses-page [id^="category-edit-btn-"],
+.gp-ds .gp-courses-page [id^="category-delete-btn-"] {
+  display: inline-flex !important;
+}
+
+/* Category add/edit forms */
+.gp-ds .gp-courses-page .gp-category-form .form-group {
+  margin-bottom: 18px;
+}
+
+.gp-ds .gp-courses-page .gp-category-form .form-group .badge {
+  margin-top: 8px;
+}
+
+.gp-ds .gp-courses-page .gp-category-form .required {
+  color: var(--gp-secondary);
+  margin-left: 2px;
+}
+
+.gp-ds .gp-courses-page .gp-category-form small {
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .gp-courses-page .custom-file {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 38px;
+}
+
+.gp-ds .gp-courses-page .custom-file-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 38px;
+  margin: 0;
+  opacity: 0;
+}
+
+.gp-ds .gp-courses-page .custom-file-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: 38px;
+  padding: 8px 12px;
+  overflow: hidden;
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 22px;
+  color: var(--gp-fg-muted);
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gp-ds .gp-courses-page .custom-file-label::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  color: var(--gp-fg);
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  background: var(--gp-surface-sunk);
+  border-left: 1px solid var(--gp-border);
+  border-radius: 0 var(--gp-radius) var(--gp-radius) 0;
+}
+
+.gp-ds .gp-courses-page .custom-file-input:focus ~ .custom-file-label {
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-courses-page .del-image {
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.gp-ds .gp-courses-page .del-image a {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-courses-page .del-image a:last-child {
+  color: var(--gp-danger);
+}
+
+/* Coupon list — #basic-datatable (reuses DataTables chrome above) */
+.gp-ds .gp-courses-page #basic-datatable {
+  width: 100%;
+}
+
+.gp-ds .gp-courses-page #basic-datatable thead th {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg-faint);
+  border-bottom-color: var(--gp-border);
+}
+
+.gp-ds .gp-courses-page #basic-datatable tbody td {
+  color: var(--gp-fg);
+  border-bottom-color: var(--gp-border);
+}
+
+.gp-ds .gp-courses-page #basic-datatable tbody td strong {
+  font-family: var(--gp-font-mono);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--gp-fg);
+}
+
+/* Coupons kebab trigger — DS §14 icon-btn. Menu: gp-dropdown.css */
+.gp-ds .gp-courses-page .dropright > .btn.action-icon,
+.gp-ds .gp-courses-page .dropright > .btn-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gp-fg-muted);
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 8px;
+  box-shadow: none;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gp-ds .gp-courses-page .dropright > .btn.action-icon:hover,
+.gp-ds .gp-courses-page .dropright > .btn.action-icon:focus,
+.gp-ds .gp-courses-page .dropright.show > .btn.action-icon,
+.gp-ds .gp-courses-page .dropright > .btn.action-icon[aria-expanded="true"],
+.gp-ds .gp-courses-page .dropright > .btn-icon:hover,
+.gp-ds .gp-courses-page .dropright > .btn-icon:focus,
+.gp-ds .gp-courses-page .dropright.show > .btn-icon,
+.gp-ds .gp-courses-page .dropright > .btn-icon[aria-expanded="true"] {
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+  border-color: var(--gp-border-strong);
+  box-shadow: none;
+}
+
+/* Coupon add/edit forms */
+.gp-ds .gp-courses-page .gp-coupon-form .form-group {
+  margin-bottom: 18px;
+}
+
+.gp-ds .gp-courses-page .gp-coupon-form .required {
+  color: var(--gp-secondary);
+  margin-left: 2px;
+}
+
+.gp-ds .gp-courses-page .gp-coupon-form .input-group-text {
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  color: var(--gp-fg-muted);
+  border-radius: 0 var(--gp-radius) var(--gp-radius) 0;
+}
+
+.gp-ds .gp-courses-page .gp-coupon-form .input-group .form-control {
+  border-right: 0;
+}
+
+.gp-ds .gp-courses-page .gp-coupon-form .input-group-append .btn {
+  min-height: 38px;
+  padding: 8px 14px;
+  font-size: 12.5px;
+  border-radius: 0 var(--gp-radius) var(--gp-radius) 0;
+}
+
+.gp-ds .gp-courses-page .gp-coupon-form .form-control.date {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+/* Date-picker popup is appended to body (.gp-ds). Tokens only — beats leftover Hyper #727cf5. */
+.gp-ds .daterangepicker {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  color: var(--gp-fg);
+}
+
+.gp-ds .daterangepicker .calendar-table {
+  background: var(--gp-surface);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .daterangepicker td.available:hover,
+.gp-ds .daterangepicker th.available:hover {
+  background-color: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+}
+
+.gp-ds .daterangepicker td.active,
+.gp-ds .daterangepicker td.active:hover {
+  background-color: var(--gp-primary);
+  color: var(--gp-on-primary);
+}
+
+.gp-ds .daterangepicker .drp-buttons {
+  border-top-color: var(--gp-border);
+}
+
+.gp-ds .daterangepicker .drp-buttons .btn-primary {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: var(--gp-on-primary);
+}
+
+/* Add / edit course wizard — leftover Hyper pills + chrome */
+.gp-ds .gp-course-wizard .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-course-wizard .header-title {
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-course-wizard .ajax_loader .ajax_loaderBar {
+  background-color: var(--gp-primary);
+}
+
+.gp-ds .gp-course-wizard .start_ajax_loading {
+  background-color: var(--gp-info-soft) !important; /* leftover Hyper #aae8d0 !important */
+}
+
+.gp-ds .gp-course-wizard .start_ajax_loading .ajax_loaderBar {
+  background-color: var(--gp-primary) !important; /* leftover Hyper #0acf97 !important */
+}
+
+.gp-ds .gp-course-wizard .form-wizard-header,
+.gp-ds .gp-course-wizard .gp-course-wizard-tabs {
+  margin-left: 0;
+  margin-right: 0;
+  background: transparent;
+  border-bottom: 1px solid var(--gp-border);
+  --bs-nav-pills-link-active-bg: transparent;
+  --bs-nav-pills-link-active-color: var(--gp-fg);
+}
+
+.gp-ds .gp-course-wizard .form-wizard-header > .w-100 {
+  display: none;
+}
+
+.gp-ds .gp-course-wizard .nav-pills.nav-justified .nav-item {
+  flex-grow: 0;
+  flex-basis: auto;
+}
+
+.gp-ds .gp-course-wizard .nav-pills .nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 0;
+  padding: 0 4px 12px;
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--gp-fg-muted);
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important; /* leftover .rounded-0 + Hyper pills */
+  box-shadow: none;
+  position: relative;
+}
+
+.gp-ds .gp-course-wizard .nav-pills .nav-link.active,
+.gp-ds .gp-course-wizard .nav-pills .show > .nav-link {
+  color: var(--gp-fg) !important;
+  background: transparent !important;
+}
+
+.gp-ds .gp-course-wizard .nav-pills .nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--gp-primary);
+}
+
+.gp-ds .gp-course-wizard .nav-pills .nav-link:hover:not(.active) {
+  color: var(--gp-fg);
+  background: transparent !important;
+}
+
+.gp-ds .gp-course-wizard .scrollable-tab-btn-left,
+.gp-ds .gp-course-wizard .scrollable-tab-btn-right {
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+  border: 1px solid var(--gp-border);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-course-wizard .scrollable-tab-btn-left:hover,
+.gp-ds .gp-course-wizard .scrollable-tab-btn-right:hover {
+  color: var(--gp-fg);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-course-wizard .form-control,
+.gp-ds .gp-course-wizard select.form-control,
+.gp-ds .gp-course-wizard textarea.form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-course-wizard .form-control:focus,
+.gp-ds .gp-course-wizard select.form-control:focus,
+.gp-ds .gp-course-wizard textarea.form-control:focus {
+  background: var(--gp-surface);
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-course-wizard .col-form-label {
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-course-wizard .required {
+  color: var(--gp-secondary);
+  margin-left: 2px;
+}
+
+.gp-ds .gp-course-wizard .select2-container {
+  width: 100% !important; /* leftover Select2 inline width */
+}
+
+.gp-ds .gp-course-wizard .select2-container--default .select2-selection--single {
+  height: 38px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-course-wizard .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 36px;
+  color: var(--gp-fg);
+  padding-left: 12px;
+}
+
+.gp-ds .gp-course-wizard .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 36px;
+}
+
+.gp-ds .gp-course-wizard .select2-container--default.select2-container--focus .select2-selection--single,
+.gp-ds .gp-course-wizard .select2-container--default.select2-container--open .select2-selection--single {
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-course-wizard input[data-switch] + label {
+  background-color: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-course-wizard input[data-switch]:checked + label,
+.gp-ds .gp-course-wizard input[data-switch="primary"]:checked + label {
+  background-color: var(--gp-primary);
+}
+
+.gp-ds .gp-course-wizard .custom-control-input:checked ~ .custom-control-label::before {
+  color: var(--gp-on-primary);
+  border-color: var(--gp-primary);
+  background-color: var(--gp-primary);
+}
+
+.gp-ds .gp-course-wizard .bootstrap-tagsinput {
+  width: 100%;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: none;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-course-wizard .note-editor.note-frame {
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-course-wizard .gp-course-wizard-pager .btn-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  min-height: 38px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: none;
+}
+
+.gp-ds .gp-course-wizard .gp-course-wizard-pager .btn-info:hover,
+.gp-ds .gp-course-wizard .gp-course-wizard-pager .btn-info:focus,
+.gp-ds .gp-course-wizard .gp-course-wizard-pager .btn-info:active {
+  color: var(--gp-fg);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border-strong);
+  box-shadow: none;
+}
+
+.gp-ds .gp-course-wizard #finish h2,
+.gp-ds .gp-course-wizard #finish h3 {
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-course-wizard #finish p {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-course-wizard .gp-course-media .box,
+.gp-ds .gp-course-wizard .wrapper-image-preview .box {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-course-wizard .gp-course-media .js--image-preview,
+.gp-ds .gp-course-wizard .wrapper-image-preview .js--image-preview {
+  background-color: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-course-wizard .gp-course-media .upload-options .btn,
+.gp-ds .gp-course-wizard .wrapper-image-preview .upload-options .btn {
+  color: var(--gp-fg);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border);
+}
+
+/* Phase 6 — curriculum tab + lesson / section / quiz / resource popups */
+.gp-ds .gp-curriculum {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0 4px;
+}
+
+.gp-ds .gp-curriculum-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* DS §22 empty states — tokens only */
+.gp-ds .empty-state {
+  text-align: center;
+  padding: 56px 24px;
+  border: 1px dashed var(--gp-border);
+  border-radius: 14px;
+  background: var(--gp-surface);
+}
+
+.gp-ds .empty-state .icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gp-surface-sunk);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 22px;
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .empty-state h4 {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .empty-state p {
+  font-size: 13.5px;
+  color: var(--gp-fg-muted);
+  max-width: 320px;
+  margin: 0 auto 18px;
+}
+
+.gp-ds .gp-curriculum-empty {
+  text-align: center;
+  padding: 36px 16px;
+  border: 1px dashed var(--gp-border);
+  border-radius: 14px;
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-curriculum-empty p {
+  margin: 0 0 6px;
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-curriculum-empty small {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-curriculum-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.gp-ds .gp-curriculum-section.card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+  margin-bottom: 0;
+}
+
+.gp-ds .gp-curriculum-section > .card-body {
+  padding: 18px;
+}
+
+.gp-ds .gp-curriculum-study-plan {
+  margin: -18px -18px 16px;
+  padding: 10px 14px;
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--gp-fg);
+  background: var(--gp-surface-sunk);
+  border-bottom: 1px solid var(--gp-border);
+  border-radius: 14px 14px 0 0;
+}
+
+.gp-ds .gp-curriculum-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.gp-ds .gp-curriculum-section-head .card-title {
+  flex: 1 1 220px;
+  margin: 0;
+  min-height: 0;
+  font-family: var(--gp-font-head);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-curriculum-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 6px;
+  font-family: var(--gp-font-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-curriculum-section-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px;
+  float: none;
+  height: auto;
+}
+
+.gp-ds .gp-curriculum-lessons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gp-ds .gp-curriculum-lesson.card {
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: none;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.gp-ds .gp-curriculum-lesson .card-body,
+.gp-ds .gp-curriculum-lesson .thinner-card-body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+}
+
+.gp-ds .gp-curriculum-lesson .card-title {
+  margin: 0;
+  font-family: var(--gp-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-curriculum-lesson-actions,
+.gp-ds .gp-curriculum-lesson .card-widgets,
+.gp-ds .gp-curriculum-section-actions.card-widgets {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  order: 2;
+  float: none;
+  height: auto;
+}
+
+.gp-ds .gp-curriculum-lesson-actions a,
+.gp-ds .gp-curriculum-lesson .card-widgets a,
+.gp-ds .gp-curriculum-section-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg-muted);
+  text-decoration: none;
+}
+
+.gp-ds .gp-curriculum-lesson-actions a:hover,
+.gp-ds .gp-curriculum-lesson .card-widgets a:hover,
+.gp-ds .gp-curriculum-section-actions a:hover {
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-curriculum-lesson-actions a:last-child:hover,
+.gp-ds .gp-curriculum-lesson .card-widgets a:last-child:hover,
+.gp-ds .gp-curriculum-section-actions a:last-child:hover {
+  background: var(--gp-danger-soft);
+  color: var(--gp-danger);
+}
+
+/* Always-visible section/lesson actions — beats leftover .display-none + hover hide() */
+.gp-ds .gp-curriculum [id^="widgets-of-section-"],
+.gp-ds .gp-curriculum [id^="widgets-of-lesson-"] {
+  display: flex !important;
+}
+
+@media (max-width: 767.98px) {
+  .gp-ds .gp-curriculum-lesson .card-body,
+  .gp-ds .gp-curriculum-lesson .thinner-card-body {
+    flex-direction: column;
+  }
+
+  .gp-ds .gp-curriculum-lesson-actions,
+  .gp-ds .gp-curriculum-lesson .card-widgets {
+    order: 0;
+  }
+}
+
+/* Modal forms — leftover Hyper fields / radios / custom-control */
+.gp-ds .gp-courses-modal,
+.gp-ds .modal-body .gp-courses-modal {
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-modal .header-title {
+  font-family: var(--gp-font-head);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-modal .form-group,
+.gp-ds .gp-courses-modal .from-group {
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-courses-modal label {
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-modal .form-control,
+.gp-ds .gp-courses-modal select.form-control,
+.gp-ds .gp-courses-modal textarea.form-control,
+.gp-ds .modal-body .gp-courses-modal .form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-courses-modal .form-control:focus,
+.gp-ds .gp-courses-modal select.form-control:focus,
+.gp-ds .gp-courses-modal textarea.form-control:focus {
+  background: var(--gp-surface);
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-courses-modal small,
+.gp-ds .gp-courses-modal .text-muted {
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .gp-courses-modal .alert-info {
+  background: var(--gp-info-soft);
+  border: 1px solid var(--gp-info-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-modal .alert-info a {
+  color: var(--gp-primary);
+}
+
+.gp-ds .gp-courses-modal .badge-info {
+  background: var(--gp-info-soft);
+  border: 1px solid var(--gp-info-border);
+  color: var(--gp-info);
+  font-weight: 600;
+}
+
+.gp-ds .gp-courses-modal .badge-light {
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  color: var(--gp-fg-muted);
+  font-weight: 600;
+}
+
+.gp-ds .gp-courses-modal .custom-control {
+  min-height: 36px;
+  padding: 8px 12px 8px 36px;
+  margin-bottom: 6px;
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-courses-modal .custom-control:hover {
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-courses-modal .custom-control-label {
+  font-weight: 600;
+}
+
+.gp-ds .gp-courses-modal .custom-control-input:checked ~ .custom-control-label::before,
+.gp-ds .modal-body .custom-control-input:checked ~ .custom-control-label::before {
+  color: var(--gp-on-primary);
+  border-color: var(--gp-primary);
+  background-color: var(--gp-primary);
+  box-shadow: none;
+}
+
+.gp-ds .gp-courses-modal .custom-control-input:focus ~ .custom-control-label::before,
+.gp-ds .modal-body .custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: none;
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-courses-modal input[type="radio"]:not(.custom-control-input),
+.gp-ds .gp-courses-modal input[type="checkbox"]:not(.custom-control-input) {
+  accent-color: var(--gp-primary);
+}
+
+.gp-ds .gp-courses-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.gp-ds .gp-courses-modal .btn-success {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: var(--gp-on-primary);
+  box-shadow: none;
+}
+
+.gp-ds .gp-courses-modal .btn-success:hover,
+.gp-ds .gp-courses-modal .btn-success:focus {
+  background: var(--gp-primary-2);
+  border-color: var(--gp-primary-2);
+  color: var(--gp-on-primary);
+}
+
+.gp-ds .gp-courses-modal .select2-container {
+  width: 100% !important; /* leftover Select2 inline width */
+}
+
+.gp-ds .gp-courses-modal .select2-container--default .select2-selection--single,
+.gp-ds .modal-body .select2-container--default .select2-selection--single {
+  height: 38px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-courses-modal .select2-container--default .select2-selection--single .select2-selection__rendered,
+.gp-ds .modal-body .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 36px;
+  color: var(--gp-fg);
+  padding-left: 12px;
+}
+
+.gp-ds .gp-courses-modal .select2-container--default .select2-selection--single .select2-selection__arrow,
+.gp-ds .modal-body .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 36px;
+}
+
+.gp-ds .gp-courses-modal .select2-container--default.select2-container--focus .select2-selection--single,
+.gp-ds .gp-courses-modal .select2-container--default.select2-container--open .select2-selection--single,
+.gp-ds .modal-body .select2-container--default.select2-container--focus .select2-selection--single,
+.gp-ds .modal-body .select2-container--default.select2-container--open .select2-selection--single {
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-courses-modal .note-editor.note-frame {
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-courses-modal .input-group-text {
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-modal .bootstrap-tagsinput {
+  width: 100%;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: none;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-modal .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+.gp-ds .gp-courses-modal .bg-dragula {
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-courses-modal .draggable-item {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-courses-modal .draggable-item .card-body {
+  padding: 12px 14px;
+}
+
+.gp-ds .gp-courses-modal .widgets-of-quiz-question a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg-muted);
+  text-decoration: none;
+}
+
+.gp-ds .gp-courses-modal .widgets-of-quiz-question a:hover {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-modal .gp-curriculum-quiz-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--gp-font-head);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-modal ul {
+  list-style: none;
+}
+
+.gp-ds .gp-courses-modal ul li.d-flex {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--gp-border);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-modal ul li.d-flex:last-child {
+  border-bottom: none;
+}
+
+.gp-ds .gp-courses-modal ul li .btn.p-1 {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-courses-modal ul li .btn.p-1:hover {
+  color: var(--gp-fg);
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-courses-modal ul li .btn.p-1:last-child:hover {
+  color: var(--gp-danger);
+  background: var(--gp-danger-soft);
+}
+
+/* Phase 7 — enrol list, academic progress, BBB tab, lessons */
+.gp-ds .gp-courses-empty {
+  text-align: center;
+  padding: 36px 16px;
+  border: 1px dashed var(--gp-border);
+  border-radius: 14px;
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-courses-empty p {
+  margin: 0;
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-enrol-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-courses-enrol-photo {
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-courses-enrol table thead th,
+.gp-ds .gp-courses-progress table thead th,
+.gp-ds .gp-courses-page table thead th {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-fg-muted);
+  border-bottom-color: var(--gp-border);
+}
+
+.gp-ds .gp-courses-enrol table tbody td,
+.gp-ds .gp-courses-progress table tbody td {
+  color: var(--gp-fg);
+  border-top-color: var(--gp-border);
+  vertical-align: middle;
+}
+
+.gp-ds .gp-courses-enrol table tbody td small {
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .gp-courses-progress-name {
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-progress .progress {
+  height: 10px;
+  margin-bottom: 8px;
+  background: var(--gp-surface-sunk);
+  border-radius: 999px;
+}
+
+.gp-ds .gp-courses-progress .progress-bar {
+  font-size: 10px;
+  line-height: 10px;
+}
+
+.gp-ds .gp-courses-progress .btn-group .btn-light {
+  color: var(--gp-fg-muted);
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  box-shadow: none;
+}
+
+.gp-ds .gp-courses-progress .btn-group .btn-light:hover,
+.gp-ds .gp-courses-progress .btn-group .btn-light:focus {
+  color: var(--gp-fg);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-courses-bbb {
+  padding: 8px 0 4px;
+}
+
+.gp-ds .gp-courses-bbb label {
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-courses-bbb-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.gp-ds .gp-courses-bbb-aside .alert {
+  width: 75%;
+  margin: 0;
+}
+
+.gp-ds .gp-courses-bbb .note-editor.note-frame {
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+@media (max-width: 767.98px) {
+  .gp-ds .gp-courses-bbb-aside {
+    margin-top: 8px;
+  }
+
+  .gp-ds .gp-courses-bbb-aside .alert,
+  .gp-ds .gp-courses-bbb-aside .btn {
+    width: 100%;
+  }
+}
+
+/* Phase 8 — addon tab leftover Hyper wrap (views ship with addons) */
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) {
+  padding-top: 8px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) :is(.card-title, .header-title) {
+  font-family: var(--gp-font-head);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) :is(.form-control, select.form-control, textarea.form-control) {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) .form-control:focus {
+  background: var(--gp-surface);
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) label {
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+/* Leftover Hyper buttons — no #727cf5 / #0acf97 */
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) :is(.btn-primary, .btn-success) {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: var(--gp-on-primary);
+  box-shadow: none;
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) :is(.btn-primary, .btn-success):hover {
+  background: var(--gp-primary-2);
+  border-color: var(--gp-primary-2);
+  color: var(--gp-on-primary);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) :is(.btn-info, .btn-outline-primary) {
+  color: var(--gp-primary);
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  box-shadow: none;
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) :is(.btn-info, .btn-outline-primary):hover {
+  color: var(--gp-primary);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) :is(.btn-secondary, .btn-light) {
+  color: var(--gp-fg-muted);
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  box-shadow: none;
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) .badge {
+  font-weight: 600;
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) .badge-success {
+  background: var(--gp-success-soft);
+  border: 1px solid var(--gp-success-border);
+  color: var(--gp-success);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) .badge-warning {
+  background: var(--gp-warning-soft);
+  border: 1px solid var(--gp-warning-border);
+  color: var(--gp-warning);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) .badge-danger {
+  background: var(--gp-danger-soft);
+  border: 1px solid var(--gp-danger-border);
+  color: var(--gp-danger);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) table thead th {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-fg-muted);
+  background: var(--gp-surface-sunk);
+  border-bottom-color: var(--gp-border);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab) table tbody td {
+  color: var(--gp-fg);
+  border-top-color: var(--gp-border);
+}
+
+/* Leftover Hyper alerts in addon panes + curriculum SCORM/H5P warnings */
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab, #curriculum) .alert,
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab, #curriculum) .alert-warning {
+  background: var(--gp-warning-soft);
+  border: 1px solid var(--gp-warning-border);
+  border-radius: 12px;
+  color: var(--gp-warning);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab, #curriculum) .alert-info {
+  background: var(--gp-info-soft);
+  border-color: var(--gp-info-border);
+  color: var(--gp-info);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab, #curriculum) .alert-success {
+  background: var(--gp-success-soft);
+  border-color: var(--gp-success-border);
+  color: var(--gp-success);
+}
+
+.gp-ds .gp-course-wizard :is(#assignment, #noticeboard, #course_analytics, #jitsi-live-class, #live-class, .gp-addon-tab, #curriculum) .alert-danger {
+  background: var(--gp-danger-soft);
+  border-color: var(--gp-danger-border);
+  color: var(--gp-danger);
+}
+
+.gp-ds .gp-course-wizard :is(#curriculum, .gp-addon-tab) .alert-heading {
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-course-wizard :is(#curriculum, .gp-addon-tab) .alert p {
+  color: var(--gp-fg-muted);
+}

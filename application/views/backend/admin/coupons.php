@@ -1,28 +1,24 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo $page_title; ?>
-                    <a href="<?php echo site_url('admin/coupon_form/add_coupon_form'); ?>" class="btn btn-outline-primary btn-rounded alignToTitle"><i class="mdi mdi-plus"></i><?php echo get_phrase('add_new_coupon'); ?></a>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
-
-<div class="row">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="mb-3 header-title"><?php echo get_phrase('coupons'); ?></h4>
-                <div class="table-responsive-sm mt-4">
+<?php
+gp_ds_page_title(
+    get_phrase('coupons'),
+    gp_ds_button(get_phrase('add') . ' ' . get_phrase('coupon'), [
+        'href' => site_url('admin/coupon_form/add_coupon_form'),
+        'variant' => 'outline',
+    ], true)
+);
+?>
+<div class="gp-courses-page">
+    <?php
+    ob_start();
+    ?>
+                <div class="table-responsive-sm gp-courses-table">
                     <table id="basic-datatable" class="table table-striped table-centered mb-0">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th><?php echo get_phrase('coupon_code'); ?></th>
-                                <th><?php echo get_phrase('discount_percentage'); ?></th>
-                                <th><?php echo get_phrase('validity_till'); ?></th>
+                                <th><?php echo get_phrase('coupon') . ' ' . get_phrase('code'); ?></th>
+                                <th><?php echo get_phrase('discount') . ' ' . get_phrase('percentage'); ?></th>
+                                <th><?php echo get_phrase('validity') . ' ' . get_phrase('till'); ?></th>
                                 <th><?php echo get_phrase('actions'); ?></th>
                             </tr>
                         </thead>
@@ -36,7 +32,7 @@
                                     <td><?php echo date('D, d-M-Y', $coupon['expiry_date']); ?></td>
                                     <td>
                                         <div class="dropright dropright">
-                                            <button type="button" class="btn btn-sm btn-outline-primary btn-rounded btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button" class="btn action-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="mdi mdi-dots-vertical"></i>
                                             </button>
                                             <ul class="dropdown-menu">
@@ -50,7 +46,11 @@
                         </tbody>
                     </table>
                 </div>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
+    <?php
+    gp_ds_card([
+        'title' => get_phrase('coupon') . ' ' . get_phrase('list'),
+        'body' => ob_get_clean(),
+        'extra_class' => 'gp-dash-panel',
+    ]);
+    ?>
 </div>

@@ -1,20 +1,10 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body py-2">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('edit_your_page'); ?>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
-
-
+<?php gp_ds_page_title(get_phrase('edit_your_page')); ?>
+<div class="gp-settings-page">
 <div class="row ">
     <div class="col-md-10">
-    	<div class="card">
-    		<div class="card-body">
-    			<h4 class='mb-3'><?php echo get_phrase('page_information'); ?></h4>
+        <?php
+        ob_start();
+        ?>
 		    	<form action="<?php echo site_url('admin/custom_page/update/'.$custom_page['custom_page_id']); ?>" method="post" enctype="multipart/form-data">
 		    		<div class="form-group">
 		    			<label for="page_title"><?php echo get_phrase('page_title'); ?></label>
@@ -50,10 +40,19 @@
 			    	</div>
 
 					<div class="form-group mt-4">
-						<button class="btn btn-success"><?php echo get_phrase('update_page'); ?></button>
+						<?php echo gp_ds_button(get_phrase('update_page'), [
+							'variant' => 'primary',
+							'type' => 'submit',
+						], true); ?>
 					</div>
 		    	</form>
-		    </div>
-		</div>
+        <?php
+        gp_ds_card([
+            'title' => get_phrase('page_information'),
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
 	</div>
+</div>
 </div>

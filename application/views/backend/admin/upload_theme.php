@@ -1,3 +1,4 @@
+<div class="gp-themes-page gp-themes-modal">
 <form action="<?php echo site_url('admin/upload_theme'); ?>" method="post" enctype="multipart/form-data">
     <div class="form-group mb-3">
         <label><?php echo get_phrase('zip_file'); ?></label>
@@ -7,8 +8,12 @@
                 <label class="custom-file-label" for="theme_zip"><?php echo get_phrase('upload_theme_file'); ?></label>
             </div>
         </div>
-        <small class="badge badge-light">EX: theme.zip</small>
+        <?php echo gp_ds_badge('EX: theme.zip', 'neutral', true); ?>
     </div>
 
-    <button type="submit" class="btn btn-primary"><?php echo get_phrase('install_theme'); ?></button>
+    <?php echo gp_ds_button(get_phrase('install_theme'), [
+        'variant' => 'primary',
+        'type' => 'submit',
+    ], true); ?>
 </form>
+</div>

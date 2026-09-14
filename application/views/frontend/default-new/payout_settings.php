@@ -5,49 +5,25 @@ $paypal_keys = $payment_keys['paypal'];
 $stripe_keys = $payment_keys['stripe'];
 $razorpay_keys = $payment_keys['razorpay'];
 ?>
+<div class="gp-student-page">
 <?php include "breadcrumb.php"; ?>
 
-<style>
-  .affiliate_form {
-	margin-top: 20px;
-}
-.affiliate_form h4 {
-    font-size: 20px;
-    padding-bottom: 10px;
-    margin-bottom:10px;
-    color: #000;
-    border-bottom: 1px solid #ddd;
-}
-  .col-form-label {
-	font-size: 14px;
-}
- .form-group small{
-  font-size:11px;
- }
- .header-title p{
-  text-transform:uppercase;
- }
- .alert-heading{
-  font-size:20px;
- }
-</style>
-<section class="wish-list-body ">
+<section class="wish-list-body gp-student-shell">
 <div class="container">
+    <?php gp_ds_page_title(site_phrase('Payout Settings')); ?>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-lg-3 col-md-4 col-sm-12">
             <?php include "profile_menus.php"; ?>
           </div>
-        <div class="col-md-9 mt-5 mb-3">
-          <div class="col-md-12 ">
-            <div class="profile-ful-body common-card">
-              <div>
-                 <div class="alert alert-warning mb-3" role="alert">
-                      <h4 class="alert-heading"><?php echo get_phrase('be_careful'); ?>!</h4>
-                      <p><?php echo get_phrase('Just configure the payment gateway you want to use, leave the rest blank.')?></p>
-                      <hr>
-                      <p><?php echo get_phrase('Also, make sure that you have configured your payment settings correctly')?></p>
-                  </div>
-                 <h4 class="header-title"><p><?php echo get_phrase('setup_your_payment_settings'); ?></p></h4>
+        <div class="col-lg-9 col-md-8 col-sm-12">
+            <?php
+            ob_start();
+            gp_ds_alert(
+                get_phrase('be_careful') . '!',
+                get_phrase('Just configure the payment gateway you want to use, leave the rest blank.') . ' ' . get_phrase('Also, make sure that you have configured your payment settings correctly'),
+                'warning'
+            );
+            ?>
                 <form class="affiliate_form" action="<?php echo site_url('home/frontend_payout_settings/paypal_settings'); ?>" method="post" enctype="multipart/form-data"> 
                   <?php $payment_gateways = $this->db->get('payment_gateways')->result_array();
                       foreach($payment_gateways as $key => $payment_gateway):
@@ -80,13 +56,24 @@ $razorpay_keys = $payment_keys['razorpay'];
                       </div>
                    <?php endforeach; ?>
                   <div class="form-group w-100">
-                     <button class="btn btn-primary float-right" type="submit"><?php echo get_phrase('save_changes'); ?></button>
+                     <?php
+                     gp_ds_button(get_phrase('save_changes'), [
+                         'variant'     => 'primary',
+                         'type'        => 'submit',
+                         'extra_class' => 'gp-student-cta',
+                     ]);
+                     ?>
                   </div>
                 </form>
-              </div>
-            </div>
-          </div>
+            <?php
+            gp_ds_card([
+                'title'       => get_phrase('setup_your_payment_settings'),
+                'extra_class' => 'gp-student-profile-card gp-student-payout-card',
+                'body'        => ob_get_clean(),
+            ]);
+            ?>
         </div>
     </div>
 </div>
 </section>
+</div>

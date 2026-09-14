@@ -12,6 +12,7 @@
 <script src="<?php echo base_url() . 'assets/frontend/default-new/js/wow.min.js'; ?>"></script>
 
 <script src="<?php echo base_url() . 'assets/frontend/default-new/js/script.js'; ?>"></script>
+<script src="<?php echo base_url('assets/design-system/gp-landing-reveal.js'); ?>" defer></script>
 <script src="<?php echo base_url() . 'assets/frontend/default-new/summernote-0.8.20-dist/summernote-lite.min.js'; ?>"></script>
 
 

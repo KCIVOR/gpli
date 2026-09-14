@@ -1,13 +1,4 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body py-2">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('pending_blog'); ?>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php gp_ds_page_title(get_phrase('pending_blog')); ?>
 
 <div class="row">
     <div class="<?php if($pending_blogs->num_rows() > 0){echo 'col-xl-9'; }else{ echo 'col-xl-12'; } ?>">
@@ -51,7 +42,7 @@
                                     </td>
                                     <td><?php echo $this->crud_model->get_blog_categories($blog['blog_category_id'])->row('title'); ?></td>
                                     <td>
-                                        <span class="badge badge-danger"><?php echo get_phrase($blog['status']); ?></span>
+                                        <?php gp_ds_badge(get_phrase($blog['status']), 'danger'); ?>
                                     </td>
                                     <td>
                                         <div class="dropright dropright">

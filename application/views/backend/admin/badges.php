@@ -5,20 +5,14 @@
 </style>
 
 <?php $homepage_banner = themeConfiguration(get_frontend_settings('theme'), 'homepage'); ?>
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('gamification_badges_settings'); ?></h4>
-            </div>
-        </div>
-    </div>
-</div>
+<?php gp_ds_page_title(get_phrase('gamification_badges_settings')); ?>
 
+<div class="gp-settings-page">
 <div class="row justify-content-center">
     <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
+        <?php
+        ob_start();
+        ?>
 
                 <div class="scrollable-tab-section" id="basicwizard">
                     <div class="scrollable-tab" style="height: 50px; overflow-y: hidden;">
@@ -74,20 +68,16 @@
                              <div class="col-lg-12">
                                     <div class="d-flex justify-content-between">
                                         <h4 class="mb-3 header-title"><?php echo site_phrase('Number of Course Badges'); ?></h4>
-                                        <a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('admin/badges_add?type=course_count'); ?>', '<?php echo get_phrase('add_a_badges'); ?>');" class="btn btn-outline-primary btn-rounded alignToTitle "><?php echo get_phrase('Add Badges') ?></a>
+                                        <?php echo gp_ds_button(get_phrase('Add Badges'), [
+                                            'variant' => 'outline',
+                                            'href' => 'javascript:;',
+                                            'extra_class' => 'alignToTitle',
+                                            'attrs' => [
+                                                'onclick' => "showAjaxModal('" . site_url('admin/badges_add?type=course_count') . "', '" . get_phrase('add_a_badges') . "');",
+                                            ],
+                                        ], true); ?>
                                     </div>
-                                    <div class="table-responsive-sm mt-4">
-                                        <table  class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                   <th><?php echo get_phrase('Image'); ?></th>
-                                                    <th><?php echo get_phrase('Title'); ?></th>
-                                                    <th><?php echo get_phrase('Condition'); ?></th>
-                                                    <th><?php echo get_phrase('Description'); ?></th>
-                                                    <th><?php echo get_phrase('Action'); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                    <?php ob_start(); ?>
                                               <?php foreach ($badgesList as $badge): ?>
                                                     <?php if ($badge['type'] == 'course_count'): ?>
                                                         <tr>
@@ -105,7 +95,7 @@
                                                             <td><?php echo $badge['description']; ?></td>
                                                             <td>
                                                                 <div class="dropright dropright">
-                                                                    <button type="button" class="btn btn-sm btn-outline-primary btn-rounded btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <button type="button" class="icon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         <i class="mdi mdi-dots-vertical"></i>
                                                                     </button>
                                                                     <ul class="dropdown-menu">
@@ -128,10 +118,20 @@
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
 
-                                            </tbody>
-                                        </table>
-
-                                    </div>
+                                    <?php
+                                    echo gp_ds_table([
+                                        'headers' => [
+                                            get_phrase('Image'),
+                                            get_phrase('Title'),
+                                            get_phrase('Condition'),
+                                            get_phrase('Description'),
+                                            get_phrase('Action'),
+                                        ],
+                                        'body_html' => ob_get_clean(),
+                                        'allow_empty' => true,
+                                        'extra_class' => 'mb-0',
+                                    ], true);
+                                    ?>
                              </div>
                         </div>
                     </div>
@@ -140,20 +140,16 @@
                              <div class="col-lg-12">
                                      <div class="d-flex justify-content-between">
                                         <h4 class="mb-3 header-title"><?php echo site_phrase('Number of Course Rating'); ?></h4>
-                                        <a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('admin/badges_add?type=courses_rating'); ?>', '<?php echo get_phrase('add_a_badges'); ?>');" class="btn btn-outline-primary btn-rounded alignToTitle "><?php echo get_phrase('Add Badges') ?></a>
+                                        <?php echo gp_ds_button(get_phrase('Add Badges'), [
+                                            'variant' => 'outline',
+                                            'href' => 'javascript:;',
+                                            'extra_class' => 'alignToTitle',
+                                            'attrs' => [
+                                                'onclick' => "showAjaxModal('" . site_url('admin/badges_add?type=courses_rating') . "', '" . get_phrase('add_a_badges') . "');",
+                                            ],
+                                        ], true); ?>
                                     </div>
-                                    <div class="table-responsive-sm mt-4">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                   <th><?php echo get_phrase('Image'); ?></th>
-                                                    <th><?php echo get_phrase('Title'); ?></th>
-                                                    <th><?php echo get_phrase('Condition'); ?></th>
-                                                    <th><?php echo get_phrase('Description'); ?></th>
-                                                    <th><?php echo get_phrase('Action'); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                    <?php ob_start(); ?>
                                               <?php foreach ($badgesList as $badge): ?>
                                                     <?php if ($badge['type'] == 'courses_rating'): ?>
                                                         <tr>
@@ -170,7 +166,7 @@
                                                             <td><?php echo $badge['description']; ?></td>
                                                             <td>
                                                                 <div class="dropright dropright">
-                                                                    <button type="button" class="btn btn-sm btn-outline-primary btn-rounded btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <button type="button" class="icon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         <i class="mdi mdi-dots-vertical"></i>
                                                                     </button>
                                                                     <ul class="dropdown-menu">
@@ -195,10 +191,20 @@
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
 
-                                            </tbody>
-                                        </table>
-
-                                    </div>
+                                    <?php
+                                    echo gp_ds_table([
+                                        'headers' => [
+                                            get_phrase('Image'),
+                                            get_phrase('Title'),
+                                            get_phrase('Condition'),
+                                            get_phrase('Description'),
+                                            get_phrase('Action'),
+                                        ],
+                                        'body_html' => ob_get_clean(),
+                                        'allow_empty' => true,
+                                        'extra_class' => 'mb-0',
+                                    ], true);
+                                    ?>
                              </div>
                         </div>
                     </div>
@@ -207,20 +213,16 @@
                              <div class="col-lg-12">
                                  <div class="d-flex justify-content-between">
                                         <h4 class="mb-3 header-title"><?php echo site_phrase('Number of Course Sale'); ?></h4>
-                                        <a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('admin/badges_add?type=courses_sale'); ?>', '<?php echo get_phrase('add_a_badges'); ?>');" class="btn btn-outline-primary btn-rounded alignToTitle "><?php echo get_phrase('Add Badges') ?></a>
+                                        <?php echo gp_ds_button(get_phrase('Add Badges'), [
+                                            'variant' => 'outline',
+                                            'href' => 'javascript:;',
+                                            'extra_class' => 'alignToTitle',
+                                            'attrs' => [
+                                                'onclick' => "showAjaxModal('" . site_url('admin/badges_add?type=courses_sale') . "', '" . get_phrase('add_a_badges') . "');",
+                                            ],
+                                        ], true); ?>
                                     </div>
-                                    <div class="table-responsive-sm mt-4">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                   <th><?php echo get_phrase('Image'); ?></th>
-                                                    <th><?php echo get_phrase('Title'); ?></th>
-                                                    <th><?php echo get_phrase('Condition'); ?></th>
-                                                    <th><?php echo get_phrase('Description'); ?></th>
-                                                    <th><?php echo get_phrase('Action'); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                    <?php ob_start(); ?>
                                               <?php foreach ($badgesList as $badge): ?>
                                                     <?php if ($badge['type'] == 'courses_sale'): ?>
                                                         <tr>
@@ -238,7 +240,7 @@
                                                             <td><?php echo $badge['description']; ?></td>
                                                             <td>
                                                                 <div class="dropright dropright">
-                                                                    <button type="button" class="btn btn-sm btn-outline-primary btn-rounded btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <button type="button" class="icon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         <i class="mdi mdi-dots-vertical"></i>
                                                                     </button>
                                                                     <ul class="dropdown-menu">
@@ -263,10 +265,20 @@
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
 
-                                            </tbody>
-                                        </table>
-
-                                    </div>
+                                    <?php
+                                    echo gp_ds_table([
+                                        'headers' => [
+                                            get_phrase('Image'),
+                                            get_phrase('Title'),
+                                            get_phrase('Condition'),
+                                            get_phrase('Description'),
+                                            get_phrase('Action'),
+                                        ],
+                                        'body_html' => ob_get_clean(),
+                                        'allow_empty' => true,
+                                        'extra_class' => 'mb-0',
+                                    ], true);
+                                    ?>
                              </div>
                         </div>
                     </div>
@@ -275,20 +287,16 @@
                              <div class="col-lg-12">
                                     <div class="d-flex justify-content-between">
                                         <h4 class="mb-3 header-title"><?php echo site_phrase('Number of Blogs'); ?></h4>
-                                        <a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('admin/badges_add?type=articles'); ?>', '<?php echo get_phrase('add_a_badges'); ?>');" class="btn btn-outline-primary btn-rounded alignToTitle "><?php echo get_phrase('Add Badges') ?></a>
+                                        <?php echo gp_ds_button(get_phrase('Add Badges'), [
+                                            'variant' => 'outline',
+                                            'href' => 'javascript:;',
+                                            'extra_class' => 'alignToTitle',
+                                            'attrs' => [
+                                                'onclick' => "showAjaxModal('" . site_url('admin/badges_add?type=articles') . "', '" . get_phrase('add_a_badges') . "');",
+                                            ],
+                                        ], true); ?>
                                     </div>
-                                    <div class="table-responsive-sm mt-4">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                   <th><?php echo get_phrase('Image'); ?></th>
-                                                    <th><?php echo get_phrase('Title'); ?></th>
-                                                    <th><?php echo get_phrase('Condition'); ?></th>
-                                                    <th><?php echo get_phrase('Description'); ?></th>
-                                                    <th><?php echo get_phrase('Action'); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                    <?php ob_start(); ?>
                                               <?php foreach ($badgesList as $badge): ?>
                                                     <?php if ($badge['type'] == 'articles'): ?>
                                                         <tr>
@@ -306,7 +314,7 @@
                                                             <td><?php echo $badge['description']; ?></td>
                                                             <td>
                                                                 <div class="dropright dropright">
-                                                                    <button type="button" class="btn btn-sm btn-outline-primary btn-rounded btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <button type="button" class="icon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         <i class="mdi mdi-dots-vertical"></i>
                                                                     </button>
                                                                     <ul class="dropdown-menu">
@@ -332,10 +340,20 @@
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
 
-                                            </tbody>
-                                        </table>
-
-                                    </div>
+                                    <?php
+                                    echo gp_ds_table([
+                                        'headers' => [
+                                            get_phrase('Image'),
+                                            get_phrase('Title'),
+                                            get_phrase('Condition'),
+                                            get_phrase('Description'),
+                                            get_phrase('Action'),
+                                        ],
+                                        'body_html' => ob_get_clean(),
+                                        'allow_empty' => true,
+                                        'extra_class' => 'mb-0',
+                                    ], true);
+                                    ?>
                              </div>
                         </div>
                     </div>
@@ -344,20 +362,16 @@
                              <div class="col-lg-12">
                                      <div class="d-flex justify-content-between">
                                         <h4 class="mb-3 header-title"><?php echo site_phrase('Number of Course Completed'); ?></h4>
-                                        <a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('admin/badges_add?type=course_completed'); ?>', '<?php echo get_phrase('add_a_badges'); ?>');" class="btn btn-outline-primary btn-rounded alignToTitle "><?php echo get_phrase('Add Badges') ?></a>
+                                        <?php echo gp_ds_button(get_phrase('Add Badges'), [
+                                            'variant' => 'outline',
+                                            'href' => 'javascript:;',
+                                            'extra_class' => 'alignToTitle',
+                                            'attrs' => [
+                                                'onclick' => "showAjaxModal('" . site_url('admin/badges_add?type=course_completed') . "', '" . get_phrase('add_a_badges') . "');",
+                                            ],
+                                        ], true); ?>
                                     </div>
-                                    <div class="table-responsive-sm mt-4">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                   <th><?php echo get_phrase('Image'); ?></th>
-                                                    <th><?php echo get_phrase('Title'); ?></th>
-                                                    <th><?php echo get_phrase('Condition'); ?></th>
-                                                    <th><?php echo get_phrase('Description'); ?></th>
-                                                    <th><?php echo get_phrase('Action'); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                    <?php ob_start(); ?>
                                               <?php foreach ($badgesList as $badge): ?>
                                                     <?php if ($badge['type'] == 'course_completed'): ?>
                                                         <tr>
@@ -375,7 +389,7 @@
                                                             <td><?php echo $badge['description']; ?></td>
                                                             <td>
                                                                 <div class="dropright dropright">
-                                                                    <button type="button" class="btn btn-sm btn-outline-primary btn-rounded btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <button type="button" class="icon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         <i class="mdi mdi-dots-vertical"></i>
                                                                     </button>
                                                                     <ul class="dropdown-menu">
@@ -401,10 +415,20 @@
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
 
-                                            </tbody>
-                                        </table>
-
-                                    </div>
+                                    <?php
+                                    echo gp_ds_table([
+                                        'headers' => [
+                                            get_phrase('Image'),
+                                            get_phrase('Title'),
+                                            get_phrase('Condition'),
+                                            get_phrase('Description'),
+                                            get_phrase('Action'),
+                                        ],
+                                        'body_html' => ob_get_clean(),
+                                        'allow_empty' => true,
+                                        'extra_class' => 'mb-0',
+                                    ], true);
+                                    ?>
                              </div>
                         </div>
                     </div>
@@ -414,20 +438,16 @@
                              <div class="col-lg-12">
                                     <div class="d-flex justify-content-between">
                                         <h4 class="mb-3 header-title"><?php echo site_phrase('Number of Course Certificate'); ?></h4>
-                                        <a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('admin/badges_add?type=certificate'); ?>', '<?php echo get_phrase('add_a_badges'); ?>');" class="btn btn-outline-primary btn-rounded alignToTitle "><?php echo get_phrase('Add Badges') ?></a>
+                                        <?php echo gp_ds_button(get_phrase('Add Badges'), [
+                                            'variant' => 'outline',
+                                            'href' => 'javascript:;',
+                                            'extra_class' => 'alignToTitle',
+                                            'attrs' => [
+                                                'onclick' => "showAjaxModal('" . site_url('admin/badges_add?type=certificate') . "', '" . get_phrase('add_a_badges') . "');",
+                                            ],
+                                        ], true); ?>
                                     </div>
-                                    <div class="table-responsive-sm mt-4">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                   <th><?php echo get_phrase('Image'); ?></th>
-                                                    <th><?php echo get_phrase('Title'); ?></th>
-                                                    <th><?php echo get_phrase('Condition'); ?></th>
-                                                    <th><?php echo get_phrase('Description'); ?></th>
-                                                    <th><?php echo get_phrase('Action'); ?></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                    <?php ob_start(); ?>
                                               <?php foreach ($badgesList as $badge): ?>
                                                     <?php if ($badge['type'] == 'certificate'): ?>
                                                         <tr>
@@ -445,7 +465,7 @@
                                                             <td><?php echo $badge['description']; ?></td>
                                                             <td>
                                                                 <div class="dropright dropright">
-                                                                    <button type="button" class="btn btn-sm btn-outline-primary btn-rounded btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <button type="button" class="icon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         <i class="mdi mdi-dots-vertical"></i>
                                                                     </button>
                                                                     <ul class="dropdown-menu">
@@ -471,10 +491,20 @@
                                                     <?php endif; ?>
                                                 <?php endforeach; ?>
 
-                                            </tbody>
-                                        </table>
-
-                                    </div>
+                                    <?php
+                                    echo gp_ds_table([
+                                        'headers' => [
+                                            get_phrase('Image'),
+                                            get_phrase('Title'),
+                                            get_phrase('Condition'),
+                                            get_phrase('Description'),
+                                            get_phrase('Action'),
+                                        ],
+                                        'body_html' => ob_get_clean(),
+                                        'allow_empty' => true,
+                                        'extra_class' => 'mb-0',
+                                    ], true);
+                                    ?>
                              </div>
                         </div>
                     </div>
@@ -482,9 +512,14 @@
                     
                 </div>
 
-            </div> <!-- end card-body-->
-        </div>
+        <?php
+        gp_ds_card([
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
     </div>
+</div>
 </div>
 
 

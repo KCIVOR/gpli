@@ -1,0 +1,316 @@
+/**
+ * Geese Project — Admin Newsletter
+ * Tokens from gp-tokens.css only. No leftover Hyper hex.
+ *
+ * In-scope page_name values:
+ *   newsletters, subscribed_user, newsletter_history
+ * Modal partials: add_newsletter, edit_newsletter, send_newsletter
+ * Include: newsletter_statistics.php (replaced into #newsletter_statistics)
+ *
+ * Forbidden:
+ *   rewriting Admin.php / common_scripts.php / cronjob
+ *   changing form names / ids / actions
+ *   renaming #server_side_users_data or #server_side_newsletter_data
+ *   converting leftover Hyper accordion to data-bs-toggle
+ *   fixing leftover status URL "faild"
+ *
+ * Hooks later phases must keep:
+ *   showAjaxModal newsletter_*_form, confirm_modal delete
+ *   #newsletter_statistics, #accordion, custom-accordion, stopProp
+ *   #collapseOne{id} #headingOne{id} data-toggle="collapse" GET tab
+ *   #send_to, #select_newsletter_user, .server-side-select2, is_selected_user
+ *   #newsletter_subject, #newsletter_description, initSummerNote
+ *   refreshServersideTable, refreshTable, actionTo
+ *   admin/cronjob/start|stop
+ */
+
+.gp-ds .gp-newsletter-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .row:has(+ .gp-newsletter-page) .gp-page-title-actions .btn,
+.gp-ds .gp-newsletter-page .btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-newsletter-page a.btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-newsletter-page button.btn:not(.btn-icon):not(.action-icon):not(.icon-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 96px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
+  line-height: 1.2;
+  min-height: 38px !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-newsletter-page .btn,
+.gp-ds .gp-newsletter-page .header-title,
+.gp-ds .gp-newsletter-page label,
+.gp-ds .gp-newsletter-page .col-form-label {
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-newsletter-page .gp-dash-panel > .card-body > .header-title,
+.gp-ds .gp-newsletter-page .card > .card-body > .header-title {
+  margin: 0 0 16px;
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-newsletter-page .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-newsletter-page .form-group {
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-newsletter-page .form-group > label,
+.gp-ds .gp-newsletter-page .col-form-label {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-newsletter-page .form-control,
+.gp-ds .gp-newsletter-page select.form-control,
+.gp-ds .gp-newsletter-page textarea.form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-newsletter-page .form-control:focus,
+.gp-ds .gp-newsletter-page select.form-control:focus,
+.gp-ds .gp-newsletter-page textarea.form-control:focus {
+  background: var(--gp-surface);
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+/* ---------- Stats ---------- */
+.gp-ds .gp-newsletter-page .gp-newsletter-stat-note {
+  font-size: 12.5px;
+  color: var(--gp-fg-muted);
+  word-spacing: 0.2em;
+  line-height: 1.4;
+}
+
+/* ---------- Leftover Hyper accordion ---------- */
+.gp-ds .gp-newsletter-page .custom-accordion > .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 12px;
+  box-shadow: none;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.gp-ds .gp-newsletter-page .custom-accordion > .card + .card {
+  margin-top: 0;
+}
+
+.gp-ds .gp-newsletter-page .custom-accordion .card-header {
+  background: var(--gp-surface);
+  border-bottom: 1px solid var(--gp-border);
+  padding: 0 16px;
+}
+
+.gp-ds .gp-newsletter-page .custom-accordion-title,
+.gp-ds .gp-newsletter-page .custom-accordion-title:hover {
+  color: var(--gp-fg);
+  text-decoration: none;
+}
+
+.gp-ds .gp-newsletter-page .custom-accordion-title p {
+  color: var(--gp-fg);
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 700;
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-newsletter-page .custom-accordion .accordion-arrow {
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .gp-newsletter-page .custom-accordion .card-body {
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-newsletter-page .icon-btn {
+  width: 30px;
+  height: 30px;
+  padding: 0 !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  margin: 0 4px;
+  float: none;
+}
+
+/* ---------- Cron notice ---------- */
+.gp-ds .gp-newsletter-page .gp-newsletter-notice {
+  background: var(--gp-info-soft);
+  border: 1px solid var(--gp-info-border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-newsletter-page .gp-newsletter-notice .alert-heading {
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin: 0 0 10px;
+}
+
+.gp-ds .gp-newsletter-page .gp-newsletter-notice p {
+  font-size: 13.5px;
+  color: var(--gp-fg-muted);
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-newsletter-page .gp-newsletter-notice hr {
+  border-color: var(--gp-border);
+  opacity: 1;
+}
+
+.gp-ds .gp-newsletter-page .gp-newsletter-cron-path {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  padding: 10px 12px;
+  display: block;
+  overflow-x: auto;
+  font-family: var(--gp-font-mono);
+  font-size: 12px;
+  color: var(--gp-fg);
+}
+
+/* ---------- Tables + DataTables (scoped; do not leak to Users) ---------- */
+.gp-ds .gp-newsletter-page table.table,
+.gp-ds .gp-newsletter-page table.dataTable {
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-newsletter-page table.table thead th,
+.gp-ds .gp-newsletter-page table.dataTable thead th {
+  word-spacing: 0.28em;
+  color: var(--gp-fg-faint);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .gp-newsletter-page table.table tbody td,
+.gp-ds .gp-newsletter-page table.dataTable tbody td,
+.gp-ds .gp-newsletter-page .table > :not(caption) > * > * {
+  color: var(--gp-fg);
+  background-color: transparent;
+  border-color: var(--gp-border);
+  box-shadow: none;
+}
+
+.gp-ds .gp-newsletter-page table.table a:not(.action-icon):not(.icon-btn):not(.btn) {
+  color: var(--gp-info);
+  text-decoration: none;
+}
+
+.gp-ds .gp-newsletter-page .dataTables_wrapper {
+  width: 100%;
+}
+
+.gp-ds .gp-newsletter-page .dataTables_wrapper .dataTables_filter {
+  float: none;
+  width: 100%;
+  margin: 0;
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-newsletter-page .dataTables_wrapper .dataTables_filter input {
+  min-height: 42px;
+  padding: 10px 14px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-newsletter-page .dataTables_info {
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-newsletter-page .dataTables_paginate .page-link,
+.gp-ds .gp-newsletter-page .dataTables_paginate a.paginate_button {
+  color: var(--gp-fg) !important;
+  background: var(--gp-surface) !important;
+  border: 1px solid var(--gp-border-strong) !important;
+  border-radius: var(--gp-radius) !important;
+}
+
+.gp-ds .gp-newsletter-page .dataTables_paginate .page-item.active .page-link,
+.gp-ds .gp-newsletter-page .dataTables_paginate a.paginate_button.current {
+  background: var(--gp-primary) !important;
+  border-color: var(--gp-primary) !important;
+  color: var(--gp-on-primary) !important;
+}
+
+/* Controller-emitted leftover chips */
+.gp-ds .gp-newsletter-page .badge-primary,
+.gp-ds .gp-newsletter-page .badge-success,
+.gp-ds .gp-newsletter-page .badge-warning {
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.gp-ds .gp-newsletter-page .text-danger {
+  color: var(--gp-danger) !important;
+}
+
+.gp-ds .gp-newsletter-page .text-warning {
+  color: var(--gp-warning) !important;
+}
+
+.gp-ds .gp-newsletter-page .text-success {
+  color: var(--gp-success) !important;
+}
+
+.gp-ds .gp-newsletter-page .text-secondary {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds .gp-newsletter-page .btn-rounded.btn-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+}

@@ -1,15 +1,17 @@
-<!-- bundle -->
-<script src="<?php echo base_url('assets/backend/js/app.min.js'); ?>"></script>
+<!-- moment.js (was bundled in app.min.js — required by FullCalendar, daterangepicker) -->
+<script src="<?php echo base_url('assets/backend/js/vendor/moment.js'); ?>"></script>
+<!-- Hyper admin plugins (Bootstrap 4 JS removed — Phase 4) -->
+<script src="<?php echo base_url('assets/backend/js/hyper-admin-plugins.js'); ?>"></script>
 <!-- third party js -->
 <script src="<?php echo base_url('assets/backend/js/vendor/Chart.bundle.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/jquery-jvectormap-1.2.2.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/jquery-jvectormap-world-mill-en.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/jquery.dataTables.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/backend/js/vendor/dataTables.bootstrap4.js'); ?>"></script>
+<script src="<?php echo base_url('assets/backend/js/vendor/dataTables.bootstrap5.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/dataTables.responsive.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/backend/js/vendor/responsive.bootstrap4.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/backend/js/vendor/responsive.bootstrap5.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/dataTables.buttons.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/backend/js/vendor/buttons.bootstrap4.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/backend/js/vendor/buttons.bootstrap5.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/buttons.html5.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/buttons.flash.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/buttons.print.min.js'); ?>"></script>
@@ -23,6 +25,7 @@
 <script src="<?php echo base_url('assets/backend/js/font-awesome-icon-picker/fontawesome-iconpicker.min.js'); ?>" charset="utf-8"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/bootstrap-tagsinput.min.js'); ?>" charset="utf-8"></script>
 <script src="<?php echo base_url() . 'assets/frontend/default-new/js/bootstrap.bundle.min.js'; ?>"></script>
+<script src="<?php echo base_url('assets/backend/js/gp-bs5-admin-bridge.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/bootstrap-tagsinput.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/dropzone.min.js'); ?>" charset="utf-8"></script>
 <script src="<?php echo base_url('assets/backend/js/ui/component.fileupload.js'); ?>" charset="utf-8"></script>

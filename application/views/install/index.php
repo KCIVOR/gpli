@@ -11,7 +11,7 @@
 	<title>Installation | Academy-LMS</title>
 	<?php include 'styles.php'; ?>
 </head>
-<body class="page-body">
+<body class="page-body gp-ds" data-theme="light">
 
 <div class="page-container horizontal-menu">
 

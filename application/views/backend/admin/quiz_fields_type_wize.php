@@ -1,3 +1,4 @@
+<div class="gp-courses-modal">
 <?php if($question_type == 'multiple_choice' || $question_type == 'single_choice'): ?>
     <div class="form-group">
         <label for="number_of_options"><?php echo get_phrase('number_of_options'); ?></label>
@@ -54,3 +55,4 @@
         });
     </script>
 <?php endif; ?>
+</div>

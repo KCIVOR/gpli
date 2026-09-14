@@ -1,13 +1,4 @@
-<!-- start page title -->
-<div class="row ">
-  <div class="col-xl-12">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('invoice'); ?></h4>
-      </div> <!-- end card body-->
-    </div> <!-- end card -->
-  </div><!-- end col-->
-</div>
+<?php gp_ds_page_title(get_phrase('invoice')); ?>
 <?php
     $course_details = $this->crud_model->get_course_by_id($payment_details['course_id'])->row_array();
     $instructor_details = $this->user_model->get_all_user($course_details['user_id'])->row_array();

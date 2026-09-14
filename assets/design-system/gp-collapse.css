@@ -1,0 +1,36 @@
+/**
+ * Geese Project Design System — Collapse Component  
+ * Phase 2a-3: Bootstrap Collapse Styling
+ * 
+ * Collapse is handled by Bootstrap JS - styling similar to accordion
+ * Preserves all Bootstrap collapse behavior
+ */
+
+/* ---------- Collapse Containers ---------- */
+.gp-ds .collapse {
+    /* Bootstrap handles display/animation */
+}
+
+.gp-ds .collapsing {
+    /* Bootstrap transition class - don't override */
+}
+
+/* ---------- Collapse Triggers ---------- */
+.gp-ds [data-bs-toggle="collapse"],
+.gp-ds [data-toggle="collapse"] {
+    cursor: pointer;
+    transition: background-color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds [data-bs-toggle="collapse"]:hover,
+.gp-ds [data-toggle="collapse"]:hover {
+    background-color: var(--gp-surface-sunk);
+}
+
+.gp-ds [data-bs-toggle="collapse"]:focus,
+.gp-ds [data-toggle="collapse"]:focus {
+    outline: 2px solid var(--gp-gold-deep);
+    outline-offset: -2px;
+}
+
+/* Dark mode via CSS variables */

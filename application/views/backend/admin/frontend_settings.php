@@ -1,24 +1,12 @@
-<style type="text/css">
-    .scrollable-tab .nav .nav-link{
-        min-width: 155px;
-    }
-</style>
-
 <?php $homepage_banner = themeConfiguration(get_frontend_settings('theme'), 'homepage'); ?>
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('website_settings'); ?></h4>
-            </div>
-        </div>
-    </div>
-</div>
+<?php gp_ds_page_title(get_phrase('website_settings')); ?>
 
+<div class="gp-settings-page">
 <div class="row justify-content-center">
     <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
+        <?php
+        ob_start();
+        ?>
 
                 <div class="scrollable-tab-section" id="basicwizard">
 
@@ -145,7 +133,11 @@
 
                             <div class="row justify-content-center">
                                 <div class="col-md-4">
-                                    <button type="button" class="btn btn-primary btn-block" onclick="checkRequiredFields()"><?php echo get_phrase('update_settings'); ?></button>
+                                    <?php echo gp_ds_button(get_phrase('update_settings'), [
+                                        'variant' => 'primary',
+                                        'type' => 'button',
+                                        'attrs' => ['onclick' => 'checkRequiredFields()'],
+                                    ], true); ?>
                                 </div>
                             </div>
                         </form>
@@ -173,11 +165,21 @@
 
                                                 <?php if($key == 0): ?>
                                                     <div class="" style="padding-top: 32px;">
-                                                        <button type="button" class="btn btn-success btn-sm" style="" name="button" onclick="appendFaq()"> <i class="fa fa-plus"></i> </button>
+                                                        <?php echo gp_ds_button('+', [
+                                                            'variant' => 'outline',
+                                                            'type' => 'button',
+                                                            'extra_class' => 'gp-settings-faq-btn',
+                                                            'attrs' => ['onclick' => 'appendFaq()', 'name' => 'button'],
+                                                        ], true); ?>
                                                     </div>
                                                 <?php else: ?>
                                                     <div class="" style="padding-top: 32px;">
-                                                        <button type="button" class="btn btn-danger btn-sm" style="margin-top: 0px;" name="button" onclick="removeFaq(this)"> <i class="fa fa-minus"></i> </button>
+                                                        <?php echo gp_ds_button('-', [
+                                                            'variant' => 'outline',
+                                                            'type' => 'button',
+                                                            'extra_class' => 'gp-settings-faq-btn',
+                                                            'attrs' => ['onclick' => 'removeFaq(this)', 'name' => 'button'],
+                                                        ], true); ?>
                                                     </div>
                                                 <?php endif; ?>
                                             </div>
@@ -197,13 +199,22 @@
 
                                                 </div>
                                                 <div class="" style="padding-top: 32px;">
-                                                    <button type="button" class="btn btn-danger btn-sm" style="margin-top: 0px;" name="button" onclick="removeFaq(this)"> <i class="fa fa-minus"></i> </button>
+                                                    <?php echo gp_ds_button('-', [
+                                                        'variant' => 'outline',
+                                                        'type' => 'button',
+                                                        'extra_class' => 'gp-settings-faq-btn',
+                                                        'attrs' => ['onclick' => 'removeFaq(this)', 'name' => 'button'],
+                                                    ], true); ?>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group pt-0 mt-0">
-                                        <button type="submit" class="btn btn-primary ml-3"><?php echo get_phrase('Save changes'); ?></button>
+                                        <?php echo gp_ds_button(get_phrase('Save changes'), [
+                                            'variant' => 'primary',
+                                            'type' => 'submit',
+                                            'extra_class' => 'ml-3',
+                                        ], true); ?>
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +251,10 @@
                                         <textarea name="office_hours" rows="2" class="form-control"><?php echo $contact_info['office_hours']; ?></textarea>
                                     </div>
                                     <div class="mb-3">
-                                        <button type="submit" class="btn btn-primary"><?php echo get_phrase('Submit') ?></button>
+                                        <?php echo gp_ds_button(get_phrase('Submit'), [
+                                            'variant' => 'primary',
+                                            'type' => 'submit',
+                                        ], true); ?>
                                     </div>
                                 </div>
                             </div>
@@ -283,7 +297,10 @@
 
                             <div class="row justify-content-center">
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary btn-block"><?php echo get_phrase('update_recaptcha_settings'); ?></button>
+                                    <?php echo gp_ds_button(get_phrase('update_recaptcha_settings'), [
+                                        'variant' => 'primary',
+                                        'type' => 'submit',
+                                    ], true); ?>
                                 </div>
                             </div>
                         </form>
@@ -293,16 +310,15 @@
                             <?php if (count($homepage_banner) > 0):
                               if ($homepage_banner['homepage_banner_image']):?>
                               <div class="col-xl-4 col-lg-6">
-                                  <div class="card">
-                                      <div class="card-body">
-                                          <div class="col-xl-12">
-                                              <h4 class="mb-3 header-title"><?php echo get_phrase('update_banner_image');?></h4>
+                                  <?php
+                                  ob_start();
+                                  ?>
                                               <div class="row justify-content-center">
                                                   <form action="<?php echo site_url('admin/frontend_settings/banner_image_update'); ?>" method="post" enctype="multipart/form-data" style="text-align: center;">
                                                       <div class="form-group mb-2">
                                                           <div class="wrapper-image-preview">
                                                               <div class="box" style="width: 250px;">
-                                                                  <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/'.get_current_banner('banner_image'));?>); background-color: #F5F5F5;"></div>
+                                                                  <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/'.get_current_banner('banner_image'));?>);"></div>
                                                                   <div class="upload-options">
                                                                       <label for="banner_image" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('upload_banner_image'); ?> <br> <small>(<?php echo $homepage_banner['homepage_banner_image_size']; ?>)</small> </label>
                                                                       <input id="banner_image" style="visibility:hidden;" type="file" class="image-upload" name="banner_image" accept="image/*">
@@ -310,27 +326,33 @@
                                                               </div>
                                                           </div>
                                                       </div>
-                                                      <button type="submit" class="btn btn-primary btn-block"><?php echo get_phrase('upload_banner_image'); ?></button>
+                                                      <?php echo gp_ds_button(get_phrase('upload_banner_image'), [
+                                                          'variant' => 'primary',
+                                                          'type' => 'submit',
+                                                      ], true); ?>
                                                   </form>
                                               </div>
-                                          </div>
-                                      </div>
-                                  </div>
+                                  <?php
+                                  gp_ds_card([
+                                      'title' => get_phrase('update_banner_image'),
+                                      'body' => ob_get_clean(),
+                                      'extra_class' => 'gp-dash-panel',
+                                  ]);
+                                  ?>
                               </div>
                               <?php endif; ?>
                             <?php endif; ?>
 
                             <div class="col-xl-4 col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="col-xl-12">
-                                            <h4 class="mb-3 header-title"><?php echo get_phrase('update_light_logo');?></h4>
+                                <?php
+                                ob_start();
+                                ?>
                                             <div class="row justify-content-center">
                                                 <form action="<?php echo site_url('admin/frontend_settings/light_logo'); ?>" method="post" enctype="multipart/form-data" style="text-align: center;">
                                                     <div class="form-group mb-2">
                                                         <div class="wrapper-image-preview">
                                                             <div class="box" style="width: 250px;">
-                                                                <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/'.get_frontend_settings('light_logo')); ?>); background-color: #F5F5F5;"></div>
+                                                                <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/'.get_frontend_settings('light_logo')); ?>);"></div>
                                                                 <div class="upload-options">
                                                                     <label for="light_logo" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('upload_light_logo'); ?> <br> <small>(330 X 70)</small> </label>
                                                                     <input id="light_logo" style="visibility:hidden;" type="file" class="image-upload" name="light_logo" accept="image/*">
@@ -338,25 +360,31 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary btn-block"><?php echo get_phrase('upload_light_logo'); ?></button>
+                                                    <?php echo gp_ds_button(get_phrase('upload_light_logo'), [
+                                                        'variant' => 'primary',
+                                                        'type' => 'submit',
+                                                    ], true); ?>
                                                 </form>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                gp_ds_card([
+                                    'title' => get_phrase('update_light_logo'),
+                                    'body' => ob_get_clean(),
+                                    'extra_class' => 'gp-dash-panel',
+                                ]);
+                                ?>
                             </div>
 
                             <div class="col-xl-4 col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="col-lg-12">
-                                            <h4 class="mb-3 header-title"><?php echo get_phrase('update_dark_logo');?></h4>
+                                <?php
+                                ob_start();
+                                ?>
                                             <div class="row justify-content-center">
                                                 <form action="<?php echo site_url('admin/frontend_settings/dark_logo'); ?>" method="post" enctype="multipart/form-data" style="text-align: center;">
                                                     <div class="form-group mb-2">
                                                         <div class="wrapper-image-preview">
                                                             <div class="box" style="width: 250px;">
-                                                                <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/'.get_frontend_settings('dark_logo')); ?>); background-color: #F5F5F5;"></div>
+                                                                <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/'.get_frontend_settings('dark_logo')); ?>);"></div>
                                                                 <div class="upload-options">
                                                                     <label for="dark_logo" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('upload_dark_logo'); ?> <br> <small>(330 X 70)</small> </label>
                                                                     <input id="dark_logo" style="visibility:hidden;" type="file" class="image-upload" name="dark_logo" accept="image/*">
@@ -364,25 +392,31 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary btn-block"><?php echo get_phrase('upload_dark_logo'); ?></button>
+                                                    <?php echo gp_ds_button(get_phrase('upload_dark_logo'), [
+                                                        'variant' => 'primary',
+                                                        'type' => 'submit',
+                                                    ], true); ?>
                                                 </form>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                gp_ds_card([
+                                    'title' => get_phrase('update_dark_logo'),
+                                    'body' => ob_get_clean(),
+                                    'extra_class' => 'gp-dash-panel',
+                                ]);
+                                ?>
                             </div>
 
                             <div class="col-xl-4 col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="col-lg-12">
-                                            <h4 class="mb-3 header-title"><?php echo get_phrase('update_small_logo');?></h4>
+                                <?php
+                                ob_start();
+                                ?>
                                             <div class="row justify-content-center">
                                                 <form action="<?php echo site_url('admin/frontend_settings/small_logo'); ?>" method="post" enctype="multipart/form-data" style="text-align: center;">
                                                     <div class="form-group mb-2">
                                                         <div class="wrapper-image-preview">
                                                             <div class="box" style="width: 250px;">
-                                                                <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/'.get_frontend_settings('small_logo')); ?>); background-color: #F5F5F5;"></div>
+                                                                <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/'.get_frontend_settings('small_logo')); ?>);"></div>
                                                                 <div class="upload-options">
                                                                     <label for="small_logo" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('upload_small_logo'); ?> <br> <small>(49 X 58)</small> </label>
                                                                     <input id="small_logo" style="visibility:hidden;" type="file" class="image-upload" name="small_logo" accept="image/*">
@@ -390,25 +424,31 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary btn-block"><?php echo get_phrase('upload_small_logo'); ?></button>
+                                                    <?php echo gp_ds_button(get_phrase('upload_small_logo'), [
+                                                        'variant' => 'primary',
+                                                        'type' => 'submit',
+                                                    ], true); ?>
                                                 </form>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                gp_ds_card([
+                                    'title' => get_phrase('update_small_logo'),
+                                    'body' => ob_get_clean(),
+                                    'extra_class' => 'gp-dash-panel',
+                                ]);
+                                ?>
                             </div>
 
                             <div class="col-xl-4 col-lg-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="col-lg-12">
-                                            <h4 class="mb-3 header-title"><?php echo get_phrase('update_favicon');?></h4>
+                                <?php
+                                ob_start();
+                                ?>
                                             <div class="row justify-content-center">
                                                 <form action="<?php echo site_url('admin/frontend_settings/favicon'); ?>" method="post" enctype="multipart/form-data" style="text-align: center;">
                                                     <div class="form-group mb-2">
                                                         <div class="wrapper-image-preview">
                                                             <div class="box" style="width: 250px;">
-                                                                <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/'.get_frontend_settings('favicon')); ?>); background-color: #F5F5F5;"></div>
+                                                                <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/'.get_frontend_settings('favicon')); ?>);"></div>
                                                                 <div class="upload-options">
                                                                     <label for="favicon" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('upload_favicon'); ?> <br> <small>(90 X 90)</small> </label>
                                                                     <input id="favicon" style="visibility:hidden;" type="file" class="image-upload" name="favicon" accept="image/*">
@@ -416,12 +456,19 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary btn-block"><?php echo get_phrase('upload_favicon'); ?></button>
+                                                    <?php echo gp_ds_button(get_phrase('upload_favicon'), [
+                                                        'variant' => 'primary',
+                                                        'type' => 'submit',
+                                                    ], true); ?>
                                                 </form>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php
+                                gp_ds_card([
+                                    'title' => get_phrase('update_favicon'),
+                                    'body' => ob_get_clean(),
+                                    'extra_class' => 'gp-dash-panel',
+                                ]);
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -444,7 +491,10 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button class="btn btn-primary"><?php echo get_phrase('Save changes'); ?></button>
+                                        <?php echo gp_ds_button(get_phrase('Save changes'), [
+                                            'variant' => 'primary',
+                                            'type' => 'submit',
+                                        ], true); ?>
                                     </div>
                                 </form>
                             </div>
@@ -454,34 +504,6 @@
                     <div class="tab-pane" id="water_mark">
                         <h4 class="mb-3 header-title"><?php echo get_phrase('video_watermark_settings');?></h4>
                         <form  action="<?php echo site_url('admin/frontend_settings/water_mark'); ?>" method="post" enctype="multipart/form-data">
-                            <style>
-                               .form-group input[type="radio"] {
-                                    cursor: pointer;
-                                }
-                                .video_test{
-                                    list-style: none;
-                                    padding-left: 0;
-                                }
-                                .video_test li input,
-                                .video_test li label,{
-                                    cursor:pointer;
-                                }
-                                .boxs{
-                                    height: 260px;
-                                    width: 300px;
-                                    margin: 10px;
-                                    background-color: white;
-                                    border-radius: 5px;
-                                    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-                                    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-                                    overflow: hidden;
-                                    text-align:center;
-                                }
-                                .text-muted{
-                                    font-size: 14px;
-                                }
-                                
-                            </style>
                              <div class="form-group mb-3">
                                 <label for="water_mark_status"><?php echo get_phrase('watermark_status'); ?></label><br>
                                 <input type="radio" value="active" name="water_mark_status" <?php if(get_frontend_settings('water_mark_status') == 'active') echo 'checked'; ?>> <?php echo get_phrase('active'); ?>
@@ -546,7 +568,7 @@
                                 <div class="eImage form-group mb-2" id="imageWatermark" style="<?php echo $watermark_type == 'image' ? 'display: block;' : 'display: none;'; ?>">
                                     <div class="wrapper-image-preview">
                                         <div class="boxs">
-                                            <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/' . $water_mark_value); ?>); background-color: #F5F5F5;"></div>
+                                            <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/system/' . $water_mark_value); ?>);"></div>
                                             <div class="upload-option">
                                                 <label for="water_mark_image" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('upload_watermark_logo'); ?> <br> <small>(330 X 70)</small> </label>
                                                 <input id="water_mark_image" style="visibility:hidden;" type="file" class="" name="water_mark_image" accept="image/*">
@@ -556,7 +578,10 @@
                                 </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary"><?php echo get_phrase('Save changes'); ?></button>
+                                <?php echo gp_ds_button(get_phrase('Save changes'), [
+                                    'variant' => 'primary',
+                                    'type' => 'submit',
+                                ], true); ?>
                             </div>
 
                         </form>
@@ -566,43 +591,37 @@
                     <div class="tab-pane" id="review">
                         <div class="d-flex justify-content-between">
                             <h4 class="mb-3 header-title"><?php echo get_phrase('Review List');?></h4>
-                            <a href="javascript:;" onclick="showAjaxModal('<?php echo site_url('admin/review_add'); ?>', '<?php echo get_phrase('add_a_review'); ?>');" class="btn btn-outline-primary btn-rounded alignToTitle"><?php echo  get_phrase('Add Review')?></a>
+                            <?php echo gp_ds_button(get_phrase('Add Review'), [
+                                'variant' => 'outline',
+                                'href' => 'javascript:;',
+                                'extra_class' => 'alignToTitle',
+                                'attrs' => [
+                                    'onclick' => "showAjaxModal('" . site_url('admin/review_add') . "', '" . get_phrase('add_a_review') . "');",
+                                ],
+                            ], true); ?>
                         </div>
                         <!--  -->
-                        <div class="table-responsive-sm mt-4">
-                            <?php 
+                        <div class="mt-4">
+                            <?php
                                 $users = $this->db->where('ratable_type', NULL)->get('rating')->result();
+                                if (!empty($users)) {
+                                    ob_start();
+                                    $counter = 1;
+                                    foreach ($users as $user):
+                                        $user_data = $this->db->get_where('users', ['id' => $user->user_id])->row_array();
                             ?>
-
-                            <?php if (!empty($users)): ?>
-                                <table class="table table-striped table-centered mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th><?php echo get_phrase('#'); ?></th>
-                                            <th><?php echo get_phrase('Name'); ?></th>
-                                            <th><?php echo get_phrase('Rating'); ?></th>
-                                            <th><?php echo get_phrase('Review'); ?></th>
-                                            <th><?php echo get_phrase('actions'); ?></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                            <?php
-                                            $counter = 1;
-                                            foreach ($users as $user): 
-                                                $user_data = $this->db->get_where('users', ['id' => $user->user_id])->row_array();
-                                            ?>
                                                 <tr class="gradeU" data-enrol-id="<?php echo $user->id; ?>">
-                                                   <td><?php echo $counter++; ?></td> 
+                                                   <td><?php echo $counter++; ?></td>
                                                     <td>
                                                         <div class="d-flex gap-2">
-                                                            <div class="mt-1"> 
+                                                            <div class="mt-1">
                                                                 <b><?php echo $user_data['first_name'].' '.$user_data['last_name']; ?></b><br>
                                                                 <small><?php echo $user_data['email']; ?></small>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <p ><?php echo $user->rating; ?></p>
+                                                        <p><?php echo $user->rating; ?></p>
                                                     </td>
                                                     <td>
                                                         <div class="pl-1 pt-1">
@@ -611,35 +630,45 @@
                                                     </td>
                                                     <td>
                                                     <div class="dropright dropright">
-                                                        <button type="button" class="btn btn-sm btn-outline-primary btn-rounded btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <button type="button" class="icon-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <i class="mdi mdi-dots-vertical"></i>
                                                         </button>
-                                                        <ul class="dropdown-menu" x-placement="left-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-162px, 0px, 0px);">
+                                                        <ul class="dropdown-menu">
                                                         <li>
                                                             <a class="dropdown-item" href="javascript:;" onclick="showAjaxModal('<?php echo site_url('admin/review_edit/'.$user->id); ?>', '<?php echo get_phrase('update_review'); ?>');">
                                                                 <?php echo get_phrase('Edit');?>
                                                             </a>
                                                         </li>
-
                                                         <li>
                                                             <a class="dropdown-item" href="javascript:;" onclick="confirm_modal('<?php echo site_url('admin/review/delete/' . $user->id); ?>');">
                                                                 <?php echo get_phrase('delete'); ?>
                                                             </a>
                                                         </li>
-
                                                         </ul>
                                                           </div>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
-                                <?php else: ?>
-                                    <div class="img-fluid w-100 text-center">
-                                        <img style="opacity: 1; width: 100px;" src="<?php echo base_url('assets/backend/images/file-search.svg'); ?>"><br>
-                                        <?php echo get_phrase('no_data_found'); ?>
+                            <?php
+                                    endforeach;
+                                    echo gp_ds_table([
+                                        'headers' => [
+                                            get_phrase('#'),
+                                            get_phrase('Name'),
+                                            get_phrase('Rating'),
+                                            get_phrase('Review'),
+                                            get_phrase('actions'),
+                                        ],
+                                        'body_html' => ob_get_clean(),
+                                        'allow_empty' => true,
+                                        'extra_class' => 'mb-0',
+                                    ], true);
+                                } else {
+                            ?>
+                                    <div class="empty-state">
+                                        <div class="icon"><i class="mdi mdi-file-search-outline"></i></div>
+                                        <h4><?php echo get_phrase('no_data_found'); ?></h4>
                                     </div>
-                                <?php endif; ?>
+                            <?php } ?>
                             </div>
 
                         <!--  -->
@@ -648,11 +677,15 @@
 
                 </div>
 
-            </div> <!-- end card-body-->
-        </div>
+        <?php
+        gp_ds_card([
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
     </div>
 </div>
-
+</div>
 
 
 

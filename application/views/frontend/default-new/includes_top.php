@@ -29,4 +29,43 @@
     <link rel="stylesheet" href="<?php echo base_url() . 'assets/frontend/default-new/css/rtl.css'; ?>">
 <?php endif; ?>
 
+<!-- Geese Project Design System — apply saved theme before first paint -->
+<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
+<!-- Geese Project Design System — arm landing-page scroll-reveal before first paint -->
+<script src="<?php echo base_url('assets/design-system/gp-landing-reveal-boot.js'); ?>"></script>
+<!-- Geese Project Design System — Phase 0 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-base.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-components-core.css'); ?>?v=btn-white-1">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-accordion.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dropdown.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-collapse.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tables.css'); ?>">
+<!-- Phase 2b Components -->
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-btn-group.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-list-group.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-pagination.css'); ?>?v=pager-2">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-breadcrumb.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-nav-tabs.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-progress.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-modal.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-offcanvas.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-popover.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tooltip.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-shell.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-public-shell.css'); ?>?v=footer-ds-15">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-carousel.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-homepage-builder.css'); ?>?v=hb-5">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-landing.css'); ?>?v=landing-15">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-auth.css'); ?>?v=auth-ds-2">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-courses.css'); ?>?v=catalog-8">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-cart.css'); ?>?v=cart-1">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-course-detail.css'); ?>?v=course-3">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-student.css'); ?>?v=student-16">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-instructor-apply.css'); ?>?v=apply-2">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dark-surfaces.css'); ?>?v=auth-autofill-1">
+<script src="<?php echo base_url('assets/design-system/gp-theme-toggle.js'); ?>" defer></script>
+
 <script src="<?php echo base_url('assets/global/js/jquery-3.6.1.min.js'); ?>"></script>

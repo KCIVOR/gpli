@@ -5,6 +5,7 @@
         $selected_lesson = $param3;
     }
  ?>
+<div class="gp-courses-modal">
  <?php if($param2 == 'add_shortcut_lesson'): ?>
     <div class="row">
         <div class="col-md-12">
@@ -18,7 +19,7 @@
     </div>
 <?php else: ?>
     <div class="alert alert-info" role="alert">
-        Course: <strong><?= $this->crud_model->get_course_by_id($param2)->row('title'); ?></strong>
+        <?php echo get_phrase('course'); ?>: <strong><?= $this->crud_model->get_course_by_id($param2)->row('title'); ?></strong>
     </div>
     <input id="course_id_for_lesson" type="hidden" value="<?= $param2; ?>" name="course_id_for_lesson">
 <?php endif; ?>
@@ -101,6 +102,7 @@
         id = "lesson-add-modal"
         onclick="showLessonAddModal()"><?php echo get_phrase('next'); ?></a>
     </div>
+</div>
 </div>
 
 <script type="text/javascript">

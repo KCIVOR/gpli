@@ -1,0 +1,229 @@
+/**
+ * Geese Project — Admin Blog
+ * Tokens from gp-tokens.css only. No leftover Hyper hex.
+ *
+ * In-scope page_name values:
+ *   blog, blog_add, blog_edit, instructors_pending_blog, blog_category, blog_settings
+ * Modals: blog_category_add.php, blog_category_edit.php
+ *
+ * Forbidden:
+ *   rewriting Admin.php blog / category / settings methods
+ *   renaming #basic-datatable
+ *   changing form names / ids / actions
+ *   editing navigation.php pending count
+ *   touching backend/user/blog*
+ *
+ * Hooks later phases must keep:
+ *   #basic-datatable, confirm_modal status/delete/approve
+ *   home/instructor_page, blog/details/{slug}/{id}
+ *   #title, #blog_category_id select2, #keywords tagsinput, #summernote-basic
+ *   #banner, #thumbnail, .image-upload, .js--image-preview, #is_popular
+ *   showAjaxModal add/edit_blog_category
+ *   #category_title, #category_subtitle maxlength 80
+ *   blog_settings radios #yes #no #enable #disabled, #blog_page_banner
+ */
+
+.gp-ds .gp-blog-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .row:has(+ .gp-blog-page) .gp-page-title-actions .btn,
+.gp-ds .gp-blog-page .btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-blog-page a.btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-blog-page button.btn:not(.btn-icon):not(.action-icon):not(.icon-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 96px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
+  line-height: 1.2;
+  min-height: 38px !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-blog-page .btn,
+.gp-ds .gp-blog-page .header-title,
+.gp-ds .gp-blog-page label,
+.gp-ds .gp-blog-page .col-form-label {
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-blog-page .gp-dash-panel > .card-body > .header-title,
+.gp-ds .gp-blog-page .card > .card-body > .header-title {
+  margin: 0 0 16px;
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-blog-page .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-blog-page .form-group {
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-blog-page .form-group > label {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-blog-page .form-control,
+.gp-ds .gp-blog-page select.form-control,
+.gp-ds .gp-blog-page textarea.form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-blog-page .form-control:focus,
+.gp-ds .gp-blog-page select.form-control:focus,
+.gp-ds .gp-blog-page textarea.form-control:focus {
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-blog-page .text-muted {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds .gp-blog-page table.table,
+.gp-ds .gp-blog-page table.dataTable {
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-blog-page table.table thead th,
+.gp-ds .gp-blog-page table.dataTable thead th {
+  word-spacing: 0.28em;
+  color: var(--gp-fg-faint);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .gp-blog-page table.table tbody td,
+.gp-ds .gp-blog-page table.dataTable tbody td,
+.gp-ds .gp-blog-page .table > :not(caption) > * > * {
+  color: var(--gp-fg);
+  background-color: transparent;
+  border-color: var(--gp-border);
+  box-shadow: none;
+}
+
+.gp-ds .gp-blog-page table.table a:not(.action-icon):not(.icon-btn):not(.btn) {
+  color: var(--gp-info);
+  text-decoration: none;
+}
+
+.gp-ds .gp-blog-page .img-thumbnail {
+  border-color: var(--gp-border);
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-blog-page .btn-rounded.btn-icon,
+.gp-ds .gp-blog-page .icon-btn {
+  width: 30px;
+  height: 30px;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-blog-page .dataTables_wrapper {
+  width: 100%;
+}
+
+.gp-ds .gp-blog-page .dataTables_wrapper .dataTables_filter {
+  float: none;
+  width: 100%;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-blog-page .dataTables_wrapper .dataTables_filter input {
+  min-height: 42px;
+  padding: 10px 14px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-blog-page .dataTables_info {
+  color: var(--gp-fg-muted);
+}
+
+/* Category tiles */
+.gp-ds .gp-blog-page .gp-blog-category-tile .list-group-item {
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.gp-ds .gp-blog-page .gp-blog-category-title {
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-blog-page .gp-blog-category-tile .list-group-item span {
+  color: var(--gp-fg-muted);
+  font-size: 13.5px;
+}
+
+.gp-ds .gp-blog-page .gp-blog-category-tile .border-0 {
+  background: transparent;
+  color: var(--gp-fg-muted);
+}
+
+/* Image preview leftover #F5F5F5 */
+.gp-ds .gp-blog-page .wrapper-image-preview .box {
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  overflow: hidden;
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-blog-page .js--image-preview {
+  background-color: var(--gp-surface-sunk) !important;
+}
+
+.gp-ds .gp-blog-page .wrapper-image-preview .upload-options .btn {
+  background: var(--gp-surface);
+  border-color: var(--gp-border);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-blog-page .bootstrap-tagsinput {
+  width: 100%;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: none;
+}
+
+.gp-ds .gp-blog-page input[type="checkbox"],
+.gp-ds .gp-blog-page input[type="radio"] {
+  accent-color: var(--gp-primary);
+}

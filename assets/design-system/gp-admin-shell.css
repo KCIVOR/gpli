@@ -1,0 +1,675 @@
+/**
+ * Geese Project — Admin / instructor chrome
+ * Sidebar + topbar only. Tokens from gp-tokens.css.
+ * Source: geeseprojdesignsystem.html §23 (admin sidebar) + §08 navbar language.
+ * Hooks kept: MetisMenu, .side-nav-link, .mm-active, dropdowns, button-menu-mobile.
+ */
+
+/* ========== Page canvas ========== */
+.gp-ds {
+  background: var(--gp-bg);
+}
+
+.gp-ds[data-layout="detached"] .wrapper {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  align-items: stretch;
+  min-height: calc(100vh - 64px);
+}
+
+.gp-ds[data-layout="detached"] .content-page {
+  background: transparent;
+  padding-top: 8px;
+  min-width: 0;
+}
+
+/* ========== Topbar — 64px navy, sticky ========== */
+.gp-ds .navbar-custom.topnav-navbar,
+.gp-ds .navbar-custom.topnav-navbar-dark,
+.gp-ds .gp-admin-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1040;
+  background: var(--gp-accent-2);
+  box-shadow: none;
+  margin: 0;
+  min-height: 64px;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.gp-ds .navbar-custom.topnav-navbar .container-fluid,
+.gp-ds .gp-admin-topbar .container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  gap: 16px;
+}
+
+.gp-ds .gp-admin-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.gp-ds .gp-admin-topbar .button-menu-mobile {
+  display: none;
+  color: #fff;
+}
+
+.gp-ds .gp-admin-topbar .button-menu-mobile .lines {
+  margin: 0;
+}
+
+.gp-ds .navbar-custom .topnav-logo {
+  display: inline-flex;
+  align-items: center;
+  height: auto;
+  min-width: 0;
+}
+
+.gp-ds .gp-admin-brand {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: -0.2px;
+  color: #fff;
+}
+
+.gp-ds .navbar-custom .topbar-right-menu,
+.gp-ds .gp-admin-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 0;
+  float: none;
+}
+
+.gp-ds .navbar-custom .topbar-right-menu > li,
+.gp-ds .gp-admin-topbar-right > li {
+  float: none;
+  max-height: none;
+}
+
+.gp-ds .navbar-custom .topbar-right-menu .nav-link:not(.nav-user),
+.gp-ds .topbar-dropdown .nav-link:not(.nav-user),
+.gp-ds .notification-list .noti-icon {
+  color: var(--gp-gold-light);
+  line-height: 1;
+  min-height: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gp-ds .gp-admin-topbar .noti-icon-badge {
+  top: 8px;
+  right: 6px;
+}
+
+.gp-ds .navbar-custom .topbar-right-menu .nav-link:hover,
+.gp-ds .topbar-dropdown .nav-link:hover {
+  color: #fff;
+}
+
+.gp-ds .gp-admin-topbar .nav-user,
+.gp-ds .navbar-custom.topnav-navbar-dark .nav-user,
+.gp-ds .topnav-navbar-dark .nav-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  min-width: 0;
+  margin: 0;
+  padding: 4px 12px 4px 4px !important; /* leftover Hyper uses !important */
+  background: var(--gp-accent);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--gp-radius);
+  color: #fff;
+  line-height: 1.2;
+  text-align: left;
+  overflow: hidden;
+}
+
+.gp-ds .gp-admin-topbar .nav-user .account-user-avatar {
+  position: static;
+  top: auto;
+  left: auto;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.gp-ds .gp-admin-topbar .nav-user .account-user-avatar img {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.gp-ds .gp-admin-topbar .gp-admin-user-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  max-width: 148px;
+  line-height: 1.2;
+}
+
+.gp-ds .gp-admin-topbar .nav-user .account-user-name,
+.gp-ds .navbar-custom .account-user-name {
+  display: block;
+  margin: 0;
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.2;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gp-ds .gp-admin-topbar .nav-user .account-position,
+.gp-ds .navbar-custom .account-position {
+  display: block;
+  margin: 0;
+  font-family: var(--gp-font-body);
+  font-size: 11px;
+  line-height: 1.2;
+  color: var(--gp-gold-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gp-ds .gp-admin-topbar .gp-theme-row {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+  height: 36px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.gp-ds .gp-admin-topbar .gp-theme-btn,
+.gp-ds .navbar-custom .gp-theme-btn {
+  border: none;
+  background: transparent;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  padding: 0;
+  margin: 0;
+  border-radius: 999px;
+  color: var(--gp-gold-light);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+  font-size: 0;
+}
+
+.gp-ds .gp-admin-topbar .gp-theme-btn svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gp-ds .gp-admin-topbar .gp-theme-btn.active,
+.gp-ds .navbar-custom .gp-theme-btn.active {
+  background: #fff;
+  color: var(--gp-accent-2);
+  border-color: transparent;
+}
+
+.gp-ds .navbar-custom .visit_website {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  overflow: visible;
+}
+
+.gp-ds .navbar-custom .visit_website .btn {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 11.5px;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  border-radius: var(--gp-radius);
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  background: transparent;
+  padding: 8px 14px;
+}
+
+.gp-ds .navbar-custom .visit_website .btn:hover {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: #fff;
+}
+
+.gp-ds .navbar-custom .noti-icon-badge {
+  background: var(--gp-gold);
+}
+
+/* ========== Sidebar — 250px navy, sticky ========== */
+.gp-ds .left-side-menu,
+.gp-ds .left-side-menu.left-side-menu-detached {
+  position: sticky;
+  top: 80px;
+  align-self: stretch;
+  background: var(--gp-accent-2);
+  box-shadow: none;
+  min-width: 250px;
+  max-width: 250px;
+  width: 250px;
+  height: calc(100vh - 96px);
+  min-height: calc(100vh - 96px);
+  max-height: calc(100vh - 96px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 14px;
+  padding: 12px 10px 20px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gp-ds .left-side-menu::-webkit-scrollbar,
+.gp-ds .left-side-menu.left-side-menu-detached::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.gp-ds .leftbar-user {
+  background: none;
+  padding: 12px 10px 18px;
+  text-align: left;
+}
+
+.gp-ds .leftbar-user a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.gp-ds .leftbar-user img {
+  border: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+.gp-ds .leftbar-user .leftbar-user-name {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 13.5px;
+  color: #fff;
+  margin: 0;
+}
+
+.gp-ds .side-nav {
+  padding-left: 0;
+}
+
+.gp-ds .side-nav .side-nav-title {
+  font-family: var(--gp-font-head);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gp-primary-3);
+  padding: 14px 10px 6px;
+}
+
+.gp-ds .side-nav .side-nav-title:first-child {
+  padding-top: 0;
+}
+
+.gp-ds .left-side-menu-detached .side-nav-light .side-nav-title {
+  color: var(--gp-primary-3);
+}
+
+.gp-ds .side-nav .side-nav-link,
+.gp-ds .left-side-menu-detached .side-nav-light .side-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  color: var(--gp-gold-light);
+  font-family: var(--gp-font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0;
+  word-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.gp-ds .side-nav .side-nav-link i {
+  color: inherit;
+  margin: 0;
+  width: 18px;
+}
+
+.gp-ds .side-nav .menu-arrow {
+  right: 10px;
+  color: var(--gp-primary-3);
+}
+
+.gp-ds .side-nav .side-nav-link:hover,
+.gp-ds .side-nav .side-nav-link:focus,
+.gp-ds .left-side-menu-detached .side-nav-light .side-nav-link:hover,
+.gp-ds .left-side-menu-detached .side-nav-light .side-nav-link:focus,
+.gp-ds .left-side-menu-detached .side-nav-light .side-nav-link:active {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.gp-ds .side-nav .side-nav-link.active,
+.gp-ds .side-nav-item.active > .side-nav-link,
+.gp-ds .side-nav-item.mm-active > .side-nav-link,
+.gp-ds .left-side-menu-detached .side-nav-light .side-nav-link.active {
+  background: var(--gp-primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.gp-ds .side-nav .side-nav-second-level,
+.gp-ds .side-nav .side-nav-third-level {
+  padding: 4px 0 8px 12px;
+}
+
+.gp-ds .side-nav .side-nav-second-level a,
+.gp-ds .side-nav .side-nav-third-level a {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-family: var(--gp-font-body);
+  font-size: 13px;
+  word-spacing: 0.2em;
+  color: var(--gp-gold-light);
+  text-decoration: none;
+}
+
+.gp-ds .side-nav .side-nav-second-level a:hover,
+.gp-ds .side-nav .side-nav-third-level a:hover,
+.gp-ds .side-nav .side-nav-second-level li.active > a,
+.gp-ds .side-nav .side-nav-third-level li.active > a {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.gp-ds .side-nav .badge {
+  background: var(--gp-gold);
+  color: var(--gp-ink);
+  font-family: var(--gp-font-head);
+  font-size: 10px;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+@media (max-width: 767.98px) {
+  .gp-ds .gp-admin-topbar .button-menu-mobile {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .gp-ds .left-side-menu.left-side-menu-detached {
+    border-radius: 0;
+    top: 64px;
+    height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px);
+    max-height: calc(100vh - 80px);
+  }
+}
+
+/* ========== Header dropdowns — DS §17 ========== */
+.gp-ds .gp-admin-topbar .dropdown-menu,
+.gp-ds .gp-admin-topbar .gp-admin-menu,
+.gp-ds .gp-admin-topbar .profile-dropdown {
+  width: 260px;
+  min-width: 240px;
+  max-width: 320px;
+  padding: 6px;
+  margin-top: 8px !important; /* leftover Hyper .dropdown-menu-animated */
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  z-index: 1050;
+}
+
+.gp-ds .gp-admin-topbar .dropdown-header,
+.gp-ds .gp-admin-topbar .noti-title,
+.gp-ds .gp-admin-topbar .dropdown-item.noti-title {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  margin: 0;
+  font-family: var(--gp-font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gp-fg-faint);
+  background: transparent;
+  border: 0;
+  white-space: normal;
+}
+
+.gp-ds .gp-admin-topbar .dropdown-header h6,
+.gp-ds .gp-admin-topbar .noti-title h5,
+.gp-ds .gp-admin-topbar .noti-title h6 {
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+}
+
+.gp-ds .gp-admin-topbar .dropdown-item:not(.notify-item),
+.gp-ds .gp-admin-topbar .gp-admin-menu > a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 7px;
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--gp-fg);
+  background: transparent;
+  text-decoration: none;
+  white-space: normal;
+}
+
+.gp-ds .gp-admin-topbar .dropdown-item:not(.notify-item) i,
+.gp-ds .gp-admin-topbar .gp-admin-menu > a i {
+  width: 18px;
+  flex: 0 0 18px;
+  text-align: center;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-admin-topbar .dropdown-item:not(.notify-item):hover,
+.gp-ds .gp-admin-topbar .gp-admin-menu > a:hover {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-admin-topbar .dropdown-item.gp-admin-menu-danger,
+.gp-ds .gp-admin-topbar .dropdown-item.gp-admin-menu-danger i {
+  color: var(--gp-danger);
+}
+
+.gp-ds .gp-admin-topbar .dropdown-item.gp-admin-menu-danger:hover {
+  background: var(--gp-danger-soft);
+  color: var(--gp-danger);
+}
+
+.gp-ds .gp-admin-topbar .dropdown-divider {
+  width: 100%;
+  height: 1px;
+  margin: 6px 2px;
+  background: var(--gp-border);
+  border: 0;
+  opacity: 1;
+}
+
+.gp-ds .gp-admin-topbar .gp-admin-notify {
+  width: 300px;
+  min-width: 280px;
+}
+
+.gp-ds .gp-admin-topbar .dropdown-header.gp-admin-notify-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gp-ds .gp-admin-topbar .dropdown-header.gp-admin-notify-head a {
+  display: inline;
+  width: auto;
+  padding: 0;
+  font-family: var(--gp-font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--gp-primary);
+  background: transparent;
+}
+
+.gp-ds .gp-admin-topbar .dropdown-header.gp-admin-notify-head a:hover {
+  background: transparent;
+  color: var(--gp-gold-deep);
+}
+
+.gp-ds .gp-admin-topbar .gp-admin-notify-list {
+  width: 100%;
+  max-height: 280px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.gp-ds .gp-admin-topbar .notification-list .notify-item,
+.gp-ds .gp-admin-topbar .notify-item {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 2px 10px;
+  align-items: start;
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  border-radius: 7px;
+  white-space: normal;
+  color: var(--gp-fg);
+  background: transparent;
+}
+
+.gp-ds .gp-admin-topbar .notify-item:hover {
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-admin-topbar .notify-item.unread {
+  background: var(--gp-info-soft);
+}
+
+.gp-ds .gp-admin-topbar .notification-list .notify-item .notify-icon,
+.gp-ds .gp-admin-topbar .notify-icon,
+.gp-ds .gp-admin-topbar .notify-icon.bg-info {
+  grid-row: 1 / span 3;
+  float: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 36px;
+  margin: 0;
+  border-radius: 50%;
+  background: var(--gp-primary);
+  color: #fff;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.gp-ds .gp-admin-topbar .notify-icon img {
+  display: block;
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+}
+
+.gp-ds .gp-admin-topbar .notification-list .notify-item .notify-details,
+.gp-ds .gp-admin-topbar .notification-list .notify-item .user-msg,
+.gp-ds .gp-admin-topbar .notify-details,
+.gp-ds .gp-admin-topbar .user-msg {
+  grid-column: 2;
+  margin: 0;
+  color: var(--gp-fg);
+  font-family: var(--gp-font-body);
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+.gp-ds .gp-admin-topbar .notify-details small,
+.gp-ds .gp-admin-topbar .user-msg,
+.gp-ds .gp-admin-topbar .user-msg.text-muted {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-admin-topbar .gp-admin-notify-empty {
+  padding: 20px 12px;
+  text-align: center;
+}
+
+.gp-ds .gp-admin-topbar .gp-admin-notify-empty p {
+  margin: 0 0 6px;
+  font-family: var(--gp-font-head);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-admin-topbar .gp-admin-notify-empty small {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--gp-fg-muted);
+  white-space: normal;
+}
+
+.gp-ds .gp-admin-topbar .gp-admin-notify-empty a {
+  display: inline;
+  padding: 0;
+  color: var(--gp-primary);
+  font-size: 12.5px;
+  font-weight: 600;
+  background: transparent;
+}
+
+.gp-ds .gp-admin-topbar .gp-admin-notify-empty a:hover {
+  background: transparent;
+  color: var(--gp-gold-deep);
+}

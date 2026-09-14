@@ -1,7 +1,9 @@
-<h4 class="header-title mb-3"><?php echo get_phrase('instructor_application_form'); ?></h4>
-<div class="alert alert-info" role="alert">
-    <h4 class="alert-heading"><?php echo get_phrase('heads_up'); ?>!</h4>
-    <p><?php echo get_settings('instructor_application_note'); ?></p>
+<div class="alert alert-info">
+    <div class="dot"></div>
+    <div>
+        <strong><?php echo get_phrase('heads_up'); ?>!</strong>
+        <p><?php echo get_settings('instructor_application_note'); ?></p>
+    </div>
 </div>
 <form class="required-form" action="<?php echo site_url('user/become_an_instructor'); ?>" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" value="<?php echo $this->session->userdata('user_id'); ?>">
@@ -44,9 +46,17 @@
         <div class="col-12">
             <div class="text-center">
                 <div class="mb-3 mt-3">
-                    <button type="button" class="btn btn-primary text-center" onclick="checkRequiredFields()"><?php echo get_phrase('apply'); ?></button>
+                    <?php
+                    gp_ds_button(get_phrase('apply'), [
+                        'variant' => 'primary',
+                        'type'    => 'button',
+                        'attrs'   => [
+                            'onclick' => 'checkRequiredFields()',
+                        ],
+                    ]);
+                    ?>
                 </div>
             </div>
-        </div> <!-- end col -->
+        </div>
     </div>
 </form>

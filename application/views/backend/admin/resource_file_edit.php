@@ -1,4 +1,4 @@
-<div class="resource_file_content">
+<div class="resource_file_content gp-courses-modal">
 	<?php $resource_file = $this->db->get_where('resource_files', ['id' => $param2])->row_array(); ?>
 	<form class="ajaxFormSubmission resetable" action="<?php echo site_url('admin/resource_files/update/'.$resource_file['id']); ?>" method="post" enctype="multipart/form-data">
 		<div class="from-group">
@@ -15,10 +15,21 @@
 
 		<div class="row">
 			<div class="col-6 text-left">
-				<button class="btn btn-primary mt-3" type="submit"><?php echo get_phrase('Update'); ?></button>
+				<?php echo gp_ds_button(get_phrase('Update'), [
+					'type' => 'submit',
+					'variant' => 'primary',
+					'extra_class' => 'mt-3',
+				], true); ?>
 			</div>
 			<div class="col-6 text-right">
-				<a href="#" class="btn btn-primary mt-3" onclick="showAjaxModal('<?php echo site_url('modal/popup/resource_files/'.$resource_file['lesson_id']); ?>', '<?php echo get_phrase('Add new resource file'); ?>')"><?php echo get_phrase('Back'); ?></a>
+				<?php echo gp_ds_button(get_phrase('Back'), [
+					'href' => '#',
+					'variant' => 'outline',
+					'extra_class' => 'mt-3',
+					'attrs' => [
+						'onclick' => "showAjaxModal('" . site_url('modal/popup/resource_files/'.$resource_file['lesson_id']) . "', '" . get_phrase('Add new resource file') . "')",
+					],
+				], true); ?>
 			</div>
 		</div>
 	</form>

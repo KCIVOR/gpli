@@ -1,14 +1,4 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body py-2">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('blogs'); ?>
-                    <a href="<?php echo site_url('user/add_blog'); ?>" class="btn btn-outline-primary btn-rounded alignToTitle"><i class="mdi mdi-plus"></i><?php echo get_phrase('add_new_blog'); ?></a>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php gp_ds_page_title(get_phrase('blogs'), '<a href="' . site_url('user/add_blog') . '" class="btn btn-outline-primary btn-rounded alignToTitle"><i class="mdi mdi-plus"></i>' . get_phrase('add_new_blog') . '</a>'); ?>
 
 <div class="row">
     <div class="col-xl-12">
@@ -53,9 +43,9 @@
                                     <td><?php echo $this->crud_model->get_blog_categories($blog['blog_category_id'])->row('title'); ?></td>
                                     <td>
                                         <?php if($blog['status'] == 1): ?>
-                                        	<span class="badge badge-success"><?php echo get_phrase('active'); ?></span>
+                                        	<?php gp_ds_badge(get_phrase('active'), 'success'); ?>
                                         <?php else: ?>
-                                        	<span class="badge badge-secondary"><?php echo get_phrase('inactive'); ?></span>
+                                        	<?php gp_ds_badge(get_phrase('inactive'), 'neutral'); ?>
                                         <?php endif; ?>
                                     </td>
                                     <td>

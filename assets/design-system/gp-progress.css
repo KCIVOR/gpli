@@ -1,0 +1,97 @@
+/**
+ * Geese Project Design System — Progress Bars
+ * Phase 2b — Course completion, upload progress
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ * Section: 19 (Progress & loading states - extension)
+ */
+
+/* ========== PROGRESS BARS ========== */
+.gp-ds .progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--gp-font-mono);
+  font-size: 11px;
+  color: var(--gp-fg-faint);
+  margin-bottom: 6px;
+}
+
+.gp-ds .progress-track,
+.gp-ds .progress {
+  background: var(--gp-surface-sunk);
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.gp-ds .progress:last-child,
+.gp-ds .progress-track:last-child {
+  margin-bottom: 0;
+}
+
+.gp-ds .progress-fill,
+.gp-ds .progress-bar {
+  height: 100%;
+  background: var(--gp-primary);
+  border-radius: 999px;
+  transition: width var(--gp-dur-slow) var(--gp-ease-out);
+}
+
+.gp-ds .progress-fill.success,
+.gp-ds .progress-bar.bg-success {
+  background: var(--gp-success);
+}
+
+.gp-ds .progress-fill.warning,
+.gp-ds .progress-bar.bg-warning {
+  background: var(--gp-warning);
+}
+
+.gp-ds .progress-fill.danger,
+.gp-ds .progress-bar.bg-danger {
+  background: var(--gp-danger);
+}
+
+.gp-ds .progress-fill.info,
+.gp-ds .progress-bar.bg-info {
+  background: var(--gp-info);
+}
+
+/* Progress sizing variants */
+.gp-ds .progress-sm,
+.gp-ds .progress.progress-sm {
+  height: 6px;
+}
+
+.gp-ds .progress-lg,
+.gp-ds .progress.progress-lg {
+  height: 14px;
+}
+
+/* Striped progress (if needed) */
+.gp-ds .progress-bar-striped {
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
+}
+
+.gp-ds .progress-bar-animated {
+  animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+  0% {
+    background-position: 1rem 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}

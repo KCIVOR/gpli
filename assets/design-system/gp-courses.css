@@ -1,0 +1,782 @@
+/**
+ * Geese Project — Public course catalog
+ * UI only. Keeps #course_filter_form, filterCourse(), wishlist, compare, enroll.
+ */
+
+.gp-ds .gp-catalog-page .bread-crumb {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none;
+  padding: 8px 0 0;
+  border: 0;
+}
+
+.gp-ds .gp-catalog-page .bread-crumb h1,
+.gp-ds .gp-catalog-page .bread-crumb .book-img {
+  display: none;
+}
+
+.gp-ds .gp-catalog-page .breadcrumb {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.gp-ds .gp-catalog-page .breadcrumb-item {
+  padding: 0 !important;
+}
+
+.gp-ds .gp-catalog-page .breadcrumb i {
+  padding: 0 !important;
+  margin: 0 6px !important;
+}
+
+.gp-ds .gp-catalog {
+  background: var(--gp-bg);
+  padding: 10px 0 48px;
+}
+
+.gp-ds .gp-catalog > .container {
+  max-width: 1240px;
+}
+
+.gp-ds .gp-catalog-head {
+  margin-bottom: 14px;
+}
+
+.gp-ds .gp-catalog-head .eyebrow {
+  margin-bottom: 8px;
+}
+
+.gp-ds .gp-catalog-head-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.gp-ds .gp-catalog-head h1 {
+  font-family: var(--gp-font-head);
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  color: var(--gp-fg);
+  margin: 0;
+}
+
+.gp-ds .gp-catalog-count {
+  margin: 0;
+  font-family: var(--gp-font-body);
+  font-size: 14px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-catalog-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 991px) {
+  .gp-ds .gp-catalog-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .gp-ds .gp-catalog-aside {
+    position: static;
+  }
+}
+
+.gp-ds .gp-catalog-aside {
+  position: sticky;
+  top: 94px;
+}
+
+.gp-ds .gp-catalog .course-all-category {
+  background: var(--gp-surface);
+  border: 0 !important;
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+  padding: 10px;
+}
+
+.gp-ds .gp-catalog .course-all-category .form-group {
+  position: relative;
+  margin: 6px 8px 14px;
+}
+
+.gp-ds .gp-catalog .course-all-category .form-group input.form-control,
+.gp-ds .gp-catalog .course-category .form-group .form-control {
+  height: 42px;
+  border: 1.5px solid var(--gp-border-strong) !important;
+  background: var(--gp-surface-sunk) !important;
+  border-radius: var(--gp-radius) !important;
+  padding: 8px 12px 8px 40px !important;
+  color: var(--gp-fg) !important;
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+}
+
+.gp-ds .gp-catalog .course-all-category .form-group input.form-control::placeholder {
+  color: var(--gp-fg-faint) !important;
+}
+
+.gp-ds .gp-catalog .course-all-category .form-group button,
+.gp-ds .gp-catalog .course-category .form-group button {
+  position: absolute;
+  left: 12px !important;
+  right: auto !important;
+  top: 50% !important;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border: 0;
+  background: transparent !important;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gp-fg-muted);
+  z-index: 2;
+}
+
+.gp-ds .gp-catalog .course-all-category .form-group button svg,
+.gp-ds .gp-catalog .course-all-category .form-group button svg path {
+  width: 16px;
+  height: 16px;
+  fill: currentColor !important;
+}
+
+.gp-ds .gp-catalog .accordion-item {
+  border: 0;
+  border-bottom: 1px solid var(--gp-border);
+  border-radius: 0;
+  margin-bottom: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.gp-ds .gp-catalog .accordion-item:last-child {
+  border-bottom: 0;
+}
+
+.gp-ds .gp-catalog .accordion-button {
+  font-size: 12.5px;
+  padding: 14px 10px;
+}
+
+.gp-ds .gp-catalog .accordion-body {
+  padding: 0 10px 14px;
+}
+
+.gp-ds .gp-catalog .form-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-left: 0;
+}
+
+.gp-ds .gp-catalog .form-check-input {
+  float: none;
+  margin: 0;
+  accent-color: var(--gp-primary);
+}
+
+.gp-ds .gp-catalog .form-check-label,
+.gp-ds .gp-catalog .form-check-label a,
+.gp-ds .gp-catalog .category-heading a {
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--gp-fg-muted);
+  text-decoration: none;
+}
+
+.gp-ds .gp-catalog .form-check-label.active a,
+.gp-ds .gp-catalog .form-check-label.active {
+  color: var(--gp-primary);
+  font-weight: 600;
+}
+
+.gp-ds .gp-catalog .form-check-label span {
+  color: var(--gp-fg-faint);
+  font-size: 12px;
+}
+
+.gp-ds .gp-catalog .show-more a {
+  font-family: var(--gp-font-head);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gp-primary);
+  text-decoration: none;
+}
+
+.gp-ds .gp-catalog .grid-view-body {
+  background: transparent;
+}
+
+.gp-ds .gp-catalog-toolbar {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+  padding: 8px 10px;
+  margin: 0 0 12px !important;
+}
+
+.gp-ds .gp-catalog-toolbar .text-14px {
+  display: none;
+}
+
+.gp-ds .gp-catalog-toolbar .list-btn,
+.gp-ds .gp-catalog-toolbar .etopCourseHead .list-btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted) !important;
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-catalog-toolbar .list-btn svg,
+.gp-ds .gp-catalog-toolbar .etopCourseHead .list-btn svg {
+  margin: 0 !important;
+}
+
+.gp-ds .gp-catalog-toolbar .list-btn svg path,
+.gp-ds .gp-catalog-toolbar .list-btn i,
+.gp-ds .gp-catalog-toolbar .etopCourseHead .list-btn i {
+  fill: currentColor !important;
+  color: inherit !important;
+  margin: 0 !important;
+}
+
+.gp-ds .gp-catalog-toolbar .list-btn.active,
+.gp-ds .gp-catalog-toolbar .list-btn:hover,
+.gp-ds .gp-catalog-toolbar .etopCourseHead .list-btn.active,
+.gp-ds .gp-catalog-toolbar .etopCourseHead .list-btn:hover {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: #fff !important;
+}
+
+.gp-ds .gp-catalog-toolbar .select-box,
+.gp-ds .gp-catalog-toolbar .nice-select {
+  min-width: 180px;
+}
+
+.gp-ds .gp-catalog-toolbar select.select-control,
+.gp-ds .gp-catalog-toolbar select.form-select,
+.gp-ds .gp-catalog-toolbar select.nice-select,
+.gp-ds .gp-catalog-toolbar .select-box select {
+  display: none !important;
+}
+
+.gp-ds .gp-catalog-toolbar div.nice-select {
+  display: flex !important;
+  align-items: center;
+  height: 36px;
+  line-height: 1 !important;
+  padding: 0 32px 0 12px !important;
+  background: var(--gp-surface-sunk) !important;
+  background-color: var(--gp-surface-sunk) !important;
+  border: 1.5px solid var(--gp-border-strong) !important;
+  border-radius: var(--gp-radius) !important;
+  color: var(--gp-fg) !important;
+  float: none;
+}
+
+.gp-ds .gp-catalog-toolbar .nice-select .current,
+.gp-ds .gp-catalog-toolbar .select-box .nice-select .current {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-catalog-toolbar .nice-select::after,
+.gp-ds .gp-catalog-toolbar .fCardsection .nice-select::after {
+  border-color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds .gp-catalog-toolbar .nice-select .list,
+.gp-ds .gp-catalog-toolbar .select-box .nice-select .list {
+  background: var(--gp-surface) !important;
+  background-color: var(--gp-surface) !important;
+  border: 1px solid var(--gp-border) !important;
+  box-shadow: var(--gp-shadow-card);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-catalog-toolbar .nice-select .option,
+.gp-ds .gp-catalog-toolbar .select-box .nice-select .option {
+  color: var(--gp-fg) !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.gp-ds .gp-catalog-toolbar .nice-select .list:hover .option:not(:hover) {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-catalog-toolbar .nice-select .option:hover,
+.gp-ds .gp-catalog-toolbar .nice-select .option.focus,
+.gp-ds .gp-catalog-toolbar .nice-select .option.selected.focus {
+  background: var(--gp-paper) !important;
+  background-color: var(--gp-paper) !important;
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-catalog .courses-card .row {
+  --bs-gutter-x: 16px;
+  --bs-gutter-y: 16px;
+}
+
+.gp-ds .gp-catalog .courses-card-body,
+.gp-ds .gp-catalog a.courses-card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--gp-surface);
+  border: 0 !important;
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--gp-fg);
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-catalog .eGridCourse .courses-card-image {
+  position: relative;
+  width: 100% !important;
+  flex: none !important;
+  max-width: none;
+  overflow: hidden;
+}
+
+.gp-ds .gp-catalog .eGridCourse .courses-card-image img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  transform: none !important;
+}
+
+.gp-ds .gp-catalog .courses-card-image-text,
+.gp-ds .gp-catalog .courses-card .courses-card-body .courses-card-image .courses-card-image-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: auto !important;
+  max-width: calc(100% - 52px);
+  background: var(--gp-primary) !important;
+  color: #fff !important;
+  font-family: var(--gp-font-head);
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  padding: 5px 10px;
+  line-height: 1;
+  z-index: 2;
+}
+
+.gp-ds .gp-catalog .courses-card-image-text h3,
+.gp-ds .gp-catalog .courses-card .courses-card-body .courses-card-image .courses-card-image-text h3 {
+  position: static !important;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: #fff !important;
+  background: transparent !important;
+}
+
+.gp-ds .gp-catalog .courses-card-image-text:has(h3:empty) {
+  display: none;
+}
+
+.gp-ds .gp-catalog .courses-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  padding: 0;
+  z-index: 2;
+}
+
+.gp-ds .gp-catalog .courses-icon i,
+.gp-ds .gp-catalog .courses-list-view-card-body .courses-card-image .courses-icon i {
+  position: static !important;
+  width: auto;
+  height: auto;
+  padding: 0 !important;
+  background: transparent !important;
+  color: inherit;
+  font-size: 13px;
+}
+
+.gp-ds .gp-catalog .courses-icon.red-heart,
+.gp-ds .gp-catalog .courses-icon.red-heart i {
+  color: var(--gp-secondary);
+}
+
+.gp-ds .gp-catalog .duration-time {
+  display: none !important;
+}
+
+.gp-ds .gp-catalog .courses-text {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-shadow: none !important;
+  width: auto !important;
+  min-width: 0;
+}
+
+.gp-ds .gp-catalog .courses-text h5,
+.gp-ds .gp-catalog .courses-card-body:hover .courses-text h5 {
+  font-family: var(--gp-font-head);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  color: var(--gp-fg);
+  margin-bottom: 8px;
+}
+
+.gp-ds .gp-catalog .review-icon,
+.gp-ds .gp-catalog .review-icon-star,
+.gp-ds .gp-catalog .courses-price-left p,
+.gp-ds .gp-catalog .eListCourse .courses-price-border .review-icon p {
+  color: var(--gp-fg-muted) !important;
+  font-size: 13px;
+}
+
+.gp-ds .gp-catalog .review-icon,
+.gp-ds .gp-catalog .review-icon-star,
+.gp-ds .gp-catalog .courses-price-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.gp-ds .gp-catalog .review-icon-star .filled,
+.gp-ds .gp-catalog .icon-color,
+.gp-ds .gp-catalog .fa-star.filled {
+  color: var(--gp-gold);
+}
+
+.gp-ds .gp-catalog .courses-price-left,
+.gp-ds .gp-catalog .eListCourse .courses-price-left {
+  position: static !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: auto;
+}
+
+.gp-ds .gp-catalog .courses-price-left h5,
+.gp-ds .gp-catalog .price-free {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-primary);
+  margin: 0;
+}
+
+.gp-ds .gp-catalog .enrollBtn,
+.gp-ds .gp-catalog span.enrollBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 11.5px;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  background: var(--gp-primary) !important;
+  background-color: var(--gp-primary) !important;
+  color: #fff !important;
+  border: 2px solid var(--gp-primary);
+  border-radius: var(--gp-radius);
+  padding: 8px 14px;
+  white-space: nowrap;
+}
+
+.gp-ds .gp-catalog .enrollBtn i,
+.gp-ds .gp-catalog .enrollBtn * {
+  color: #fff !important;
+}
+
+.gp-ds .gp-catalog .compare-img,
+.gp-ds .gp-catalog .compare-img.echecks,
+.gp-ds .gp-catalog .review-btn .echecks,
+.gp-ds .gp-catalog .ammount .echecks {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 1px solid var(--gp-border) !important;
+  border-radius: var(--gp-radius) !important;
+  background: var(--gp-surface) !important;
+  color: var(--gp-fg-muted) !important;
+  line-height: 1 !important;
+  cursor: pointer;
+  transition: background var(--gp-dur-fast) var(--gp-ease-out),
+              border-color var(--gp-dur-fast) var(--gp-ease-out),
+              color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-catalog .compare-img:hover,
+.gp-ds .gp-catalog .review-btn .echecks:hover,
+.gp-ds .gp-catalog .epopCourse:hover .review-btn .echecks,
+.gp-ds .gp-catalog .eGridCourse:hover .review-btn .echecks {
+  background: var(--gp-surface-sunk) !important;
+  border-color: var(--gp-border-strong) !important;
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-catalog .compare-img svg path,
+.gp-ds .gp-catalog .review-btn .echecks svg path,
+.gp-ds .gp-catalog .epopCourse:hover .review-btn .echecks svg path,
+.gp-ds .gp-catalog .eGridCourse:hover .review-btn .echecks svg path {
+  fill: currentColor !important;
+}
+
+.gp-ds .gp-catalog .courses-list-view-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .gp-catalog a.courses-list-view-card-body,
+.gp-ds .gp-catalog .courses-list-view-card-body,
+.gp-ds .gp-catalog .courses-card .courses-list-view-card-body {
+  display: grid !important;
+  grid-template-columns: 188px minmax(0, 1fr);
+  align-items: stretch;
+  flex-direction: unset;
+  overflow: hidden;
+}
+
+.gp-ds .gp-catalog .courses-list-view-card-body .courses-card-image,
+.gp-ds .gp-catalog .courses-card .courses-card-body.courses-list-view-card-body .courses-card-image,
+.gp-ds .gp-catalog .courses-card .courses-list-view-card-body .courses-card-image {
+  position: relative;
+  flex: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow: hidden;
+}
+
+.gp-ds .gp-catalog .courses-list-view-card-body .courses-card-image img,
+.gp-ds .gp-catalog .courses-list-view-card .courses-list-view-card-body .courses-card-image img,
+.gp-ds .gp-catalog .courses-card .courses-list-view-card-body .courses-card-image img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: none !important;
+  aspect-ratio: auto;
+  object-fit: cover;
+  border-radius: 0 !important;
+  transform: none !important;
+}
+
+.gp-ds .gp-catalog .courses-list-view-card .courses-list-view-card-body .courses-text,
+.gp-ds .gp-catalog .courses-list-view-card-body .courses-text {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto 1fr auto;
+  align-items: start;
+  gap: 6px 16px;
+  padding: 16px 18px !important;
+  box-shadow: none !important;
+  border-radius: 0;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100%;
+  position: relative;
+  z-index: 1;
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-catalog .courses-list-view-card-body .courses-d-flex-text {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.gp-ds .gp-catalog .courses-list-view-card-body .courses-d-flex-text h5 {
+  margin: 0;
+}
+
+.gp-ds .gp-catalog .courses-list-view-card-body .ellipsis-line-2 {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  max-width: none !important;
+  margin: 0 !important;
+  color: var(--gp-fg-muted);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.gp-ds .gp-catalog .courses-list-view-card-body .courses-price-left {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.gp-ds .gp-catalog .courses-list-view-card-body .courses-price-border {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  margin-top: 8px;
+}
+
+.gp-ds .gp-catalog .courses-list-view-card-body .courses-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 0;
+}
+
+@media (max-width: 700px) {
+  .gp-ds .gp-catalog a.courses-list-view-card-body,
+  .gp-ds .gp-catalog .courses-list-view-card-body {
+    grid-template-columns: 1fr;
+  }
+
+  .gp-ds .gp-catalog .courses-list-view-card-body .courses-card-image img {
+    min-height: 180px;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+.gp-ds .gp-catalog .pagenation-items {
+  background: transparent !important;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 0 0 !important;
+}
+
+.gp-ds .gp-catalog .pagenation-items .pagination {
+  gap: 4px;
+  margin: 0;
+}
+
+.gp-ds .gp-catalog .pagenation-items .page-link,
+.gp-ds .gp-catalog .pagenation-items .page-item a,
+.gp-ds .gp-catalog .pagenation-items .page-item span.page-link {
+  margin: 0 !important;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px !important;
+  box-shadow: none;
+}
+
+.gp-ds .gp-catalog .pagenation-items .page-item.active .page-link,
+.gp-ds .gp-catalog .pagenation-items .page-item.active.disabled .page-link {
+  background: var(--gp-primary) !important;
+  color: #fff !important;
+  border-color: var(--gp-primary) !important;
+  opacity: 1 !important;
+  box-shadow: none;
+}
+
+.gp-ds .gp-catalog .pagenation-items .page-item:not(.active) .page-link:hover,
+.gp-ds .gp-catalog .pagenation-items .page-item:not(.active) a:hover,
+.gp-ds .gp-catalog .pagenation-items .page-item:not(.active) a:focus {
+  background: var(--gp-surface-sunk) !important;
+  background-color: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
+  border-color: var(--gp-border-strong) !important;
+  box-shadow: none;
+}
+
+.gp-ds .gp-catalog-empty {
+  text-align: center;
+  padding: 56px 24px;
+  border: 1px dashed var(--gp-border);
+  border-radius: 14px;
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-catalog-empty-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gp-surface-sunk);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 22px;
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .gp-catalog-empty h5 {
+  font-family: var(--gp-font-head);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin-bottom: 6px;
+}
+
+.gp-ds .gp-catalog-empty p {
+  font-size: 13.5px;
+  color: var(--gp-fg-muted);
+  max-width: 320px;
+  margin: 0 auto 18px;
+}
+
+/* Leftover Hyper hard-codes #0D0C23 / #fff. Catalog text uses DS tokens so night mode stays readable. */
+.gp-ds .gp-catalog-page .breadcrumb span,
+.gp-ds .gp-catalog-page .breadcrumb i,
+.gp-ds .gp-catalog-page .breadcrumb a,
+.gp-ds .gp-catalog .accordion-button,
+.gp-ds .gp-catalog .accordion-button:not(.collapsed),
+.gp-ds .gp-catalog .course-all-category .accordion-button,
+.gp-ds .gp-catalog .course-all-category .accordion-button:not(.collapsed),
+.gp-ds .gp-catalog .form-check-label.active span,
+.gp-ds .gp-catalog .fCardsection p {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-catalog .form-check-label,
+.gp-ds .gp-catalog .form-check-label a,
+.gp-ds .gp-catalog .category-heading a,
+.gp-ds .gp-catalog .courses-text p,
+.gp-ds .gp-catalog .courses-card .courses-card-body .courses-text p,
+.gp-ds .gp-catalog-count {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds .gp-catalog .courses-text h5,
+.gp-ds .gp-catalog .courses-d-flex-text h5,
+.gp-ds .gp-catalog .courses-card-body:hover .courses-text h5,
+.gp-ds .gp-catalog-head h1 {
+  color: var(--gp-fg) !important;
+}

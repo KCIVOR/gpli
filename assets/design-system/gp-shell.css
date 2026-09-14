@@ -1,0 +1,260 @@
+/**
+ * Geese Project Design System — Shared shell polish
+ * Phase 6 — Header / footer / nav visual treatment only
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ *
+ * Scoped under .gp-ds. Does not change JS hook class names,
+ * cart/wishlist hover reveal, MetisMenu collapse, or dropdown display.
+ */
+
+/* ========== Theme toggle (hard-rule .theme-row / .theme-btn) ========== */
+.gp-ds .gp-theme-row {
+  display: flex;
+  gap: 6px;
+}
+
+.gp-ds .navbar-custom .gp-theme-row {
+  margin-right: 10px;
+}
+
+.gp-ds .gp-theme-btn {
+  font-family: var(--gp-font-body);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.gp-ds .gp-theme-btn.active {
+  border-color: var(--gp-fg);
+  color: var(--gp-fg);
+  font-weight: 600;
+}
+
+/* Dark utility bars (frontend sub-header, admin topbar) */
+.gp-ds header .sub-header .gp-theme-btn,
+.gp-ds .navbar-custom .gp-theme-btn {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(237, 235, 230, 0.88);
+}
+
+.gp-ds header .sub-header .gp-theme-btn.active,
+.gp-ds .navbar-custom .gp-theme-btn.active {
+  border-color: var(--gp-gold);
+  color: var(--gp-gold);
+  background: rgba(252, 208, 28, 0.12);
+  font-weight: 600;
+}
+
+.gp-ds .gp-theme-btn:focus-visible {
+  outline: 3px solid var(--gp-primary);
+  outline-offset: 2px;
+}
+
+/* ========== Frontend header — sub-header ========== */
+.gp-ds header .sub-header {
+  background-color: var(--gp-accent-2);
+}
+
+.gp-ds header .sub-header .icon a {
+  font-family: var(--gp-font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(237, 235, 230, 0.92);
+}
+
+.gp-ds header .sub-header .right-icon i,
+.gp-ds header .sub-header .right-icon a {
+  color: rgba(237, 235, 230, 0.92);
+}
+
+.gp-ds header .sub-header .language-control .select-control,
+.gp-ds header .sub-header .language-control .nice-select {
+  font-family: var(--gp-font-body);
+  font-size: 13px;
+}
+
+/* ========== Frontend header — menubar ========== */
+.gp-ds header .menubar {
+  background-color: var(--gp-surface);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gp-border);
+}
+
+.gp-ds header .menubar .nav-link {
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--gp-fg);
+}
+
+.gp-ds header .menubar .right-menubar a {
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--gp-fg);
+}
+
+.gp-ds header .menubar .menu_number {
+  background-color: var(--gp-secondary);
+  font-family: var(--gp-font-mono);
+}
+
+.gp-ds header .menubar .header-search .search-input,
+.gp-ds header .menubar .header-search .search-input-floating {
+  font-family: var(--gp-font-body);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds header .menubar .navbar-nav .navbarHover li a {
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds header .menubar .navbar-nav .navbarHover a:hover {
+  color: var(--gp-fg);
+}
+
+.gp-ds header .menubar .menu_pro_tgl_bg {
+  background-color: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds header .menubar .menu_pro_tgl_bg h4 {
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds header .menubar .menu_pro_tgl_bg p {
+  font-family: var(--gp-font-body);
+  font-size: 12px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds header .menubar .menu_pro_tgl_bg ul li:hover:after {
+  background-color: var(--gp-primary);
+}
+
+.gp-ds header .menubar .menu_pro_wish {
+  background-color: var(--gp-surface);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+}
+
+/* ========== Frontend mobile offcanvas (type only) ========== */
+.gp-ds header .offcanves-profile .user-details h4,
+.gp-ds header .mobile-view-offcanves .user-details h4 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds header .mobile-view-offcanves .user-details p {
+  font-family: var(--gp-font-body);
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds header .mobile-view-offcanves .btn-toggle-list {
+  font-family: var(--gp-font-body);
+  font-weight: 600;
+  color: var(--gp-fg);
+}
+
+/* ========== Frontend footer (shared include) ========== */
+.gp-ds footer.lms2-footer-section {
+  background: var(--gp-accent-2);
+}
+
+.gp-ds footer.lms2-footer-section .ft2-title {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #EDEBE6;
+}
+
+.gp-ds footer.lms2-footer-section .ft2-logo-area p,
+.gp-ds footer.lms2-footer-section .ft2-short-des {
+  font-family: var(--gp-font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: #A7A4B0;
+}
+
+.gp-ds footer.lms2-footer-section .ft2-nav-link,
+.gp-ds footer.lms2-footer-section .ft2-copyright-info,
+.gp-ds footer.lms2-footer-section .ft2-copyright-nav-link {
+  font-family: var(--gp-font-body);
+  color: #A7A4B0;
+}
+
+.gp-ds footer.lms2-footer-section .ft2-nav-link:hover,
+.gp-ds footer.lms2-footer-section .ft2-copyright-nav-link:hover {
+  color: #fff;
+}
+
+.gp-ds footer.lms2-footer-section .ft2-subscribe-wrap {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.gp-ds footer.lms2-footer-section .ft2-newsLetter-input {
+  font-family: var(--gp-font-body);
+  border-radius: var(--gp-radius);
+  border-color: var(--gp-primary-2);
+  background: #12182A;
+  color: #EDEBE6;
+}
+
+.gp-ds footer.lms2-footer-section .ft2-padding {
+  padding-top: 64px;
+  padding-bottom: 52px;
+}
+
+.gp-ds footer.lms2-footer-section .ft2-bottom-content {
+  padding: 24px 0;
+}
+
+/* ========== Admin / instructor topbar ========== */
+.gp-ds .navbar-custom.topnav-navbar .visit_website h4 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+/* ========== Admin / instructor left nav (type + color only) ========== */
+.gp-ds .side-nav .side-nav-title {
+  font-family: var(--gp-font-head);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.gp-ds .side-nav .side-nav-link,
+.gp-ds .side-nav .side-nav-second-level a {
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+}
+
+.gp-ds .leftbar-user .leftbar-user-name {
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+}
+
+/* Unused backend footer.php still gets type if ever included */
+.gp-ds footer.main {
+  font-family: var(--gp-font-body);
+  color: var(--gp-fg-muted);
+  font-size: 13px;
+}

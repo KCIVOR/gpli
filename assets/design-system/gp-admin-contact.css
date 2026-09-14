@@ -1,0 +1,163 @@
+/**
+ * Geese Project — Admin Contact
+ * Tokens from gp-tokens.css only. No leftover Hyper hex.
+ *
+ * In-scope page_name: contact
+ * Modal: contact_reply_form.php
+ *
+ * Forbidden:
+ *   rewriting Admin.php contact() / data-table row HTML
+ *   renaming #server_side_users_data
+ *   changing GET ajax or selected_ids
+ *   editing navigation.php unread badge
+ *
+ * Hooks later phases must keep:
+ *   #delete_selected, #select_all, selectedRows, data-row-id
+ *   admin/contact/data-table GET, order [[0,'desc']]
+ *   confirm_modal delete / delete_selected_contact
+ *   showAjaxModal contact_reply_form, reply_message, send_reply/{id}
+ */
+
+.gp-ds .gp-contact-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .row:has(+ .gp-contact-page) .gp-page-title-actions .btn,
+.gp-ds .gp-contact-page .btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-contact-page a.btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-contact-page button.btn:not(.btn-icon):not(.action-icon):not(.icon-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 96px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
+  line-height: 1.2;
+  min-height: 38px !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-contact-page .btn,
+.gp-ds .gp-contact-page .header-title,
+.gp-ds .gp-contact-page label {
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-contact-page .gp-dash-panel > .card-body > .header-title,
+.gp-ds .gp-contact-page .card > .card-body > .header-title {
+  margin: 0 0 16px;
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-contact-page .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-contact-page .form-control,
+.gp-ds .gp-contact-page textarea.form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-contact-page .form-control:focus,
+.gp-ds .gp-contact-page textarea.form-control:focus {
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-contact-page table.table,
+.gp-ds .gp-contact-page table.dataTable {
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-contact-page table.table thead th,
+.gp-ds .gp-contact-page table.dataTable thead th {
+  word-spacing: 0.28em;
+  color: var(--gp-fg-faint);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .gp-contact-page table.table tbody td,
+.gp-ds .gp-contact-page table.dataTable tbody td,
+.gp-ds .gp-contact-page .table > :not(caption) > * > * {
+  color: var(--gp-fg);
+  background-color: transparent;
+  border-color: var(--gp-border);
+  box-shadow: none;
+}
+
+.gp-ds .gp-contact-page table.table a:not(.action-icon):not(.icon-btn):not(.btn) {
+  color: var(--gp-info);
+  text-decoration: none;
+}
+
+.gp-ds .gp-contact-page .dataTables_wrapper {
+  width: 100%;
+}
+
+.gp-ds .gp-contact-page .dataTables_wrapper .dataTables_filter {
+  float: none;
+  width: 100%;
+  margin: 0;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-contact-page .dataTables_wrapper .dataTables_filter input {
+  min-height: 42px;
+  padding: 10px 14px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-contact-page .dataTables_info {
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-contact-page .badge-primary,
+.gp-ds .gp-contact-page .badge-success,
+.gp-ds .gp-contact-page .badge-warning {
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.gp-ds .gp-contact-page .text-success {
+  color: var(--gp-success) !important;
+}
+
+.gp-ds .gp-contact-page .btn-rounded.btn-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-contact-page input[type="checkbox"] {
+  accent-color: var(--gp-primary);
+}

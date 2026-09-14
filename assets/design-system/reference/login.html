@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in | GP Leadership Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --dur-fast:150ms; --dur:260ms; --dur-slow:520ms;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-7:28px; --sp-8:32px;
+  --sp-10:40px; --sp-12:48px; --sp-15:60px; --sp-20:80px;
+  --primary:#003BA6; --primary-2:#4772BF; --primary-3:#809DD2;
+  --secondary:#CD182A;
+  --accent:#00215D; --accent-2:#001946;
+  --gold:#FCD01C; --gold-light:#D6E0F1; --gold-deep:#00328B; --blue-solid:#00328B;
+  --paper:#F5F5F2; --white:#ffffff; --text:#6B6B6B; --ink:#090909; --line:#F9F9F9;
+  --shadow:0 4px 15px rgba(0,0,0,.08);
+  --radius:10px;
+  --font-head:'Manrope',sans-serif; --font-body:'Inter',sans-serif;
+  --danger:#CD182A; --danger-soft:#FBE9EA; --danger-border:#f0b8bd;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--white);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:var(--font-head);color:var(--ink);line-height:1.2;margin:0;}
+p{margin:0;}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+.container{max-width:1290px;margin:0 auto;padding:0 24px;}
+
+a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible{
+  outline:3px solid var(--primary); outline-offset:2px; border-radius:2px;
+}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--font-head);font-weight:800;text-transform:uppercase;
+  letter-spacing:.32px;font-size:13px;line-height:1.25;
+  border-radius:var(--radius);padding:15px 26px;border:2px solid transparent;
+  cursor:pointer;transition:all var(--dur) var(--ease-out);white-space:nowrap;text-align:center;
+}
+.btn-primary{background:var(--primary);border-color:var(--primary);color:#fff;}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent);}
+.btn-block{width:100%;}
+
+/* ---------- header ---------- */
+.site-header{background:var(--white);border-bottom:1px solid #ECEAE4;position:sticky;top:0;z-index:20;}
+.header-inner{height:78px;display:flex;align-items:center;justify-content:space-between;}
+.lms-badge{display:inline-flex;align-items:center;font-family:var(--font-head);font-weight:800;font-size:20px;color:var(--ink);text-decoration:none;letter-spacing:-.2px;}
+.lms-badge span{color:var(--primary);}
+.header-back{font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;}
+.header-back:hover{color:var(--ink);}
+
+/* ---------- split layout ---------- */
+.auth-shell{min-height:calc(100vh - 78px);display:grid;grid-template-columns:1fr 1fr;}
+@media(max-width:920px){.auth-shell{grid-template-columns:1fr;}}
+
+.auth-visual{
+  position:relative;background:linear-gradient(155deg,var(--accent-2) 0%, var(--accent) 60%, #24396f 100%);
+  color:#fff;padding:64px 56px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;
+}
+@media(max-width:920px){.auth-visual{display:none;}}
+.auth-visual .kicker{font-family:var(--font-head);font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);margin-bottom:18px;}
+.auth-visual h2{font-size:clamp(26px,3vw,36px);font-weight:800;max-width:420px;margin-bottom:20px;}
+.auth-visual p{color:#C9D6F0;font-size:15.5px;max-width:400px;line-height:1.7;}
+.auth-visual .portrait-wrap{
+  position:relative;border-radius:16px;overflow:hidden;max-width:340px;box-shadow:0 20px 60px rgba(0,0,0,.35);
+  margin-top:34px;
+}
+.auth-visual .portrait-wrap img{width:100%;display:block;}
+.auth-visual .portrait-caption{
+  background:rgba(9,12,26,.55);backdrop-filter:blur(6px);position:absolute;left:0;right:0;bottom:0;
+  padding:16px 18px;font-size:13px;color:#E7ECF9;
+}
+.auth-visual .portrait-caption b{display:block;color:#fff;font-family:var(--font-head);font-size:13.5px;margin-bottom:2px;}
+.auth-visual .stat-row{display:flex;gap:28px;margin-top:auto;padding-top:34px;}
+.auth-visual .stat-row div b{display:block;font-family:var(--font-head);font-size:26px;font-weight:800;color:var(--gold-light);}
+.auth-visual .stat-row div span{font-size:11.5px;color:#A9B9E0;text-transform:uppercase;letter-spacing:.08em;}
+
+.auth-form-wrap{display:flex;align-items:center;justify-content:center;padding:56px 24px;}
+.auth-form{width:100%;max-width:380px;}
+.auth-form .eyebrow{font-family:var(--font-head);font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--secondary);margin-bottom:14px;}
+.auth-form h1{font-size:clamp(26px,3vw,32px);font-weight:800;margin-bottom:10px;}
+.auth-form .sub{color:var(--text);font-size:14.5px;margin-bottom:32px;}
+
+.field{margin-bottom:22px;}
+.field label{display:block;font-family:var(--font-head);font-size:12.5px;font-weight:700;color:var(--ink);margin-bottom:7px;}
+.field .input-wrap{position:relative;}
+.field input{
+  width:100%;border:none;border-bottom:1px solid #D8D5CC;padding:6px 30px 12px 0;
+  font-family:var(--font-body);font-size:15.5px;color:var(--ink);background:transparent;
+  transition:border-color var(--dur-fast) var(--ease-out);
+}
+.field input:focus{outline:none;border-bottom-color:var(--blue-solid);border-bottom-width:2px;}
+.field .toggle-pw{
+  position:absolute;right:0;top:2px;background:none;border:none;color:var(--text);cursor:pointer;font-size:12px;
+  font-family:var(--font-head);font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+}
+.field.has-error input{border-bottom-color:var(--danger);}
+.field .error-msg{display:none;color:var(--danger);font-size:12px;margin-top:7px;}
+.field.has-error .error-msg{display:block;}
+
+.row-between{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;}
+.check-row{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--ink);}
+.check-row input{width:16px;height:16px;accent-color:var(--primary);}
+.forgot-link{font-size:13px;font-weight:600;color:var(--blue-solid);text-decoration:none;}
+.forgot-link:hover{text-decoration:underline;}
+
+.divider{display:flex;align-items:center;gap:14px;margin:26px 0;color:var(--text);font-size:12px;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.1em;}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:#ECEAE4;}
+
+.social-row{display:flex;gap:12px;margin-bottom:28px;}
+.social-btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #D8D5CC;border-radius:var(--radius);
+  padding:11px;font-family:var(--font-head);font-size:12.5px;font-weight:700;color:var(--ink);background:#fff;cursor:pointer;
+  transition:border-color var(--dur-fast) var(--ease-out);
+}
+.social-btn:hover{border-color:var(--ink);}
+
+.auth-foot{text-align:center;font-size:13.5px;color:var(--text);}
+.auth-foot a{color:var(--blue-solid);font-weight:700;text-decoration:none;}
+.auth-foot a:hover{text-decoration:underline;}
+
+.demo-note{
+  margin-top:30px;padding:12px 14px;border:1px solid #ECEAE4;border-radius:9px;background:var(--paper);
+  font-size:12px;color:var(--text);line-height:1.6;
+}
+.demo-note b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="lms-badge" aria-label="GP Leadership Institute home">GP<span>LI</span></a>
+    <a href="index.html" class="header-back">← Back to home</a>
+  </div>
+</header>
+
+<div class="auth-shell">
+  <div class="auth-visual">
+    <div>
+      <div class="kicker">GP Leadership Institute</div>
+      <h2>Practical learning experiences, built for SME teams.</h2>
+      <p>Unlimited access to 100+ self-paced courses in business, technology, and leadership — learn on your own schedule, at your own pace.</p>
+      <div class="portrait-wrap">
+        <img src="assets/img/learner-portrait.jpg" alt="">
+        <div class="portrait-caption"><b>Amara Torres</b>Operations Lead, learner since 2024</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <div><b>100+</b><span>Courses</span></div>
+      <div><b>8</b><span>Categories</span></div>
+      <div><b>35k</b><span>Learners</span></div>
+    </div>
+  </div>
+
+  <div class="auth-form-wrap">
+    <div class="auth-form">
+      <div class="eyebrow">Welcome back</div>
+      <h1>Log in to your account</h1>
+      <p class="sub">Explore, learn, and grow with us. Enjoy a seamless and enriching educational journey — let's begin.</p>
+
+      <form onsubmit="return false;">
+        <div class="field">
+          <label for="login-email">Email address</label>
+          <div class="input-wrap"><input id="login-email" type="email" placeholder="you@company.com" autocomplete="username"></div>
+        </div>
+        <div class="field has-error">
+          <label for="login-password">Password</label>
+          <div class="input-wrap">
+            <input id="login-password" type="password" placeholder="Enter your password" autocomplete="current-password">
+            <button type="button" class="toggle-pw">Show</button>
+          </div>
+          <div class="error-msg">Incorrect email or password. Try again.</div>
+        </div>
+
+        <div class="row-between">
+          <label class="check-row"><input type="checkbox" checked> Remember me</label>
+          <a class="forgot-link" href="javascript:void(0);">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      </form>
+
+      <div class="divider">or continue with</div>
+      <div class="social-row">
+        <button class="social-btn" type="button">Google</button>
+        <button class="social-btn" type="button">Microsoft</button>
+      </div>
+
+      <p class="auth-foot">Don't have an account? <a href="javascript:void(0);">Sign up free</a></p>
+
+      <div class="demo-note"><b>Design preview</b> — this page is a static mockup built on The Geese Project design system. No form here is wired to a real backend; the error state shown is illustrative only.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelector('.toggle-pw').addEventListener('click', function(){
+  var input = document.getElementById('login-password');
+  var showing = input.type === 'text';
+  input.type = showing ? 'password' : 'text';
+  this.textContent = showing ? 'Show' : 'Hide';
+});
+</script>
+
+</body>
+</html>

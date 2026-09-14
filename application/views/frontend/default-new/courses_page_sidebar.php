@@ -18,7 +18,7 @@ function updateQueryString($key, $value) {
             <!-- Accordion -->
              <div class="accordion-item course-category">
                 <div class="form-group" >
-                   <input type="text" name="title" placeholder="<?php echo site_phrase('Search by keyword'); ?>" 
+                   <input type="text" name="title" placeholder="<?php echo get_phrase('Search') . ' ' . get_phrase('keyword'); ?>" 
                       class="form-control" value="<?php echo isset($_GET['title']) ? htmlspecialchars($_GET['title']) : ''; ?>">
                         <button type="submit">
                             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

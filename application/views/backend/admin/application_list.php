@@ -1,18 +1,9 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('instructor_applications'); ?></h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php gp_ds_page_title(get_phrase('instructor_applications')); ?>
 
-<div class="row justify-content-center">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="mb-3 header-title"><?php echo get_phrase('list_of_applications'); ?></h4>
+<div class="gp-users-page">
+    <?php
+    ob_start();
+    ?>
                 <ul class="nav nav-tabs nav-bordered mb-3">
                     <li class="nav-item">
                         <a href="#pending-b1" data-toggle="tab" aria-expanded="false" class="nav-link active">
@@ -30,21 +21,11 @@
 
                 <div class="tab-content">
                     <div class="tab-pane show active" id="pending-b1">
-                        <div class="table-responsive-sm mt-4">
-                            <table id="pending-application" class="table table-striped table-centered mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th><?php echo get_phrase('name'); ?></th>
-                                        <th><?php echo get_phrase('document'); ?></th>
-                                        <th><?php echo get_phrase('details'); ?></th>
-                                        <th><?php echo get_phrase('status'); ?></th>
-                                        <th><?php echo get_phrase('action'); ?></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($pending_applications->result_array() as $key => $pending_application):
-                                        $user_data = $this->user_model->get_all_user($pending_application['user_id'])->row_array();?>
+                        <?php
+                        ob_start();
+                        foreach ($pending_applications->result_array() as $key => $pending_application):
+                            $user_data = $this->user_model->get_all_user($pending_application['user_id'])->row_array();
+                        ?>
                                         <tr class="gradeU">
                                             <td>
                                                 <?php echo ++$key; ?>
@@ -53,22 +34,30 @@
                                                 <?php echo $user_data['first_name'].' '.$user_data['last_name']; ?>
                                             </td>
                                             <td>
-                                                <a href="javascript:;" class="btn btn-primary" onclick="showAjaxModal('<?php echo site_url('modal/popup/application_details/'.$pending_application['id']); ?>', '<?php echo get_phrase('applicant_details'); ?>')">
-                                                    <i class="fa fa-info-circle"></i> <?php echo get_phrase('application_details'); ?>
-                                                </a>
+                                                <?php echo gp_ds_button(get_phrase('application_details'), [
+                                                    'href' => 'javascript:;',
+                                                    'variant' => 'outline',
+                                                    'attrs' => [
+                                                        'onclick' => "showAjaxModal('" . site_url('modal/popup/application_details/'.$pending_application['id']) . "', '" . get_phrase('applicant_details') . "')",
+                                                    ],
+                                                ], true); ?>
                                             </td>
                                             <td>
                                                 <?php if (!empty($pending_application['document'])): ?>
-                                                    <a href="<?php echo base_url().'uploads/document/'.$pending_application['document']; ?>" class="btn btn-info" download>
-                                                        <i class="fa fa-download"></i> <?php echo get_phrase('download'); ?>
-                                                    </a>
+                                                    <?php echo gp_ds_button(get_phrase('download'), [
+                                                        'href' => base_url().'uploads/document/'.$pending_application['document'],
+                                                        'variant' => 'quiet',
+                                                        'attrs' => [
+                                                            'download' => '',
+                                                        ],
+                                                    ], true); ?>
                                                 <?php endif; ?>
                                             </td>
-                                            <td style="text-align: center;">
+                                            <td>
                                                 <?php if ($pending_application['status'] == 0): ?>
-                                                    <div class="badge badge-danger"><?php echo get_phrase('pending'); ?></div>
+                                                    <?php gp_ds_badge(get_phrase('pending'), 'danger'); ?>
                                                 <?php elseif($pending_application['status'] == 1): ?>
-                                                    <div class="badge badge-success"><?php echo get_phrase('approved'); ?></div>
+                                                    <?php gp_ds_badge(get_phrase('approved'), 'success'); ?>
                                                 <?php endif; ?>
                                             </td>
                                             <td>
@@ -91,26 +80,30 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        <?php
+                        endforeach;
+                        echo gp_ds_table([
+                            'table_id' => 'pending-application',
+                            'extra_class' => 'mb-0',
+                            'headers' => [
+                                '#',
+                                get_phrase('name'),
+                                get_phrase('document'),
+                                get_phrase('details'),
+                                get_phrase('status'),
+                                get_phrase('action'),
+                            ],
+                            'body_html' => ob_get_clean(),
+                            'allow_empty' => true,
+                        ], true);
+                        ?>
                     </div>
                     <div class="tab-pane" id="approved-b1">
-                        <div class="table-responsive-sm mt-4">
-                            <table id="approved-application" class="table table-striped table-centered mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th><?php echo get_phrase('name'); ?></th>
-                                        <th><?php echo get_phrase('document'); ?></th>
-                                        <th><?php echo get_phrase('details'); ?></th>
-                                        <th><?php echo get_phrase('status'); ?></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($approved_applications->result_array() as $key => $approved_application):
-                                        $user_data = $this->user_model->get_all_user($approved_application['user_id'])->row_array();?>
+                        <?php
+                        ob_start();
+                        foreach ($approved_applications->result_array() as $key => $approved_application):
+                            $user_data = $this->user_model->get_all_user($approved_application['user_id'])->row_array();
+                        ?>
                                         <tr class="gradeU">
                                             <td>
                                                 <?php echo ++$key; ?>
@@ -119,34 +112,58 @@
                                                 <?php echo $user_data['first_name'].' '.$user_data['last_name']; ?>
                                             </td>
                                             <td>
-                                                <a href="javascript:;" class="btn btn-primary" onclick="showAjaxModal('<?php echo site_url('modal/popup/application_details/'.$approved_application['id']); ?>', '<?php echo get_phrase('applicant_details'); ?>')">
-                                                    <i class="fa fa-info-circle"></i> <?php echo get_phrase('application_details'); ?>
-                                                </a>
+                                                <?php echo gp_ds_button(get_phrase('application_details'), [
+                                                    'href' => 'javascript:;',
+                                                    'variant' => 'outline',
+                                                    'attrs' => [
+                                                        'onclick' => "showAjaxModal('" . site_url('modal/popup/application_details/'.$approved_application['id']) . "', '" . get_phrase('applicant_details') . "')",
+                                                    ],
+                                                ], true); ?>
                                             </td>
                                             <td>
                                                 <?php if (!empty($approved_application['document'])): ?>
-                                                    <a href="<?php echo base_url().'uploads/document/'.$approved_application['document']; ?>" class="btn btn-info" download>
-                                                        <i class="fa fa-download"></i> <?php echo get_phrase('download'); ?>
-                                                    </a>
+                                                    <?php echo gp_ds_button(get_phrase('download'), [
+                                                        'href' => base_url().'uploads/document/'.$approved_application['document'],
+                                                        'variant' => 'quiet',
+                                                        'attrs' => [
+                                                            'download' => '',
+                                                        ],
+                                                    ], true); ?>
                                                 <?php endif; ?>
                                             </td>
-                                            <td style="text-align: center;">
+                                            <td>
                                                 <?php if ($approved_application['status'] == 0): ?>
-                                                    <div class="badge badge-danger"><?php echo get_phrase('pending'); ?></div>
+                                                    <?php gp_ds_badge(get_phrase('pending'), 'danger'); ?>
                                                 <?php elseif($approved_application['status'] == 1): ?>
-                                                    <div class="badge badge-success"><?php echo get_phrase('approved'); ?></div>
+                                                    <?php gp_ds_badge(get_phrase('approved'), 'success'); ?>
                                                 <?php endif; ?>
                                             </td>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        <?php
+                        endforeach;
+                        echo gp_ds_table([
+                            'table_id' => 'approved-application',
+                            'extra_class' => 'mb-0',
+                            'headers' => [
+                                '#',
+                                get_phrase('name'),
+                                get_phrase('document'),
+                                get_phrase('details'),
+                                get_phrase('status'),
+                            ],
+                            'body_html' => ob_get_clean(),
+                            'allow_empty' => true,
+                        ], true);
+                        ?>
                     </div>
                 </div>
-            </div> <!-- end card-body-->
-        </div> <!-- end card-->
-    </div>
+    <?php
+    gp_ds_card([
+        'title' => get_phrase('list_of_applications'),
+        'body' => ob_get_clean(),
+        'extra_class' => 'gp-dash-panel',
+    ]);
+    ?>
 </div>
 
 <script type="text/javascript">

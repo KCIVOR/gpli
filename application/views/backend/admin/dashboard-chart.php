@@ -27,7 +27,7 @@
          this.$body = o("body"), this.charts = []
      };
      t.prototype.respChart = function(r, a, n, e) {
-         Chart.defaults.global.defaultFontColor = "#8391a2", Chart.defaults.scale.gridLines.color = "#8391a2";
+         Chart.defaults.global.defaultFontColor = "#6B6B65", Chart.defaults.scale.gridLines.color = "#E4E1D8";
          var i = r.get(0).getContext("2d"),
              s = o(r).parent();
          return function() {
@@ -113,7 +113,7 @@
                  labels: ["<?php echo get_phrase('active_course'); ?>", "<?php echo get_phrase('pending_course'); ?>"],
                  datasets: [{
                      data: [<?php echo $number_of_active_course; ?>, <?php echo $number_of_pending_course; ?>],
-                     backgroundColor: ["#0acf97", "#FFC107"],
+                     backgroundColor: ["#003BA6", "#FCD01C"],
                      borderColor: "transparent",
                      borderWidth: "2"
                  }]
@@ -128,7 +128,7 @@
          return t
      }, t.prototype.init = function() {
          var r = this;
-         Chart.defaults.global.defaultFontFamily = '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif', r.charts = this.initCharts(), o(window).on("resize", function(t) {
+         Chart.defaults.global.defaultFontFamily = 'Inter, sans-serif', r.charts = this.initCharts(), o(window).on("resize", function(t) {
              o.each(r.charts, function(t, r) {
                  try {
                      r.destroy()

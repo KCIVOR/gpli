@@ -1,0 +1,236 @@
+/**
+ * Geese Project — Admin Enrollments
+ * Tokens from gp-tokens.css only. No leftover Hyper hex.
+ *
+ * In-scope page_name values: enrol_student, enrol_history
+ *
+ * Hooks to keep:
+ *   required-form, user_id[], course_id[], #multiple_course_id
+ *   server-side-select2, checkRequiredFields
+ *   #reportrange, #selectedValue, #date_range, #submit-button
+ *   update_date_range, #export-button, export_csv
+ *   tr.gradeU[data-enrol-id], confirm_modal
+ */
+
+.gp-ds .gp-enrol-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .gp-enrol-page .btn:not(.btn-icon):not(.action-icon),
+.gp-ds .gp-enrol-page a.btn:not(.btn-icon):not(.action-icon),
+.gp-ds .gp-enrol-page button.btn:not(.btn-icon):not(.action-icon) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 96px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
+  line-height: 1.2;
+  min-height: 38px !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-enrol-page .btn,
+.gp-ds .gp-enrol-page .header-title,
+.gp-ds .row:has(+ .gp-enrol-page) .page-title,
+.gp-ds .gp-enrol-page label {
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-enrol-page .gp-dash-panel > .card-body > .header-title {
+  margin: 0 0 16px;
+}
+
+.gp-ds .gp-enrol-page .required {
+  color: var(--gp-secondary);
+  margin-left: 2px;
+}
+
+.gp-ds .gp-enrol-page .form-group {
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-enrol-page .form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-enrol-page .form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-enrol-page .select2-container {
+  width: 100% !important;
+}
+
+.gp-ds .gp-enrol-page .select2-container--default .select2-selection--single,
+.gp-ds .gp-enrol-page .select2-container--default .select2-selection--multiple {
+  min-height: 38px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-enrol-page .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 36px;
+  color: var(--gp-fg);
+  padding-left: 12px;
+}
+
+.gp-ds .gp-enrol-page .select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background: var(--gp-info-soft);
+  border-color: var(--gp-border);
+  color: var(--gp-fg);
+  border-radius: 7px;
+}
+
+.gp-ds .gp-enrol-page .select2-container--default.select2-container--focus .select2-selection--single,
+.gp-ds .gp-enrol-page .select2-container--default.select2-container--focus .select2-selection--multiple,
+.gp-ds .gp-enrol-page .select2-container--default.select2-container--open .select2-selection--single,
+.gp-ds .gp-enrol-page .select2-container--default.select2-container--open .select2-selection--multiple {
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-enrol-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-enrol-toolbar-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 280px;
+}
+
+.gp-ds .gp-enrol-date-field,
+.gp-ds .gp-enrol-date-field .form-group {
+  flex: 1 1 280px;
+  max-width: 480px;
+  min-width: 0;
+  margin: 0;
+}
+
+.gp-ds .gp-enrol-page #submit-button,
+.gp-ds .gp-enrol-page #export-button {
+  flex: 0 0 auto;
+  width: auto !important;
+  min-width: 96px;
+  height: auto !important;
+}
+
+.gp-ds .gp-enrol-page #reportrange {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 12px;
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.gp-ds .gp-enrol-page #reportrange:hover,
+.gp-ds .gp-enrol-page #reportrange:focus {
+  border-color: var(--gp-border-strong);
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-enrol-page table.table thead th {
+  word-spacing: 0.28em;
+}
+
+.gp-ds .gp-enrol-page table.table a:not(.action-icon):not(.icon-btn) {
+  color: var(--gp-primary);
+  text-decoration: none;
+}
+
+.gp-ds .gp-enrol-page table.table a:not(.action-icon):not(.icon-btn):hover {
+  color: var(--gp-accent);
+}
+
+.gp-ds .gp-enrol-page .action-icon,
+.gp-ds .gp-enrol-page .icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted) !important;
+  font-size: 13px;
+  text-decoration: none;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-enrol-page .action-icon:hover,
+.gp-ds .gp-enrol-page .icon-btn:hover {
+  background: var(--gp-danger-soft);
+  border-color: var(--gp-danger-border);
+  color: var(--gp-danger) !important;
+}
+
+.gp-ds .gp-enrol-page .img-thumbnail {
+  border-color: var(--gp-border);
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-enrol-page .empty-state {
+  text-align: center;
+  padding: 56px 24px;
+  border: 1px dashed var(--gp-border);
+  border-radius: 14px;
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-enrol-page .empty-state .icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gp-surface-sunk);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 22px;
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .gp-enrol-page .empty-state p {
+  font-size: 13.5px;
+  color: var(--gp-fg-muted);
+  margin: 0;
+  word-spacing: 0.2em;
+}

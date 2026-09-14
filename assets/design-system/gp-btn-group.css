@@ -1,0 +1,54 @@
+/**
+ * Geese Project Design System — Button Groups
+ * Phase 2b — Segmented filter controls (All/Published/Draft, etc.)
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ * Section: 20 (List & button groups - extension)
+ */
+
+/* ========== BUTTON GROUP ========== */
+.gp-ds .btn-group {
+  display: inline-flex;
+  border-radius: var(--gp-radius);
+  overflow: hidden;
+  border: 1px solid var(--gp-border-strong);
+}
+
+.gp-ds .btn-group button,
+.gp-ds .btn-group .btn {
+  border: none;
+  background: var(--gp-surface);
+  padding: 10px 16px;
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-fg-muted);
+  cursor: pointer;
+  border-right: 1px solid var(--gp-border-strong);
+  border-radius: 0;
+  transition: background var(--gp-dur-fast) var(--gp-ease-out),
+              color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .btn-group button:last-child,
+.gp-ds .btn-group .btn:last-child {
+  border-right: none;
+}
+
+.gp-ds .btn-group button.active,
+.gp-ds .btn-group .btn.active {
+  background: var(--gp-primary);
+  color: #fff;
+}
+
+.gp-ds .btn-group button:hover:not(.active),
+.gp-ds .btn-group .btn:hover:not(.active) {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+}
+
+.gp-ds .btn-group button:focus-visible,
+.gp-ds .btn-group .btn:focus-visible {
+  outline: 2px solid var(--gp-gold-deep);
+  outline-offset: -2px;
+  z-index: 1;
+}

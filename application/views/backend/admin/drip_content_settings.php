@@ -1,19 +1,10 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-play-protected-content title_icon"></i> <?php echo get_phrase('drip_content_settings'); ?>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
-
+<?php gp_ds_page_title(get_phrase('drip_content_settings')); ?>
+<div class="gp-settings-page">
 <div class="row">
 	<div class="col-lg-7">
-		<div class="card">
-			<div class="card-body">
-				<h3 class="mb-3 header-title"><?php echo get_phrase('manage_your_drip_content_settings'); ?></h3>
+		<?php
+		ob_start();
+		?>
 				<form action="<?php echo site_url('admin/drip_content_settings/update'); ?>" method="post">
 					<div class="form-group">
 						<label><?php echo get_phrase('lesson_completion_role'); ?><span class="required">*</span></label>
@@ -50,20 +41,21 @@
                         <textarea name="locked_lesson_message" id = "locked_lesson_message" class="form-control" rows="5"><?php echo $drip_content_settings['locked_lesson_message']; ?></textarea>
                     </div>
 
-                    <div class="form-group">
-                    	<button type="submit" class="btn btn-primary"><?php echo get_phrase('save_changes'); ?></button>
-                    </div>
+                    <?php echo gp_ds_button(get_phrase('save_changes'), ['variant' => 'primary', 'type' => 'submit'], true); ?>
 				</form>
-			</div>
-		</div>
+		<?php
+		gp_ds_card([
+			'title' => get_phrase('manage_your_drip_content_settings'),
+			'body' => ob_get_clean(),
+			'extra_class' => 'gp-dash-panel',
+		]);
+		?>
 	</div>
 	<div class="col-lg-5">
-		<div class="alert alert-info" role="alert">
-			<h4 class="alert-heading"><?php echo get_phrase('attention'); ?>!</h4>
-            <p class="mb-0"><?php echo get_phrase('the_auto_checkmark_is_only_applicable_for_video_lessons'); ?>.</p>
-            <a href="https://creativeitem.com/docs/academy-lms/drip-content-settings" target="_blank"><?php echo get_phrase('learn_more'); ?></a>
-        </div>
+		<?php echo gp_ds_alert(get_phrase('attention'), get_phrase('the_auto_checkmark_is_only_applicable_for_video_lessons') . '.', 'info', true); ?>
+		<a href="https://creativeitem.com/docs/academy-lms/drip-content-settings" target="_blank" class="gp-settings-help-link"><?php echo get_phrase('learn_more'); ?></a>
 	</div>
+</div>
 </div>
 
 <script type="text/javascript">

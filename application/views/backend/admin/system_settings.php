@@ -1,20 +1,10 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('system_settings'); ?></h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
-
+<?php gp_ds_page_title(get_phrase('system_settings')); ?>
+<div class="gp-settings-page">
 <div class="row">
     <div class="col-xl-7">
-        <div class="card">
-            <div class="card-body">
-                <div class="col-lg-12">
-                    <h4 class="mb-3 header-title"><?php echo get_phrase('system_settings');?></h4>
-
+        <?php
+        ob_start();
+        ?>
                     <form class="required-form" action="<?php echo site_url('admin/system_settings/system_update'); ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="system_name"><?php echo get_phrase('website_name'); ?><span class="required">*</span></label>
@@ -62,10 +52,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="youtube_api_key"><?php echo get_phrase('youtube_API_key'); ?><span class="required">*</span> &nbsp; <a href = "https://developers.google.com/youtube/v3/getting-started" target = "_blank" style="color: #a7a4a4">(<?php echo get_phrase('get_YouTube_API_key'); ?> <i class="mdi mdi-open-in-new"></i>)</a></label>
+                            <label for="youtube_api_key"><?php echo get_phrase('youtube_API_key'); ?><span class="required">*</span> &nbsp; <a href = "https://developers.google.com/youtube/v3/getting-started" target = "_blank" class="gp-settings-help-link">(<?php echo get_phrase('get_YouTube_API_key'); ?> <i class="mdi mdi-open-in-new"></i>)</a></label>
                             <input type="text" name = "youtube_api_key" id = "youtube_api_key" class="form-control" value="<?php echo get_settings('youtube_api_key');  ?>" required>
-                            <a href="https://support.google.com/googleapi/answer/6158841" target="_blank">
-                                <small class="badge badge-light">
+                            <a href="https://support.google.com/googleapi/answer/6158841" target="_blank" class="gp-settings-help-link">
+                                <small>
                                     <?php echo get_phrase('If you want to use Google Drive video, you need to enable the Google Drive service in this API'); ?>
                                     <i class="mdi mdi-open-in-new"></i>
                                 </small>
@@ -73,7 +63,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="vimeo_api_key"><?php echo get_phrase('vimeo_API_key'); ?><span class="required">*</span> &nbsp; <a href = "https://www.youtube.com/watch?v=Wwy9aibAd54" target = "_blank" style="color: #a7a4a4">(<?php echo get_phrase('get_Vimeo_API_key'); ?> <i class="mdi mdi-open-in-new"></i>)</a></label>
+                            <label for="vimeo_api_key"><?php echo get_phrase('vimeo_API_key'); ?><span class="required">*</span> &nbsp; <a href = "https://www.youtube.com/watch?v=Wwy9aibAd54" target = "_blank" class="gp-settings-help-link">(<?php echo get_phrase('get_Vimeo_API_key'); ?> <i class="mdi mdi-open-in-new"></i>)</a></label>
                             <input type="text" name = "vimeo_api_key" id = "vimeo_api_key" class="form-control" value="<?php echo get_settings('vimeo_api_key');  ?>" required>
                         </div>
 
@@ -173,18 +163,24 @@
                         </div>
 
 
-                        <button type="button" class="btn btn-primary" onclick="checkRequiredFields()"><?php echo get_phrase('save'); ?></button>
+                        <?php echo gp_ds_button(get_phrase('save'), [
+                            'variant' => 'primary',
+                            'type' => 'button',
+                            'attrs' => ['onclick' => 'checkRequiredFields()'],
+                        ], true); ?>
                     </form>
-                </div>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
+        <?php
+        gp_ds_card([
+            'title' => get_phrase('system_settings'),
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
     </div><!-- end col-->
     <div class="col-xl-5">
-        <div class="card">
-            <div class="card-body">
-                <div class="col-lg-12">
-                    <h4 class="mb-3 header-title"><?php echo get_phrase('update_product');?></h4>
-
+        <?php
+        ob_start();
+        ?>
                     <form action="<?php echo site_url('updater/update'); ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group mb-2">
                             <label><?php echo get_phrase('file'); ?></label>
@@ -196,10 +192,18 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary"><?php echo get_phrase('update'); ?></button>
+                        <?php echo gp_ds_button(get_phrase('update'), [
+                            'variant' => 'primary',
+                            'type' => 'submit',
+                        ], true); ?>
                     </form>
-                </div>
-            </div> <!-- end card body-->
-        </div>
+        <?php
+        gp_ds_card([
+            'title' => get_phrase('update_product'),
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
     </div>
+</div>
 </div>

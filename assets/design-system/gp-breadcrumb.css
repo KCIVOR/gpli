@@ -1,0 +1,57 @@
+/**
+ * Geese Project Design System — Breadcrumbs
+ * Phase 2b — Navigation path indicators
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ * Section: 15 (Breadcrumbs & pagination - extension)
+ */
+
+/* ========== BREADCRUMB ========== */
+.gp-ds .breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+}
+
+.gp-ds .breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gp-ds .breadcrumb a {
+  color: var(--gp-fg-muted);
+  text-decoration: none;
+  transition: color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .breadcrumb a:hover {
+  color: var(--gp-primary);
+}
+
+.gp-ds .breadcrumb .sep,
+.gp-ds .breadcrumb-item + .breadcrumb-item::before {
+  content: "/";
+  color: var(--gp-fg-faint);
+  padding: 0 4px;
+}
+
+.gp-ds .breadcrumb .current,
+.gp-ds .breadcrumb-item.active {
+  color: var(--gp-fg);
+  font-weight: 600;
+}
+
+/* Support for Bootstrap breadcrumb structure */
+.gp-ds .breadcrumb-item + .breadcrumb-item::before {
+  content: "/";
+  display: inline-block;
+  padding-right: 0;
+  padding-left: 0;
+  color: var(--gp-fg-faint);
+}

@@ -1,0 +1,186 @@
+/**
+ * Geese Project — Admin Announcements
+ * Tokens from gp-tokens.css only. No leftover Hyper hex.
+ *
+ * In-scope page_name values:
+ *   announcements, announcement_add, announcement_edit
+ *
+ * Forbidden:
+ *   rewriting Admin.php announcement methods
+ *   renaming #course-datatable, #multiple_course_id, #title, #summernote-basic, #attachment, #is_pinned
+ *   changing form names / ids / actions
+ *   editing custom.js #course-datatable init
+ *   editing navigation.php
+ *
+ * Hooks later phases must keep:
+ *   #course-datatable, data-page-length
+ *   confirm_modal delete
+ *   announcement_form/edit_announcement_form/{id}
+ *   required-form, checkRequiredFields
+ *   select2 #multiple_course_id name="course_ids[]"
+ *   #attachment changeTitleOfImageUploader
+ */
+
+.gp-ds .gp-announce-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .row:has(+ .gp-announce-page) .gp-page-title-actions .btn,
+.gp-ds .gp-announce-page .btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-announce-page a.btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-announce-page button.btn:not(.btn-icon):not(.action-icon):not(.icon-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 96px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
+  line-height: 1.2;
+  min-height: 38px !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-announce-page .btn,
+.gp-ds .gp-announce-page .header-title,
+.gp-ds .gp-announce-page label {
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-announce-page .gp-dash-panel > .card-body > .header-title,
+.gp-ds .gp-announce-page .card > .card-body > .header-title {
+  margin: 0 0 16px;
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-announce-page .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-announce-page .form-group {
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-announce-page .form-group > label {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-announce-page .required {
+  color: var(--gp-danger);
+  margin-left: 2px;
+}
+
+.gp-ds .gp-announce-page .form-control,
+.gp-ds .gp-announce-page select.form-control,
+.gp-ds .gp-announce-page .custom-file-label {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-announce-page .form-control:focus {
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-announce-page .custom-file-label {
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-announce-page table.table,
+.gp-ds .gp-announce-page table.dataTable {
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-announce-page table.table thead th,
+.gp-ds .gp-announce-page table.dataTable thead th {
+  word-spacing: 0.28em;
+  color: var(--gp-fg-faint);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .gp-announce-page table.table tbody td,
+.gp-ds .gp-announce-page table.dataTable tbody td,
+.gp-ds .gp-announce-page .table > :not(caption) > * > * {
+  color: var(--gp-fg);
+  background-color: transparent;
+  border-color: var(--gp-border);
+  box-shadow: none;
+}
+
+.gp-ds .gp-announce-page .dataTables_wrapper {
+  width: 100%;
+}
+
+.gp-ds .gp-announce-page .dataTables_wrapper .dataTables_filter {
+  float: none;
+  width: 100%;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-announce-page .dataTables_wrapper .dataTables_filter input {
+  min-height: 42px;
+  padding: 10px 14px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-announce-page .dataTables_info {
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-announce-page .buttons-csv {
+  margin-bottom: 20px;
+}
+
+.gp-ds .gp-announce-page .btn-rounded.btn-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-announce-page .empty-state,
+.gp-ds .gp-announce-page .img-fluid.w-100.text-center {
+  text-align: center;
+  color: var(--gp-fg-muted);
+  padding: 24px 0;
+}
+
+.gp-ds .gp-announce-page .img-fluid.w-100.text-center img {
+  width: 100px;
+  opacity: 1;
+}
+
+.gp-ds .gp-announce-page input[type="checkbox"] {
+  accent-color: var(--gp-primary);
+}

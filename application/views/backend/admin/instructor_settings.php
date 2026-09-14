@@ -1,19 +1,11 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('instructor_settings'); ?></h4>
-            </div>
-        </div>
-    </div>
-</div>
+<?php gp_ds_page_title(get_phrase('instructor_settings')); ?>
 
+<div class="gp-users-page">
 <div class="row">
     <div class="col-xl-6">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="mb-3 header-title"><?php echo get_phrase('public_instructor_settings');?></h4>
-
+        <?php
+        ob_start();
+        ?>
                 <form action="<?php echo site_url('admin/instructor_settings/update'); ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label><?php echo get_phrase('allow_public_instructor'); ?></label>
@@ -29,21 +21,24 @@
                         </div>
                     </div>
 
-                    <div class="row justify-content-center">
-                        <div class="col-md-7">
-                            <button type="submit" class="btn btn-primary btn-block"><?php echo get_phrase('update_settings'); ?></button>
-                        </div>
-                    </div>
+                    <?php echo gp_ds_button(get_phrase('update_settings'), [
+                        'variant' => 'primary',
+                        'type' => 'submit',
+                    ], true); ?>
                 </form>
-            </div>
-        </div>
+        <?php
+        gp_ds_card([
+            'title' => get_phrase('public_instructor_settings'),
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
     </div>
 
     <div class="col-xl-6">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="mb-3 header-title"><?php echo get_phrase('instructor_commission_settings');?></h4>
-
+        <?php
+        ob_start();
+        ?>
                 <form action="<?php echo site_url('admin/instructor_settings/update'); ?>" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="instructor_revenue"><?php echo get_phrase('instructor_revenue_percentage'); ?></label>
@@ -64,15 +59,20 @@
                         </div>
                     </div>
 
-                    <div class="row justify-content-center">
-                        <div class="col-md-7">
-                            <button type="submit" class="btn btn-primary btn-block"><?php echo get_phrase('update_settings'); ?></button>
-                        </div>
-                    </div>
+                    <?php echo gp_ds_button(get_phrase('update_settings'), [
+                        'variant' => 'primary',
+                        'type' => 'submit',
+                    ], true); ?>
                 </form>
-            </div>
-        </div>
+        <?php
+        gp_ds_card([
+            'title' => get_phrase('instructor_commission_settings'),
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
     </div>
+</div>
 </div>
 
 <script type="text/javascript">

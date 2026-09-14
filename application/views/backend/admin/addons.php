@@ -1,22 +1,23 @@
-<div class="row ">
-  <div class="col-xl-12">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="page-title"> <i class="mdi mdi-power-plug title_icon"></i> <?php echo get_phrase('addon_manager'); ?>
-          <a href="https://1.envato.market/B32Ry" target="_blank" class="btn btn-outline-primary btn-rounded alignToTitle"> <i class="mdi mdi-cart"></i> <?php echo get_phrase('buy_new_addon'); ?></a>
-          <a href="<?php echo site_url('admin/addon/add'); ?>" class="btn btn-outline-primary btn-rounded alignToTitle mr-1"><i class="mdi mdi-download"></i> <?php echo get_phrase('install_addon'); ?></a>
-        </h4>
-      </div> <!-- end card body-->
-    </div> <!-- end card -->
-  </div><!-- end col-->
-</div>
+<?php
+gp_ds_page_title(
+    get_phrase('addon_manager'),
+    gp_ds_button(get_phrase('buy_new_addon'), [
+        'href' => 'https://1.envato.market/B32Ry',
+        'variant' => 'outline',
+        'attrs' => [
+            'target' => '_blank',
+        ],
+    ], true) . ' ' . gp_ds_button(get_phrase('install_addon'), [
+        'href' => site_url('admin/addon/add'),
+        'variant' => 'outline',
+    ], true)
+);
+?>
 
-<!-- Start page title end -->
-<div class="row justify-content-center">
-  <div class="col-xl-12">
-    <div class="card">
-      <div class="card-body">
-
+<div class="gp-addons-page">
+    <?php
+    ob_start();
+    ?>
         <ul class="nav nav-tabs nav-bordered mb-3 mb-3">
           <li class="nav-item">
             <a href="#installedAddon" data-toggle="tab" aria-expanded="true" class="nav-link rounded-0 active">
@@ -34,26 +35,18 @@
 
         <div class="tab-content">
           <div class="tab-pane active" id="installedAddon">
-            <div class="table-responsive-sm mt-4">
-              <table id="basic-datatable" class="table table-striped table-centered mb-0">
-                <thead>
-                  <tr>
-                    <th><?php echo get_phrase('name'); ?></th>
-                    <th><?php echo get_phrase('version'); ?></th>
-                    <th><?php echo get_phrase('status'); ?></th>
-                    <th><?php echo get_phrase('actions'); ?></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($addons as $addon) : ?>
+            <?php
+            ob_start();
+            foreach ($addons as $addon) :
+            ?>
                     <tr class="gradeU">
                       <td><?php echo $addon['name']; ?></td>
                       <td><?php echo $addon['version']; ?></td>
                       <td>
                         <?php if ($addon['status'] == 1) : ?>
-                          <span class="badge badge-success"><?php echo get_phrase('active'); ?></span>
+                          <?php gp_ds_badge(get_phrase('active'), 'success'); ?>
                         <?php else : ?>
-                          <span class="badge badge-secondary"><?php echo get_phrase('deactive'); ?></span>
+                          <?php gp_ds_badge(get_phrase('deactive'), 'neutral'); ?>
                         <?php endif; ?>
                       </td>
                       <td>
@@ -62,7 +55,7 @@
                             <i class="mdi mdi-dots-vertical"></i>
                           </button>
                           <ul class="dropdown-menu">
-                            <a class="dropdown-item" href="<?php echo site_url('admin/addon/update'); ?>"><?php echo get_phrase('addon_update'); ?></a></li>
+                            <li><a class="dropdown-item" href="<?php echo site_url('admin/addon/update'); ?>"><?php echo get_phrase('addon_update'); ?></a></li>
                             <?php if ($addon['status'] == 1) : ?>
                               <li><a class="dropdown-item" href="#" onclick="confirm_modal('<?php echo site_url('admin/addon/deactivate/' . $addon['id']); ?>');"><?php echo get_phrase('deactive'); ?></a></li>
                             <?php else : ?>
@@ -74,13 +67,27 @@
                         </div>
                       </td>
                     </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
-            </div>
+            <?php
+            endforeach;
+            echo gp_ds_table([
+                'table_id' => 'basic-datatable',
+                'extra_class' => 'table-striped mb-0',
+                'headers' => [
+                    get_phrase('name'),
+                    get_phrase('version'),
+                    get_phrase('status'),
+                    get_phrase('actions'),
+                ],
+                'body_html' => ob_get_clean(),
+                'allow_empty' => true,
+            ], true);
+            ?>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+    <?php
+    gp_ds_card([
+        'body' => ob_get_clean(),
+        'extra_class' => 'gp-dash-panel',
+    ]);
+    ?>
 </div>

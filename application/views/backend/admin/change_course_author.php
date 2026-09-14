@@ -1,4 +1,4 @@
-<form class="required-form" action="<?php echo site_url('admin/change_course_author/'.$course_details['id']); ?>" method="post">
+<form class="required-form gp-courses-modal" action="<?php echo site_url('admin/change_course_author/'.$course_details['id']); ?>" method="post">
     <div class="form-group">
         <label for="parent"><?php echo get_phrase('Select an author'); ?></label>
         <select class="form-control select2" data-toggle="select2" name="instructor_id" id="instructor_id" required>
@@ -7,7 +7,12 @@
             <?php endforeach; ?>
         </select>
     </div>
-    <button type="submit" class="btn btn-primary"><?php echo get_phrase("submit"); ?></button>
+    <div class="gp-courses-modal-actions">
+        <?php echo gp_ds_button(get_phrase('submit'), [
+            'type' => 'submit',
+            'variant' => 'primary',
+        ], true); ?>
+    </div>
 </form>
 
 <script>

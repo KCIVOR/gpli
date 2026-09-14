@@ -203,6 +203,7 @@
 }
  </style>
 
+<div class="gp-course-custom-field">
 <div class="d-flex align-items-center justify-content-between mb-3">
     <h5 class="fs-16px title mb-3 capitalize"><?php echo get_phrase('custom_field'); ?></h5>
     <div>
@@ -472,3 +473,4 @@ $custom_fields = $this->db->where('course_id', $course_id)->order_by('sorting', 
         </div>
     </div>
 </div>
+</div><!-- .gp-course-custom-field -->

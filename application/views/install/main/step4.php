@@ -2,9 +2,7 @@
   <div class="row"
     style="margin-top: 20px;">
     <div class="col-md-8 col-md-offset-2">
-      <div class="alert alert-danger">
-        <strong><?php echo $error; ?></strong>
-      </div>
+      <?php gp_ds_alert($error, '', 'danger'); ?>
     </div>
   </div>
 <?php } ?>

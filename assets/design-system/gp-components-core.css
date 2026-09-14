@@ -1,0 +1,594 @@
+/**
+ * Geese Project Design System — Core Components
+ * Phase 0 — Buttons, Cards, Badges, Alerts, Forms
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ * Sections: 05–07 (buttons, cards, forms) + 11–13 (badges, alerts) from extension
+ */
+
+/* ========== BUTTONS (Section 05) ========== */
+/* Named variants only — bare .btn is legacy (icon toggles, utility controls, etc.) */
+.gp-ds .btn-primary,
+.gp-ds .btn-secondary,
+.gp-ds .btn-outline,
+.gp-ds .btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+  font-size: 13px;
+  border-radius: var(--gp-radius);
+  padding: 15px 26px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.gp-ds .btn-primary,
+.gp-ds a.btn-primary,
+.gp-ds button.btn-primary,
+.gp-ds .btn-primary:visited {
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+  --bs-btn-disabled-color: #fff;
+  background: var(--gp-primary);
+  background-color: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: #fff !important;
+}
+
+.gp-ds .btn-primary:hover,
+.gp-ds .btn-primary:focus,
+.gp-ds .btn-primary:active,
+.gp-ds .btn-primary:focus-visible,
+.gp-ds a.btn-primary:hover,
+.gp-ds a.btn-primary:focus,
+.gp-ds a.btn-primary:active,
+.gp-ds button.btn-primary:hover,
+.gp-ds button.btn-primary:focus,
+.gp-ds button.btn-primary:active {
+  background: var(--gp-accent);
+  background-color: var(--gp-accent);
+  border-color: var(--gp-accent);
+  color: #fff !important;
+}
+
+.gp-ds .btn-primary i,
+.gp-ds .btn-primary svg,
+.gp-ds .btn-primary svg path {
+  color: #fff !important;
+  fill: currentColor !important;
+}
+
+.gp-ds .btn-secondary,
+.gp-ds a.btn-secondary,
+.gp-ds button.btn-secondary {
+  background: var(--gp-secondary);
+  border-color: var(--gp-secondary);
+  color: #fff !important;
+}
+
+.gp-ds .btn-secondary:hover,
+.gp-ds .btn-secondary:focus,
+.gp-ds .btn-secondary:active {
+  background: var(--gp-secondary-hover);
+  border-color: var(--gp-secondary-hover);
+  color: #fff !important;
+}
+
+/* Hyper `.btn-sm` / `.btn-icon` keep their own size; alias is color only. */
+.gp-ds .btn-outline,
+.gp-ds .btn-outline-primary {
+  background: transparent;
+  border-color: var(--gp-accent);
+  color: var(--gp-accent);
+}
+
+.gp-ds .btn-outline:hover,
+.gp-ds .btn-outline-primary:hover {
+  background: var(--gp-accent);
+  color: #fff;
+}
+
+.gp-ds .btn-quiet {
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+  font-weight: 700;
+}
+
+.gp-ds .btn-quiet:hover {
+  background: var(--gp-border);
+  border-color: var(--gp-border);
+}
+
+.gp-ds a.btn-primary:focus-visible,
+.gp-ds button.btn-primary:focus-visible,
+.gp-ds a.btn-secondary:focus-visible,
+.gp-ds button.btn-secondary:focus-visible,
+.gp-ds a.btn-outline:focus-visible,
+.gp-ds button.btn-outline:focus-visible,
+.gp-ds a.btn-outline-primary:focus-visible,
+.gp-ds button.btn-outline-primary:focus-visible,
+.gp-ds a.btn-quiet:focus-visible,
+.gp-ds button.btn-quiet:focus-visible {
+  outline: 3px solid var(--gp-primary);
+  outline-offset: 2px;
+}
+
+/* ========== CARDS & SURFACES (Section 06) ========== */
+/* No extra padding — Hyper .card-body already pads. Scratch cards use .gp-ds-card. */
+.gp-ds .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-ds-card {
+  padding: 26px;
+}
+
+.gp-ds .card h4 {
+  font-size: 16.5px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.gp-ds h4.page-title,
+.gp-ds .page-title,
+.gp-ds .header-title,
+.gp-ds h4.header-title,
+.gp-ds .card .header-title,
+.gp-ds .card .page-title {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  word-spacing: normal;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.gp-ds .gp-page-title-card .card-body {
+  padding: 16px 20px;
+}
+
+.gp-ds .gp-page-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.gp-ds .gp-page-title-row .page-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  min-width: 0;
+}
+
+.gp-ds .gp-page-title-row .page-title .title_icon {
+  margin-right: 0;
+}
+
+.gp-ds .gp-page-title-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+.gp-ds .gp-page-title-actions .alignToTitle {
+  float: none;
+  margin: 0;
+}
+
+.gp-ds .gp-page-title-actions .btn,
+.gp-ds .gp-page-title-actions a.btn,
+.gp-ds .gp-page-title-actions button.btn {
+  padding: 8px 14px !important; /* beat DS §05 15px 26px on page chrome */
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  min-height: 38px;
+  word-spacing: 0.18em;
+}
+
+.gp-ds .card p {
+  font-size: 13.5px;
+  color: var(--gp-fg-muted);
+  line-height: 1.6;
+}
+
+/* Dark gradient card */
+.gp-ds .card-dark {
+  background: linear-gradient(155deg, var(--gp-accent-2) 0%, var(--gp-accent) 60%, #24396f 100%);
+  color: #fff;
+  border-radius: 14px;
+  padding: 26px;
+  border: none;
+}
+
+.gp-ds .card-dark .eyebrow {
+  font-family: var(--gp-font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gp-gold-light);
+  margin-bottom: 10px;
+}
+
+.gp-ds .card-dark h4 {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.gp-ds .card-dark p {
+  color: #C9D6F0;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+/* Stat badge */
+.gp-ds .stat-badge {
+  background: var(--gp-accent);
+  color: #fff;
+  border-radius: 14px;
+  padding: 18px 14px;
+  text-align: center;
+  display: inline-block;
+}
+
+.gp-ds .stat-badge .num {
+  font-family: var(--gp-font-head);
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gp-gold-light);
+  line-height: 1;
+}
+
+.gp-ds .stat-badge .lbl {
+  font-family: var(--gp-font-head);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #D6E0F1;
+  margin-top: 7px;
+}
+
+/* ========== FORM FIELDS (Section 07) ========== */
+/* Underline fields only when not Bootstrap/Hyper controls. */
+.gp-ds label:not(.col-form-label):not(.form-check-label):not(.custom-control-label):not(.custom-file-label):not(.btn) {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-bottom: 7px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-ds-form label,
+.gp-ds label.gp-ds-label {
+  display: block;
+}
+
+.gp-ds input[type="text"]:not(.form-control):not(.form-select),
+.gp-ds input[type="email"]:not(.form-control),
+.gp-ds input[type="password"]:not(.form-control),
+.gp-ds input[type="number"]:not(.form-control),
+.gp-ds input[type="url"]:not(.form-control),
+.gp-ds input[type="tel"]:not(.form-control),
+.gp-ds input[type="search"]:not(.form-control) {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--gp-border-strong);
+  padding: 4px 0 12px;
+  font-family: var(--gp-font-body);
+  font-size: 15.5px;
+  color: var(--gp-fg);
+  background: transparent;
+  transition: border-color 0.3s;
+}
+
+.gp-ds input[type="text"]:not(.form-control):focus,
+.gp-ds input[type="email"]:not(.form-control):focus,
+.gp-ds input[type="password"]:not(.form-control):focus,
+.gp-ds input[type="number"]:not(.form-control):focus,
+.gp-ds input[type="url"]:not(.form-control):focus,
+.gp-ds input[type="tel"]:not(.form-control):focus,
+.gp-ds input[type="search"]:not(.form-control):focus {
+  outline: none;
+  border-bottom-color: var(--gp-gold-deep);
+  border-bottom-width: 2px;
+}
+
+.gp-ds select:not(.form-control):not(.form-select):not(.select2-hidden-accessible),
+.gp-ds textarea:not(.form-control):not(.note-codable) {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--gp-border-strong);
+  padding: 4px 0 12px;
+  font-family: var(--gp-font-body);
+  font-size: 15.5px;
+  color: var(--gp-fg);
+  background: transparent;
+  transition: border-color 0.3s;
+}
+
+.gp-ds textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.gp-ds select:not(.form-control):not(.form-select):focus,
+.gp-ds textarea:not(.form-control):focus {
+  outline: none;
+  border-bottom-color: var(--gp-gold-deep);
+  border-bottom-width: 2px;
+}
+
+.gp-ds .field-error input,
+.gp-ds .field-error select,
+.gp-ds .field-error textarea {
+  border-bottom-color: var(--gp-danger);
+}
+
+/* Select2 is leftover Hyper JS — restyle with tokens only (dropdown appends to body) */
+.gp-ds .select2-container--default .select2-selection--single,
+.gp-ds .select2-container--default .select2-selection--multiple,
+.gp-ds .select2-container .select2-selection--multiple {
+  background-color: var(--gp-surface) !important;
+  border: 1px solid var(--gp-border) !important;
+  border-radius: var(--gp-radius) !important;
+  min-height: 38px;
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: var(--gp-fg);
+  line-height: 36px;
+}
+
+.gp-ds .select2-container--default .select2-selection--single .select2-selection__placeholder,
+.gp-ds .select2-container--default .select2-selection--multiple .select2-selection__placeholder {
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .select2-dropdown {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  color: var(--gp-fg);
+}
+
+.gp-ds .select2-search--dropdown .select2-search__field {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .select2-container--default .select2-results__option {
+  color: var(--gp-fg);
+  padding: 9px 10px;
+  font-size: 13.5px;
+}
+
+.gp-ds .select2-container--default .select2-results__option--highlighted[aria-selected],
+.gp-ds .select2-container--default .select2-results__option[aria-selected=true]:hover {
+  background-color: var(--gp-info-soft) !important;
+  color: var(--gp-primary) !important;
+}
+
+.gp-ds .select2-container--default .select2-results__option[aria-selected=true] {
+  background-color: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .select2-container .select2-selection--multiple .select2-selection__choice {
+  background-color: var(--gp-info-soft) !important;
+  border: 1px solid var(--gp-info-border) !important;
+  color: var(--gp-primary) !important;
+  border-radius: 7px !important;
+}
+
+.gp-ds .select2-container .select2-selection--multiple .select2-selection__choice__remove,
+.gp-ds .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: var(--gp-primary) !important;
+}
+
+.gp-ds .select2-container .select2-selection--multiple .select2-search__field {
+  color: var(--gp-fg);
+}
+
+.gp-ds .error-msg {
+  color: var(--gp-danger);
+  font-size: 12px;
+  margin-top: 6px;
+  font-family: var(--gp-font-body);
+}
+
+/* Checkboxes and radios */
+.gp-ds .check-row,
+.gp-ds .radio-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13.5px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .check-row input[type="checkbox"],
+.gp-ds .radio-row input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gp-primary);
+}
+
+/* Toggle switch */
+.gp-ds .switch {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+}
+
+.gp-ds .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.gp-ds .switch .track {
+  position: absolute;
+  inset: 0;
+  background: var(--gp-border-strong);
+  border-radius: 999px;
+  transition: background var(--gp-dur-fast) var(--gp-ease-out);
+  cursor: pointer;
+}
+
+.gp-ds .switch .track::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .switch input:checked + .track {
+  background: var(--gp-primary);
+}
+
+.gp-ds .switch input:checked + .track::after {
+  transform: translateX(16px);
+}
+
+/* ========== BADGES (Section 12 - Extension) ========== */
+.gp-ds .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  line-height: 1.5;
+}
+
+.gp-ds .badge-primary {
+  background: var(--gp-info-soft);
+  color: var(--gp-info);
+}
+
+.gp-ds .badge-secondary {
+  background: var(--gp-danger-soft);
+  color: var(--gp-secondary);
+}
+
+.gp-ds .badge-success {
+  background: var(--gp-success-soft);
+  color: var(--gp-success);
+}
+
+.gp-ds .badge-warning {
+  background: var(--gp-warning-soft);
+  color: var(--gp-warning);
+}
+
+.gp-ds .badge-danger {
+  background: var(--gp-danger-soft);
+  color: var(--gp-danger);
+}
+
+.gp-ds .badge-neutral {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg-muted);
+  border: 1px solid var(--gp-border);
+}
+
+/* ========== ALERTS (Section 13 - Extension) ========== */
+.gp-ds .alert {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.gp-ds .alert:last-child {
+  margin-bottom: 0;
+}
+
+.gp-ds .alert .dot {
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-top: 7px;
+}
+
+.gp-ds .alert strong {
+  display: block;
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  margin-bottom: 2px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .alert p {
+  color: var(--gp-fg-muted);
+  margin: 0;
+}
+
+.gp-ds .alert-success {
+  background: var(--gp-success-soft);
+  border-color: var(--gp-success-border);
+  color: var(--gp-success);
+}
+
+.gp-ds .alert-warning {
+  background: var(--gp-warning-soft);
+  border-color: var(--gp-warning-border);
+  color: var(--gp-warning);
+}
+
+.gp-ds .alert-danger {
+  background: var(--gp-danger-soft);
+  border-color: var(--gp-danger-border);
+  color: var(--gp-danger);
+}
+
+.gp-ds .alert-info {
+  background: var(--gp-info-soft);
+  border-color: var(--gp-info-border);
+  color: var(--gp-info);
+}

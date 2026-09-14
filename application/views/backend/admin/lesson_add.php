@@ -3,6 +3,7 @@
 $course_details = $this->crud_model->get_course_by_id($param2)->row_array();
 $sections = $this->crud_model->get_section('course', $param2)->result_array();
 ?>
+<div class="gp-courses-modal">
 <!-- SHOWING THE LESSON TYPE IN AN ALERT VIEW -->
 <div class="alert alert-info" role="alert">
     <?php echo get_phrase("lesson_type"); ?> :
@@ -67,10 +68,16 @@ $sections = $this->crud_model->get_section('course', $param2)->result_array();
         <label for="free_lesson"><?php echo get_phrase('mark_as_free_lesson'); ?></label>
     </div>
 
-    <div class="text-center">
-        <button class = "btn btn-success w-100 formSubmissionBtn" type="submit" name="button"><?php echo get_phrase('add_lesson'); ?></button>
+    <div class="gp-courses-modal-actions">
+        <?php echo gp_ds_button(get_phrase('add_lesson'), [
+            'type' => 'submit',
+            'variant' => 'primary',
+            'extra_class' => 'w-100 formSubmissionBtn',
+            'attrs' => ['name' => 'button'],
+        ], true); ?>
     </div>
 </form>
+</div>
 
 <script type="text/javascript">
 

@@ -1,20 +1,11 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body py-2">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('add_blog'); ?>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php gp_ds_page_title(get_phrase('add_blog')); ?>
 
 
 <div class="row ">
     <div class="col-md-10">
-    	<div class="card">
-    		<div class="card-body">
-    			<h4 class='mb-3'><?php echo get_phrase('add_a_new_blog'); ?></h4>
+        <?php
+        ob_start();
+        ?>
 		    	<form action="<?php echo site_url('user/blog/add'); ?>" method="post" enctype="multipart/form-data">
 		    		<div class="form-group">
 		    			<label for="title"><?php echo get_phrase('title'); ?></label>
@@ -72,7 +63,12 @@
 						<button class="btn btn-success"><?php echo get_phrase('add_blog'); ?></button>
 					</div>
 		    	</form>
-		    </div>
-		</div>
+        <?php
+        $body = ob_get_clean();
+        gp_ds_card([
+            'title' => get_phrase('add_a_new_blog'),
+            'body'  => $body,
+        ]);
+        ?>
 	</div>
 </div>

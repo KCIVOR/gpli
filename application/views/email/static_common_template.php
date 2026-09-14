@@ -3,25 +3,37 @@
 <head>
   <title><?php echo $subject; ?></title>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 0;">
-  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center;">
-
-    <!-- Logo -->
-    <div style="text-align: center; margin-bottom: 20px;">
-      <img src="<?= base_url('uploads/system/'.get_frontend_settings('dark_logo')); ?>" alt="Website Logo" width="250" height="auto">
-    </div>
-
-    <!-- Email subject -->
-    <h1 style="color: #333333; font-size: 25px; text-align: center; margin-bottom: 20px;"><?php echo $subject; ?></h1>
-
-    <!-- Email body -->
-    <!-- Start and end hidden div are needed for tracking system notification. SO don't remove -->
-    <div class="system_notification_start" style="display: none;"></div>
-    <div><?php echo $message; ?></div>
-    <div class="system_notification_end" style="display: none;"></div>
-
-    <!-- Email footer -->
-    <p style="text-align: center; margin-top: 40px; color: #999999; font-size: 14px;">&copy; <?= date('Y') ?> <?= get_settings('system_name'); ?>. All rights reserved.</p>
-  </div>
+<body style="margin:0; padding:0; background-color:#FBFAF7; font-family:Inter, Arial, sans-serif; color:#171613;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#FBFAF7; margin:0; padding:0;">
+    <tr>
+      <td align="center" style="padding:40px 16px;">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; width:100%; background-color:#ffffff; border:1px solid #E4E1D8;">
+          <tr>
+            <td align="center" style="padding:40px 40px 20px 40px;">
+              <img src="<?= base_url('uploads/system/'.get_frontend_settings('dark_logo')); ?>" alt="Website Logo" width="250" height="auto" style="display:block; border:0;">
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding:0 40px 20px 40px; font-family:Manrope, Arial, sans-serif; font-size:25px; font-weight:800; line-height:1.3; color:#171613;">
+              <?php echo $subject; ?>
+            </td>
+          </tr>
+          <tr>
+            <td align="left" style="padding:0 40px 20px 40px; font-family:Inter, Arial, sans-serif; font-size:16px; line-height:1.6; color:#6B6B65;">
+              <!-- Start and end hidden div are needed for tracking system notification. SO don't remove -->
+              <div class="system_notification_start" style="display: none;"></div>
+              <div><?php echo $message; ?></div>
+              <div class="system_notification_end" style="display: none;"></div>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="padding:20px 40px 40px 40px; font-family:Inter, Arial, sans-serif; font-size:14px; line-height:1.5; color:#9C988D;">
+              &copy; <?= date('Y') ?> <?= get_settings('system_name'); ?>. All rights reserved.
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>

@@ -5171,6 +5171,76 @@ class Crud_model extends CI_Model
         return json_encode(['error' => get_phrase('Data not found')]);
     }
 
+    public function ensure_frontend_setting($key, $value = '')
+    {
+        $row = $this->db->where('key', $key)->get('frontend_settings');
+        if ($row->num_rows() === 0) {
+            $this->db->insert('frontend_settings', ['key' => $key, 'value' => $value]);
+        }
+    }
+
+    public function update_landing_page_extras()
+    {
+        $current = gp_landing_extras();
+        $posted  = $this->input->post('landing');
+        if (! is_array($posted)) {
+            $posted = [];
+        }
+        $merged = array_replace_recursive($current, $posted);
+
+        if (! empty($_FILES['landing_media']['name']) && is_array($_FILES['landing_media']['name'])) {
+            if (! is_dir('uploads/home-pages')) {
+                mkdir('uploads/home-pages', 0777, true);
+            }
+            foreach (['image_1', 'image_2', 'image_3'] as $slot) {
+                if (! empty($_FILES['landing_media']['name'][$slot])) {
+                    $name = 'uploads/home-pages/' . md5(uniqid((string) mt_rand(), true)) . '.jpg';
+                    if (move_uploaded_file($_FILES['landing_media']['tmp_name'][$slot], $name)) {
+                        $merged['media'][$slot] = $name;
+                    }
+                }
+            }
+        }
+
+        $section_bg_clear = $this->input->post('landing_section_bg_clear');
+        if (is_array($section_bg_clear)) {
+            foreach ($section_bg_clear as $slot => $flag) {
+                if ($flag && isset($merged['section_bg'][$slot])) {
+                    $merged['section_bg'][$slot] = '';
+                }
+            }
+        }
+
+        if (! empty($_FILES['landing_section_bg']['name']) && is_array($_FILES['landing_section_bg']['name'])) {
+            if (! is_dir('uploads/home-pages')) {
+                mkdir('uploads/home-pages', 0777, true);
+            }
+            $allowed_ext = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+            foreach ($_FILES['landing_section_bg']['name'] as $slot => $orig_name) {
+                if ($orig_name === '' || ! isset($merged['section_bg'][$slot])) {
+                    continue;
+                }
+                $ext = strtolower(pathinfo($orig_name, PATHINFO_EXTENSION));
+                if (! in_array($ext, $allowed_ext, true)) {
+                    continue;
+                }
+                $name = 'uploads/home-pages/' . md5(uniqid((string) mt_rand(), true)) . '.' . $ext;
+                if (move_uploaded_file($_FILES['landing_section_bg']['tmp_name'][$slot], $name)) {
+                    $merged['section_bg'][$slot] = $name;
+                }
+            }
+        }
+
+        $this->ensure_frontend_setting('landing_page_extras', '{}');
+        $this->db->where('key', 'landing_page_extras')->update('frontend_settings', [
+            'value' => json_encode($merged),
+        ]);
+
+        foreach (['feature_trio_section', 'media_strip_section', 'function_grid_section', 'quiz_banner_section', 'why_section', 'cta_band_section'] as $toggle) {
+            $this->ensure_frontend_setting($toggle, '1');
+        }
+    }
+
     public function get_contacts($id = "")
     {
         if ($id > 0) {

@@ -2,9 +2,7 @@
   <div class="row"
     style="margin-top: 20px;">
     <div class="col-md-8 col-md-offset-2">
-      <div class="alert alert-danger">
-        <strong><?php echo $error_con_fail; ?></strong>
-      </div>
+      <?php gp_ds_alert($error_con_fail, '', 'danger'); ?>
     </div>
   </div>
 <?php } ?>
@@ -12,9 +10,7 @@
   <div class="row"
     style="margin-top: 20px;">
     <div class="col-md-8 col-md-offset-2">
-      <div class="alert alert-danger">
-        <strong><?php echo $error_nodb; ?></strong>
-      </div>
+      <?php gp_ds_alert($error_nodb, '', 'danger'); ?>
     </div>
   </div>
 <?php } ?>

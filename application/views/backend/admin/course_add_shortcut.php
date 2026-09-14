@@ -1,17 +1,18 @@
-<div class="row">
-	<div class="col-md-12">
-		<form class="ajaxForm" action="<?= site_url('admin/course_actions/add_shortcut'); ?>">
+<div class="gp-courses-modal">
+	<div class="row">
+		<div class="col-md-12">
+			<form class="ajaxForm" action="<?= site_url('admin/course_actions/add_shortcut'); ?>">
 
-			<?php if(addon_status('scorm_course') || addon_status('h5p')): ?>
+				<?php if(addon_status('scorm_course') || addon_status('h5p')): ?>
                 <div class="form-group">
-                  <label for="course_type"><?php echo get_phrase('course_type'); ?></label>
+                  <label for="course_type"><?php echo get_phrase('course') . ' ' . get_phrase('type'); ?></label>
                   <select class="form-control select2" data-toggle="select2" name="course_type" id="course_type">
                     <option value="general"><?php echo get_phrase('general'); ?></option>
                     <?php if(addon_status('scorm_course')){ ?>
                         <option value="scorm"><?php echo get_phrase('scorm'); ?></option>
                     <?php }?>
                     <?php if(addon_status('h5p')){?>
-                        <option value="h5p"><?php echo get_phrase('H5P');?>
+                        <option value="h5p"><?php echo get_phrase('H5P'); ?></option>
                     <?php }?>
                   </select>
               </div>
@@ -19,14 +20,14 @@
               <input type="hidden" name = "course_type" value="general">
             <?php endif; ?>
 
-			<div class="form-group">
-				<label><?php echo get_phrase('course_title'); ?> <span class="required">*</span></label>
-				<input type="text" name="title" class="form-control" placeholder="<?php echo get_phrase('enter_course_title'); ?>">
-			</div>
+				<div class="form-group">
+					<label><?php echo get_phrase('course_title'); ?> <span class="required">*</span></label>
+					<input type="text" name="title" class="form-control" placeholder="<?php echo get_phrase('enter_course_title'); ?>">
+				</div>
 
-			<div class="form-group">
-				<label><?php echo get_phrase('category'); ?> <span class="required">*</span></label>
-				<select class="form-control select2" data-toggle="select2" name="sub_category_id" id="sub_category_id" required>
+				<div class="form-group">
+					<label><?php echo get_phrase('category'); ?> <span class="required">*</span></label>
+					<select class="form-control select2" data-toggle="select2" name="sub_category_id" id="sub_category_id" required>
                     <option value=""><?php echo get_phrase('select_a_category'); ?></option>
                     <?php foreach ($categories->result_array() as $category): ?>
                         <optgroup label="<?php echo $category['name']; ?>">
@@ -38,9 +39,9 @@
                 	<?php endforeach; ?>
 	            </select>
 	            <small class="text-muted"><?php echo get_phrase('select_sub_category'); ?></small>
-			</div>
+				</div>
 
-			<div class="form-group">
+				<div class="form-group">
                 <label for="level"><?php echo get_phrase('level'); ?></label>
                 <select class="form-control select2" data-toggle="select2" name="level" id="level">
                     <option value="beginner"><?php echo get_phrase('beginner'); ?></option>
@@ -49,7 +50,7 @@
                 </select>
             </div>
 
-			<div class="form-group">
+				<div class="form-group">
                 <label for="language_made_in"><?php echo get_phrase('language_made_in'); ?></label>
                 <select class="form-control select2" data-toggle="select2" name="language_made_in" id="language_made_in">
                     <?php foreach ($languages as $language): ?>
@@ -106,10 +107,14 @@
                 <small class="badge badge-light"><?php echo get_phrase('After purchase, students can access the course until your selected time.'); ?></small>
             </div>
 
-            <div class="form-group">
-                <button class="btn btn-primary float-right"><?php echo get_phrase('add_course'); ?></button>
+            <div class="gp-courses-modal-actions">
+                <?php echo gp_ds_button(get_phrase('add_course'), [
+                    'type' => 'submit',
+                    'variant' => 'primary',
+                ], true); ?>
             </div>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
 

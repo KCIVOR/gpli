@@ -590,11 +590,8 @@
         <?php endif; ?>
 
         <?php if (has_permission('messaging')): ?>
-        <li class="side-nav-item">
-            <a href="<?php echo site_url('admin/message'); ?>" class="side-nav-link<?php if ($page_name == 'message' || $page_name == 'message_new' || $page_name == 'message_read') {
-        echo 'active';
-}
-?>">
+        <li class="side-nav-item<?php if ($page_name == 'message' || $page_name == 'message_new' || $page_name == 'message_read'): ?> active<?php endif; ?>">
+            <a href="<?php echo site_url('admin/message'); ?>" class="side-nav-link">
                 <i class="dripicons-message"></i>
                 <span><?php echo get_phrase('message'); ?></span>
                 <?php
@@ -757,11 +754,8 @@
         <?php endif; ?>
 
         <?php if (has_permission('theme')): ?>
-        <li class="side-nav-item">
-            <a href="<?php echo site_url('admin/theme_settings'); ?>" class="side-nav-link<?php if ($page_name == 'theme_settings') {
-        echo 'active';
-}
-?>">
+        <li class="side-nav-item<?php if ($page_name == 'theme_settings'): ?> active<?php endif; ?>">
+            <a href="<?php echo site_url('admin/theme_settings'); ?>" class="side-nav-link">
                 <i class="dripicons-brush"></i>
                 <span><?php echo get_phrase('themes'); ?></span>
             </a>
@@ -771,7 +765,7 @@
 
         <?php if (has_permission('settings')): ?>
         <li
-            class="side-nav-item<?php if ($page_name == 'system_settings' || $page_name == 'frontend_settings' || $page_name == 'payment_settings' || $page_name == 'manage_language' || $page_name == 'about' || $page_name == 'themes' || $page_name == 'custom_page' || $page_name == 'data_center' || $page_name == 'notification_settings' || $page_name == 'jitsi_live_class_settings' || $page_name == 'seo_settings' || $page_name == 'sitemap_settings'): ?> active<?php endif; ?>">
+            class="side-nav-item<?php if (in_array($page_name, ['system_settings', 'frontend_settings', 'drip_content_settings', 'badges', 'seo_settings', 'sitemap_settings', 'certificate_settings', 's3_settings', 'wasabi_settings', 'open_ai_settings', 'zoom_live_class_settings', 'jitsi_live_class_settings', 'bbb_live_class_settings', 'payment_settings', 'manage_language', 'notification_settings', 'social_login', 'custom_page', 'add_custom_page', 'edit_custom_page', 'home_page_builder', 'data_center', 'about'], true)): ?> active<?php endif; ?>">
             <a href="javascript: void(0);" class="side-nav-link">
                 <i class="dripicons-toggles"></i>
                 <span> <?php echo get_phrase('settings'); ?> </span>

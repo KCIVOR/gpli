@@ -1,20 +1,10 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('Wasabi storage settings'); ?></h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
-
+<?php gp_ds_page_title(get_phrase('Wasabi storage settings')); ?>
+<div class="gp-settings-page">
 <div class="row">
     <div class="col-xl-7">
-        <div class="card">
-            <div class="card-body">
-                <div class="col-lg-12">
-                    <h4 class="mb-3 header-title"><?php echo get_phrase('Wasabi storage settings');?></h4>
-
+        <?php
+        ob_start();
+        ?>
                     <form class="required-form" action="<?php echo site_url('admin/wasabi_settings/update'); ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="access_key"><?php echo 'Wasabi S3 '.get_phrase('access_key'); ?><span class="required">*</span></label>
@@ -36,10 +26,15 @@
                             <input type="text" name = "region_name" id = "region_name" class="form-control" value="<?php echo get_settings('wasabi_region');  ?>" required>
                         </div>
 
-                        <button type="submit" class="btn btn-primary"><?php echo get_phrase('save'); ?></button>
+                        <?php echo gp_ds_button(get_phrase('save'), ['variant' => 'primary', 'type' => 'submit'], true); ?>
                     </form>
-                </div>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
+        <?php
+        gp_ds_card([
+            'title' => get_phrase('Wasabi storage settings'),
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
     </div><!-- end col-->
+</div>
 </div>

@@ -1,19 +1,11 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body py-2">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('BigBlueButton Live Class Settings'); ?>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
-
+<?php gp_ds_page_title(get_phrase('BigBlueButton Live Class Settings')); ?>
+<div class="gp-settings-page">
 
 <div class="row ">
     <div class="col-md-6">
-    	<div class="card">
-    		<div class="card-body">
+        <?php
+        ob_start();
+        ?>
 		    	<form action="<?php echo site_url('admin/bbb_live_class_settings/update'); ?>" method="post" enctype="multipart/form-data">
 		    		<div class="form-group">
 		    			<label for="endpoint"><?php echo get_phrase('BigBlueButton Endpoint'); ?></label>
@@ -26,10 +18,16 @@
 		    		</div>
 
 					<div class="form-group mt-4">
-						<button class="btn btn-success"><?php echo get_phrase('Save Changes'); ?></button>
+						<?php echo gp_ds_button(get_phrase('Save Changes'), ['variant' => 'primary', 'type' => 'submit'], true); ?>
 					</div>
 		    	</form>
-		    </div>
-		</div>
+        <?php
+        gp_ds_card([
+            'title' => get_phrase('BigBlueButton Live Class Settings'),
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
 	</div>
+</div>
 </div>

@@ -1,0 +1,193 @@
+/**
+ * Geese Project Design System — Popovers
+ * Phase 2b — Contextual tooltips with rich content
+ * Source: Bootstrap 5 popover patterns + design system tokens
+ * Note: Popovers require Bootstrap JS (popover.js) for positioning
+ */
+
+/* ========== POPOVER CONTAINER ========== */
+.gp-ds .popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1070;
+  display: none;
+  max-width: 276px;
+  font-family: var(--gp-font-body);
+  font-size: 13px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 10px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .popover.show:not(.note-popover),
+.gp-ds .popover.in:not(.note-popover) {
+  display: block;
+}
+
+/*
+ * Summernote markup is always `note-popover popover in` (even when unused)
+ * and is parked at 0,0. Hide by default. When the editor needs one, jQuery
+ * sets inline display:block — that must win, so do not use !important.
+ */
+.gp-ds .note-popover,
+.gp-ds .note-air-popover,
+.gp-ds .note-image-popover,
+.gp-ds .note-link-popover,
+.gp-ds .note-table-popover,
+.gp-ds .note-hint-popover,
+.gp-ds .note-video-popover {
+  display: none;
+}
+
+/* ========== POPOVER ARROW ========== */
+.gp-ds .popover .popover-arrow,
+.gp-ds .popover .arrow {
+  position: absolute;
+  display: block;
+  width: 1rem;
+  height: 0.5rem;
+}
+
+.gp-ds .popover .popover-arrow::before,
+.gp-ds .popover .arrow::before,
+.gp-ds .popover .popover-arrow::after,
+.gp-ds .popover .arrow::after {
+  position: absolute;
+  display: block;
+  content: "";
+  border-color: transparent;
+  border-style: solid;
+}
+
+/* Arrow positioning by direction */
+.gp-ds .popover[data-popper-placement^="top"] > .popover-arrow,
+.gp-ds .bs-popover-top > .arrow,
+.gp-ds .bs-popover-auto[data-popper-placement^="top"] > .arrow {
+  bottom: calc(-0.5rem - 1px);
+}
+
+.gp-ds .popover[data-popper-placement^="top"] > .popover-arrow::before,
+.gp-ds .bs-popover-top > .arrow::before,
+.gp-ds .popover[data-popper-placement^="top"] > .popover-arrow::after,
+.gp-ds .bs-popover-top > .arrow::after {
+  border-width: 0.5rem 0.5rem 0;
+}
+
+.gp-ds .popover[data-popper-placement^="top"] > .popover-arrow::before,
+.gp-ds .bs-popover-top > .arrow::before {
+  bottom: 0;
+  border-top-color: var(--gp-border);
+}
+
+.gp-ds .popover[data-popper-placement^="top"] > .popover-arrow::after,
+.gp-ds .bs-popover-top > .arrow::after {
+  bottom: 1px;
+  border-top-color: var(--gp-surface);
+}
+
+/* Right arrow */
+.gp-ds .popover[data-popper-placement^="right"] > .popover-arrow,
+.gp-ds .bs-popover-end > .arrow {
+  left: calc(-0.5rem - 1px);
+  width: 0.5rem;
+  height: 1rem;
+}
+
+.gp-ds .popover[data-popper-placement^="right"] > .popover-arrow::before,
+.gp-ds .bs-popover-end > .arrow::before,
+.gp-ds .popover[data-popper-placement^="right"] > .popover-arrow::after,
+.gp-ds .bs-popover-end > .arrow::after {
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.gp-ds .popover[data-popper-placement^="right"] > .popover-arrow::before,
+.gp-ds .bs-popover-end > .arrow::before {
+  left: 0;
+  border-right-color: var(--gp-border);
+}
+
+.gp-ds .popover[data-popper-placement^="right"] > .popover-arrow::after,
+.gp-ds .bs-popover-end > .arrow::after {
+  left: 1px;
+  border-right-color: var(--gp-surface);
+}
+
+/* Bottom arrow */
+.gp-ds .popover[data-popper-placement^="bottom"] > .popover-arrow,
+.gp-ds .bs-popover-bottom > .arrow {
+  top: calc(-0.5rem - 1px);
+}
+
+.gp-ds .popover[data-popper-placement^="bottom"] > .popover-arrow::before,
+.gp-ds .bs-popover-bottom > .arrow::before,
+.gp-ds .popover[data-popper-placement^="bottom"] > .popover-arrow::after,
+.gp-ds .bs-popover-bottom > .arrow::after {
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.gp-ds .popover[data-popper-placement^="bottom"] > .popover-arrow::before,
+.gp-ds .bs-popover-bottom > .arrow::before {
+  top: 0;
+  border-bottom-color: var(--gp-border);
+}
+
+.gp-ds .popover[data-popper-placement^="bottom"] > .popover-arrow::after,
+.gp-ds .bs-popover-bottom > .arrow::after {
+  top: 1px;
+  border-bottom-color: var(--gp-surface);
+}
+
+/* Left arrow */
+.gp-ds .popover[data-popper-placement^="left"] > .popover-arrow,
+.gp-ds .bs-popover-start > .arrow {
+  right: calc(-0.5rem - 1px);
+  width: 0.5rem;
+  height: 1rem;
+}
+
+.gp-ds .popover[data-popper-placement^="left"] > .popover-arrow::before,
+.gp-ds .bs-popover-start > .arrow::before,
+.gp-ds .popover[data-popper-placement^="left"] > .popover-arrow::after,
+.gp-ds .bs-popover-start > .arrow::after {
+  border-width: 0.5rem 0 0.5rem 0.5rem;
+}
+
+.gp-ds .popover[data-popper-placement^="left"] > .popover-arrow::before,
+.gp-ds .bs-popover-start > .arrow::before {
+  right: 0;
+  border-left-color: var(--gp-border);
+}
+
+.gp-ds .popover[data-popper-placement^="left"] > .popover-arrow::after,
+.gp-ds .bs-popover-start > .arrow::after {
+  right: 1px;
+  border-left-color: var(--gp-surface);
+}
+
+/* ========== POPOVER HEADER ========== */
+.gp-ds .popover-header {
+  padding: 10px 14px;
+  margin-bottom: 0;
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gp-fg);
+  background: var(--gp-surface-sunk);
+  border-bottom: 1px solid var(--gp-border);
+  border-top-left-radius: calc(10px - 1px);
+  border-top-right-radius: calc(10px - 1px);
+}
+
+.gp-ds .popover-header:empty {
+  display: none;
+}
+
+/* ========== POPOVER BODY ========== */
+.gp-ds .popover-body {
+  padding: 12px 14px;
+  color: var(--gp-fg-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}

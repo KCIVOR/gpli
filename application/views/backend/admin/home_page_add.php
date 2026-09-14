@@ -1,3 +1,4 @@
+<div class="gp-settings-page">
 <form action="<?php echo site_url('admin/home_page_builder/add'); ?>" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title"><?php echo get_phrase('Title'); ?></label>
@@ -15,9 +16,13 @@
     </div>
 
     <div class="form-group mt-4">
-        <button class="btn btn-success"><?php echo get_phrase('Add'); ?></button>
+        <?php echo gp_ds_button(get_phrase('Add'), [
+            'variant' => 'primary',
+            'type' => 'submit',
+        ], true); ?>
     </div>
 </form>
+</div>
 
 <script>
     $('#summernote-basic').summernote({

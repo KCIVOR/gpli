@@ -2,17 +2,16 @@
 $user_data = $this->db->get_where('users', array('id' => $user_id))->row_array();
 $social_links = json_decode($user_data['social_links'], true);
 ?>
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo $page_title; ?>
-                    <a href="<?php echo site_url('admin/admins'); ?>" class="btn btn-outline-primary btn-rounded alignToTitle"> <i class="mdi mdi-arrow-left"></i> <?php echo get_phrase('back_to_admins'); ?></a>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php
+gp_ds_page_title(
+    $page_title,
+    gp_ds_button(get_phrase('back_to_admins'), [
+        'href' => site_url('admin/admins'),
+        'variant' => 'outline',
+    ], true)
+);
+?>
+<div class="gp-users-page gp-user-wizard">
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
@@ -174,7 +173,14 @@ $social_links = json_decode($user_data['social_links'], true);
                                             <p class="w-75 mb-2 mx-auto"><?php echo get_phrase('you_are_just_one_click_away'); ?></p>
 
                                             <div class="mb-3">
-                                                <button type="button" class="btn btn-primary" onclick="checkRequiredFields()" name="button"><?php echo get_phrase('submit'); ?></button>
+                                                <?php echo gp_ds_button(get_phrase('submit'), [
+                                                    'variant' => 'primary',
+                                                    'type' => 'button',
+                                                    'attrs' => [
+                                                        'name' => 'button',
+                                                        'onclick' => 'checkRequiredFields()',
+                                                    ],
+                                                ], true); ?>
                                             </div>
                                         </div>
                                     </div> <!-- end col -->
@@ -183,10 +189,10 @@ $social_links = json_decode($user_data['social_links'], true);
 
                             <ul class="list-inline mb-0 wizard">
                                 <li class="previous list-inline-item">
-                                    <a href="javascript:;" class="btn btn-info">Previous</a>
+                                    <a href="javascript:;" class="btn btn-outline">Previous</a>
                                 </li>
                                 <li class="next list-inline-item float-right">
-                                    <a href="javascript:;" class="btn btn-info">Next</a>
+                                    <a href="javascript:;" class="btn btn-outline">Next</a>
                                 </li>
                             </ul>
 
@@ -197,4 +203,5 @@ $social_links = json_decode($user_data['social_links'], true);
             </div> <!-- end card-body -->
         </div> <!-- end card-->
     </div>
+</div>
 </div>

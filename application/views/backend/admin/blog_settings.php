@@ -1,7 +1,11 @@
+<?php gp_ds_page_title(get_phrase('blog_settings')); ?>
+
+<div class="gp-blog-page">
 <div class="row">
 	<div class="col-md-8">
-		<div class="card">
-			<div class="card-body">
+		<?php
+		ob_start();
+		?>
 				<form action="<?php echo site_url('admin/blog_settings/update'); ?>" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="blog_page_title"><?php echo get_phrase('blog_page_title'); ?></label>
@@ -31,10 +35,18 @@
 					</div>
 
 					<div class="form-group">
-						<button class="btn btn-primary" type="submit"><?php echo get_phrase('save_changes'); ?></button>
+						<?php echo gp_ds_button(get_phrase('save_changes'), [
+							'variant' => 'primary',
+							'type' => 'submit',
+						], true); ?>
 					</div>
 				</form>
-			</div>
-		</div>
+		<?php
+		gp_ds_card([
+			'body' => ob_get_clean(),
+			'extra_class' => 'gp-dash-panel',
+		]);
+		?>
 	</div>
+</div>
 </div>

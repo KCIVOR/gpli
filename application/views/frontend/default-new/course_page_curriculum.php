@@ -53,7 +53,7 @@
 
                                     <?php if($lesson['is_free']): ?>
                                         <div class="lecture-info ms-auto pe-2 me-2">
-                                            <span onclick="lesson_preview('<?php echo site_url('home/play_lesson/'.$lesson['id'].'/preview') ?>', '<?php echo $lesson['title']; ?>', 'lg')" class="checkPropagation cursor-pointer badge bg-light text-dark fw-400 text-13px"><i class="fas fa-eye me-1 text-13px"></i> <?php echo get_phrase('Preview') ?></span>
+                                            <span onclick="lesson_preview('<?php echo site_url('home/play_lesson/'.$lesson['id'].'/preview') ?>', '<?php echo $lesson['title']; ?>', 'lg')" class="checkPropagation cursor-pointer"><?php gp_ds_badge(get_phrase('Preview'), 'neutral'); ?></span>
                                         </div>
                                     <?php endif; ?>
 

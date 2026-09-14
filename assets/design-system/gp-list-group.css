@@ -1,0 +1,62 @@
+/**
+ * Geese Project Design System — List Groups
+ * Phase 2b — Notification/message lists
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ * Section: 20 (List & button groups - extension)
+ */
+
+/* ========== LIST GROUP ========== */
+.gp-ds .list-group {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--gp-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.gp-ds .list-group-item {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--gp-border);
+  font-size: 13.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--gp-surface);
+  transition: background var(--gp-dur-fast) var(--gp-ease-out);
+  text-decoration: none;
+  color: var(--gp-fg);
+}
+
+.gp-ds .list-group-item:last-child {
+  border-bottom: none;
+}
+
+.gp-ds .list-group-item:hover:not(.active) {
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .list-group-item.active {
+  background: var(--gp-primary);
+  color: #fff;
+}
+
+.gp-ds .list-group-item.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* List group flush (no border/radius) */
+.gp-ds .list-group-flush {
+  border: none;
+  border-radius: 0;
+}
+
+.gp-ds .list-group-flush .list-group-item {
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+
+.gp-ds .list-group-flush .list-group-item:first-child {
+  border-top: none;
+}

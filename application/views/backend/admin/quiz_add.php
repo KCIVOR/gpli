@@ -1,7 +1,7 @@
 <?php
 $sections = $this->crud_model->get_section('course', $param2)->result_array();
 ?>
-<form action="<?php echo site_url('admin/quizes/'.$param2.'/add'); ?>" method="post">
+<form class="gp-courses-modal" action="<?php echo site_url('admin/quizes/'.$param2.'/add'); ?>" method="post">
     <div class="form-group">
         <label for="title"><?php echo get_phrase('quiz_title'); ?></label>
         <input class="form-control" type="text" name="title" id="title" required>
@@ -48,8 +48,12 @@ $sections = $this->crud_model->get_section('course', $param2)->result_array();
         <label><?php echo get_phrase('instruction'); ?></label>
         <textarea name="summary" class="form-control"></textarea>
     </div>
-    <div class="text-center">
-        <button class = "btn btn-success" type="submit" name="button"><?php echo get_phrase('submit'); ?></button>
+    <div class="gp-courses-modal-actions">
+        <?php echo gp_ds_button(get_phrase('submit'), [
+            'type' => 'submit',
+            'variant' => 'primary',
+            'attrs' => ['name' => 'button'],
+        ], true); ?>
     </div>
 </form>
 <script type="text/javascript">

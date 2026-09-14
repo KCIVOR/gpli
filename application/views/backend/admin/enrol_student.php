@@ -1,21 +1,11 @@
-<!-- start page title -->
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('course_enrolment'); ?></h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php gp_ds_page_title(get_phrase('course_enrolment')); ?>
 
-<div class="row justify-content-center">
-    <div class="col-xl-7">
-        <div class="card">
-            <div class="card-body">
-              <div class="col-lg-12">
-                <h4 class="mb-3 header-title"><?php echo get_phrase('enrolment_form'); ?></h4>
-
+<div class="gp-enrol-page">
+    <div class="row justify-content-center">
+        <div class="col-xl-7">
+            <?php
+            ob_start();
+            ?>
                 <form class="required-form" action="<?php echo site_url('admin/enrol_student/enrol'); ?>" method="post" enctype="multipart/form-data">
 
                     <div class="form-group">
@@ -35,10 +25,19 @@
                         </select>
                     </div>
 
-                    <button type="button" class="btn btn-primary" onclick="checkRequiredFields()"><?php echo get_phrase('enrol_student'); ?></button>
+                    <?php echo gp_ds_button(get_phrase('enrol_student'), [
+                        'variant' => 'primary',
+                        'type' => 'button',
+                        'attrs' => ['onclick' => 'checkRequiredFields()'],
+                    ], true); ?>
                 </form>
-              </div>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
+            <?php
+            gp_ds_card([
+                'title' => get_phrase('enrolment_form'),
+                'body'  => ob_get_clean(),
+                'extra_class' => 'gp-dash-panel',
+            ]);
+            ?>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,228 @@
+/**
+ * Geese Project — Admin Addons
+ * Tokens from gp-tokens.css only. No leftover Hyper hex.
+ *
+ * In-scope page_name values:
+ *   addons, addon_add, addon_update, available_addons
+ * Modal: about_this_addon.php
+ * Also: available_addon.php iframe card
+ *
+ * Forbidden:
+ *   rewriting Admin.php addon methods
+ *   renaming #basic-datatable, #products-datatable, #addon_zip
+ *   changing form names / ids / actions
+ *   editing navigation.php
+ *
+ * Hooks later phases must keep:
+ *   #basic-datatable, #products-datatable
+ *   confirm_modal activate / deactivate / delete
+ *   showAjaxModal about_this_addon/{id}
+ *   admin/addon/install, admin/addon/version_update
+ *   #addon_zip, changeTitleOfImageUploader, accept=".zip"
+ *   data-toggle="tab" installed / available
+ */
+
+.gp-ds .gp-addons-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .row:has(+ .gp-addons-page) .gp-page-title-actions .btn,
+.gp-ds .gp-addons-page .btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-addons-page a.btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-addons-page button.btn:not(.btn-icon):not(.action-icon):not(.icon-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 96px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
+  line-height: 1.2;
+  min-height: 38px !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-addons-page .btn,
+.gp-ds .gp-addons-page .header-title,
+.gp-ds .gp-addons-page label {
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-addons-page .gp-dash-panel > .card-body > .header-title,
+.gp-ds .gp-addons-page .card > .card-body > .header-title {
+  margin: 0 0 16px;
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-addons-page .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-addons-page .form-group {
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-addons-page .form-group > label {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-addons-page .form-control,
+.gp-ds .gp-addons-page .custom-file-input,
+.gp-ds .gp-addons-page .custom-file-label {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-addons-page .form-control:focus {
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-addons-page .custom-file-label {
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-addons-page .nav-tabs.nav-bordered .nav-link,
+.gp-ds .gp-addons-page .nav-tabs.nav-bordered .nav-link.active {
+  border: none !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+.gp-ds .gp-addons-page table.table,
+.gp-ds .gp-addons-page table.dataTable {
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-addons-page table.table thead th,
+.gp-ds .gp-addons-page table.dataTable thead th {
+  word-spacing: 0.28em;
+  color: var(--gp-fg-faint);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .gp-addons-page table.table tbody td,
+.gp-ds .gp-addons-page table.dataTable tbody td,
+.gp-ds .gp-addons-page .table > :not(caption) > * > * {
+  color: var(--gp-fg);
+  background-color: transparent;
+  border-color: var(--gp-border);
+  box-shadow: none;
+}
+
+.gp-ds .gp-addons-page table.table a:not(.action-icon):not(.icon-btn):not(.btn) {
+  color: var(--gp-info);
+  text-decoration: none;
+}
+
+.gp-ds .gp-addons-page .text-body {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-addons-page .text-muted {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds .gp-addons-page .text-warning {
+  color: var(--gp-warning) !important;
+}
+
+.gp-ds .gp-addons-page .text-light.mdi-star {
+  color: var(--gp-border-strong) !important;
+}
+
+.gp-ds .gp-addons-page .dataTables_wrapper {
+  width: 100%;
+}
+
+.gp-ds .gp-addons-page .dataTables_wrapper .dataTables_filter {
+  float: none;
+  width: 100%;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-addons-page .dataTables_wrapper .dataTables_filter input {
+  min-height: 42px;
+  padding: 10px 14px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-addons-page .dataTables_info {
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-addons-page .btn-rounded.btn-icon,
+.gp-ds .gp-addons-page .icon-btn,
+.gp-ds .gp-addons-page .action-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gp-ds .gp-addons-page .action-icon:hover,
+.gp-ds .gp-addons-page .icon-btn:hover,
+.gp-ds .gp-addons-page .btn-rounded.btn-icon:hover {
+  color: var(--gp-fg);
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-addons-page .gp-addons-iframe {
+  width: 100%;
+  height: 510px;
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-addons-modal h5 {
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin: 0 0 12px;
+}
+
+.gp-ds .gp-addons-modal p {
+  color: var(--gp-fg-muted);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.gp-ds .gp-addons-modal a {
+  color: var(--gp-info);
+}

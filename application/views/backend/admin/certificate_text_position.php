@@ -4,6 +4,7 @@
 	<title><?php echo get_phrase('certificates_text_position'); ?> | <?php echo get_settings('system_title'); ?></title>
 	<link rel="shortcut icon" href="<?php echo base_url('uploads/system/').get_frontend_settings('favicon');?>">
 	<link href="<?php echo base_url('assets/backend/css/fontawesome-all.min.css') ?>" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css'); ?>">
 	<script src="<?php echo base_url('assets/backend/js/jquery-3.3.1.min.js'); ?>" charset="utf-8"></script>
 	<script src="https://www.jqueryscript.net/demo/drag-drop-touch/jquery.draggableTouch.js"></script>
 	<style type="text/css">
@@ -20,18 +21,18 @@
 		}
 		.submit-button{
 			padding: 12px 15px;
-			background-color: #2d32d5;
+			background-color: var(--gp-primary);
 			border-radius: 5px;
-			color: #fff;
+			color: var(--gp-on-primary);
 			text-decoration: none;
 			border: none;
 			cursor: pointer;
 		}
 		.back-button{
 			padding: 12px 15px;
-			background-color: #848484;
+			background-color: var(--gp-fg-muted);
 			border-radius: 5px;
-			color: #fff;
+			color: var(--gp-on-primary);
 			text-decoration: none;
 			border: none;
 			cursor: pointer;
@@ -41,7 +42,7 @@
 		}
 	</style>
 </head>
-<body style="display: flex;">
+<body class="gp-ds" style="display: flex;">
 	<div style="width: 750px; position: relative; text-align: center;">
 		<div class="certificate-text-position">
 			<?php echo remove_js(htmlspecialchars_decode(get_settings('certificate-text-positons'))); ?>

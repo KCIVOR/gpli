@@ -1,0 +1,215 @@
+/**
+ * Geese Project Design System — Pagination
+ * Phase 2b — Page navigation controls
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ * Section: 15 (Breadcrumbs & pagination - extension)
+ */
+
+/* ========== PAGINATION ========== */
+.gp-ds .pagination {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.gp-ds .pagination .page-item {
+  list-style: none;
+}
+
+.gp-ds .pagination .page-link,
+.gp-ds .pagination .page-item a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gp-fg-muted);
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--gp-dur-fast) var(--gp-ease-out),
+              color var(--gp-dur-fast) var(--gp-ease-out),
+              border-color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .pagination .page-link:hover,
+.gp-ds .pagination .page-link:focus,
+.gp-ds .pagination .page-item:not(.active) a:hover,
+.gp-ds .pagination .page-item:not(.active) a:focus {
+  background: var(--gp-surface-sunk) !important;
+  background-color: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
+  border-color: var(--gp-border-strong) !important;
+  box-shadow: none;
+}
+
+.gp-ds .pagination .page-item.active .page-link,
+.gp-ds .pagination .page-item.active.disabled .page-link {
+  background: var(--gp-primary);
+  background-color: var(--gp-primary);
+  color: #fff !important;
+  border-color: var(--gp-primary);
+  opacity: 1;
+  box-shadow: none;
+}
+
+.gp-ds .pagination .page-item.disabled:not(.active) .page-link {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.gp-ds .pagination .page-link:focus-visible {
+  outline: 2px solid var(--gp-gold-deep);
+  outline-offset: 2px;
+}
+
+/* Pagination sizing variants */
+.gp-ds .pagination-sm .page-link {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.gp-ds .pagination-lg .page-link {
+  min-width: 44px;
+  height: 44px;
+  padding: 0 14px;
+  font-size: 14px;
+}
+
+/*
+ * Contact + Blog + Settings DataTables: leftover Hyper circular pager / Bootstrap
+ * Previous–Next pills → design-system §15 .page-btn
+ * (geeseprojdesignsystem.html). Do not invent a third skin.
+ */
+.gp-ds .gp-contact-page .dataTables_paginate,
+.gp-ds .gp-blog-page .dataTables_paginate,
+.gp-ds .gp-addons-page .dataTables_paginate,
+.gp-ds .gp-announce-page .dataTables_paginate,
+.gp-ds .gp-settings-page .dataTables_paginate {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.gp-ds .gp-contact-page .dataTables_paginate .pagination,
+.gp-ds .gp-blog-page .dataTables_paginate .pagination,
+.gp-ds .gp-addons-page .dataTables_paginate .pagination,
+.gp-ds .gp-announce-page .dataTables_paginate .pagination,
+.gp-ds .gp-settings-page .dataTables_paginate .pagination {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gp-ds .gp-contact-page .dataTables_paginate li.paginate_button,
+.gp-ds .gp-blog-page .dataTables_paginate li.paginate_button,
+.gp-ds .gp-addons-page .dataTables_paginate li.paginate_button,
+.gp-ds .gp-announce-page .dataTables_paginate li.paginate_button,
+.gp-ds .gp-settings-page .dataTables_paginate li.paginate_button,
+.gp-ds .gp-contact-page .dataTables_paginate .page-item,
+.gp-ds .gp-blog-page .dataTables_paginate .page-item,
+.gp-ds .gp-addons-page .dataTables_paginate .page-item,
+.gp-ds .gp-announce-page .dataTables_paginate .page-item,
+.gp-ds .gp-settings-page .dataTables_paginate .page-item {
+  min-width: 0;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  display: list-item;
+  font-family: inherit;
+  opacity: 1;
+}
+
+.gp-ds .gp-contact-page .pagination-rounded .page-link,
+.gp-ds .gp-blog-page .pagination-rounded .page-link,
+.gp-ds .gp-addons-page .pagination-rounded .page-link,
+.gp-ds .gp-announce-page .pagination-rounded .page-link,
+.gp-ds .gp-settings-page .pagination-rounded .page-link {
+  border-radius: 8px !important;
+  margin: 0 !important;
+}
+
+.gp-ds .gp-contact-page .dataTables_paginate .page-link,
+.gp-ds .gp-blog-page .dataTables_paginate .page-link,
+.gp-ds .gp-addons-page .dataTables_paginate .page-link,
+.gp-ds .gp-announce-page .dataTables_paginate .page-link,
+.gp-ds .gp-settings-page .dataTables_paginate .page-link,
+.gp-ds .gp-contact-page .dataTables_paginate a.paginate_button,
+.gp-ds .gp-blog-page .dataTables_paginate a.paginate_button,
+.gp-ds .gp-addons-page .dataTables_paginate a.paginate_button,
+.gp-ds .gp-announce-page .dataTables_paginate a.paginate_button,
+.gp-ds .gp-settings-page .dataTables_paginate a.paginate_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 8px;
+  border-radius: 8px !important;
+  border: 1px solid var(--gp-border) !important;
+  background: var(--gp-surface) !important;
+  color: var(--gp-fg-muted) !important;
+  font-family: var(--gp-font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1;
+  box-shadow: none;
+}
+
+.gp-ds .gp-contact-page .dataTables_paginate .page-item.active .page-link,
+.gp-ds .gp-blog-page .dataTables_paginate .page-item.active .page-link,
+.gp-ds .gp-addons-page .dataTables_paginate .page-item.active .page-link,
+.gp-ds .gp-announce-page .dataTables_paginate .page-item.active .page-link,
+.gp-ds .gp-settings-page .dataTables_paginate .page-item.active .page-link,
+.gp-ds .gp-contact-page .dataTables_paginate a.paginate_button.current,
+.gp-ds .gp-blog-page .dataTables_paginate a.paginate_button.current,
+.gp-ds .gp-addons-page .dataTables_paginate a.paginate_button.current,
+.gp-ds .gp-announce-page .dataTables_paginate a.paginate_button.current,
+.gp-ds .gp-settings-page .dataTables_paginate a.paginate_button.current {
+  background: var(--gp-primary) !important;
+  border-color: var(--gp-primary) !important;
+  color: #fff !important;
+  font-weight: 700;
+  opacity: 1;
+}
+
+.gp-ds .gp-contact-page .dataTables_paginate .page-item.disabled .page-link,
+.gp-ds .gp-blog-page .dataTables_paginate .page-item.disabled .page-link,
+.gp-ds .gp-addons-page .dataTables_paginate .page-item.disabled .page-link,
+.gp-ds .gp-announce-page .dataTables_paginate .page-item.disabled .page-link,
+.gp-ds .gp-settings-page .dataTables_paginate .page-item.disabled .page-link,
+.gp-ds .gp-contact-page .dataTables_paginate a.paginate_button.disabled,
+.gp-ds .gp-blog-page .dataTables_paginate a.paginate_button.disabled,
+.gp-ds .gp-addons-page .dataTables_paginate a.paginate_button.disabled,
+.gp-ds .gp-announce-page .dataTables_paginate a.paginate_button.disabled,
+.gp-ds .gp-settings-page .dataTables_paginate a.paginate_button.disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
+.gp-ds .gp-contact-page .dataTables_paginate .page-item:not(.active):not(.disabled) .page-link:hover,
+.gp-ds .gp-blog-page .dataTables_paginate .page-item:not(.active):not(.disabled) .page-link:hover,
+.gp-ds .gp-addons-page .dataTables_paginate .page-item:not(.active):not(.disabled) .page-link:hover,
+.gp-ds .gp-announce-page .dataTables_paginate .page-item:not(.active):not(.disabled) .page-link:hover,
+.gp-ds .gp-settings-page .dataTables_paginate .page-item:not(.active):not(.disabled) .page-link:hover {
+  background: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
+  border-color: var(--gp-border-strong) !important;
+}

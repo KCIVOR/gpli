@@ -1,0 +1,93 @@
+/**
+ * Geese Project Design System — Nav Tabs
+ * Phase 2b — Tab navigation (Overview / Curriculum / Reviews / Instructor)
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ * Section: 16 (Tabs & accordion - extension)
+ */
+
+/* ========== NAV TABS ========== */
+.gp-ds .nav-tabs,
+.gp-ds .tabs-nav {
+  display: flex;
+  gap: 26px;
+  border-bottom: 1px solid var(--gp-border);
+  margin-bottom: 20px;
+  list-style: none;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.gp-ds .nav-tabs .nav-item {
+  list-style: none;
+}
+
+.gp-ds .nav-tabs .nav-link,
+.gp-ds .tabs-nav a {
+  padding: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gp-fg-muted);
+  text-decoration: none;
+  position: relative;
+  cursor: pointer;
+  transition: color var(--gp-dur-base) var(--gp-ease-out);
+  display: inline-block;
+  border: none;
+  background: none;
+}
+
+.gp-ds .nav-tabs .nav-link.active,
+.gp-ds .tabs-nav a.active,
+.gp-ds .nav-tabs .nav-link:hover,
+.gp-ds .tabs-nav a:hover {
+  color: var(--gp-fg);
+}
+
+.gp-ds .nav-tabs .nav-link.active::after,
+.gp-ds .tabs-nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--gp-primary);
+}
+
+.gp-ds .nav-tabs .nav-link:focus-visible,
+.gp-ds .tabs-nav a:focus-visible {
+  outline: 2px solid var(--gp-gold-deep);
+  outline-offset: 4px;
+}
+
+.gp-ds .nav-tabs .nav-link.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Tab content panes */
+.gp-ds .tab-content {
+  margin-top: 20px;
+}
+
+.gp-ds .tab-pane {
+  display: none;
+}
+
+.gp-ds .tab-pane.active,
+.gp-ds .tab-pane.show {
+  display: block;
+}
+
+/* Responsive tabs */
+@media (max-width: 768px) {
+  .gp-ds .nav-tabs,
+  .gp-ds .tabs-nav {
+    gap: 18px;
+  }
+  
+  .gp-ds .nav-tabs .nav-link,
+  .gp-ds .tabs-nav a {
+    font-size: 13px;
+  }
+}

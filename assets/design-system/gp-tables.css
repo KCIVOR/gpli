@@ -1,0 +1,192 @@
+/**
+ * Geese Project Design System — Tables Component
+ * Phase 2a-4: DataTables Compatible Styling
+ * 
+ * Styles regular tables and DataTables plugin tables
+ * Preserves all DataTables JS behavior and features
+ */
+
+/* ---------- Base Table Styles ---------- */
+.gp-ds table.table,
+.gp-ds table.data-table,
+.gp-ds table.dataTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    min-width: 640px;
+}
+
+/* ---------- Table Head ---------- */
+.gp-ds table.table thead th,
+.gp-ds table.data-table thead th,
+.gp-ds table.dataTable thead th {
+    text-align: left;
+    font-family: var(--gp-font-head);
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--gp-fg-faint);
+    background: var(--gp-surface-sunk);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gp-border);
+}
+
+/* DataTables sorting indicators */
+.gp-ds table.dataTable thead th.sorting,
+.gp-ds table.dataTable thead th.sorting_asc,
+.gp-ds table.dataTable thead th.sorting_desc {
+    cursor: pointer;
+}
+
+/* ---------- Table Body ---------- */
+.gp-ds table.table tbody td,
+.gp-ds table.data-table tbody td,
+.gp-ds table.dataTable tbody td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--gp-border);
+    color: var(--gp-fg);
+}
+
+.gp-ds table.table tbody tr:last-child td,
+.gp-ds table.data-table tbody tr:last-child td,
+.gp-ds table.dataTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.gp-ds table.table tbody tr:hover,
+.gp-ds table.data-table tbody tr:hover,
+.gp-ds table.dataTable tbody tr:hover {
+    background: var(--gp-surface-sunk);
+}
+
+/* ---------- Table Striped (Optional) ---------- */
+.gp-ds table.table-striped tbody tr:nth-child(odd) {
+    background: var(--gp-surface-sunk);
+}
+
+/* ---------- Table Bordered ---------- */
+.gp-ds table.table-bordered,
+.gp-ds table.table-bordered th,
+.gp-ds table.table-bordered td {
+    border: 1px solid var(--gp-border);
+}
+
+/* ---------- Table Action Buttons ---------- */
+.gp-ds .table-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.gp-ds .icon-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--gp-border);
+    background: var(--gp-surface);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--gp-fg-muted);
+    font-size: 13px;
+    transition: border-color var(--gp-dur-fast) var(--gp-ease-out), 
+                color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .icon-btn:hover {
+    border-color: var(--gp-border-strong);
+    color: var(--gp-fg);
+}
+
+/* ---------- DataTables Specific Elements ---------- */
+.gp-ds .dataTables_wrapper {
+    width: 100%;
+}
+
+/*
+ * Bootstrap 5 DataTables default `dom` wraps length/filter/table/info
+ * in `.row` children. Page-level `display: grid` on `.dataTables_wrapper`
+ * must let those rows span the full wrapper — otherwise the table parks
+ * in column 2 beside Search (Contact / Blog / Newsletter / Admins).
+ */
+.gp-ds .dataTables_wrapper > .row,
+.gp-ds .dataTables_wrapper > .table-responsive {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.gp-ds .table-responsive:has(> .dataTables_wrapper) {
+    overflow: visible;
+}
+
+.gp-ds .dataTables_length,
+.gp-ds .dataTables_filter {
+    font-size: 13px;
+    color: var(--gp-fg);
+}
+
+.gp-ds .dataTables_length select,
+.gp-ds .dataTables_filter input {
+    border: 1px solid var(--gp-border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    background: var(--gp-surface);
+    color: var(--gp-fg);
+    font-size: 13px;
+}
+
+.gp-ds .dataTables_info {
+    font-size: 13px;
+    color: var(--gp-fg-muted);
+}
+
+.gp-ds .dataTables_paginate {
+    display: flex;
+    gap: 6px;
+}
+
+.gp-ds .dataTables_paginate .paginate_button {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    border-radius: 8px;
+    border: 1px solid var(--gp-border);
+    background: var(--gp-surface);
+    color: var(--gp-fg-muted);
+    font-family: var(--gp-font-mono);
+    font-size: 12.5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--gp-dur-fast) var(--gp-ease-out);
+    text-decoration: none;
+}
+
+.gp-ds .dataTables_paginate .paginate_button.current {
+    background: var(--gp-primary);
+    border-color: var(--gp-primary);
+    color: #fff;
+    font-weight: 700;
+}
+
+.gp-ds .dataTables_paginate .paginate_button.disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.gp-ds .dataTables_paginate .paginate_button:hover:not(.disabled):not(.current) {
+    background: var(--gp-surface-sunk);
+    color: var(--gp-fg);
+}
+
+/* ---------- Responsive Tables ---------- */
+.gp-ds .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Dark mode via CSS variables */

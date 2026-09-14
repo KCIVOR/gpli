@@ -1,0 +1,217 @@
+/**
+ * Geese Project Design System — Homepage builder partials
+ * Phase 5d — CSS-only .gp-ds overrides for components/main/ class names.
+ * Does not rewrite builder PHP or JS hook classes
+ * (.lms2-reviewSlider, .lms3-reviewSlider-*, .checkPropagation, .owl-carousel).
+ */
+
+.gp-ds .cTitle h1,
+.gp-ds .f-36,
+.gp-ds .h-3-expert-instructor-heading h1,
+.gp-ds .h-1-banner-text h1,
+.gp-ds section.top-categories h1,
+.gp-ds section.faq h1,
+.gp-ds .title-1 {
+    font-family: var(--gp-font-head);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--gp-fg);
+}
+
+/* new-style.css hardcodes .title-two .title to #062320 (near-black) with no
+   dark-mode value — every leftover section kept unchanged from the old theme
+   (Latest courses, Think more clearly, reviews, FAQ, blog) uses this exact
+   class for its heading, so all of them went near-invisible in dark mode. */
+.gp-ds .title-two .title {
+    color: var(--gp-fg) !important;
+}
+
+.gp-ds .cTitle p,
+.gp-ds .h-3-expert-instructor-heading p,
+.gp-ds section.top-categories p,
+.gp-ds section.faq > .container > .row p,
+.gp-ds .subtits16 {
+    font-family: var(--gp-font-body);
+    color: var(--gp-fg-muted);
+}
+
+.gp-ds .single-popup-course,
+.gp-ds .courses-card-body,
+.gp-ds .instructor-card-body,
+.gp-ds .instructor-item,
+.gp-ds .instructor-item-5,
+.gp-ds .h-3-expart-1,
+.gp-ds .category-product-body,
+.gp-ds .banner-card-1 {
+    background: var(--gp-surface);
+    border: 1px solid var(--gp-border);
+    border-radius: 14px;
+    box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .courses-card-image {
+    border-radius: 14px 14px 0 0;
+    overflow: hidden;
+}
+
+/* Slick gives each .single-popup-course slide 0 margin, so the individually
+   carded slides (background/border/radius/shadow above) sit flush against
+   each other — only the two outer corners round off, reading as one big
+   card with internal seams instead of a row of separate cards. Standard
+   slick gutter fix: margin the slides, counter it on the viewport so the
+   track math and edge clipping stay correct. */
+.gp-ds .course-group-slider.slick-slider .slick-list {
+    margin: 0 -10px;
+}
+
+.gp-ds .course-group-slider.slick-slider .slick-slide {
+    margin: 0 10px;
+}
+
+.gp-ds .courses-text h5,
+.gp-ds .instructor-card-text h4,
+.gp-ds .h-3-expart-1-text h4,
+.gp-ds .eText h5,
+.gp-ds .lms3-reviewer-name {
+    font-family: var(--gp-font-head);
+    font-weight: 800;
+    color: var(--gp-fg);
+}
+
+.gp-ds .courses-text p,
+.gp-ds .eText p,
+.gp-ds .duration-time p,
+.gp-ds .lms3-review-comment,
+.gp-ds .hide-cat-text {
+    font-family: var(--gp-font-body);
+    color: var(--gp-fg-muted);
+}
+
+.gp-ds .courses-card-image-text h3,
+.gp-ds .courses-price,
+.gp-ds .review-icon-star p {
+    font-family: var(--gp-font-head);
+}
+
+/* style.css sets course-card title/price to its own legacy var(--color-1) —
+   a fixed dark value with no dark-mode override — at equal or higher
+   selector specificity than the rules just above, so it wins and every
+   leftover carousel card (Top/Latest courses) shows near-black text on a
+   near-black card in dark mode. Same for the wishlist heart icon: its
+   color is a semi-transparent #6e798a81 meant for a light circle, which
+   goes near-invisible once that circle's background (var(--bg-white))
+   flips dark. Match the legacy selectors' own shape so specificity ties,
+   then !important to be sure. */
+.gp-ds .courses-card .courses-card-body .courses-text h5,
+.gp-ds .courses-card .courses-card-body .courses-price-left h5,
+.gp-ds .grid-view-body .courses-text h5.mb-2 {
+    color: var(--gp-fg) !important;
+}
+
+.gp-ds .courses-card-image .courses-icon i {
+    color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds .category-product-body:hover,
+.gp-ds .single-popup-course:hover,
+.gp-ds .instructor-card-body:hover {
+    border-color: var(--gp-border-strong);
+}
+
+.gp-ds .search-option .form-control,
+.gp-ds .search-option input[type="text"] {
+    font-family: var(--gp-font-body);
+    color: var(--gp-fg);
+    background: var(--gp-surface);
+    border-color: var(--gp-border-strong);
+    border-radius: var(--gp-radius);
+}
+
+.gp-ds .search-option .submit-cls,
+.gp-ds .purchase-btn {
+    font-family: var(--gp-font-head);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.32px;
+    border-radius: var(--gp-radius);
+    background: var(--gp-primary);
+    border-color: var(--gp-primary);
+    color: #fff;
+}
+
+.gp-ds .search-option .submit-cls:hover,
+.gp-ds .purchase-btn:hover {
+    background: var(--gp-accent);
+    border-color: var(--gp-accent);
+    color: #fff;
+}
+
+.gp-ds .faq-accrodion .accordion-item {
+    background: var(--gp-surface);
+    border: 1px solid var(--gp-border);
+    border-radius: 14px;
+}
+
+.gp-ds .faq-accrodion .accordion-button {
+    font-family: var(--gp-font-head);
+    font-weight: 700;
+    color: var(--gp-fg);
+    background: var(--gp-surface);
+}
+
+.gp-ds .faq-accrodion .accordion-body {
+    font-family: var(--gp-font-body);
+    color: var(--gp-fg-muted);
+}
+
+/* style.css ships !important rules for this exact markup (.eFaq .accordion-button
+   color #754FFE / .collapsed #1E293B, plus 20px/28px type and a 22px left gutter
+   for a decorative purple dot) that outrank the DS overrides above. Beat them
+   here so the FAQ accordion actually renders as the DS accordion component
+   (gp-accordion.css), not the old Hyper/LMS theme's. */
+.gp-ds .eFaq .accordion-button,
+.gp-ds .eFaq .accordion-button.collapsed,
+.gp-ds .faq-accrodion .accordion .accordion-button {
+    color: var(--gp-fg) !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    padding: 16px 18px !important;
+}
+
+.gp-ds .faq-accrodion .accordion .accordion-button::before {
+    display: none !important;
+}
+
+.gp-ds .eFaq .faq-accrodion .accordion .accordion-body p {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--gp-fg-muted);
+}
+
+.gp-ds .h-1-banner,
+.gp-ds .bannar-area {
+    background: var(--gp-bg);
+}
+
+.gp-ds .h-1-banner-text h1 span {
+    color: var(--gp-primary);
+}
+
+.gp-ds .statistics-item h3,
+.gp-ds .stat-badge-demo .num {
+    font-family: var(--gp-font-head);
+    font-weight: 800;
+    color: var(--gp-primary);
+}
+
+.gp-ds .promotional-section,
+.gp-ds .motivetional-section,
+.gp-ds .software-section {
+    background: var(--gp-surface);
+}
+
+.gp-ds .lms1-text-purple-gradient {
+    color: var(--gp-primary);
+    background: none;
+    -webkit-text-fill-color: var(--gp-primary);
+}

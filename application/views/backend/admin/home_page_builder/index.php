@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body class="gp-ds" data-theme="light">
 
     <!-- Builder bar -->
     <div id="editor_top_bar" class="editor_top_bar">

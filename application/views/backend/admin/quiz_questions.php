@@ -4,6 +4,7 @@ $quiz_details = $this->crud_model->get_lessons('lesson', $param2)->row_array();
 $questions = $this->crud_model->get_quiz_questions($param2)->result_array();
 ?>
 <?php if (count($quiz_details)): ?>
+    <div class="gp-courses-modal">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -11,9 +12,27 @@ $questions = $this->crud_model->get_quiz_questions($param2)->result_array();
                     <div class="row" data-plugin="dragula" data-containers='["question-list"]'>
                         <div class="col-md-12">
                             <div class="bg-dragula p-2 p-lg-4">
-                                <h5 class="mt-0"><?php echo get_phrase('questions_of').': '.$quiz_details['title']; ?>
-                                    <button type="button" class="btn btn-outline-primary btn-sm btn-rounded alignToTitle ml-1" id = "question-sort-btn" onclick="sort()" name="button"><?php echo get_phrase('update_sorting'); ?></button>
-                                    <button type="button" class="btn btn-outline-primary btn-sm btn-rounded alignToTitle" onclick="showLargeModal('<?php echo site_url('modal/popup/question_add/'.$param2) ?>', '<?php echo get_phrase('add_new_question'); ?>')" name="button" data-dismiss="modal"><?php echo get_phrase('add_new_question'); ?></button>
+                                <h5 class="mt-0 gp-curriculum-quiz-title"><?php echo get_phrase('questions_of') . ': ' . $quiz_details['title']; ?>
+                                    <?php echo gp_ds_button(get_phrase('update_sorting'), [
+                                        'type' => 'button',
+                                        'variant' => 'outline',
+                                        'extra_class' => 'btn-sm alignToTitle ml-1',
+                                        'attrs' => [
+                                            'id' => 'question-sort-btn',
+                                            'onclick' => 'sort()',
+                                            'name' => 'button',
+                                        ],
+                                    ], true); ?>
+                                    <?php echo gp_ds_button(get_phrase('add_new_question'), [
+                                        'type' => 'button',
+                                        'variant' => 'outline',
+                                        'extra_class' => 'btn-sm alignToTitle',
+                                        'attrs' => [
+                                            'onclick' => "showLargeModal('" . site_url('modal/popup/question_add/'.$param2) . "', '" . get_phrase('add_new_question') . "')",
+                                            'name' => 'button',
+                                            'data-dismiss' => 'modal',
+                                        ],
+                                    ], true); ?>
                                 </h5>
                                 <div id="question-list" class="py-2">
                                     <?php foreach ($questions as $question): ?>
@@ -41,6 +60,7 @@ $questions = $this->crud_model->get_quiz_questions($param2)->result_array();
                 </div> <!-- end card-body -->
             </div> <!-- end card -->
         </div> <!-- end col -->
+    </div>
     </div>
 <?php endif; ?>
 

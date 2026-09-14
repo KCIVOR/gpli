@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch: {}
+
+concurrency:
+  group: production-deployment
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -36,5 +41,7 @@ jobs:
             --exclude='Thumbs.db' \
             --exclude='desktop.ini' \
             --exclude='*.log' \
+            --exclude='*.md' \
+            --exclude='docs/' \
             ./ \
             startuplabcc@89.116.134.177:/home/startuplabcc/public_html/lms

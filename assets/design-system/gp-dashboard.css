@@ -1,0 +1,220 @@
+/**
+ * Geese Project — Admin + instructor dashboard
+ * Tokens from gp-tokens.css. Cards follow DS §06. Empty state follows DS empty-state.
+ * Hooks kept: #task-area-chart, #project-status-chart, #unpaid-instructor-revenue, #go-to-instructor-revenue.
+ */
+
+.gp-ds .gp-dash {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .gp-dash-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.gp-ds .gp-dash-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+  text-decoration: none;
+  color: var(--gp-fg);
+}
+
+.gp-ds a.gp-dash-stat:hover {
+  border-color: var(--gp-border-strong);
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+}
+
+.gp-ds div.gp-dash-stat {
+  cursor: default;
+}
+
+.gp-ds .gp-dash-stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--gp-info-soft);
+  color: var(--gp-primary);
+  font-size: 16px;
+}
+
+.gp-ds .gp-dash-stat-value {
+  font-family: var(--gp-font-head);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-dash-stat-label {
+  font-family: var(--gp-font-head);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-dash-panel {
+  margin-bottom: 0;
+}
+
+.gp-ds .gp-dash-panel .card-header {
+  padding: 18px 20px 0;
+  background: transparent;
+  border: 0;
+}
+
+.gp-ds .gp-dash-panel .card-body {
+  padding: 18px 20px 20px;
+}
+
+.gp-ds .gp-dash-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.gp-ds .gp-dash-card-head .header-title {
+  margin: 0;
+}
+
+.gp-ds .gp-dash-card-head a,
+.gp-ds #go-to-instructor-revenue {
+  display: inline-flex !important; /* leftover Hyper + hover script hide the link */
+  align-items: center;
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-primary);
+  text-decoration: none;
+}
+
+.gp-ds .gp-dash-chart {
+  position: relative;
+  height: 280px;
+}
+
+.gp-ds .gp-dash-chart--donut {
+  height: 200px;
+}
+
+.gp-ds .gp-dash-split {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.gp-ds .gp-dash-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.gp-ds .gp-dash-legend-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-dash-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.gp-ds .gp-dash-legend-dot--active {
+  background: var(--gp-primary);
+}
+
+.gp-ds .gp-dash-legend-dot--pending {
+  background: var(--gp-gold);
+}
+
+.gp-ds .gp-dash-legend-value {
+  font-family: var(--gp-font-head);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-dash-legend-label {
+  font-family: var(--gp-font-body);
+  font-size: 12.5px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-dash-person {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gp-ds .gp-dash-person strong {
+  font-family: var(--gp-font-head);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-dash-person span {
+  font-size: 12.5px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-dash-empty {
+  text-align: center;
+  padding: 36px 16px;
+  border: 1px dashed var(--gp-border);
+  border-radius: 14px;
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-dash-empty p {
+  margin: 0 0 6px;
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-dash-empty small {
+  color: var(--gp-fg-muted);
+}
+
+@media (max-width: 1199.98px) {
+  .gp-ds .gp-dash-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gp-ds .gp-dash-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .gp-ds .gp-dash-stats {
+    grid-template-columns: 1fr;
+  }
+}

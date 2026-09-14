@@ -1,46 +1,25 @@
-<style>
-    .alignToTitle {
-        margin-right: 15px; /* Add space between the buttons */
-    }
-</style>
-<div class="row">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> 
-                    <i class="mdi mdi-apple-keyboard-command title_icon"></i> 
-                    <?php echo $page_title; ?>
-                    <a href="<?php echo site_url('admin/admin_form/add_admin_form'); ?>" class="btn btn-outline-primary btn-rounded alignToTitle">
-                        <i class="mdi mdi-plus"></i><?php echo get_phrase('add_admin'); ?>
-                    </a>
-                    <button type="button" class="btn btn-info btn-rounded alignToTitle" id="export-csv-button" onclick="export_csv()">
-                        <i class="mdi mdi-download"></i> <?php echo get_phrase('Export CSV'); ?>
-                    </button>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php
+gp_ds_page_title(
+    $page_title,
+    gp_ds_button(get_phrase('add_admin'), [
+        'href' => site_url('admin/admin_form/add_admin_form'),
+        'variant' => 'outline',
+    ], true) . ' ' . gp_ds_button(get_phrase('Export CSV'), [
+        'variant' => 'primary',
+        'type' => 'button',
+        'attrs' => [
+            'id' => 'export-csv-button',
+            'onclick' => 'export_csv()',
+        ],
+    ], true)
+);
+?>
 
-<div class="row">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="mb-3 header-title"><?php echo get_phrase('admins'); ?></h4>
-                <div class="table-responsive-sm mt-4">
-                    <table id="basic-datatable" class="table table-striped table-centered mb-0">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th><?php echo get_phrase('photo'); ?></th>
-                                <th><?php echo get_phrase('name'); ?></th>
-                                <th><?php echo get_phrase('email'); ?></th>
-                                <th><?php echo get_phrase('Phone'); ?></th>
-                                <th><?php echo get_phrase('actions'); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($admins as $key => $user): ?>
+<div class="gp-users-page">
+    <?php
+    ob_start();
+    foreach ($admins as $key => $user):
+    ?>
                                 <tr class="gradeU" data-admin-id="<?php echo $user['id']; ?>">
                                     <td><?php echo $key + 1; ?></td>
                                     <td>
@@ -62,17 +41,33 @@
                                                 </ul>
                                             </div>
                                         <?php else: ?>
-                                            <span class="badge badge-success"><?php echo ucwords(get_phrase('root_admin')); ?></span>
+                                            <?php gp_ds_badge(ucwords(get_phrase('root_admin')), 'success'); ?>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
+    <?php
+    endforeach;
+    $admin_rows = ob_get_clean();
+
+    gp_ds_card([
+        'title' => get_phrase('admins'),
+        'body' => gp_ds_table([
+            'table_id' => 'basic-datatable',
+            'extra_class' => 'mb-0',
+            'headers' => [
+                '#',
+                get_phrase('photo'),
+                get_phrase('name'),
+                get_phrase('email'),
+                get_phrase('Phone'),
+                get_phrase('actions'),
+            ],
+            'body_html' => $admin_rows,
+            'allow_empty' => true,
+        ], true),
+        'extra_class' => 'gp-dash-panel',
+    ]);
+    ?>
 </div>
 
 <script>

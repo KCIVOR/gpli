@@ -1,0 +1,911 @@
+/**
+ * Geese Project Design System — Landing page skin
+ * Scoped under .gp-ds. Colors are --gp-* tokens only (dark-mode follows
+ * the existing [data-theme]/prefers-color-scheme rules in gp-tokens.css).
+ * Text uses --gp-fg / --gp-fg-muted / --gp-fg-faint — never --gp-ink /
+ * --gp-text, which have no dark-mode override.
+ */
+
+.gp-ds .gp-landing-eyebrow {
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  word-spacing: 0;
+  color: var(--gp-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gp-ds .gp-landing-eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  background: var(--gp-secondary);
+  display: inline-block;
+}
+
+.gp-ds .gp-landing-head {
+  max-width: 640px;
+  margin-bottom: 32px;
+}
+
+.gp-ds .gp-landing-head.gp-landing-center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.gp-ds .gp-landing-head.gp-landing-center .gp-landing-eyebrow {
+  justify-content: center;
+}
+
+.gp-ds .gp-landing h2 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  letter-spacing: 0;
+  word-spacing: 0.12em;
+  color: var(--gp-fg);
+  margin-top: 10px;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+}
+
+.gp-ds .gp-landing-head p {
+  color: var(--gp-fg-muted);
+  margin-top: 10px;
+}
+
+.gp-ds section.gp-landing {
+  padding-block: clamp(40px, 6vw, 76px);
+  min-height: 48vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.gp-ds section.gp-landing > .container {
+  width: 100%;
+}
+
+/* Sections with enough content to fill a screen (hero, course grids,
+   the why/instructors/faq blocks) get the full viewport; compact,
+   single-purpose bands (a 3-up feature row, a chip list, one banner,
+   one CTA) stay at the shorter default above instead of stretching
+   into empty whitespace. */
+.gp-ds section.gp-landing-hero,
+.gp-ds section.gp-landing-top-courses,
+.gp-ds section.gp-landing-functions,
+.gp-ds section.gp-landing-why,
+.gp-ds section.gp-landing-instructors,
+.gp-ds section.gp-landing-faq {
+  min-height: 100vh;
+}
+
+/* ...unless that grid didn't come back with enough to fill a row (e.g.
+   no course flagged "top", or only one instructor on the team) — then
+   it's mostly a heading over blank space, so drop back to the compact
+   band size. Threshold is "fewer than 3 cards", checked via :has() +
+   :nth-child so it reacts to real data instead of a fixed class list. */
+.gp-ds section.gp-landing-top-courses:not(:has(.gp-landing-tc-card:nth-child(3))),
+.gp-ds section.gp-landing-functions:not(:has(.gp-landing-fn-card:nth-child(3))),
+.gp-ds section.gp-landing-instructors:not(:has(.gp-landing-instr-card:nth-child(3))) {
+  min-height: 48vh;
+}
+
+/* Subtle alternating section tint so the page reads as distinct bands
+   without a hard line between them — kept low-contrast (gp-paper is only
+   a few points off gp-bg in both themes) so it doesn't look like a stripe. */
+.gp-ds .gp-landing-trio,
+.gp-ds .gp-landing-functions,
+.gp-ds .gp-landing-quiz-wrap,
+.gp-ds .gp-landing-instructors,
+.gp-ds .gp-landing-dual-wrap {
+  background: var(--gp-paper);
+}
+
+/* ---------- Section background image/GIF (admin-set) ---------- */
+/* Inline style sets background-image; this adds sizing + a dark scrim so
+   whatever image/GIF the admin picks, the section's own text (which
+   otherwise assumes a light or dark *surface*, not a photo) stays legible.
+   Cards/chips with their own solid surface keep floating on top unchanged. */
+.gp-ds section.gp-landing.gp-landing-has-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  isolation: isolate;
+}
+
+.gp-ds section.gp-landing.gp-landing-has-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(10, 10, 14, 0.6), rgba(10, 10, 14, 0.72));
+  z-index: 0;
+}
+
+.gp-ds section.gp-landing.gp-landing-has-bg > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.gp-ds section.gp-landing.gp-landing-has-bg .gp-landing-eyebrow,
+.gp-ds section.gp-landing.gp-landing-has-bg h2,
+.gp-ds section.gp-landing.gp-landing-has-bg .gp-landing-why-tile h4,
+.gp-ds section.gp-landing.gp-landing-has-bg .gp-landing-instr-card h3 {
+  color: #fff;
+}
+
+.gp-ds section.gp-landing.gp-landing-has-bg .gp-landing-eyebrow::before {
+  background: #fff;
+}
+
+.gp-ds section.gp-landing.gp-landing-has-bg .gp-landing-head p,
+.gp-ds section.gp-landing.gp-landing-has-bg .gp-landing-why-tile p,
+.gp-ds section.gp-landing.gp-landing-has-bg .gp-landing-instr-card p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ---------- Hero ---------- */
+.gp-ds .gp-landing-hero {
+  background: linear-gradient(180deg, var(--gp-paper) 0%, var(--gp-bg) 78%);
+  padding-block: clamp(44px, 7vw, 84px) clamp(32px, 5vw, 56px);
+  text-align: center;
+}
+
+.gp-ds .gp-landing-hero-copy {
+  max-width: 760px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.gp-ds .gp-landing-hero h1 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  letter-spacing: 0;
+  word-spacing: 0.12em;
+  color: var(--gp-fg);
+  font-size: clamp(2.1rem, 4.6vw, 3.1rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.gp-ds .gp-landing-accent {
+  color: var(--gp-gold-deep);
+  background: linear-gradient(180deg, transparent 60%, var(--gp-gold) 60%);
+}
+
+/* No DS token covers "light gold text on a dark ground" — --gp-gold is tuned as a
+   small solid fill/underline, too saturated for direct text; --gp-gold-light is a
+   pale lavender surface tint, not gold at all. This is a deliberate one-off tint,
+   not an overlooked literal. */
+@media (prefers-color-scheme: dark) {
+  .gp-ds:not([data-theme="light"]) .gp-landing-accent { color: #ffe985; }
+}
+.gp-ds[data-theme="dark"] .gp-landing-accent { color: #ffe985; }
+
+.gp-ds .gp-landing-hero p {
+  color: var(--gp-fg-muted);
+  font-size: 1.05rem;
+  max-width: 52ch;
+}
+
+.gp-ds .gp-landing-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gp-ds .gp-landing-cta-wide { min-width: 180px; }
+
+.gp-ds .gp-landing-search {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  gap: 8px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-landing-search input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 10px 14px;
+  color: var(--gp-fg);
+  min-width: 0;
+}
+
+.gp-ds .gp-landing-search input:focus { outline: none; }
+
+.gp-ds .gp-landing-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--gp-border);
+  border: 1px solid var(--gp-border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.gp-ds .gp-landing-stat {
+  background: var(--gp-surface);
+  padding: 20px 14px;
+  text-align: center;
+}
+
+.gp-ds .gp-landing-stat .num {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: var(--gp-primary);
+}
+
+.gp-ds .gp-landing-stat .lbl {
+  font-weight: 600;
+  font-size: 0.84rem;
+  color: var(--gp-fg);
+  margin-top: 2px;
+}
+
+.gp-ds .gp-landing-stat .sub {
+  font-size: 0.75rem;
+  color: var(--gp-fg-faint);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+
+.gp-ds .gp-landing-hero-banner {
+  margin-top: 32px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--gp-shadow-card);
+}
+
+/* ---------- Feature trio ---------- */
+.gp-ds .gp-landing-trio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.gp-ds .gp-landing-feat {
+  padding: 24px;
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-landing-feat h3 {
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  color: var(--gp-fg);
+  font-size: 1.05rem;
+  margin: 0 0 8px;
+}
+
+.gp-ds .gp-landing-feat p {
+  color: var(--gp-fg-muted);
+  font-size: 0.94rem;
+  margin: 0;
+}
+
+/* ---------- Media strip ---------- */
+.gp-ds .gp-landing-media-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+}
+
+.gp-ds .gp-landing-media-video {
+  grid-row: 1 / 3;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  background: var(--gp-accent);
+  min-height: 220px;
+}
+
+.gp-ds .gp-landing-media-video img { width: 100%; height: 100%; object-fit: cover; }
+
+.gp-ds .gp-landing-media-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--gp-secondary);
+  color: var(--gp-on-primary);
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.gp-ds .gp-landing-media-caption {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  color: var(--gp-on-primary);
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.gp-ds .gp-landing-media-tile {
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--gp-surface-sunk);
+  min-height: 100px;
+}
+
+.gp-ds .gp-landing-media-tile img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Top course cards (tc-card) ---------- */
+.gp-ds .gp-landing-tc-card {
+  position: relative;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* No explicit height here on purpose: a flex/grid item with height:100%
+     inside a row/track whose own height is intrinsic (set by its tallest
+     child) creates a circular size dependency that some browsers resolve by
+     falling back to content-based sizing instead of true stretch — which is
+     exactly why these cards were rendering at different heights. Plain
+     align-items: stretch (the default, set explicitly below) does the job
+     without that percentage-height conflict. */
+}
+
+.gp-ds .gp-landing-tc-thumb { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--gp-surface-sunk); }
+.gp-ds .gp-landing-tc-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.gp-ds .gp-landing-tc-card > .courses-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  left: auto;
+  margin: 0;
+}
+
+.gp-ds .gp-landing-tc-body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.gp-ds .gp-landing-tc-body h5 {
+  font-size: 0.98rem;
+  color: var(--gp-fg);
+  margin: 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.gp-ds .gp-landing-tc-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-landing-tc-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--gp-border);
+}
+
+.gp-ds .gp-landing-tc-price { font-family: var(--gp-font-head); font-weight: 800; color: var(--gp-fg); }
+
+.gp-ds .gp-landing-tc-viewall {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+/* ---------- Carousel (native scroll-snap, no jQuery/Slick) ---------- */
+.gp-ds .gp-landing-carousel-wrap {
+  position: relative;
+}
+
+.gp-ds .gp-landing-tc-track {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 4px;
+  padding: 4px 4px 12px;
+  margin: 0 -4px;
+  scrollbar-width: none;
+}
+
+.gp-ds .gp-landing-tc-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gp-ds .gp-landing-tc-track .gp-landing-tc-slide {
+  flex: 0 0 276px;
+  width: 276px;
+  scroll-snap-align: start;
+}
+
+.gp-ds .gp-landing-carousel-nav {
+  position: absolute;
+  top: 108px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  box-shadow: var(--gp-shadow-card);
+  color: var(--gp-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--gp-dur-fast) var(--gp-ease-out), color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-landing-carousel-nav:hover {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: var(--gp-on-primary);
+}
+
+.gp-ds .gp-landing-carousel-prev {
+  left: -20px;
+}
+
+.gp-ds .gp-landing-carousel-next {
+  right: -20px;
+}
+
+@media (max-width: 900px) {
+  .gp-ds .gp-landing-carousel-nav {
+    display: none;
+  }
+}
+
+/* ---------- Function grid ---------- */
+.gp-ds .gp-landing-fn-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.gp-ds .gp-landing-fn-card {
+  padding: 20px;
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  background: var(--gp-surface);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.gp-ds .gp-landing-fn-card:hover { border-color: var(--gp-primary); transform: translateY(-2px); }
+.gp-ds .gp-landing-fn-card h3 { font-family: var(--gp-font-head); font-size: 1rem; color: var(--gp-fg); margin: 0; }
+.gp-ds .gp-landing-fn-card p { color: var(--gp-fg-muted); font-size: 0.86rem; margin: 0; flex: 1; }
+.gp-ds .gp-landing-fn-card span { font-size: 0.78rem; font-weight: 700; color: var(--gp-primary); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ---------- Category chips ---------- */
+.gp-ds .gp-landing-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.gp-ds .gp-landing-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-landing-chip .gp-landing-chip-count { color: var(--gp-fg-faint); font-weight: 500; }
+.gp-ds .gp-landing-chip:hover { border-color: var(--gp-secondary); }
+
+/* ---------- Quiz banner ---------- */
+.gp-ds .gp-landing-quiz {
+  background: var(--gp-accent);
+  color: var(--gp-on-primary);
+  border-radius: 20px;
+  padding: clamp(26px, 5vw, 44px);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.gp-ds .gp-landing-quiz::before {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--gp-primary-2) 0%, transparent 70%);
+  opacity: 0.5;
+}
+
+.gp-ds .gp-landing-quiz-copy { max-width: 520px; position: relative; }
+.gp-ds .gp-landing-quiz .gp-landing-eyebrow { color: var(--gp-gold); }
+.gp-ds .gp-landing-quiz .gp-landing-eyebrow::before { background: var(--gp-gold); }
+.gp-ds .gp-landing-quiz h2 { color: var(--gp-on-primary); margin-top: 10px; }
+.gp-ds .gp-landing-quiz p { color: rgba(255, 255, 255, 0.78); margin-top: 10px; }
+.gp-ds .gp-landing-quiz-actions { position: relative; }
+
+/* ---------- Why section ---------- */
+.gp-ds .gp-landing-why { background: var(--gp-info-soft); }
+
+.gp-ds .gp-landing-why-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.gp-ds .gp-landing-why-tiles { display: flex; flex-direction: column; gap: 18px; margin-top: 22px; }
+.gp-ds .gp-landing-why-tile { display: flex; gap: 14px; }
+
+.gp-ds .gp-landing-why-tile .gp-landing-dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gp-primary);
+  flex-shrink: 0;
+  font-weight: 800;
+  font-family: var(--gp-font-head);
+}
+
+.gp-ds .gp-landing-why-tile h4 { font-size: 0.98rem; color: var(--gp-fg); margin: 0 0 4px; }
+.gp-ds .gp-landing-why-tile p { color: var(--gp-fg-muted); font-size: 0.9rem; margin: 0; }
+
+.gp-ds .gp-landing-why-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.gp-ds .gp-landing-why-stat {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  padding: 22px;
+  text-align: center;
+}
+
+.gp-ds .gp-landing-why-stat .num { font-family: var(--gp-font-head); font-weight: 800; font-size: 1.8rem; color: var(--gp-primary); }
+.gp-ds .gp-landing-why-stat .lbl { font-size: 0.84rem; color: var(--gp-fg-muted); margin-top: 4px; }
+
+/* ---------- Instructor cards ---------- */
+.gp-ds .gp-landing-instr-card { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.gp-ds .gp-landing-instr-card img { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; margin-bottom: 6px; }
+.gp-ds .gp-landing-instr-card h3 { font-size: 0.96rem; color: var(--gp-fg); margin: 0; }
+.gp-ds .gp-landing-instr-card p { font-size: 0.82rem; color: var(--gp-fg-muted); margin: 0; }
+
+/* ---------- Dual CTA ---------- */
+.gp-ds .gp-landing-dual { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.gp-ds .gp-landing-dual-card {
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.gp-ds .gp-landing-dual-card.gp-landing-dual-learn { background: var(--gp-primary); color: var(--gp-on-primary); }
+.gp-ds .gp-landing-dual-card.gp-landing-dual-learn h3 { color: var(--gp-on-primary); }
+.gp-ds .gp-landing-dual-card.gp-landing-dual-learn p { color: rgba(255, 255, 255, 0.8); }
+.gp-ds .gp-landing-dual-card.gp-landing-dual-teach { background: var(--gp-surface); border: 1px solid var(--gp-border); }
+.gp-ds .gp-landing-dual-card.gp-landing-dual-teach p { color: var(--gp-fg-muted); }
+.gp-ds .gp-landing-dual-card h3 { font-family: var(--gp-font-head); font-size: 1.2rem; margin: 0; color: var(--gp-fg); }
+
+/* ---------- CTA band ---------- */
+.gp-ds .gp-landing-cta-band { background: var(--gp-accent-2); color: var(--gp-on-primary); text-align: center; border-radius: 0; }
+.gp-ds .gp-landing-cta-band h2 { color: var(--gp-on-primary); max-width: 20ch; margin-inline: auto; }
+.gp-ds .gp-landing-cta-band p { color: rgba(255, 255, 255, 0.75); max-width: 52ch; margin: 12px auto 0; }
+.gp-ds .gp-landing-cta-band .gp-landing-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+.gp-ds .gp-landing-cta-band .gp-landing-footnote { font-size: 0.78rem; color: rgba(255, 255, 255, 0.55); margin-top: 14px; }
+
+/* ---------- FAQ ---------- */
+.gp-ds .gp-landing-faq-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.gp-ds .gp-landing-faq-intro { position: sticky; top: 100px; }
+.gp-ds .gp-landing-faq-intro h2 { margin-top: 10px; }
+.gp-ds .gp-landing-faq-intro p { margin-top: 10px; color: var(--gp-fg-muted); }
+
+.gp-ds .gp-landing-faq-contact {
+  margin-top: 28px;
+  padding: 22px;
+  border-radius: var(--gp-radius);
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-landing-faq-contact-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--gp-primary);
+  color: var(--gp-on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.gp-ds .gp-landing-faq-contact h4 {
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gp-fg);
+  margin: 0 0 6px;
+}
+
+.gp-ds .gp-landing-faq-contact p {
+  font-size: 0.86rem;
+  color: var(--gp-fg-muted);
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.gp-ds .gp-landing-faq-list { display: flex; flex-direction: column; gap: 14px; }
+
+.gp-ds .gp-landing-faq-item {
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  background: var(--gp-surface);
+  overflow: hidden;
+  transition: border-color var(--gp-dur-fast) var(--gp-ease-out), box-shadow var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-landing-faq-item:has(.gp-landing-faq-q[aria-expanded="true"]) {
+  border-color: var(--gp-primary);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-landing-faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 22px;
+  background: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-landing-faq-num {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: var(--gp-fg-faint);
+  flex-shrink: 0;
+  min-width: 26px;
+  transition: color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-landing-faq-q[aria-expanded="true"] .gp-landing-faq-num { color: var(--gp-primary); }
+
+.gp-ds .gp-landing-faq-q-text { flex: 1; line-height: 1.4; }
+
+.gp-ds .gp-landing-faq-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--gp-border-strong);
+  flex-shrink: 0;
+  transition: background var(--gp-dur-fast) var(--gp-ease-out), border-color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-landing-faq-icon::before,
+.gp-ds .gp-landing-faq-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--gp-fg);
+  transform: translate(-50%, -50%);
+  transition: transform var(--gp-dur-fast) var(--gp-ease-out), opacity var(--gp-dur-fast) var(--gp-ease-out), background var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-landing-faq-icon::before { width: 10px; height: 1.6px; }
+.gp-ds .gp-landing-faq-icon::after { width: 1.6px; height: 10px; }
+
+.gp-ds .gp-landing-faq-q[aria-expanded="true"] .gp-landing-faq-icon {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+}
+
+.gp-ds .gp-landing-faq-q[aria-expanded="true"] .gp-landing-faq-icon::before,
+.gp-ds .gp-landing-faq-q[aria-expanded="true"] .gp-landing-faq-icon::after {
+  background: var(--gp-on-primary);
+}
+
+.gp-ds .gp-landing-faq-q[aria-expanded="true"] .gp-landing-faq-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  opacity: 0;
+}
+
+.gp-ds .gp-landing-faq-a {
+  padding: 0 22px 22px 66px;
+  color: var(--gp-fg-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.gp-ds .gp-landing-faq-a p { margin: 0; }
+
+@media (max-width: 900px) {
+  .gp-ds .gp-landing-faq-grid { grid-template-columns: 1fr; gap: 32px; }
+  .gp-ds .gp-landing-faq-intro { position: static; }
+}
+
+/* ---------- Outline buttons inside .gp-landing must stay legible in dark mode ---------- */
+/* .btn-outline (gp-components-core.css) borrows --gp-accent, which has no dark-mode
+   value — on a dark .gp-landing surface (hero, dual-teach card) that reads as
+   near-black text on near-black. Repoint to --gp-fg only inside .gp-landing, only
+   in dark mode, so every other outline button on the site is untouched. */
+@media (prefers-color-scheme: dark) {
+  .gp-ds:not([data-theme="light"]) .gp-landing .btn-outline:not(.gp-landing-btn-on-dark) {
+    border-color: var(--gp-fg-muted);
+    color: var(--gp-fg) !important;
+  }
+}
+.gp-ds[data-theme="dark"] .gp-landing .btn-outline:not(.gp-landing-btn-on-dark) {
+  border-color: var(--gp-fg-muted);
+  color: var(--gp-fg) !important;
+}
+
+/* ---------- Buttons on dark surfaces ---------- */
+.gp-ds .gp-landing-btn-on-dark.btn-primary { background: var(--gp-on-primary); border-color: var(--gp-on-primary); color: var(--gp-accent) !important; }
+.gp-ds .gp-landing-btn-on-dark.btn-primary:hover { background: var(--gp-gold); border-color: var(--gp-gold); }
+.gp-ds .gp-landing-btn-on-dark.btn-outline { border-color: rgba(255, 255, 255, 0.55); color: var(--gp-on-primary) !important; }
+.gp-ds .gp-landing-btn-on-dark.btn-outline:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--gp-on-primary); }
+
+@media (max-width: 900px) {
+  .gp-ds .gp-landing-stats { grid-template-columns: repeat(2, 1fr); }
+  .gp-ds .gp-landing-trio-grid,
+  .gp-ds .gp-landing-fn-grid,
+  .gp-ds .gp-landing-dual { grid-template-columns: repeat(2, 1fr); }
+  .gp-ds .gp-landing-media-grid { grid-template-columns: 1fr; grid-template-rows: 220px 140px 140px; }
+  .gp-ds .gp-landing-media-video { grid-row: auto; }
+  .gp-ds .gp-landing-why-body { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .gp-ds .gp-landing-stats,
+  .gp-ds .gp-landing-trio-grid,
+  .gp-ds .gp-landing-fn-grid,
+  .gp-ds .gp-landing-dual,
+  .gp-ds .gp-landing-why-stats { grid-template-columns: 1fr; }
+}
+
+/* ---------- Entrance animation ---------- */
+/* Hero: always in the first viewport, so it animates on load rather than
+   on scroll — pure CSS, gated only by prefers-reduced-motion, so it needs
+   no JS and can never get stuck hidden. */
+@media (prefers-reduced-motion: no-preference) {
+  .gp-ds .gp-landing-hero-copy > * {
+    animation: gp-landing-fade-up 0.7s cubic-bezier(.16, .8, .3, 1) both;
+  }
+  .gp-ds .gp-landing-hero-copy > *:nth-child(1) { animation-delay: 0s; }
+  .gp-ds .gp-landing-hero-copy > *:nth-child(2) { animation-delay: 0.08s; }
+  .gp-ds .gp-landing-hero-copy > *:nth-child(3) { animation-delay: 0.16s; }
+  .gp-ds .gp-landing-hero-copy > *:nth-child(4) { animation-delay: 0.24s; }
+  .gp-ds .gp-landing-hero-copy > *:nth-child(5) { animation-delay: 0.32s; }
+  .gp-ds .gp-landing-hero-banner {
+    animation: gp-landing-fade-up 0.8s cubic-bezier(.16, .8, .3, 1) 0.3s both;
+  }
+}
+
+@keyframes gp-landing-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Every other section: starts hidden only when html.gp-landing-anim is
+   present — that class is added synchronously in <head>
+   (gp-landing-reveal-boot.js) only when JS + IntersectionObserver are
+   available and the visitor hasn't asked for reduced motion, so there's
+   no flash on capable browsers and no dead "stuck invisible" section on
+   anyone else (no JS, JS error, reduced motion — all just see it plain). */
+html.gp-landing-anim .gp-ds section.gp-landing:not(.gp-landing-hero) {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(.16, .8, .3, 1), transform 0.7s cubic-bezier(.16, .8, .3, 1);
+}
+
+html.gp-landing-anim .gp-ds section.gp-landing.gp-landing-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger the cards/chips inside a revealed grid so they settle in one
+   after another instead of popping in as a single flat block. Carousel
+   slides are excluded — only ~4 are visible at once, so staggering all
+   10 reads as a delay rather than an effect. */
+html.gp-landing-anim .gp-ds .gp-landing-trio-grid > *,
+html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *,
+html.gp-landing-anim .gp-ds .gp-landing-chips > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+html.gp-landing-anim .gp-ds section.gp-landing.gp-landing-in .gp-landing-trio-grid > *,
+html.gp-landing-anim .gp-ds section.gp-landing.gp-landing-in .gp-landing-fn-grid > *,
+html.gp-landing-anim .gp-ds section.gp-landing.gp-landing-in .gp-landing-chips > * {
+  opacity: 1;
+  transform: none;
+}
+
+html.gp-landing-anim .gp-ds .gp-landing-trio-grid > *:nth-child(1),
+html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(1),
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(1) { transition-delay: 0.05s; }
+html.gp-landing-anim .gp-ds .gp-landing-trio-grid > *:nth-child(2),
+html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(2),
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(2) { transition-delay: 0.1s; }
+html.gp-landing-anim .gp-ds .gp-landing-trio-grid > *:nth-child(3),
+html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(3),
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(3) { transition-delay: 0.15s; }
+html.gp-landing-anim .gp-ds .gp-landing-trio-grid > *:nth-child(4),
+html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(4),
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(4) { transition-delay: 0.2s; }
+html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(5),
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(5) { transition-delay: 0.25s; }
+html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(6),
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(6) { transition-delay: 0.3s; }

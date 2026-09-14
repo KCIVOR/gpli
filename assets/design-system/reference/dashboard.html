@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard | GP Leadership Institute</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --dur-fast:150ms; --dur:260ms; --dur-slow:520ms;
+  --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px;
+  --primary:#003BA6; --primary-2:#4772BF; --primary-3:#809DD2;
+  --secondary:#CD182A;
+  --accent:#00215D; --accent-2:#001946;
+  --gold:#FCD01C; --gold-light:#D6E0F1; --gold-deep:#00328B; --blue-solid:#00328B;
+  --paper:#F5F5F2; --white:#ffffff; --text:#6B6B6B; --ink:#090909; --line:#F9F9F9;
+  --shadow:0 4px 15px rgba(0,0,0,.06);
+  --radius:10px;
+  --font-head:'Manrope',sans-serif; --font-body:'Inter',sans-serif; --font-mono:'JetBrains Mono',monospace;
+  --success:#1E7A34; --success-soft:#E6F4EA; --success-border:#bfe4c8;
+  --warning:#B45309; --warning-soft:#FDF1E0; --warning-border:#f3d9ad;
+  --danger:#CD182A;  --danger-soft:#FBE9EA;  --danger-border:#f0b8bd;
+  --info:#003BA6;    --info-soft:#E7EEF9;    --info-border:#b9cdec;
+  --bg:#FBFAF7; --border:#E7E5DF;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#111015; --white:#17161c; --paper:#0c0c10; --border:#2b2a32; --ink:#EDEBE6; --text:#A7A4B0; --line:#2b2a32;
+    --shadow:0 4px 15px rgba(0,0,0,.4);
+    --success-soft:#16321f; --warning-soft:#3a2708; --danger-soft:#3a1418; --info-soft:#101f3d;
+  }
+}
+[data-theme="dark"]{
+  --bg:#111015; --white:#17161c; --paper:#0c0c10; --border:#2b2a32; --ink:#EDEBE6; --text:#A7A4B0; --line:#2b2a32;
+  --shadow:0 4px 15px rgba(0,0,0,.4);
+  --success-soft:#16321f; --warning-soft:#3a2708; --danger-soft:#3a1418; --info-soft:#101f3d;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;height:100%;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:var(--font-head);color:var(--ink);margin:0;}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible{outline:3px solid var(--primary);outline-offset:2px;border-radius:2px;}
+
+/* ---------- shell ---------- */
+.shell{display:grid;grid-template-columns:250px 1fr;min-height:100vh;}
+@media(max-width:900px){.shell{grid-template-columns:1fr;}}
+
+.sidebar{
+  background:linear-gradient(180deg,var(--accent-2) 0%, var(--accent) 100%);color:#fff;
+  padding:22px 16px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto;
+}
+@media(max-width:900px){.sidebar{display:none;}}
+.sidebar .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:800;font-size:17px;color:#fff;margin-bottom:30px;padding:0 8px;}
+.sidebar .brand span{color:var(--gold-light);}
+.sidebar .brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--primary-2),var(--gold));flex:0 0 auto;}
+.sidebar .grp{font-family:var(--font-head);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#8FA3D6;margin:20px 8px 8px;}
+.sidebar .grp:first-of-type{margin-top:0;}
+.sidebar nav a{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 10px;border-radius:8px;
+  color:#C9D6F0;font-size:13.5px;font-weight:500;margin-bottom:2px;transition:background var(--dur-fast) var(--ease-out);
+}
+.sidebar nav a:hover{background:rgba(255,255,255,.07);color:#fff;}
+.sidebar nav a.active{background:var(--primary);color:#fff;font-weight:700;}
+.sidebar nav a .ic{width:18px;text-align:center;opacity:.9;}
+.sidebar nav a .count{background:var(--gold);color:#171613;font-size:10px;font-weight:800;border-radius:999px;padding:1px 7px;}
+.sidebar .foot-user{margin-top:auto;padding:14px 10px 4px;border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:10px;}
+.sidebar .foot-user .avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--secondary));flex:0 0 auto;}
+.sidebar .foot-user b{display:block;font-size:13px;color:#fff;}
+.sidebar .foot-user span{font-size:11.5px;color:#93A7D4;}
+
+/* ---------- topbar ---------- */
+.topbar{
+  background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:64px;gap:10px;
+}
+.topbar .crumb{font-size:13px;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.topbar .crumb b{color:var(--ink);}
+.topbar .actions{display:flex;align-items:center;gap:10px;flex:0 0 auto;}
+.theme-row{display:flex;gap:3px;border:1px solid var(--border);border-radius:999px;padding:3px;}
+.theme-row button{border:none;background:transparent;width:28px;height:26px;border-radius:999px;cursor:pointer;color:var(--text);font-size:12px;}
+.theme-row button.active{background:var(--ink);color:var(--white);}
+.icon-btn{width:36px;height:36px;border-radius:9px;border:1px solid var(--border);background:var(--white);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);position:relative;font-size:14px;}
+.icon-btn .dot{position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:var(--secondary);}
+.user-chip{display:flex;align-items:center;gap:9px;padding:5px 10px 5px 5px;border:1px solid var(--border);border-radius:999px;cursor:pointer;}
+.user-chip .avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--primary-2),var(--secondary));}
+.user-chip b{font-size:13px;}
+
+.main{padding:28px 24px 60px;}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap;}
+.page-head h1{font-size:24px;font-weight:800;}
+.page-head p{color:var(--text);font-size:13.5px;margin-top:4px;}
+
+/* ---------- stat tiles ---------- */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+@media(max-width:900px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.stat-grid{grid-template-columns:1fr;}}
+.stat-tile{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow);}
+.stat-tile .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.stat-tile .ic{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.stat-tile .ic.blue{background:var(--info-soft);color:var(--primary);}
+.stat-tile .ic.gold{background:#FCF3CE;color:var(--gold-deep);}
+.stat-tile .ic.green{background:var(--success-soft);color:var(--success);}
+.stat-tile .ic.red{background:var(--danger-soft);color:var(--secondary);}
+.stat-tile .delta{font-family:var(--font-mono);font-size:11px;font-weight:600;}
+.stat-tile .delta.up{color:var(--success);}
+.stat-tile .delta.down{color:var(--danger);}
+.stat-tile .num{font-family:var(--font-head);font-size:26px;font-weight:800;}
+.stat-tile .lbl{font-size:12.5px;color:var(--text);margin-top:2px;}
+
+/* ---------- layout grid ---------- */
+.dash-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start;}
+@media(max-width:1100px){.dash-grid{grid-template-columns:1fr;}}
+
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);margin-bottom:20px;}
+.card .card-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--border);}
+.card .card-head h3{font-size:15px;font-weight:800;}
+.card .card-head a{font-size:12.5px;font-weight:700;color:var(--blue-solid);}
+.card .card-body{padding:20px;}
+
+/* chart */
+.chart-wrap{padding:8px 4px 0;}
+.chart-legend{display:flex;gap:18px;font-size:12px;color:var(--text);margin-bottom:8px;}
+.chart-legend span{display:inline-flex;align-items:center;gap:6px;}
+.chart-legend i{width:8px;height:8px;border-radius:50%;background:var(--primary);display:inline-block;}
+
+/* table */
+.table-wrap{overflow-x:auto;}
+table.data-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px;}
+table.data-table thead th{
+  text-align:left;font-family:var(--font-head);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--text);padding:0 20px 12px;border-bottom:1px solid var(--border);
+}
+table.data-table tbody td{padding:13px 20px;border-bottom:1px solid var(--border);}
+table.data-table tbody tr:last-child td{border-bottom:none;}
+table.data-table tbody tr:hover{background:var(--paper);}
+.cell-user{display:flex;align-items:center;gap:10px;}
+.cell-user .avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--primary-3),var(--primary));flex:0 0 auto;}
+.cell-user b{display:block;font-size:13.5px;}
+.cell-user span{font-size:11.5px;color:var(--text);}
+
+.badge{display:inline-flex;align-items:center;font-family:var(--font-head);font-weight:700;font-size:10.5px;letter-spacing:.02em;text-transform:uppercase;padding:4px 9px;border-radius:999px;}
+.badge-success{background:var(--success-soft);color:var(--success);}
+.badge-warning{background:var(--warning-soft);color:var(--warning);}
+.badge-danger{background:var(--danger-soft);color:var(--danger);}
+
+/* list group */
+.list-group{display:flex;flex-direction:column;}
+.list-group-item{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--border);}
+.list-group-item:last-child{border-bottom:none;}
+.list-group-item .rank{font-family:var(--font-mono);font-size:12px;color:var(--text);width:16px;flex:0 0 auto;}
+.list-group-item .thumb{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--primary-3),var(--primary));flex:0 0 auto;}
+.list-group-item .title{font-size:13.5px;font-weight:600;}
+.list-group-item .meta{font-size:11.5px;color:var(--text);margin-top:2px;}
+.list-group-item .num{margin-left:auto;text-align:right;font-family:var(--font-head);font-weight:800;font-size:14px;}
+.list-group-item .num small{display:block;font-family:var(--font-body);font-weight:400;font-size:10.5px;color:var(--text);}
+
+/* activity feed */
+.feed-item{display:flex;gap:12px;padding:14px 20px;border-bottom:1px solid var(--border);}
+.feed-item:last-child{border-bottom:none;}
+.feed-item .dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:0 0 auto;}
+.feed-item .dot.blue{background:var(--primary);}
+.feed-item .dot.gold{background:var(--gold-deep);}
+.feed-item .dot.green{background:var(--success);}
+.feed-item p{font-size:13px;}
+.feed-item time{font-size:11.5px;color:var(--text);}
+
+.demo-note{
+  margin:24px 0 0;padding:12px 16px;border:1px solid var(--border);border-radius:9px;background:var(--paper);
+  font-size:12px;color:var(--text);line-height:1.6;
+}
+.demo-note b{color:var(--ink);}
+
+/* topbar responsive collapse — placed last so it wins over the base rules above */
+@media(max-width:480px){
+  .theme-row{display:none;}
+  .user-chip b{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="mark"></span>GP<span>LI</span> Admin</div>
+    <div class="grp">Main</div>
+    <nav>
+      <a href="#" class="active"><span><span class="ic">◧</span> Dashboard</span></a>
+      <a href="#"><span><span class="ic">▭</span> Courses</span></a>
+      <a href="#"><span><span class="ic">◔</span> Enrollments</span></a>
+    </nav>
+    <div class="grp">People</div>
+    <nav>
+      <a href="#"><span><span class="ic">◎</span> Facilitators</span></a>
+      <a href="#"><span><span class="ic">◑</span> Learners</span></a>
+    </nav>
+    <div class="grp">Business</div>
+    <nav>
+      <a href="#"><span><span class="ic">◈</span> Payouts</span> <span class="count">3</span></a>
+      <a href="#"><span><span class="ic">▤</span> Reports</span></a>
+      <a href="#"><span><span class="ic">⚙</span> Settings</span></a>
+    </nav>
+    <div class="foot-user">
+      <div class="avatar"></div>
+      <div><b>Dana Whitfield</b><span>Program Admin</span></div>
+    </div>
+  </aside>
+
+  <div>
+    <div class="topbar">
+      <div class="crumb"><b>Dashboard</b> · Overview</div>
+      <div class="actions">
+        <div class="theme-row">
+          <button id="t-light">Light</button>
+          <button id="t-system" class="active">System</button>
+          <button id="t-dark">Dark</button>
+        </div>
+        <div class="icon-btn">🔔<span class="dot"></span></div>
+        <div class="user-chip"><div class="avatar"></div><b>Dana</b></div>
+      </div>
+    </div>
+
+    <main class="main">
+      <div class="page-head">
+        <div>
+          <h1>Welcome back, Dana</h1>
+          <p>Here's what's happening across GPLI this month.</p>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-tile">
+          <div class="top"><div class="ic blue">▭</div><div class="delta up">▲ 4.2%</div></div>
+          <div class="num">128</div><div class="lbl">Active courses</div>
+        </div>
+        <div class="stat-tile">
+          <div class="top"><div class="ic gold">◑</div><div class="delta up">▲ 12%</div></div>
+          <div class="num">2,481</div><div class="lbl">Enrolled learners</div>
+        </div>
+        <div class="stat-tile">
+          <div class="top"><div class="ic green">$</div><div class="delta up">▲ 8.6%</div></div>
+          <div class="num">$48,920</div><div class="lbl">Revenue this month</div>
+        </div>
+        <div class="stat-tile">
+          <div class="top"><div class="ic red">◔</div><div class="delta down">▼ 1.4%</div></div>
+          <div class="num">76%</div><div class="lbl">Completion rate</div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div>
+          <div class="card">
+            <div class="card-head">
+              <h3>Revenue — last 12 months</h3>
+              <a href="#">View report →</a>
+            </div>
+            <div class="card-body">
+              <div class="chart-legend"><span><i></i> Revenue</span></div>
+              <div class="chart-wrap">
+                <svg viewBox="0 0 600 180" width="100%" height="180" preserveAspectRatio="none" role="img" aria-label="Revenue trend chart">
+                  <polyline fill="none" stroke="#E7E5DF" stroke-width="1" points="0,150 600,150"></polyline>
+                  <polyline fill="none" stroke="#E7E5DF" stroke-width="1" points="0,100 600,100"></polyline>
+                  <polyline fill="none" stroke="#E7E5DF" stroke-width="1" points="0,50 600,50"></polyline>
+                  <polyline fill="none" stroke="#003BA6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                    points="0,120 55,110 110,125 165,90 220,95 275,70 330,80 385,55 440,60 495,35 550,42 600,20"></polyline>
+                  <g fill="#003BA6">
+                    <circle cx="0" cy="120" r="4"></circle><circle cx="55" cy="110" r="4"></circle><circle cx="110" cy="125" r="4"></circle>
+                    <circle cx="165" cy="90" r="4"></circle><circle cx="220" cy="95" r="4"></circle><circle cx="275" cy="70" r="4"></circle>
+                    <circle cx="330" cy="80" r="4"></circle><circle cx="385" cy="55" r="4"></circle><circle cx="440" cy="60" r="4"></circle>
+                    <circle cx="495" cy="35" r="4"></circle><circle cx="550" cy="42" r="4"></circle><circle cx="600" cy="20" r="5" fill="#CD182A"></circle>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h3>Recent enrollments</h3>
+              <a href="#">View all →</a>
+            </div>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead><tr><th>Learner</th><th>Course</th><th>Date</th><th>Status</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <td><div class="cell-user"><div class="avatar"></div><div><b>Marcus Lee</b><span>marcus.lee@company.com</span></div></div></td>
+                    <td>Leadership Fundamentals</td><td>Sep 10, 2026</td>
+                    <td><span class="badge badge-success">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="cell-user"><div class="avatar"></div><div><b>Priya Nair</b><span>priya.nair@company.com</span></div></div></td>
+                    <td>Sales Enablement 101</td><td>Sep 9, 2026</td>
+                    <td><span class="badge badge-warning">Pending</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="cell-user"><div class="avatar"></div><div><b>Tom Alvarez</b><span>tom.alvarez@company.com</span></div></div></td>
+                    <td>Operations &amp; Process</td><td>Sep 8, 2026</td>
+                    <td><span class="badge badge-success">Active</span></td>
+                  </tr>
+                  <tr>
+                    <td><div class="cell-user"><div class="avatar"></div><div><b>Grace Kim</b><span>grace.kim@company.com</span></div></div></td>
+                    <td>Executive Leadership</td><td>Sep 6, 2026</td>
+                    <td><span class="badge badge-danger">Refunded</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <div class="card-head"><h3>Top courses</h3></div>
+            <div class="list-group">
+              <div class="list-group-item"><span class="rank">1</span><div class="thumb"></div><div><div class="title">Leadership Fundamentals</div><div class="meta">412 enrolled</div></div><div class="num">4.9<small>rating</small></div></div>
+              <div class="list-group-item"><span class="rank">2</span><div class="thumb"></div><div><div class="title">Sales Enablement 101</div><div class="meta">356 enrolled</div></div><div class="num">4.8<small>rating</small></div></div>
+              <div class="list-group-item"><span class="rank">3</span><div class="thumb"></div><div><div class="title">Executive Leadership</div><div class="meta">298 enrolled</div></div><div class="num">4.7<small>rating</small></div></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>Recent activity</h3></div>
+            <div class="list-group">
+              <div class="feed-item"><span class="dot blue"></span><div><p><b>New facilitator</b> Aya Reyes joined the platform</p><time>2h ago</time></div></div>
+              <div class="feed-item"><span class="dot gold"></span><div><p><b>Payout processed</b> $2,140 to J. Cruz</p><time>5h ago</time></div></div>
+              <div class="feed-item"><span class="dot green"></span><div><p><b>Course published</b> "Change Management Basics"</p><time>1d ago</time></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-note"><b>Design preview</b> — this dashboard is a static mockup built on The Geese Project design system. Numbers, names, and activity shown are illustrative, not live data.</div>
+    </main>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var btns = {light:document.getElementById('t-light'), dark:document.getElementById('t-dark'), system:document.getElementById('t-system')};
+  function apply(mode){
+    if(mode === 'system'){ root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme', mode); }
+    Object.keys(btns).forEach(function(k){ btns[k].classList.toggle('active', k===mode); });
+    try{ localStorage.setItem('gpli-dash-theme', mode); }catch(e){}
+  }
+  var saved='system';
+  try{ saved = localStorage.getItem('gpli-dash-theme') || 'system'; }catch(e){}
+  apply(saved);
+  btns.light.addEventListener('click', function(){apply('light');});
+  btns.dark.addEventListener('click', function(){apply('dark');});
+  btns.system.addEventListener('click', function(){apply('system');});
+})();
+</script>
+
+</body>
+</html>

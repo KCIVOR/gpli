@@ -1,0 +1,404 @@
+/**
+ * Geese Project Design System — Auth (login) layout
+ * Assembled from the landing-package login sample.
+ * Tokens only. Does not change form actions or field names.
+ */
+
+.gp-ds .gp-auth-shell {
+  min-height: calc(100vh - 78px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--gp-bg);
+}
+
+@media (max-width: 920px) {
+  .gp-ds .gp-auth-shell {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+}
+
+.gp-ds .gp-auth-visual {
+  position: relative;
+  background: linear-gradient(155deg, var(--gp-accent-2) 0%, var(--gp-accent) 60%, #24396f 100%);
+  color: #fff;
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+@media (max-width: 920px) {
+  .gp-ds .gp-auth-visual {
+    display: none;
+  }
+}
+
+.gp-ds .gp-auth-visual .kicker {
+  font-family: var(--gp-font-head);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gp-gold-light);
+  margin-bottom: 18px;
+  max-width: 100%;
+  overflow: visible;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.gp-ds .gp-auth-visual h2 {
+  font-family: var(--gp-font-head);
+  font-size: clamp(28px, 3.2vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  max-width: 440px;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.gp-ds .gp-auth-visual p {
+  color: #C9D6F0;
+  font-size: 15.5px;
+  max-width: 400px;
+  line-height: 1.7;
+}
+
+.gp-ds .gp-auth-portrait {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  max-width: 340px;
+  box-shadow: var(--gp-shadow-card);
+  margin-top: 34px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.gp-ds .gp-auth-portrait img {
+  width: 100%;
+  display: block;
+}
+
+.gp-ds .gp-auth-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 34px;
+}
+
+.gp-ds .gp-auth-stats > div {
+  min-width: 96px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 16px 14px;
+  text-align: center;
+}
+
+.gp-ds .gp-auth-stats b {
+  display: block;
+  font-family: var(--gp-font-head);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--gp-gold-light);
+}
+
+.gp-ds .gp-auth-stats span {
+  display: block;
+  font-family: var(--gp-font-head);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--gp-gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 7px;
+}
+
+.gp-ds .gp-auth-form-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 24px;
+  background: var(--gp-bg);
+}
+
+.gp-ds .gp-auth-form {
+  width: 100%;
+  max-width: 420px;
+}
+
+.gp-ds .gp-auth-form h1 {
+  font-family: var(--gp-font-head);
+  font-size: clamp(26px, 3vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin-bottom: 10px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-auth-sub {
+  color: var(--gp-fg-muted);
+  font-size: 14.5px;
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+
+.gp-ds .gp-auth-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 520px) {
+  .gp-ds .gp-auth-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gp-ds .gp-auth-field {
+  margin-bottom: 22px;
+}
+
+.gp-ds .gp-auth-form label {
+  display: block;
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  margin-bottom: 7px;
+  color: var(--gp-fg);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.gp-ds .gp-auth-input-wrap {
+  position: relative;
+}
+
+.gp-ds .gp-auth-form input[type="email"],
+.gp-ds .gp-auth-form input[type="password"],
+.gp-ds .gp-auth-form input[type="text"],
+.gp-ds .gp-auth-form input[type="phone"],
+.gp-ds .gp-auth-form input[type="tel"],
+.gp-ds .gp-auth-form input[type="file"],
+.gp-ds .gp-auth-form textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--gp-border-strong);
+  padding: 6px 72px 12px 0;
+  font-family: var(--gp-font-body);
+  font-size: 15.5px;
+  color: var(--gp-fg);
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.gp-ds .gp-auth-form input[type="file"],
+.gp-ds .gp-auth-form textarea {
+  padding-right: 0;
+}
+
+.gp-ds .gp-auth-form textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.gp-ds .gp-auth-form label small {
+  font-weight: 500;
+  color: var(--gp-fg-muted);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.gp-ds .gp-auth-hint {
+  display: block;
+  font-size: 12px;
+  color: var(--gp-fg-muted);
+  margin-top: 7px;
+}
+
+.gp-ds .gp-auth-check {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--gp-fg);
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.gp-ds .gp-auth-check input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  padding: 0;
+  border: none;
+  accent-color: var(--gp-primary);
+}
+
+.gp-ds .gp-auth-form input:focus,
+.gp-ds .gp-auth-form textarea:focus {
+  outline: none;
+  box-shadow: none;
+  border-bottom-color: var(--gp-gold-deep);
+  border-bottom-width: 2px;
+}
+
+.gp-ds[data-theme="dark"] .gp-auth-form input,
+.gp-ds[data-theme="dark"] .gp-auth-form textarea {
+  background-color: transparent !important;
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds[data-theme="dark"] .gp-auth-form input:-webkit-autofill,
+.gp-ds[data-theme="dark"] .gp-auth-form input:-webkit-autofill:hover,
+.gp-ds[data-theme="dark"] .gp-auth-form input:-webkit-autofill:focus,
+.gp-ds[data-theme="dark"] .gp-auth-form input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--gp-fg) !important;
+  caret-color: var(--gp-fg);
+  border-bottom-color: var(--gp-border-strong);
+  transition: background-color 99999s ease-out 0s;
+  box-shadow: 0 0 0 1000px var(--gp-bg) inset !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--gp-bg) inset !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .gp-ds[data-theme="system"] .gp-auth-form input,
+  .gp-ds[data-theme="system"] .gp-auth-form textarea {
+    background-color: transparent !important;
+    color: var(--gp-fg) !important;
+  }
+
+  .gp-ds[data-theme="system"] .gp-auth-form input:-webkit-autofill,
+  .gp-ds[data-theme="system"] .gp-auth-form input:-webkit-autofill:hover,
+  .gp-ds[data-theme="system"] .gp-auth-form input:-webkit-autofill:focus,
+  .gp-ds[data-theme="system"] .gp-auth-form input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--gp-fg) !important;
+    caret-color: var(--gp-fg);
+    box-shadow: 0 0 0 1000px var(--gp-bg) inset !important;
+    -webkit-box-shadow: 0 0 0 1000px var(--gp-bg) inset !important;
+  }
+}
+
+.gp-ds .gp-auth-toggle-pw {
+  position: absolute;
+  right: 0;
+  top: auto;
+  bottom: 10px;
+  background: none;
+  border: none;
+  color: var(--gp-fg-muted);
+  cursor: pointer;
+  font-size: 11.5px;
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0;
+  line-height: 1;
+  z-index: 2;
+}
+
+.gp-ds .gp-auth-toggle-pw:hover {
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-auth-forgot {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gp-primary);
+  text-decoration: none;
+}
+
+.gp-ds .gp-auth-forgot:hover {
+  text-decoration: underline;
+}
+
+.gp-ds .gp-auth-form .gp-auth-submit,
+.gp-ds .gp-auth-form .btn-primary {
+  width: 100%;
+  margin-top: 8px;
+  height: auto;
+  min-height: 0;
+  padding: 15px 26px !important;
+  border-radius: var(--gp-radius) !important;
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.32px;
+}
+
+.gp-ds .gp-auth-form .g-recaptcha {
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 26px 0;
+  color: var(--gp-fg-muted);
+  font-size: 12px;
+  font-family: var(--gp-font-head);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.gp-ds .gp-auth-divider::before,
+.gp-ds .gp-auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--gp-border);
+}
+
+.gp-ds .gp-auth-social {
+  margin-bottom: 28px;
+}
+
+.gp-ds .gp-auth-foot {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-auth-foot a {
+  color: var(--gp-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.gp-ds[data-theme="dark"] .gp-auth-forgot,
+.gp-ds[data-theme="dark"] .gp-auth-foot a {
+  color: var(--gp-info);
+}
+
+@media (prefers-color-scheme: dark) {
+  .gp-ds[data-theme="system"] .gp-auth-forgot,
+  .gp-ds[data-theme="system"] .gp-auth-foot a {
+    color: var(--gp-info);
+  }
+}
+
+.gp-ds .gp-auth-foot a:hover {
+  text-decoration: underline;
+}
+
+/* Leftover Hyper login/signup canvas — follow the theme instead of --bg-white */
+.gp-ds .sign-up,
+.gp-ds .sing-up-right {
+  background-color: var(--gp-bg);
+  color: var(--gp-fg);
+}

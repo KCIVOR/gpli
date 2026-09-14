@@ -1,3 +1,4 @@
+<div class="gp-blog-page gp-blog-modal">
 <form action="<?php echo site_url('admin/blog_category/update/'.$blog_category['blog_category_id']); ?>" method="post">
 	<div class="form-group">
 		<label for="category_title"><?php echo get_phrase('title'); ?></label>
@@ -9,6 +10,10 @@
 	</div>
 
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary"><?php echo get_phrase('update'); ?></button>
+		<?php echo gp_ds_button(get_phrase('update'), [
+			'variant' => 'primary',
+			'type' => 'submit',
+		], true); ?>
 	</div>
 </form>
+</div>

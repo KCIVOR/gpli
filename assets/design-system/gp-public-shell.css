@@ -1,0 +1,1029 @@
+/**
+ * Public header / nav / footer — assembled from the landing-package sample.
+ * Tokens only. Does not change cart, search, wishlist, or newsletter hooks.
+ */
+
+/* ========== Sticky single header (DS 08 Navigation) ========== */
+.gp-ds header.gp-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--gp-surface);
+  box-shadow: var(--gp-shadow-card);
+  border-bottom: 1px solid var(--gp-border);
+}
+
+.gp-ds header.gp-site-header .sub-header {
+  display: none;
+}
+
+.gp-ds header.gp-site-header .menubar {
+  background: transparent;
+  padding: 0;
+  border-bottom: none;
+}
+
+.gp-ds header.gp-site-header .navbar {
+  padding: 0;
+}
+
+.gp-ds header.gp-site-header .navbar>.container,
+.gp-ds header.gp-site-header .header-inner {
+  max-width: 1240px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 16px;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+@media (min-width: 992px) {
+  .gp-ds header.gp-site-header .navbar-collapse {
+    display: flex !important;
+    align-items: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 16px;
+    flex-wrap: nowrap;
+  }
+}
+
+.gp-ds header.gp-site-header .navbar-brand.logo {
+  padding: 0;
+  margin-right: 0;
+  flex: 0 0 auto;
+}
+
+.gp-ds header.gp-site-header .navbar-brand.logo img {
+  height: 36px;
+  width: auto;
+}
+
+/* Logo swap: the uploaded "dark_logo" has dark-colored wordmark text and
+   disappears on a dark ground; "light_logo" is the white-text variant made
+   for exactly this. Show the matching one per theme, same tri-state pattern
+   as the color tokens (bare rule = light, media query = system, attr = explicit). */
+.gp-ds .gp-logo-on-dark {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  .gp-ds:not([data-theme="light"]) .gp-logo-on-light {
+    display: none;
+  }
+  .gp-ds:not([data-theme="light"]) .gp-logo-on-dark {
+    display: inline-block;
+  }
+}
+.gp-ds[data-theme="dark"] .gp-logo-on-light {
+  display: none;
+}
+.gp-ds[data-theme="dark"] .gp-logo-on-dark {
+  display: inline-block;
+}
+
+.gp-ds header.gp-site-header .main-nav-wrap {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 0 !important;
+}
+
+/* Nav links — 14px / 500, underline grows from the link edges */
+.gp-ds header.gp-site-header .main-nav-wrap .nav-link,
+.gp-ds header.gp-site-header .navbar-collapse>a {
+  font-family: var(--gp-font-body);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--gp-fg) !important;
+  background: transparent !important;
+  padding: 8px 0;
+  position: relative;
+}
+
+.gp-ds header.gp-site-header .main-nav-wrap .nav-link i,
+.gp-ds header.gp-site-header .main-nav-wrap .nav-link .fa-angle-down {
+  font-size: 10px;
+  margin-left: 6px !important;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds header.gp-site-header .main-nav-wrap .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--gp-primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform var(--gp-dur-base) var(--gp-ease-out);
+}
+
+.gp-ds header.gp-site-header .main-nav-wrap .nav-item:hover .nav-link,
+.gp-ds header.gp-site-header .main-nav-wrap .nav-item.active .nav-link {
+  color: var(--gp-blue-solid) !important;
+}
+
+.gp-ds header.gp-site-header .main-nav-wrap .nav-item:hover .nav-link::after,
+.gp-ds header.gp-site-header .main-nav-wrap .nav-item.active .nav-link::after {
+  transform: scaleX(1);
+}
+
+/* Courses / dropdowns */
+.gp-ds header.gp-site-header .navbarHover {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  min-width: 280px;
+  padding: 8px 0;
+  margin-top: 10px;
+}
+
+.gp-ds header.gp-site-header .navbarHover li a {
+  font-family: var(--gp-font-body);
+  font-size: 14px;
+  color: var(--gp-fg-muted);
+  padding: 10px 18px;
+}
+
+.gp-ds header.gp-site-header .navbarHover li a:hover {
+  background: var(--gp-paper);
+  color: var(--gp-accent);
+  padding-left: 24px;
+}
+
+.gp-ds header.gp-site-header .sub-category-menu {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 0 10px 10px 0;
+}
+
+/* Compact search-icon dropdown (many header menu items) — DS card, not inline #bbb */
+.gp-ds header.gp-site-header .search-input-form .dropdown-menu {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border) !important;
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card) !important;
+}
+
+/* Search — compact pill, icon and label do not overlap */
+.gp-ds header.gp-site-header .gp-header-search,
+.gp-ds header.gp-site-header .search-input-form {
+  flex: 1 1 260px;
+  width: 260px;
+  max-width: 280px;
+  min-width: 0;
+  margin: 0 auto;
+}
+
+.gp-ds header.gp-site-header .header-search,
+.gp-ds header.gp-site-header .search-container {
+  background: transparent;
+  box-shadow: none !important;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+/* DS's own input component (gp-components-core.css, reference doc §07):
+   underline-only, no boxed border, transparent ground, thickens and turns
+   gold-deep on focus — used here instead of a bespoke pill so the header
+   search matches every other text field in the system. */
+.gp-ds header.gp-site-header .search-input,
+.gp-ds header.gp-site-header .search-input-floating,
+.gp-ds header.gp-site-header .search-input:focus,
+.gp-ds header.gp-site-header .search-input.focused {
+  box-sizing: border-box;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  min-height: 36px;
+  height: 36px;
+  border: none !important;
+  border-bottom: 1.5px solid var(--gp-border-strong) !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  color: var(--gp-fg) !important;
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+  padding: 0 4px 0 26px !important;
+  opacity: 1 !important;
+  margin: 0 !important;
+  line-height: 36px !important;
+  letter-spacing: 0;
+  word-spacing: 0.12em;
+  transition: border-color var(--gp-dur-fast) var(--gp-ease-out), border-bottom-width var(--gp-dur-fast) var(--gp-ease-out) !important;
+}
+
+.gp-ds header.gp-site-header .search-input::placeholder,
+.gp-ds header.gp-site-header .search-input-floating::placeholder,
+.gp-ds header.gp-site-header .search-input::-webkit-input-placeholder,
+.gp-ds header.gp-site-header .search-input-floating::-webkit-input-placeholder {
+  color: var(--gp-fg-muted) !important;
+  opacity: 1;
+}
+
+.gp-ds header.gp-site-header .search-input:focus,
+.gp-ds header.gp-site-header .search-input-floating:focus {
+  border-bottom-color: var(--gp-gold-deep) !important;
+  border-bottom-width: 2px !important;
+  outline: none;
+  box-shadow: none;
+}
+
+.gp-ds header.gp-site-header .header-search-icon {
+  left: 2px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 18px !important;
+  height: 18px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  color: var(--gp-fg-muted) !important;
+  z-index: 2;
+}
+
+.gp-ds header.gp-site-header .header-search-icon svg,
+.gp-ds header.gp-site-header .menu_pro_cart_tgl svg,
+.gp-ds header.gp-site-header .menu_wisth_tgl svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 0 !important;
+}
+
+.gp-ds header.gp-site-header .header-search-icon svg,
+.gp-ds header.gp-site-header .header-search-icon svg path,
+.gp-ds header.gp-site-header .menu_pro_cart_tgl svg,
+.gp-ds header.gp-site-header .menu_pro_cart_tgl svg path,
+.gp-ds header.gp-site-header .menu_wisth_tgl svg,
+.gp-ds header.gp-site-header .menu_wisth_tgl svg path {
+  fill: currentColor !important;
+}
+
+/* Right actions */
+.gp-ds header.gp-site-header .right-menubar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  height: 36px;
+  margin-left: auto !important;
+}
+
+.gp-ds header.gp-site-header .right-menubar>* {
+  margin: 0 !important;
+}
+
+.gp-ds header.gp-site-header .right-menubar a,
+.gp-ds header.gp-site-header .menubar .right-menubar a {
+  margin-top: 0 !important;
+}
+
+.gp-ds header.gp-site-header .right-menubar i,
+.gp-ds header.gp-site-header .menubar .right-menubar i {
+  margin: 0 !important;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.gp-ds header.gp-site-header .right-menubar>li {
+  display: none;
+}
+
+.gp-ds header.gp-site-header .wisth_tgl_2div>a,
+.gp-ds header.gp-site-header .menu_pro_cart_tgl,
+.gp-ds header.gp-site-header .menu_wisth_tgl {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--gp-radius);
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  color: var(--gp-fg);
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  flex-shrink: 0;
+}
+
+.gp-ds header.gp-site-header .wisth_tgl_2div>a:hover,
+.gp-ds header.gp-site-header .menu_pro_cart_tgl:hover {
+  background: var(--gp-paper);
+}
+
+.gp-ds header.gp-site-header .wisth_tgl_div,
+.gp-ds header.gp-site-header .menu_pro_tgl_div {
+  position: relative;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.gp-ds header.gp-site-header .wish,
+.gp-ds header.gp-site-header .wisth_tgl_2div,
+.gp-ds header.gp-site-header .wisth_tgl_2div.wish,
+.gp-ds header.gp-site-header .menu_pro_tgl-2div {
+  display: flex;
+  align-items: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 36px;
+}
+
+.gp-ds header.gp-site-header .menu_number {
+  background: var(--gp-secondary);
+  color: var(--gp-on-primary);
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 10px;
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish,
+.gp-ds header.gp-site-header .menu_pro_tgl_bg {
+  background: var(--gp-surface) !important;
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  color: var(--gp-fg);
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish::after {
+  background-color: var(--gp-surface) !important;
+  box-shadow: none;
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish .menu_pro_wish-flex .text h4,
+.gp-ds header.gp-site-header .menu_pro_wish h4,
+.gp-ds header.gp-site-header .menu_pro_wish:hover .text h4,
+.gp-ds header.gp-site-header .menu_pro_wish a:not(.btn) {
+  color: var(--gp-fg) !important;
+  letter-spacing: 0;
+  word-spacing: 0.12em;
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish .menu_pro_wish-flex .text p,
+.gp-ds header.gp-site-header .menu_pro_wish:hover .text p,
+.gp-ds header.gp-site-header .menu_pro_wish .text-muted,
+.gp-ds header.gp-site-header .menu_pro_wish .text-secondary,
+.gp-ds header.gp-site-header .menu_pro_wish small {
+  color: var(--gp-fg-muted) !important;
+  letter-spacing: 0;
+  word-spacing: 0.12em;
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish-flex .spandiv span {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish-flex .spandiv del {
+  color: var(--gp-fg-faint) !important;
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish-f-b {
+  border-bottom-color: var(--gp-border) !important;
+}
+
+.gp-ds header.gp-site-header .wisth_tgl_2div:hover .menu_pro_wish,
+.gp-ds header.gp-site-header .menu_pro_wish:hover,
+.gp-ds header.gp-site-header .menu_pro_tgl_bg:hover {
+  background: var(--gp-surface) !important;
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish-f-b:hover,
+.gp-ds header.gp-site-header .menu_pro_wish .path_pos_wish-2:hover,
+.gp-ds header.gp-site-header .menu_pro_wish a.checkPropagation:hover,
+.gp-ds header.gp-site-header .notify-item:hover {
+  background: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish-f-b:hover h4,
+.gp-ds header.gp-site-header .menu_pro_wish-f-b:hover .text h4,
+.gp-ds header.gp-site-header .menu_pro_wish-f-b:hover a,
+.gp-ds header.gp-site-header .menu_pro_wish-f-b:hover span,
+.gp-ds header.gp-site-header .menu_pro_wish:hover .text h4 {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish-f-b:hover p,
+.gp-ds header.gp-site-header .menu_pro_wish:hover .text p {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds header.gp-site-header .menu_pro_wish .cart-minus,
+.gp-ds header.gp-site-header .menu_pro_wish .cart-minus i,
+.gp-ds header.gp-site-header .menu_pro_wish .fa-cart-plus,
+.gp-ds header.gp-site-header .menu_pro_wish .fa-minus-circle {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds header.gp-site-header .notify-icon {
+  background: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds header.gp-site-header .notify-item {
+  color: var(--gp-fg);
+}
+
+.gp-ds header.gp-site-header .notify-item.unread {
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds header.gp-site-header .notify-details,
+.gp-ds header.gp-site-header .notify-item .user-msg,
+.gp-ds header.gp-site-header .notify-item .text-muted {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds header.gp-site-header .notify-details {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds header.gp-site-header .menu_pro_btn .btn,
+.gp-ds header.gp-site-header .menu_pro_btn a.btn {
+  color: var(--gp-on-primary) !important;
+  text-transform: none !important;
+  letter-spacing: 0.02em;
+  word-spacing: 0.16em;
+}
+
+/* Profile-dropdown SVG icons ship with a hardcoded #99A1B7 stroke/fill in the
+   markup (28 occurrences) — repoint to the DS muted-text token instead of
+   editing every inline SVG, so it follows dark mode like everything else. */
+.gp-ds header.gp-site-header .user-dropdown-menu-item svg [stroke="#99A1B7"] {
+  stroke: var(--gp-fg-muted);
+}
+.gp-ds header.gp-site-header .user-dropdown-menu-item svg [fill="#99A1B7"] {
+  fill: var(--gp-fg-muted);
+}
+
+.gp-ds header.gp-site-header .menu_pro_tgl img,
+.gp-ds header.gp-site-header .profile-dropdown img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--gp-border);
+}
+
+.gp-ds header.gp-site-header .gp-login-link {
+  font-family: var(--gp-font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gp-fg);
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 4px;
+  margin: 0 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.gp-ds header.gp-site-header .gp-login-link:hover {
+  color: var(--gp-blue-solid);
+}
+
+.gp-ds header.gp-site-header .right-menubar .btn-primary,
+.gp-ds header.gp-site-header .right-menubar .ctBtn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  min-height: 36px;
+  padding: 0 20px !important;
+  margin: 0 !important;
+  font-family: var(--gp-font-head);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1 !important;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--gp-primary) !important;
+  border: 2px solid var(--gp-primary) !important;
+  color: var(--gp-on-primary) !important;
+  border-radius: var(--gp-radius) !important;
+}
+
+.gp-ds header.gp-site-header .right-menubar .btn-primary:hover,
+.gp-ds header.gp-site-header .right-menubar .ctBtn:hover {
+  background: var(--gp-accent) !important;
+  border-color: var(--gp-accent) !important;
+  color: var(--gp-on-primary) !important;
+}
+
+.gp-ds header.gp-site-header .gp-header-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  height: 36px;
+}
+
+@media (max-width: 1199px) {
+  .gp-ds header.gp-site-header .gp-header-tools .language-control {
+    display: none;
+  }
+}
+
+.gp-ds header.gp-site-header .gp-header-tools .language-control {
+  max-width: 124px;
+  margin: 0;
+  position: relative;
+}
+
+/* nice-select hides the real <select>; do not un-hide it */
+.gp-ds header.gp-site-header .gp-header-tools select.select-control,
+.gp-ds header.gp-site-header .gp-header-tools select.form-select,
+.gp-ds header.gp-site-header .gp-header-tools select.nice-select {
+  display: none !important;
+}
+
+.gp-ds header.gp-site-header .gp-header-tools div.nice-select {
+  display: flex !important;
+  align-items: center;
+  box-sizing: border-box;
+  font-family: var(--gp-font-body);
+  font-size: 12.5px;
+  min-height: 36px;
+  height: 36px;
+  line-height: 1 !important;
+  padding: 0 36px 0 14px !important;
+  background: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
+  border: 1.5px solid var(--gp-border-strong) !important;
+  max-width: 124px;
+  float: none;
+}
+
+.gp-ds header.gp-site-header .gp-header-tools .nice-select .current {
+  color: var(--gp-fg) !important;
+  letter-spacing: 0;
+  word-spacing: 0.12em;
+}
+
+.gp-ds header.gp-site-header .gp-header-tools .nice-select::after {
+  width: 6px !important;
+  height: 6px !important;
+  right: 14px !important;
+  top: 50% !important;
+  margin-top: -5px !important;
+  border-width: 0 1.5px 1.5px 0 !important;
+  border-color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds header.gp-site-header .gp-header-tools .nice-select .list {
+  background: var(--gp-surface) !important;
+  border: 1px solid var(--gp-border) !important;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds header.gp-site-header .gp-header-tools .nice-select .option {
+  color: var(--gp-fg) !important;
+  background: transparent !important;
+}
+
+.gp-ds header.gp-site-header .gp-header-tools .nice-select .option:hover,
+.gp-ds header.gp-site-header .gp-header-tools .nice-select .option.focus,
+.gp-ds header.gp-site-header .gp-header-tools .nice-select .option.selected.focus {
+  background: var(--gp-paper) !important;
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds header.gp-site-header .gp-theme-row {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--gp-border);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+  flex-shrink: 0;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+.gp-ds header.gp-site-header .gp-theme-btn {
+  border: none;
+  background: transparent;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 999px;
+  color: var(--gp-fg-muted);
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  line-height: 0 !important;
+}
+
+.gp-ds header.gp-site-header .gp-theme-btn svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gp-ds header.gp-site-header .gp-theme-btn.active {
+  background: var(--gp-primary);
+  color: var(--gp-on-primary);
+  border-color: transparent;
+}
+
+/* Dark header: keep language, cart, login, and theme readable.
+   Search needs no override here — the underline field (base rule above) is
+   transparent with theme-aware tokens throughout, so it already adapts. */
+.gp-ds[data-theme="dark"] header.gp-site-header .search-input::placeholder,
+.gp-ds[data-theme="dark"] header.gp-site-header .search-input-floating::placeholder,
+.gp-ds[data-theme="dark"] header.gp-site-header .search-input::-webkit-input-placeholder,
+.gp-ds[data-theme="dark"] header.gp-site-header .search-input-floating::-webkit-input-placeholder {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds[data-theme="dark"] header.gp-site-header .header-search-icon,
+.gp-ds[data-theme="dark"] header.gp-site-header .menu_pro_cart_tgl,
+.gp-ds[data-theme="dark"] header.gp-site-header .menu_wisth_tgl,
+.gp-ds[data-theme="dark"] header.gp-site-header .wisth_tgl_2div>a,
+.gp-ds[data-theme="dark"] header.gp-site-header .gp-login-link,
+.gp-ds[data-theme="dark"] header.gp-site-header .menu-offcanves .btn-bar,
+.gp-ds[data-theme="dark"] header.gp-site-header .m-search-icon,
+.gp-ds[data-theme="dark"] header.gp-site-header .m-cross-icon {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds[data-theme="dark"] header.gp-site-header .gp-login-link:hover,
+.gp-ds[data-theme="dark"] header.gp-site-header .menu_pro_cart_tgl:hover,
+.gp-ds[data-theme="dark"] header.gp-site-header .wisth_tgl_2div>a:hover {
+  color: var(--gp-fg) !important;
+  background: #25242c;
+}
+
+.gp-ds[data-theme="dark"] header.gp-site-header .gp-header-tools div.nice-select {
+  background: #25242c !important;
+  color: var(--gp-fg) !important;
+  border-color: var(--gp-border-strong) !important;
+}
+
+.gp-ds[data-theme="dark"] header.gp-site-header .gp-header-tools .nice-select .list {
+  background: var(--gp-surface) !important;
+}
+
+.gp-ds[data-theme="dark"] header.gp-site-header .gp-theme-row {
+  border-color: var(--gp-border-strong);
+  background: #25242c;
+}
+
+.gp-ds[data-theme="dark"] header.gp-site-header .gp-theme-btn {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds[data-theme="dark"] header.gp-site-header .gp-theme-btn.active {
+  background: var(--gp-primary-2);
+  color: var(--gp-on-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  /* Search needs no override here either — see the dark-header comment above. */
+
+  .gp-ds[data-theme="system"] header.gp-site-header .header-search-icon,
+  .gp-ds[data-theme="system"] header.gp-site-header .menu_pro_cart_tgl,
+  .gp-ds[data-theme="system"] header.gp-site-header .menu_wisth_tgl,
+  .gp-ds[data-theme="system"] header.gp-site-header .wisth_tgl_2div>a,
+  .gp-ds[data-theme="system"] header.gp-site-header .gp-login-link {
+    color: var(--gp-fg-muted) !important;
+  }
+
+  .gp-ds[data-theme="system"] header.gp-site-header .gp-header-tools div.nice-select {
+    background: #25242c !important;
+    color: var(--gp-fg) !important;
+    border-color: var(--gp-border-strong) !important;
+  }
+
+  .gp-ds[data-theme="system"] header.gp-site-header .gp-theme-row {
+    border-color: var(--gp-border-strong);
+    background: #25242c;
+  }
+}
+
+/* Mobile offcanvas → navy drawer */
+.gp-ds header.gp-site-header .mobile-view-offcanves .offcanvas {
+  background: var(--gp-accent) !important;
+  color: var(--gp-on-primary);
+}
+
+.gp-ds header.gp-site-header .mobile-view-offcanves .offcanvas-header,
+.gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-top,
+.gp-ds header.gp-site-header .mobile-view-offcanves li.bg-light,
+.gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle-nav {
+  background: transparent !important;
+}
+
+.gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle-list,
+.gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle,
+.gp-ds header.gp-site-header .mobile-view-offcanves a,
+.gp-ds header.gp-site-header .mobile-view-offcanves .user-details h4,
+.gp-ds header.gp-site-header .mobile-view-offcanves .user-details p {
+  /* Off-white, not var(--gp-fg): this drawer is a fixed --gp-accent navy panel
+     in both themes, so its text needs a fixed light color too — --gp-fg would
+     go near-black in light mode and disappear against the navy background. */
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .logIn-btn,
+.gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .signUp-btn {
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds header.gp-site-header .mobile-view-offcanves .gp-header-tools {
+  padding: 16px 20px 24px;
+}
+
+.gp-ds header.gp-site-header .mobile-view-offcanves .gp-theme-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gp-ds header.gp-site-header .menu-offcanves .btn-bar,
+.gp-ds header.gp-site-header .m-search-icon,
+.gp-ds header.gp-site-header .m-cross-icon {
+  color: var(--gp-fg);
+}
+
+.gp-ds header.gp-site-header .inline-form .form-control {
+  background: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
+  border: 1.5px solid var(--gp-border-strong) !important;
+  border-radius: 999px;
+}
+
+.gp-ds header.gp-site-header .inline-form .form-control::placeholder {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds header.gp-site-header .inline-form .search-btn {
+  background: var(--gp-primary) !important;
+  color: var(--gp-on-primary) !important;
+}
+
+/* ========== Footer (DS paper grid — keep all admin-driven blocks) ========== */
+.gp-ds footer.gp-site-footer,
+.gp-ds footer.lms2-footer-section.gp-site-footer {
+  background: var(--gp-paper);
+  color: var(--gp-fg-muted);
+  padding: 72px 0 0;
+  border-top: 1px solid var(--gp-border);
+  overflow: visible;
+  position: relative;
+  z-index: 1;
+}
+
+.gp-ds footer.gp-site-footer::after {
+  display: none !important;
+}
+
+.gp-ds footer.gp-site-footer>.container {
+  max-width: 1240px;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr 1.35fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .gp-ds footer.gp-site-footer .gp-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .gp-ds footer.gp-site-footer .gp-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-brand img {
+  height: 36px;
+  width: auto;
+  margin-bottom: 16px;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-brand p,
+.gp-ds footer.gp-site-footer .gp-footer-note {
+  font-family: var(--gp-font-body);
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--gp-fg-muted);
+  max-width: 280px;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-brand span {
+  display: block;
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--gp-fg);
+  margin-top: 8px;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-brand span a {
+  color: var(--gp-fg);
+}
+
+.gp-ds footer.gp-site-footer h4,
+.gp-ds footer.gp-site-footer .ft2-title {
+  font-family: var(--gp-font-head);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gp-secondary);
+  margin: 0 0 18px;
+}
+
+.gp-ds[data-theme="dark"] footer.gp-site-footer h4,
+.gp-ds[data-theme="dark"] footer.gp-site-footer .ft2-title {
+  color: var(--gp-gold-light);
+}
+
+.gp-ds footer.gp-site-footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gp-ds footer.gp-site-footer ul li {
+  margin-bottom: 12px;
+}
+
+.gp-ds footer.gp-site-footer a,
+.gp-ds footer.gp-site-footer .ft2-nav-link {
+  font-family: var(--gp-font-body);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--gp-fg-muted);
+  text-decoration: none;
+  transition: color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds footer.gp-site-footer a:hover,
+.gp-ds footer.gp-site-footer .ft2-nav-link:hover {
+  color: var(--gp-primary);
+  padding-left: 0 !important;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-socials a {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--gp-radius);
+  border: 1.5px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-socials a i,
+.gp-ds footer.gp-site-footer .gp-footer-socials a svg {
+  color: inherit;
+  fill: currentColor;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-socials a:hover {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: var(--gp-on-primary) !important;
+  padding-left: 0 !important;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-subscribe h4 {
+  margin-bottom: 14px;
+}
+
+.gp-ds footer.gp-site-footer .ft2-subscribe-wrap {
+  background: transparent;
+  padding: 0;
+}
+
+.gp-ds footer.gp-site-footer .gp-foot-subscribe {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin-top: 0;
+  position: relative;
+}
+
+.gp-ds footer.gp-site-footer .gp-foot-subscribe .form-control,
+.gp-ds footer.gp-site-footer .ft2-newsLetter-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 42px;
+  border: 1.5px solid var(--gp-border-strong) !important;
+  background: var(--gp-surface) !important;
+  border-radius: var(--gp-radius) !important;
+  padding: 10px 12px !important;
+  color: var(--gp-fg) !important;
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+}
+
+.gp-ds footer.gp-site-footer .gp-foot-subscribe .form-control::placeholder,
+.gp-ds footer.gp-site-footer .ft2-newsLetter-input::placeholder {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds footer.gp-site-footer .ft2-newsLetter-btn {
+  position: static !important;
+  right: auto !important;
+  top: auto !important;
+  flex: 0 0 auto;
+  height: 42px;
+  background: var(--gp-primary) !important;
+  border: 2px solid var(--gp-primary) !important;
+  color: var(--gp-on-primary) !important;
+  border-radius: var(--gp-radius) !important;
+  padding: 0 16px !important;
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+}
+
+.gp-ds footer.gp-site-footer .ft2-newsLetter-btn:hover {
+  background: var(--gp-accent) !important;
+  border-color: var(--gp-accent) !important;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-bottom {
+  border-top: 1px solid var(--gp-border);
+  margin-top: 56px;
+  padding: 22px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-legal {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-legal a {
+  color: var(--gp-fg-muted);
+  font-size: 13px;
+}
+
+.gp-ds footer.gp-site-footer .gp-footer-legal a:hover {
+  color: var(--gp-primary);
+  padding-left: 0 !important;
+}

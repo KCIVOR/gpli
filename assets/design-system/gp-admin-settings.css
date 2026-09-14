@@ -1,0 +1,698 @@
+/**
+ * Geese Project — Admin Settings
+ * Tokens from gp-tokens.css only. No leftover Hyper hex.
+ * Light / Dark: use var(--gp-*) so .gp-ds[data-theme] flips surfaces.
+ * Do not hardcode #111015, #FBFAF7, #fff, #1b84ff, #a7a4a4, #F5F5F5, #343a40.
+ *
+ * In-scope page_name values:
+ *   system_settings, frontend_settings, drip_content_settings, badges
+ *   seo_settings, sitemap_settings, certificate_settings, s3_settings
+ *   wasabi_settings, open_ai_settings, zoom_live_class_settings
+ *   jitsi_live_class_settings, bbb_live_class_settings,
+ *   payment_settings (admin + instructor /user/payout_settings)
+ *   manage_language, notification_settings, social_login
+ *   custom_page, add_custom_page, edit_custom_page, home_page_builder
+ *   data_center, about
+ *
+ * Forbidden:
+ *   rewriting Admin.php / addon controllers
+ *   changing form names / ids / actions
+ *   editing DataTables JS / common_scripts.php
+ *   restyling home_page_builder/index.php canvas
+ *   inventing --gp-text-muted / --gp-link
+ *
+ * Hooks later phases must keep:
+ *   checkRequiredFields, updatePhrase, btn-{slug}
+ *   confirm_modal, showAjaxModal, showRightModal
+ *   #website_keywords / #meta_keywords data-role="tagsinput"
+ *   #basicwizard, #badgeTabs, tab hrefs
+ *   #basic-datatable, #summernote-basic
+ *   #minimum_duration data-toggle="timepicker"
+ *   #data-import-alert-modal, payment identifier / theme_color
+ */
+
+.gp-ds .gp-settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .row:has(+ .gp-settings-page) .gp-page-title-actions .btn,
+.gp-ds .gp-settings-page .btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-settings-page a.btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-settings-page button.btn:not(.btn-icon):not(.action-icon):not(.icon-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 96px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
+  line-height: 1.2;
+  min-height: 38px !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-settings-page .btn,
+.gp-ds .gp-settings-page .header-title,
+.gp-ds .row:has(+ .gp-settings-page) .page-title,
+.gp-ds .gp-settings-page label,
+.gp-ds .gp-settings-page .col-form-label {
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-settings-page .gp-dash-panel > .card-body > .header-title,
+.gp-ds .gp-settings-page .card > .card-body > .header-title {
+  margin: 0 0 16px;
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-settings-page .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-settings-page .required {
+  color: var(--gp-secondary);
+  margin-left: 2px;
+}
+
+.gp-ds .gp-settings-page .form-group {
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-settings-page .form-group > label,
+.gp-ds .gp-settings-page .col-form-label {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-settings-page .form-control,
+.gp-ds .gp-settings-page select.form-control,
+.gp-ds .gp-settings-page textarea.form-control,
+.gp-ds .gp-settings-page .custom-file-label,
+.gp-ds .gp-settings-page .input-group-text {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-settings-page .form-control:focus,
+.gp-ds .gp-settings-page select.form-control:focus,
+.gp-ds .gp-settings-page textarea.form-control:focus {
+  background: var(--gp-surface);
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-settings-page input[type="color"].form-control {
+  width: 56px;
+  max-width: 56px;
+  height: 38px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.gp-ds .gp-settings-page .text-muted,
+.gp-ds .gp-settings-page .gp-settings-help-link {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds .gp-settings-page .gp-settings-help-link:hover {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-settings-page a:not(.btn):not(.nav-link):not(.dropdown-item):not(.page-link):not(.action-icon):not(.icon-btn):not(.add-home-page) {
+  color: var(--gp-primary);
+}
+
+.gp-ds .gp-settings-page a:not(.btn):not(.nav-link):not(.dropdown-item):not(.page-link):not(.action-icon):not(.icon-btn):not(.add-home-page):hover {
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-settings-page .bootstrap-tagsinput {
+  width: 100%;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: none;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-settings-page .js--image-preview {
+  background-color: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+}
+
+.gp-ds .gp-settings-page .action-icon,
+.gp-ds .gp-settings-page .icon-btn,
+.gp-ds .gp-settings-page .btn.btn-icon,
+.gp-ds .gp-settings-page .dropright > .icon-btn,
+.gp-ds .gp-settings-page .dropright > .btn.btn-icon,
+.gp-ds .gp-settings-page .dropright > .btn-rounded.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted) !important;
+  font-size: 13px;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-settings-page .action-icon:hover,
+.gp-ds .gp-settings-page .icon-btn:hover,
+.gp-ds .gp-settings-page .icon-btn:focus,
+.gp-ds .gp-settings-page .icon-btn[aria-expanded="true"],
+.gp-ds .gp-settings-page .btn.btn-icon:hover,
+.gp-ds .gp-settings-page .btn.btn-icon:focus,
+.gp-ds .gp-settings-page .dropright > .icon-btn:hover,
+.gp-ds .gp-settings-page .dropright > .icon-btn:focus,
+.gp-ds .gp-settings-page .dropright.show > .icon-btn,
+.gp-ds .gp-settings-page .dropright > .icon-btn[aria-expanded="true"],
+.gp-ds .gp-settings-page .dropright > .btn.btn-icon:hover,
+.gp-ds .gp-settings-page .dropright > .btn.btn-icon:focus,
+.gp-ds .gp-settings-page .dropright.show > .btn.btn-icon,
+.gp-ds .gp-settings-page .dropright > .btn.btn-icon[aria-expanded="true"] {
+  background: var(--gp-surface);
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-settings-page .nav-pills.bg-nav-pills,
+.gp-ds .gp-settings-page .nav-tabs.nav-bordered {
+  background: transparent;
+  border-bottom: 1px solid var(--gp-border);
+  --bs-nav-pills-link-active-bg: transparent;
+  --bs-nav-pills-link-active-color: var(--gp-fg);
+}
+
+.gp-ds .gp-settings-page .nav-pills .nav-link,
+.gp-ds .gp-settings-page .nav-tabs .nav-link {
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gp-fg-muted);
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none;
+}
+
+.gp-ds .gp-settings-page .nav-pills .nav-link.active,
+.gp-ds .gp-settings-page .nav-tabs .nav-link.active {
+  color: var(--gp-fg) !important;
+  background: transparent !important;
+  box-shadow: inset 0 -2px 0 var(--gp-primary);
+}
+
+.gp-ds .gp-settings-page table.table,
+.gp-ds .gp-settings-page table.dataTable {
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-settings-page table.table thead th,
+.gp-ds .gp-settings-page table.dataTable thead th {
+  color: var(--gp-fg-faint);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .gp-settings-page table.table tbody td,
+.gp-ds .gp-settings-page table.dataTable tbody td {
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .gp-settings-page .dataTables_wrapper .dataTables_filter input,
+.gp-ds .gp-settings-page .dataTables_length select {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-settings-page .dataTables_info,
+.gp-ds .gp-settings-page .dataTables_length,
+.gp-ds .gp-settings-page .dataTables_filter label {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-settings-page .alert-info,
+.gp-ds .gp-settings-page .alert-danger,
+.gp-ds .gp-settings-page .alert-success,
+.gp-ds .gp-settings-page .alert-light {
+  background: var(--gp-info-soft);
+  border: 1px solid var(--gp-info-border);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-settings-page .alert-danger {
+  background: var(--gp-danger-soft);
+  border-color: var(--gp-danger-border);
+}
+
+.gp-ds .gp-settings-page .alert-success {
+  background: var(--gp-success-soft);
+  border-color: var(--gp-success-border);
+}
+
+.gp-ds .gp-settings-page .alert-light {
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .gp-settings-page .gp-settings-faq-btn {
+  min-width: 38px !important;
+  width: 38px !important;
+  padding: 8px 0 !important;
+}
+
+.gp-ds .gp-settings-page .scrollable-tab-btn-left,
+.gp-ds .gp-settings-page .scrollable-tab-btn-right {
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+  border: 1px solid var(--gp-border);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-settings-page .scrollable-tab-btn-left:hover,
+.gp-ds .gp-settings-page .scrollable-tab-btn-right:hover {
+  color: var(--gp-fg);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .gp-settings-page .form-group input[type="radio"],
+.gp-ds .gp-settings-page .video_test li input,
+.gp-ds .gp-settings-page .video_test li label {
+  cursor: pointer;
+}
+
+.gp-ds .gp-settings-page .video_test {
+  list-style: none;
+  padding-left: 0;
+}
+
+.gp-ds .gp-settings-page .boxs {
+  height: 260px;
+  width: 300px;
+  margin: 10px;
+  background-color: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  overflow: hidden;
+  text-align: center;
+}
+
+.gp-ds .gp-settings-page .wrapper-image-preview .box {
+  background: var(--gp-surface);
+  background-color: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-settings-page .wrapper-image-preview .js--image-preview {
+  background-color: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-settings-page .scrollable-tab .nav .nav-link {
+  min-width: 155px;
+}
+
+.gp-ds .gp-settings-page .upload-options .btn,
+.gp-ds .gp-settings-page .upload-option .btn {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  color: var(--gp-fg);
+  height: auto;
+  white-space: normal;
+}
+
+/* Timepicker widget appends to body (outside .gp-settings-page). Token leftover Hyper #727cf5. */
+.gp-ds .bootstrap-timepicker-widget.dropdown-menu {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  color: var(--gp-fg);
+}
+
+.gp-ds .bootstrap-timepicker-widget table td input {
+  color: var(--gp-fg);
+  background-color: var(--gp-surface-sunk);
+  border-radius: var(--gp-radius);
+  border: 1px solid var(--gp-border);
+}
+
+.gp-ds .bootstrap-timepicker-widget table td a {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .bootstrap-timepicker-widget table td a:hover {
+  background-color: var(--gp-surface-sunk);
+  border-color: var(--gp-border);
+  color: var(--gp-primary);
+}
+
+.gp-ds .bootstrap-timepicker-widget.dropdown-menu:before {
+  border-bottom-color: var(--gp-border);
+}
+
+.gp-ds .bootstrap-timepicker-widget.dropdown-menu:after {
+  border-bottom-color: var(--gp-surface);
+}
+
+.gp-ds .bootstrap-timepicker-widget.timepicker-orient-bottom:after {
+  border-top-color: var(--gp-surface);
+}
+
+.gp-ds .bootstrap-timepicker-widget.timepicker-orient-bottom:before {
+  border-top-color: var(--gp-border);
+}
+
+/* Phase 5 — Language settings (phrase cards + leftover btn-{slug} icon save) */
+.gp-ds .gp-settings-page .gp-settings-phrase-card {
+  margin-bottom: 16px;
+  box-shadow: none;
+}
+
+.gp-ds .gp-settings-page .gp-settings-phrase-card .card-header {
+  padding: 12px 16px;
+  background: var(--gp-surface-sunk);
+  border-bottom: 1px solid var(--gp-border);
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gp-fg);
+  border-radius: 14px 14px 0 0;
+}
+
+.gp-ds .gp-settings-page .btn.btn-icon.gp-settings-phrase-save {
+  float: right;
+  color: var(--gp-primary) !important;
+}
+
+.gp-ds .gp-settings-page .btn.btn-icon.gp-settings-phrase-save:hover,
+.gp-ds .gp-settings-page .btn.btn-icon.gp-settings-phrase-save:focus {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-settings-page .gp-settings-lang-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gp-ds .gp-settings-page .gp-settings-import-hint {
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* Phase 6 — Notification leftover custom-switch + warning text */
+.gp-ds .gp-settings-page .custom-control-label::before {
+  background-color: var(--gp-surface);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .gp-settings-page .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: var(--gp-on-primary);
+  box-shadow: none;
+}
+
+.gp-ds .gp-settings-page .text-warning {
+  color: var(--gp-warning) !important;
+}
+
+/* Phase 8 — Data center + About */
+.gp-ds .gp-settings-page .gp-settings-file-hint {
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.gp-ds .gp-settings-page .gp-settings-backup-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-settings-page .gp-settings-backup-head .header-title {
+  margin: 0;
+}
+
+.gp-ds .gp-settings-page .file-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border: 1px solid var(--gp-border);
+  border-radius: 10px;
+  font-size: 12.5px;
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-settings-page .file-chip .name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gp-fg);
+  min-width: 0;
+}
+
+.gp-ds .gp-settings-page .gp-settings-backup-date {
+  color: var(--gp-fg-muted);
+  font-size: 12px;
+}
+
+.gp-ds .gp-settings-page .gp-settings-backup-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.gp-ds .gp-settings-page .empty-state {
+  text-align: center;
+  padding: 56px 24px;
+  border: 1px dashed var(--gp-border);
+  border-radius: 14px;
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-settings-page .empty-state .icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gp-surface-sunk);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 22px;
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .gp-settings-page .empty-state h4 {
+  font-size: 16px;
+  margin-bottom: 6px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-settings-page .empty-state p {
+  font-size: 13.5px;
+  color: var(--gp-fg-muted);
+  max-width: 320px;
+  margin: 0 auto 18px;
+}
+
+.gp-ds .gp-settings-page .list-group-item {
+  gap: 12px;
+  flex-wrap: wrap;
+  word-break: break-word;
+}
+
+.gp-ds .gp-settings-page .gp-settings-about-layout {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.gp-ds .gp-settings-page .gp-settings-about-layout .list-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.gp-ds .gp-settings-page .gp-settings-about-label {
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-settings-page .gp-settings-about-label .mdi-square {
+  color: var(--gp-fg-muted);
+  font-size: 10px;
+  margin-right: 6px;
+}
+
+.gp-ds .gp-settings-page .gp-settings-about-value {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-settings-page .gp-settings-about-art {
+  flex-shrink: 0;
+  width: 120px;
+  height: auto;
+}
+
+@media (max-width: 767px) {
+  .gp-ds .gp-settings-page .gp-settings-about-layout {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .gp-ds .gp-settings-page .gp-settings-about-art {
+    align-self: center;
+  }
+}
+
+/* Phase 10 — Home page builder list (not the canvas) */
+.gp-ds .gp-settings-page .add-home-page {
+  display: block;
+  width: 100%;
+  padding: 35px 70px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--gp-primary);
+  background-color: var(--gp-surface-sunk);
+  border: 1px dashed var(--gp-primary);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-settings-page .add-home-page:hover,
+.gp-ds .gp-settings-page .add-home-page:focus {
+  color: var(--gp-primary);
+  background-color: var(--gp-surface);
+  box-shadow: var(--gp-shadow-card);
+  text-decoration: none;
+}
+
+.gp-ds .gp-settings-page .add-home-page .sub-title {
+  margin-bottom: 4px;
+  color: inherit;
+}
+
+.gp-ds .gp-settings-page .add-home-page .title {
+  margin: 0;
+  font-family: var(--gp-font-head);
+  font-size: 15px;
+  font-weight: 500;
+  color: inherit;
+}
+
+.gp-ds .gp-settings-page .gp-home-page-item img {
+  max-width: 100%;
+  height: 250px;
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-settings-page .gp-home-page-badge {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  max-width: calc(100% - 24px);
+}
+
+.gp-ds .gp-settings-page .gp-home-page-badge .badge {
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 12.5px;
+}
+
+.gp-ds .gp-settings-page .gp-home-page-actions {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gp-ds .gp-settings-page a.btn.gp-home-page-status-wide {
+  min-width: 75% !important;
+  width: 75% !important;
+}
+
+.gp-ds .gp-settings-page input[data-switch] + label,
+.gp-ds .gp-settings-page input[data-switch="bool"] + label,
+.gp-ds .gp-settings-page input[data-switch="success"] + label {
+  background-color: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-settings-page input[data-switch] + label:before,
+.gp-ds .gp-settings-page input[data-switch="bool"] + label:before,
+.gp-ds .gp-settings-page input[data-switch="success"] + label:before {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-settings-page input[data-switch] + label:after,
+.gp-ds .gp-settings-page input[data-switch="bool"] + label:after,
+.gp-ds .gp-settings-page input[data-switch="success"] + label:after {
+  background-color: var(--gp-surface);
+}
+
+.gp-ds .gp-settings-page input[data-switch]:checked + label,
+.gp-ds .gp-settings-page input[data-switch="bool"]:checked + label,
+.gp-ds .gp-settings-page input[data-switch="success"]:checked + label {
+  background-color: var(--gp-primary);
+}
+
+.gp-ds .gp-settings-page input[data-switch]:checked + label:before,
+.gp-ds .gp-settings-page input[data-switch="bool"]:checked + label:before,
+.gp-ds .gp-settings-page input[data-switch="success"]:checked + label:before {
+  color: var(--gp-on-primary) !important;
+}
+
+.gp-ds .gp-settings-page input[data-switch]:checked + label:after,
+.gp-ds .gp-settings-page input[data-switch="bool"]:checked + label:after,
+.gp-ds .gp-settings-page input[data-switch="success"]:checked + label:after {
+  background-color: var(--gp-on-primary);
+}

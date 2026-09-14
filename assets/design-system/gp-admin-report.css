@@ -1,0 +1,400 @@
+/**
+ * Geese Project — Admin Report
+ * Tokens from gp-tokens.css only. No leftover Hyper hex.
+ *
+ * In-scope page_name values:
+ *   admin_revenue, instructor_revenue, purchase_history, invoice,
+ *   sales_report (instructor /user/sales_report)
+ *
+ * Forbidden:
+ *   rewriting DataTables JS
+ *   changing form names / ids / actions
+ *   editing controllers
+ *   removing filters, columns, print, or invoice fields
+ *
+ * Hooks later phases must keep:
+ *   #reportrange, #selectedValue, #date_range, #submit-button
+ *   update_date_range
+ *   #basic-datatable, #sales-report-datatable, tr.gradeU
+ *   javascript:window.print(), .d-print-none
+ */
+
+.gp-ds .gp-report-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .row:has(+ .gp-report-page) .gp-page-title-actions .btn,
+.gp-ds .gp-report-page .btn:not(.btn-icon):not(.action-icon),
+.gp-ds .gp-report-page a.btn:not(.btn-icon):not(.action-icon),
+.gp-ds .gp-report-page button.btn:not(.btn-icon):not(.action-icon) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 96px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
+  line-height: 1.2;
+  min-height: 38px !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-report-page .btn,
+.gp-ds .gp-report-page .header-title,
+.gp-ds .row:has(+ .gp-report-page) .page-title {
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-report-page .gp-dash-panel > .card-body > .header-title {
+  margin: 0 0 16px;
+}
+
+.gp-ds .gp-report-toolbar-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.gp-ds .gp-report-date-field,
+.gp-ds .gp-report-date-field .form-group {
+  flex: 1 1 280px;
+  max-width: 480px;
+  min-width: 0;
+  margin: 0;
+}
+
+.gp-ds .gp-report-page #submit-button {
+  flex: 0 0 auto;
+  width: auto !important;
+  min-width: 96px;
+  height: auto !important;
+  border-radius: var(--gp-radius) !important;
+}
+
+.gp-ds .gp-report-page #reportrange {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 12px;
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  font-family: var(--gp-font-body);
+  font-size: 13.5px;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.gp-ds .gp-report-page #reportrange:hover,
+.gp-ds .gp-report-page #reportrange:focus {
+  border-color: var(--gp-border-strong);
+  background: var(--gp-surface);
+}
+
+/* Leftover Hyper daterangepicker is appended to body — restyle as DS §17 dropdown */
+.gp-ds .daterangepicker {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 10px;
+  box-shadow: var(--gp-shadow-card);
+  color: var(--gp-fg);
+  padding: 6px;
+  font-family: var(--gp-font-body);
+}
+
+.gp-ds .daterangepicker:before,
+.gp-ds .daterangepicker:after {
+  display: none;
+}
+
+.gp-ds .daterangepicker .ranges ul {
+  width: 100% !important;
+  padding: 0;
+  margin: 0;
+}
+
+.gp-ds .daterangepicker .ranges li {
+  padding: 9px 10px;
+  border-radius: 7px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--gp-fg);
+  word-spacing: 0.2em;
+  background: transparent;
+}
+
+.gp-ds .daterangepicker .ranges li:hover {
+  background: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .daterangepicker .ranges li.active {
+  background: var(--gp-info-soft) !important; /* leftover Hyper #08c */
+  color: var(--gp-primary) !important;
+  font-weight: 700;
+}
+
+.gp-ds .daterangepicker .calendar-table {
+  background: var(--gp-surface);
+  border-color: var(--gp-border);
+}
+
+.gp-ds .daterangepicker td.available:hover,
+.gp-ds .daterangepicker th.available:hover {
+  background-color: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+}
+
+.gp-ds .daterangepicker td.active,
+.gp-ds .daterangepicker td.active:hover {
+  background-color: var(--gp-primary) !important; /* leftover Hyper #357ebd */
+  border-color: transparent;
+  color: var(--gp-on-primary) !important;
+}
+
+.gp-ds .daterangepicker td.in-range {
+  background-color: var(--gp-info-soft);
+  color: var(--gp-fg);
+}
+
+.gp-ds .daterangepicker .drp-buttons {
+  border-top-color: var(--gp-border);
+}
+
+.gp-ds .daterangepicker .drp-buttons .btn-primary {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: var(--gp-on-primary);
+  box-shadow: none;
+}
+
+.gp-ds .daterangepicker .drp-buttons .btn-default,
+.gp-ds .daterangepicker .drp-buttons .btn-light,
+.gp-ds .daterangepicker .drp-buttons .cancelBtn {
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-report-page .form-control,
+.gp-ds .gp-report-page input.form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-report-page .table-responsive-sm,
+.gp-ds .gp-report-page .table-responsive {
+  margin-top: 0;
+}
+
+.gp-ds .gp-report-page table.table thead th,
+.gp-ds .gp-report-page table.dataTable thead th {
+  word-spacing: 0.28em;
+}
+
+.gp-ds .gp-report-page .dataTables_wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  column-gap: 16px;
+  row-gap: 12px;
+}
+
+.gp-ds .gp-report-page .dataTables_wrapper .dataTables_filter {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: stretch;
+  float: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  font-family: var(--gp-font-body);
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-report-page .dataTables_wrapper .dataTables_filter label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  font-weight: 600;
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-report-page .dataTables_wrapper .dataTables_filter input {
+  flex: 1 1 auto;
+  display: block;
+  width: 100% !important;
+  min-width: 0;
+  min-height: 42px;
+  margin-left: 0;
+  padding: 10px 14px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-report-page .dataTables_filter input:focus {
+  border-color: var(--gp-border-strong);
+  outline: none;
+}
+
+.gp-ds .gp-report-page .dataTables_wrapper > .row,
+.gp-ds .gp-report-page .dataTables_wrapper > .table-responsive,
+.gp-ds .gp-report-page .dataTables_wrapper table,
+.gp-ds .gp-report-page .dataTables_wrapper .dataTables_scroll,
+.gp-ds .gp-report-page .dataTables_wrapper .dataTables_processing {
+  grid-column: 1 / -1;
+}
+
+.gp-ds .gp-report-page .dataTables_info {
+  grid-column: 1;
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-report-page .dataTables_empty {
+  color: var(--gp-fg-muted);
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-report-page .dataTables_paginate {
+  grid-column: 2;
+  justify-self: end;
+}
+
+.gp-ds .gp-report-page .dataTables_paginate .pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.gp-ds .gp-report-page .dataTables_paginate .page-item {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+
+.gp-ds .gp-report-page .dataTables_paginate .page-link,
+.gp-ds .gp-report-page .dataTables_paginate a.paginate_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 12px;
+  margin: 0;
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--gp-fg) !important;
+  background: var(--gp-surface) !important;
+  border: 1px solid var(--gp-border-strong) !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none;
+  opacity: 1 !important;
+}
+
+.gp-ds .gp-report-page .dataTables_paginate .page-item.disabled .page-link,
+.gp-ds .gp-report-page .dataTables_paginate a.paginate_button.disabled {
+  color: var(--gp-fg-muted) !important;
+  background: var(--gp-surface-sunk) !important;
+  border-color: var(--gp-border) !important;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.gp-ds .gp-report-page .dataTables_paginate .page-item.active .page-link,
+.gp-ds .gp-report-page .dataTables_paginate a.paginate_button.current {
+  color: #fff !important;
+  background: var(--gp-primary) !important;
+  border-color: var(--gp-primary) !important;
+}
+
+.gp-ds .gp-report-page .table a {
+  color: var(--gp-primary);
+  text-decoration: none;
+}
+
+.gp-ds .gp-report-page .table a:hover {
+  color: var(--gp-accent);
+}
+
+.gp-ds .gp-report-page .text-muted {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds .gp-report-page .badge-light {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg-muted);
+  border: 1px solid var(--gp-border);
+  text-transform: none;
+  letter-spacing: normal;
+  word-spacing: normal;
+  font-weight: 600;
+}
+
+.gp-ds .gp-report-invoice .gp-report-invoice-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.gp-ds .gp-report-invoice .gp-report-invoice-meta p,
+.gp-ds .gp-report-invoice address {
+  color: var(--gp-fg-muted);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.gp-ds .gp-report-invoice h6 {
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin-bottom: 6px;
+}
+
+.gp-ds .gp-report-invoice .gp-report-invoice-total {
+  text-align: right;
+}
+
+.gp-ds .gp-report-invoice .gp-report-invoice-total h3 {
+  font-family: var(--gp-font-head);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin: 8px 0 0;
+}
+
+@media print {
+  .gp-ds .gp-report-invoice .d-print-none {
+    display: none !important;
+  }
+}

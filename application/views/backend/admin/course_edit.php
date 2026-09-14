@@ -1,16 +1,24 @@
 <?php
 $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
 ?>
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('update') . ': ' . $course_details['title']; ?></h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php
+gp_ds_page_title(
+    get_phrase('update') . ': ' . $course_details['title'],
+    gp_ds_button(get_phrase('view_on_frontend'), [
+        'href' => site_url('admin/preview/' . $course_id),
+        'variant' => 'outline',
+        'attrs' => ['target' => '_blank'],
+    ], true)
+    . ' '
+    . gp_ds_button(get_phrase('back_to_course_list'), [
+        'href' => site_url('admin/courses'),
+        'variant' => 'outline',
+    ], true)
+);
+?>
 
+<div class="gp-courses-page">
+<div class="gp-course-wizard">
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
@@ -24,11 +32,6 @@ $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
                     <div class="col-md-6">
                         <h4 class="header-title my-1"><?php echo get_phrase('course_manager'); ?></h4>
                     </div>
-                    <div class="col-md-6">
-                        <a href="<?php echo site_url('admin/preview/' . $course_id); ?>" class="alignToTitle btn btn-outline-secondary btn-rounded btn-sm ml-1 my-1" target="_blank"><?php echo get_phrase('view_on_frontend'); ?> <i class="mdi mdi-arrow-right"></i> </a>
-
-                        <a href="<?php echo site_url('admin/courses'); ?>" class="alignToTitle btn btn-outline-secondary btn-rounded btn-sm my-1"> <i class=" mdi mdi-keyboard-backspace"></i> <?php echo get_phrase('back_to_course_list'); ?></a>
-                    </div>
                 </div>
 
                 <div class="row">
@@ -39,7 +42,7 @@ $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
                                 <button type="button" class="scrollable-tab-btn-left"><i class="mdi mdi-arrow-left"></i></button>
 
                                 <div class="scrollable-tab">
-                                    <ul class="nav nav-pills nav-justified form-wizard-header">
+                                    <ul class="nav nav-pills nav-justified form-wizard-header gp-course-wizard-tabs">
                                         <li class="nav-item">
                                             <a href="#curriculum" data-toggle="tab" class="nav-link rounded-0 pt-2 pb-2">
                                                 <i class="mdi mdi-account-circle"></i>
@@ -169,9 +172,13 @@ $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
                                             <?php if ($course_details['course_type'] == 'scorm_course') : ?>
                                                 <div class="row justify-content-center">
                                                     <div class="col-md-6">
-                                                        <div class="alert alert-warning" role="alert">
-                                                            <h4 class="alert-heading"><?= get_phrase('heads_up'); ?>!</h4>
-                                                            <p><?= get_phrase('currently_the_scorm_course_addon_is_deactivate'); ?>. <?= get_phrase('please_activate_the_scorm_course_addon_to_use_it'); ?>.</p>
+                                                        <div class="gp-addon-tab">
+                                                            <?php echo gp_ds_alert(
+                                                                get_phrase('heads_up') . '!',
+                                                                get_phrase('currently_the_scorm_course_addon_is_deactivate') . '. ' . get_phrase('please_activate_the_scorm_course_addon_to_use_it') . '.',
+                                                                'warning',
+                                                                true
+                                                            ); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -180,9 +187,13 @@ $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
                                             <?php if ($course_details['course_type'] == 'h5p') : ?>
                                                 <div class="row justify-content-center">
                                                     <div class="col-md-6">
-                                                        <div class="alert alert-warning" role="alert">
-                                                            <h4 class="alert-heading"><?= get_phrase('heads_up'); ?>!</h4>
-                                                            <p><?= get_phrase('currently_the_h5p_course_addon_is_deactivate'); ?>. <?= get_phrase('please_activate_the_h5p_course_addon_to_use_it'); ?>.</p>
+                                                        <div class="gp-addon-tab">
+                                                            <?php echo gp_ds_alert(
+                                                                get_phrase('heads_up') . '!',
+                                                                get_phrase('currently_the_h5p_course_addon_is_deactivate') . '. ' . get_phrase('please_activate_the_h5p_course_addon_to_use_it') . '.',
+                                                                'warning',
+                                                                true
+                                                            ); ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -205,7 +216,7 @@ $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
 
                                     <!-- Jitsi live class CODE BASE -->
                                     <?php if (addon_status('jitsi-live-class')) : ?>
-                                        <div class="tab-pane" id="jitsi-live-class">
+                                        <div class="tab-pane gp-addon-tab" id="jitsi-live-class">
                                             <?php include 'jitsi_live_class.php'; ?>
                                         </div>
                                     <?php endif; ?>
@@ -213,14 +224,14 @@ $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
 
                                     <!-- ASSIGNMENT CODE BASE -->
                                     <?php if (addon_status('assignment')) : ?>
-                                        <div class="tab-pane" id="assignment">
+                                        <div class="tab-pane gp-addon-tab" id="assignment">
                                             <?php include 'assignment.php'; ?>
                                         </div>
                                     <?php endif; ?>
 
                                     <!-- NOTICEBOARD CODE BASE -->
                                     <?php if (addon_status('noticeboard')) : ?>
-                                        <div class="tab-pane" id="noticeboard">
+                                        <div class="tab-pane gp-addon-tab" id="noticeboard">
                                             <?php include 'noticeboard.php'; ?>
                                         </div>
                                     <?php endif; ?>
@@ -228,7 +239,7 @@ $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
 
                                     <!-- COURSE ANALYTICS CODE BASE -->
                                     <?php if (addon_status('course_analytics')) : ?>
-                                        <div class="tab-pane" id="course_analytics">
+                                        <div class="tab-pane gp-addon-tab" id="course_analytics">
                                             <?php include 'course_analytics.php'; ?>
                                         </div>
                                     <?php endif; ?>
@@ -718,14 +729,19 @@ $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
                                                     <p class="w-75 mb-2 mx-auto"><?php echo get_phrase('you_are_just_one_click_away'); ?></p>
 
                                                     <div class="mb-3 mt-3">
-                                                        <button type="button" class="btn btn-primary text-center" onclick="checkRequiredFields()"><?php echo get_phrase('submit'); ?></button>
+                                                        <?php echo gp_ds_button(get_phrase('submit'), [
+                                                            'type' => 'button',
+                                                            'variant' => 'primary',
+                                                            'extra_class' => 'text-center',
+                                                            'attrs' => ['onclick' => 'checkRequiredFields()'],
+                                                        ], true); ?>
                                                     </div>
                                                 </div>
                                             </div> <!-- end col -->
                                         </div> <!-- end row -->
                                     </div>
 
-                                    <ul class="list-inline mb-0 wizard text-center">
+                                    <ul class="list-inline mb-0 wizard text-center gp-course-wizard-pager">
                                         <li class="previous list-inline-item">
                                             <a href="javascript:;" class="btn btn-info"> <i class="mdi mdi-arrow-left-bold"></i> </a>
                                         </li>
@@ -743,6 +759,8 @@ $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
         </div> <!-- end card-->
     </div>
 </div>
+</div><!-- .gp-course-wizard -->
+</div><!-- .gp-courses-page -->
 
 <script type="text/javascript">
     $(document).ready(function() {

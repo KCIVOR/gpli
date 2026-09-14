@@ -1,0 +1,137 @@
+/**
+ * Geese Project Design System — Dropdown Component
+ * Phase 2a-2: Bootstrap Dropdown Styling
+ * 
+ * Adapts Bootstrap dropdown menus to match hard-rule design system §17
+ * Preserves all Bootstrap JS behavior (data-toggle="dropdown", dropdown plugin)
+ */
+
+/* ---------- Dropdown Container ---------- */
+.gp-ds .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* ---------- Dropdown Menu ---------- */
+.gp-ds .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    min-width: 200px;
+    background: var(--gp-surface);
+    border: 1px solid var(--gp-border);
+    border-radius: 10px;
+    box-shadow: var(--gp-shadow-card);
+    padding: 6px;
+    flex-direction: column;
+    z-index: 1050; /* Bootstrap default, keep for proper stacking */
+}
+
+/* display:flex on every .dropdown-menu overrode Bootstrap's display:none,
+   so menus were always "in layout" and only Hyper's opacity:0 hid them.
+   Gate visibility on .show like Bootstrap 5. */
+.gp-ds .dropdown-menu:not(.show) {
+    display: none !important;
+}
+
+.gp-ds .dropdown-menu.show {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Dropdown positioning variants */
+.gp-ds .dropdown-menu-right,
+.gp-ds .dropdown-menu-end {
+    right: 0;
+    left: auto;
+}
+
+.gp-ds .dropdown-menu-left,
+.gp-ds .dropdown-menu-start {
+    left: 0;
+    right: auto;
+}
+
+/* ---------- Dropdown Items ---------- */
+.gp-ds .dropdown-item,
+.gp-ds .dropdown-menu a {
+    padding: 9px 10px;
+    border-radius: 7px;
+    font-size: 13.5px;
+    color: var(--gp-fg);
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    clear: both;
+    white-space: nowrap;
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .dropdown-item:hover,
+.gp-ds .dropdown-menu a:hover {
+    background: var(--gp-surface-sunk);
+    color: var(--gp-fg);
+}
+
+.gp-ds .dropdown-item:focus,
+.gp-ds .dropdown-menu a:focus {
+    outline: 2px solid var(--gp-gold-deep);
+    outline-offset: -2px;
+    background: var(--gp-surface-sunk);
+}
+
+.gp-ds .dropdown-item.active,
+.gp-ds .dropdown-menu a.active {
+    background: var(--gp-primary);
+    color: #fff;
+}
+
+.gp-ds .dropdown-item.disabled,
+.gp-ds .dropdown-menu a.disabled {
+    color: var(--gp-fg-faint);
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* ---------- Dropdown Divider ---------- */
+.gp-ds .dropdown-divider,
+.gp-ds .dropdown-menu .divider {
+    height: 1px;
+    background: var(--gp-border);
+    margin: 6px 2px;
+    overflow: hidden;
+    border: none;
+}
+
+/* ---------- Dropdown Header ---------- */
+.gp-ds .dropdown-header {
+    padding: 6px 10px;
+    font-family: var(--gp-font-head);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gp-fg-faint);
+    white-space: nowrap;
+}
+
+/* ---------- Dropdown Toggle Button ---------- */
+.gp-ds .dropdown-toggle {
+    cursor: pointer;
+}
+
+.gp-ds .dropdown-toggle::after {
+    /* Bootstrap adds caret via ::after */
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-left: 0.3em solid transparent;
+}
+
+/* ---------- Dark Mode ---------- */
+/* Dark mode colors handled automatically via CSS variables */

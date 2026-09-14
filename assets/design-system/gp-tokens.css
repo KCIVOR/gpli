@@ -1,0 +1,153 @@
+/**
+ * Geese Project Design System — Tokens
+ * Phase 0 — All tokens extracted from the hard-rule file and scoped under .gp-ds
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ */
+
+.gp-ds {
+  /* ========== Brand Colors ========== */
+  --gp-primary: #003BA6;
+  --gp-primary-2: #4772BF;
+  --gp-primary-3: #809DD2;
+  --gp-secondary: #CD182A;
+  --gp-secondary-hover: #90111D;
+  --gp-accent: #00215D;
+  --gp-accent-2: #001946;
+  --gp-gold: #FCD01C;
+  --gp-gold-light: #D6E0F1;
+  --gp-gold-deep: #00328B;
+  --gp-blue-solid: #00328B;
+
+  /* ========== Neutrals (Light Mode) ========== */
+  --gp-paper: #F5F5F2;
+  --gp-ink: #0d0d0c;
+  --gp-text: #6B6B6B;
+  --gp-line: #E7E5DF;
+  --gp-bg: #FBFAF7;
+  --gp-surface: #ffffff;
+  --gp-surface-sunk: #F3F1EB;
+  --gp-border: #E4E1D8;
+  --gp-border-strong: #CFCBBE;
+  --gp-fg: #171613;
+  --gp-fg-muted: #6B6B65;
+  --gp-fg-faint: #9C988D;
+  --gp-code-bg: #12141c;
+  --gp-code-fg: #d8dcec;
+
+  /* ========== Typography ========== */
+  --gp-font-head: 'Manrope', sans-serif;
+  --gp-font-body: 'Inter', sans-serif;
+  --gp-font-mono: 'JetBrains Mono', monospace;
+
+  /* ========== Spacing & Radius ========== */
+  --gp-radius: 10px;
+
+  /* ========== Shadow ========== */
+  --gp-shadow-card: 0 1px 2px rgba(20, 20, 15, .04), 0 8px 24px rgba(20, 20, 15, .05);
+
+  /* ========== Motion (Extension v2) ========== */
+  --gp-ease-out: cubic-bezier(.22, 1, .36, 1);
+  --gp-ease-io: cubic-bezier(.65, 0, .35, 1);
+  --gp-dur-fast: 150ms;
+  --gp-dur-base: 260ms;
+  --gp-dur-slow: 520ms;
+
+  /* ========== Semantic Colors (Extension v2) ========== */
+  --gp-success: #1E7A34;
+  --gp-success-soft: #E6F4EA;
+  --gp-success-border: #bfe4c8;
+  --gp-warning: #B45309;
+  --gp-warning-soft: #FDF1E0;
+  --gp-warning-border: #f3d9ad;
+  --gp-danger: #CD182A;
+  --gp-danger-soft: #FBE9EA;
+  --gp-danger-border: #f0b8bd;
+  --gp-info: #003BA6;
+  --gp-info-soft: #E7EEF9;
+  --gp-info-border: #b9cdec;
+
+  /* DS extension for admin courses */
+  --gp-on-primary: #ffffff;
+}
+
+/* ========== Dark Mode Tokens ========== */
+/* System mode only — never auto-dark on partial migrations (default is light) */
+@media (prefers-color-scheme: dark) {
+  .gp-ds[data-theme="system"] {
+    --gp-bg: #111015;
+    --gp-surface: #17161c;
+    --gp-surface-sunk: #0c0c10;
+    --gp-border: #2b2a32;
+    --gp-border-strong: #3c3a45;
+    --gp-fg: #EDEBE6;
+    --gp-fg-muted: #A7A4B0;
+    --gp-fg-faint: #726f7c;
+    --gp-paper: #1b1a20;
+    --gp-line: #2b2a32;
+    --gp-code-bg: #0a0a0e;
+    --gp-code-fg: #d8dcec;
+    --gp-shadow-card: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35);
+    --gp-success: #5FD98A;
+    --gp-success-soft: #16321f;
+    --gp-success-border: #1f4b2c;
+    --gp-warning: #FFC978;
+    --gp-warning-soft: #3a2708;
+    --gp-warning-border: #5c3d12;
+    --gp-danger: #FF8791;
+    --gp-danger-soft: #3a1418;
+    --gp-danger-border: #5c2028;
+    --gp-info: #9FC0FF;
+    --gp-info-soft: #101f3d;
+    --gp-info-border: #1c3566;
+
+    /* DS extension for admin courses */
+    --gp-on-primary: #ffffff;
+
+    /* Leftover frontend theme vars (style.css .dark-theme) so --bg-white follows DS dark */
+    --bg-white: var(--gp-bg);
+    --bg-white-2: var(--gp-surface);
+    --bg-white-3: var(--gp-fg-muted);
+    --bg-white-4: var(--gp-surface);
+    --bg-white-5: var(--gp-surface);
+    --bg-white-7: var(--gp-bg);
+  }
+}
+
+.gp-ds[data-theme="dark"] {
+  --gp-bg: #111015;
+  --gp-surface: #17161c;
+  --gp-surface-sunk: #0c0c10;
+  --gp-border: #2b2a32;
+  --gp-border-strong: #3c3a45;
+  --gp-fg: #EDEBE6;
+  --gp-fg-muted: #A7A4B0;
+  --gp-fg-faint: #726f7c;
+  --gp-paper: #1b1a20;
+  --gp-line: #2b2a32;
+  --gp-code-bg: #0a0a0e;
+  --gp-code-fg: #d8dcec;
+  --gp-shadow-card: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .35);
+  --gp-success: #5FD98A;
+  --gp-success-soft: #16321f;
+  --gp-success-border: #1f4b2c;
+  --gp-warning: #FFC978;
+  --gp-warning-soft: #3a2708;
+  --gp-warning-border: #5c3d12;
+  --gp-danger: #FF8791;
+  --gp-danger-soft: #3a1418;
+  --gp-danger-border: #5c2028;
+  --gp-info: #9FC0FF;
+  --gp-info-soft: #101f3d;
+  --gp-info-border: #1c3566;
+
+  /* DS extension for admin courses */
+  --gp-on-primary: #ffffff;
+
+  /* Leftover frontend theme vars (style.css .dark-theme) so --bg-white follows DS dark */
+  --bg-white: var(--gp-bg);
+  --bg-white-2: var(--gp-surface);
+  --bg-white-3: var(--gp-fg-muted);
+  --bg-white-4: var(--gp-surface);
+  --bg-white-5: var(--gp-surface);
+  --bg-white-7: var(--gp-bg);
+}

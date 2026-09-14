@@ -1,37 +1,34 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo $page_title; ?>
-                    <a href="<?php echo site_url('admin/instructor_form/add_instructor_form'); ?>" class="btn btn-outline-primary btn-rounded alignToTitle"><i class="mdi mdi-plus"></i><?php echo get_phrase('add_instructor'); ?></a>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php
+gp_ds_page_title(
+    $page_title,
+    gp_ds_button(get_phrase('add_instructor'), [
+        'href' => site_url('admin/instructor_form/add_instructor_form'),
+        'variant' => 'outline',
+    ], true)
+);
+?>
 
-<div class="row">
-  <div class="col-lg-12">
-      <div class="card">
-        <div class="card-body" data-collapsed="0">
-          <h4 class="mb-3 header-title"><?php echo get_phrase('instructor'); ?></h4>
-          <table class="table table-striped table-centered w-100" id="server_side_users_data">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th><?php echo get_phrase('photo'); ?></th>
-                <th><?php echo get_phrase('name'); ?></th>
-                <th><?php echo get_phrase('email'); ?></th>
-                <th><?php echo get_phrase('Phone'); ?></th>
-                <th><?php echo get_phrase('enrolled_courses'); ?></th>
-                <th><?php echo get_phrase('actions'); ?></th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-      </div>
-    </div>
-  </div><!-- end col-->
+<div class="gp-users-page">
+    <?php
+    gp_ds_card([
+        'title' => get_phrase('instructor'),
+        'body' => gp_ds_table([
+            'table_id' => 'server_side_users_data',
+            'extra_class' => 'mb-0',
+            'headers' => [
+                '#',
+                get_phrase('photo'),
+                get_phrase('name'),
+                get_phrase('email'),
+                get_phrase('Phone'),
+                get_phrase('enrolled_courses'),
+                get_phrase('actions'),
+            ],
+            'allow_empty' => true,
+        ], true),
+        'extra_class' => 'gp-dash-panel',
+    ]);
+    ?>
 </div>
 
 <script>

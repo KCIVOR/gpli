@@ -1,22 +1,19 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('available_addons'); ?></h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php gp_ds_page_title(get_phrase('available_addons')); ?>
 
-<!-- Start page title end -->
+<div class="gp-addons-page">
 <div class="row justify-content-center">
   <div class="col-md-12">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="mb-3 header-title"><?php echo get_phrase('all_available_addon'); ?></h4>
-        <iframe scrolling="yes" class="col-md-12 w-100" frameborder="none" style="height: 510px;" src="http://academy-lms.com/mobile.php"></iframe>
-      </div>
-    </div>
+    <?php
+    ob_start();
+    ?>
+        <iframe scrolling="yes" class="gp-addons-iframe" frameborder="none" src="http://academy-lms.com/mobile.php"></iframe>
+    <?php
+    gp_ds_card([
+        'title' => get_phrase('all_available_addon'),
+        'body' => ob_get_clean(),
+        'extra_class' => 'gp-dash-panel',
+    ]);
+    ?>
   </div>
 </div>
-
+</div>

@@ -1,0 +1,94 @@
+/**
+ * Geese Project Design System — Carousel
+ * Phase 5d — Hard-rule §24 (extension)
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ *
+ * Visual chrome only. Owl/Slick/Bootstrap JS hooks and class names are preserved.
+ */
+
+.gp-ds .carousel,
+.gp-ds .owl-carousel {
+    position: relative;
+}
+
+.gp-ds .carousel-inner,
+.gp-ds .owl-stage-outer {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.gp-ds .carousel-item {
+    background: linear-gradient(135deg, var(--gp-primary), var(--gp-primary-3));
+    color: #fff;
+    font-family: var(--gp-font-head);
+    font-weight: 800;
+}
+
+.gp-ds .carousel-indicators {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    margin: 0;
+}
+
+.gp-ds .carousel-indicators [data-bs-target],
+.gp-ds .carousel-indicators button {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.5);
+    text-indent: -999px;
+    overflow: hidden;
+}
+
+.gp-ds .carousel-indicators .active {
+    background: #fff;
+}
+
+.gp-ds .owl-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.gp-ds .owl-dot span {
+    display: block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gp-border-strong);
+}
+
+.gp-ds .owl-dot.active span {
+    background: var(--gp-primary);
+}
+
+.gp-ds .slick-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 0;
+    list-style: none;
+}
+
+.gp-ds .slick-dots li button {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 0;
+    padding: 0;
+    font-size: 0;
+    background: var(--gp-border-strong);
+}
+
+.gp-ds .slick-dots li.slick-active button {
+    background: var(--gp-primary);
+}

@@ -1,21 +1,12 @@
-<div class="row ">
-	<div class="col-xl-12">
-		<div class="card">
-			<div class="card-body">
-				<h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('manage_profile'); ?></h4>
-			</div> <!-- end card body-->
-		</div> <!-- end card -->
-	</div><!-- end col-->
-</div>
+<?php gp_ds_page_title(get_phrase('manage_profile')); ?>
 
+<div class="gp-profile-page">
 <div class="row ">
 	<div class="col-xl-7">
-		<div class="card">
-			<div class="card-body">
-				<h4 class="header-title mb-3"><?php echo get_phrase('basic_info'); ?></h4>
-				<?php
-				foreach($edit_data as $row):
-					$social_links = json_decode($row['social_links'], true);?>
+		<?php
+		ob_start();
+		foreach ($edit_data as $row):
+			$social_links = json_decode($row['social_links'], true); ?>
 					<?php echo form_open(site_url('admin/manage_profile/update_profile_info/'.$row['id']) , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top' , 'enctype' => 'multipart/form-data'));?>
 
 					<div class="form-group">
@@ -55,7 +46,7 @@
 
 					<div class="form-group">
                         <label for="skills"><?php echo get_phrase('skills'); ?></label>
-                        <input type="text" class="form-control bootstrap-tag-input" id = "skills" name="skills" data-role="tagsinput" style="width: 100%;" value="<?php echo $row['skills'];  ?>"/>
+                        <input type="text" class="form-control bootstrap-tag-input" id = "skills" name="skills" data-role="tagsinput" value="<?php echo $row['skills'];  ?>"/>
                         <small class="text-muted"><?php echo get_phrase('write_your_skill_and_click_the_enter_button'); ?></small>
                     </div>
 
@@ -69,7 +60,7 @@
 						<label> <?php echo get_phrase('photo'); ?> <small>(<?php echo get_phrase('the_image_size_should_be_any_square_image'); ?>)</small> </label>
 						<div class="d-flex mt-2">
 							<div class="">
-								<img class = "rounded-circle img-thumbnail" src="<?php echo $this->user_model->get_user_image_url($this->session->userdata('user_id')); ?>" alt="" style="height: 50px; width: 50px;">
+								<img class = "rounded-circle img-thumbnail" src="<?php echo $this->user_model->get_user_image_url($this->session->userdata('user_id')); ?>" alt="">
 							</div>
 							<div class="flex-grow-1 pl-2">
 								<div class="input-group">
@@ -83,21 +74,27 @@
 					</div>
 
 					<div class="row justify-content-center">
-						<button type="submit" class="btn btn-primary"><?php echo get_phrase('update_profile');?></button>
+						<?php echo gp_ds_button(get_phrase('update_profile'), [
+							'variant' => 'primary',
+							'type' => 'submit',
+						], true); ?>
 					</div>
 				</form>
 				<?php
 			endforeach;
-			?>
-		</form>
-	</div> <!-- end card body-->
-</div> <!-- end card -->
-</div>
-<div class="col-xl-5">
-	<div class="card">
-		<div class="card-body">
-			<?php foreach($edit_data as $row): ?>
-				<?php echo form_open(site_url('admin/manage_profile/change_password/'.$row['id']) , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
+		gp_ds_card([
+			'title' => get_phrase('basic_info'),
+			'body' => ob_get_clean(),
+			'extra_class' => 'gp-dash-panel',
+		]);
+		?>
+	</div>
+	<div class="col-xl-5">
+		<?php
+		ob_start();
+		foreach ($edit_data as $row):
+			echo form_open(site_url('admin/manage_profile/change_password/'.$row['id']) , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));
+		?>
 				<div class="form-group">
 					<label><?php echo get_phrase('current_password');?></label>
 					<input type="password" class="form-control" name="current_password" value="" required/>
@@ -111,12 +108,21 @@
 					<input type="password" class="form-control" name="confirm_password" value="" required/>
 				</div>
 				<div class="row justify-content-center">
-					<button type="submit" class="btn btn-info"><?php echo get_phrase('update_password');?></button>
+					<?php echo gp_ds_button(get_phrase('update_password'), [
+						'variant' => 'primary',
+						'type' => 'submit',
+					], true); ?>
 				</div>
 			</form>
-		<?php endforeach; ?>
+		<?php
+		endforeach;
+		gp_ds_card([
+			'title' => get_phrase('update_password'),
+			'body' => ob_get_clean(),
+			'extra_class' => 'gp-dash-panel',
+		]);
+		?>
 	</div>
-</div>
 </div>
 </div>
 

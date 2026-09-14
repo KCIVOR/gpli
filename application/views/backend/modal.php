@@ -81,17 +81,26 @@ function confirm_modal(delete_url)
 </script>
 
 <!-- Info Alert Modal -->
-<div id="alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="alert-modal" class="modal fade gp-confirm-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-body p-4">
-                <div class="text-center">
-                    <i class="dripicons-information h1 text-info"></i>
-                    <h4 class="mt-2"><?php echo get_phrase("heads_up"); ?>!</h4>
-                    <p class="mt-3"><?php echo get_phrase("are_you_sure"); ?>?</p>
-                    <button type="button" class="btn btn-info my-2" data-dismiss="modal"><?php echo get_phrase("cancel"); ?></button>
-                    <a href="#" id="update_link" class="btn btn-danger my-2"><?php echo get_phrase("continue"); ?></a>
-                </div>
+            <div class="modal-header">
+                <h4 class="modal-title"><?php echo get_phrase("heads_up"); ?>!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <p><?php echo get_phrase("are_you_sure"); ?>?</p>
+            </div>
+            <div class="modal-footer">
+                <?php echo gp_ds_button(get_phrase("cancel"), [
+                    'variant' => 'quiet',
+                    'attrs' => ['data-dismiss' => 'modal'],
+                ], true); ?>
+                <?php echo gp_ds_button(get_phrase("continue"), [
+                    'variant' => 'secondary',
+                    'href' => '#',
+                    'attrs' => ['id' => 'update_link'],
+                ], true); ?>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -141,17 +150,31 @@ function delete_by_ajax_calling(delete_url, elem_id){
 </script>
 
 <!-- Info Alert Modal -->
-<div id="ajax-alert-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="ajax-alert-modal" class="modal fade gp-confirm-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <div class="modal-body p-4">
-                <div class="text-center" id="appent_link">
-                    <i class="dripicons-information h1 text-info"></i>
-                    <h4 class="mt-2"><?php echo get_phrase("heads_up"); ?>!</h4>
-                    <p class="mt-3"><?php echo get_phrase("are_you_sure"); ?>?</p>
-                    <button type="button" class="btn btn-info my-2" data-dismiss="modal"><?php echo get_phrase("cancel"); ?></button>
-                    <a id="appent_link_a" href="javascript:;" class="btn btn-danger my-2" data-dismiss="modal"><?php echo get_phrase("continue"); ?></a>
+            <div class="modal-header">
+                <h4 class="modal-title"><?php echo get_phrase("heads_up"); ?>!</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="appent_link">
+                    <p><?php echo get_phrase("are_you_sure"); ?>?</p>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <?php echo gp_ds_button(get_phrase("cancel"), [
+                    'variant' => 'quiet',
+                    'attrs' => ['data-dismiss' => 'modal'],
+                ], true); ?>
+                <?php echo gp_ds_button(get_phrase("continue"), [
+                    'variant' => 'secondary',
+                    'href' => 'javascript:;',
+                    'attrs' => [
+                        'id' => 'appent_link_a',
+                        'data-dismiss' => 'modal',
+                    ],
+                ], true); ?>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

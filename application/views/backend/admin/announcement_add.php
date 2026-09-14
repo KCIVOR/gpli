@@ -1,24 +1,14 @@
-<!-- start page title -->
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('add_new_announcement'); ?></h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php gp_ds_page_title(get_phrase('add_new_announcement')); ?>
 
+<div class="gp-announce-page">
 <div class="row justify-content-center">
     <div class="col-xl-7">
-        <div class="card">
-            <div class="card-body">
-              <div class="col-lg-12">
-                <h4 class="mb-3 header-title"><?php echo get_phrase('announcement_add_form'); ?></h4>
-
+        <?php
+        ob_start();
+        ?>
                 <form class="required-form" action="<?php echo site_url('admin/announcements/add'); ?>" method="post" enctype="multipart/form-data">
-                    
-                    <div class="form-group">                  
+
+                    <div class="form-group">
                         <label for="multiple_course_id"><?php echo get_phrase('Courses'); ?><span class="required">*</span> </label>
 
                         <select class="select2 form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose ..." name="course_ids[]" id="multiple_course_id" required>
@@ -27,18 +17,18 @@
                         <?php $courses = $this->db->where('status', 'active')->or_where('status', 'private')->get('course')->result_array();
                                     foreach ($courses as $course): ?>
                                     <option value="<?php echo $course['id'] ?>"><?php echo $course['title']; ?></option>
-                        <?php endforeach; ?>                   
+                        <?php endforeach; ?>
 
                         </select>
-                        <span class="badge badge-light"><?php echo get_phrase('Select_one_or_multiple_courses'); ?></span>
-                    </div>             
-               
+                        <?php echo gp_ds_badge(get_phrase('Select_one_or_multiple_courses'), 'neutral', true); ?>
+                    </div>
+
 
                     <div class="form-group">
                         <label for="title"><?php echo get_phrase('title'); ?><span class="required">*</span></label>
                         <input type="text" class="form-control" id="title" name="title" required>
                     </div>
-              
+
                     <div class="form-group">
 		    			<label for="summernote-basic"><?php echo get_phrase('description'); ?></label>
 		    			<textarea name="description" id="summernote-basic"></textarea>
@@ -57,12 +47,23 @@
                     <div class="form-group">
 						<input type="checkbox" id="is_pinned" value="1" name="is_pinned">
 						<label for="is_pinned"><?php echo get_phrase('pin_announcement'); ?></label>
-					</div>                               
-               
-                    <button type="button" class="btn btn-primary" onclick="checkRequiredFields()"><?php echo get_phrase("submit"); ?></button>
+					</div>
+
+                    <?php echo gp_ds_button(get_phrase('submit'), [
+                        'variant' => 'primary',
+                        'type' => 'button',
+                        'attrs' => [
+                            'onclick' => 'checkRequiredFields()',
+                        ],
+                    ], true); ?>
                 </form>
-              </div>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
+        <?php
+        gp_ds_card([
+            'title' => get_phrase('announcement_add_form'),
+            'body'  => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
     </div><!-- end col-->
+</div>
 </div>

@@ -1,4 +1,4 @@
-<div class="resource_file_content">
+<div class="resource_file_content gp-courses-modal">
 	<form class="ajaxFormSubmission resetable" action="<?php echo site_url('admin/resource_files/add/'.$param2); ?>" method="post" enctype="multipart/form-data">
 		<div class="from-group">
 			<label for="resource_title"><?php echo get_phrase('Title'); ?></label>
@@ -13,7 +13,11 @@
 	    </div>
 
 
-		<button class="btn btn-primary mt-3" type="submit"><?php echo get_phrase('Add'); ?></button>
+		<?php echo gp_ds_button(get_phrase('Add'), [
+			'type' => 'submit',
+			'variant' => 'primary',
+			'extra_class' => 'mt-3',
+		], true); ?>
 	</form>
 	
 

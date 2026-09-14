@@ -1,0 +1,125 @@
+/**
+ * Geese Project — Admin Themes
+ * Tokens from gp-tokens.css only. No leftover Hyper hex.
+ *
+ * In-scope page_name: theme_settings
+ * Modal: upload_theme.php
+ *
+ * Forbidden:
+ *   rewriting Admin.php theme_settings / theme_actions / upload_theme / install_theme
+ *   changing activate_theme AJAX url or POST `theme`
+ *   renaming #theme_zip
+ *   editing navigation.php
+ *
+ * Hooks later phases must keep:
+ *   showAjaxModal admin/upload_theme
+ *   activate_theme('{theme}')
+ *   confirm_modal admin/theme_actions/remove/{theme}
+ *   #theme_zip, changeTitleOfImageUploader, accept=".zip"
+ *   success_notify / error_notify + location.reload
+ */
+
+.gp-ds .gp-themes-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .row:has(+ .gp-themes-page) .gp-page-title-actions .btn,
+.gp-ds .gp-themes-page .btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-themes-page a.btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-themes-page button.btn:not(.btn-icon):not(.action-icon):not(.icon-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 96px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
+  line-height: 1.2;
+  min-height: 38px !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-themes-page .btn,
+.gp-ds .gp-themes-page .header-title,
+.gp-ds .gp-themes-page label {
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-themes-page .gp-dash-panel > .card-body > .header-title,
+.gp-ds .gp-themes-page .card > .card-body > .header-title {
+  margin: 0 0 16px;
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-themes-page .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-themes-page .gp-themes-tile .card-img-top {
+  width: 100%;
+  border-radius: var(--gp-radius) var(--gp-radius) 0 0;
+  border-bottom: 1px solid var(--gp-border);
+}
+
+.gp-ds .gp-themes-page .gp-themes-tile .card-title,
+.gp-ds .gp-themes-page .gp-themes-tile-title {
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin: 0 0 12px;
+}
+
+.gp-ds .gp-themes-page .gp-themes-tile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gp-ds .gp-themes-page .gp-themes-uninstalled {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-themes-page .gp-themes-uninstalled strong {
+  font-family: var(--gp-font-head);
+}
+
+.gp-ds .gp-themes-page .form-group {
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-themes-page .form-group > label {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-themes-page .custom-file-label {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg-muted);
+  box-shadow: none;
+}

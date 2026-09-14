@@ -1,0 +1,96 @@
+/**
+ * Installer overlay only. Does not replace install/styles.php or
+ * change form actions / config writes.
+ */
+.gp-ds.page-body {
+  background: var(--gp-bg);
+  color: var(--gp-fg);
+  font-family: var(--gp-font-body);
+}
+
+.gp-ds.page-body .navbar.navbar-fixed-top {
+  background: var(--gp-accent-2) !important;
+  border-bottom: 1px solid var(--gp-border);
+}
+
+.gp-ds.page-body .navbar-brand,
+.gp-ds.page-body .navbar-brand.pull-right {
+  color: var(--gp-fg);
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+}
+
+.gp-ds.page-body .main-content {
+  background: var(--gp-bg);
+  color: var(--gp-fg);
+}
+
+.gp-ds.page-body .card,
+.gp-ds.page-body .panel,
+.gp-ds.page-body .panel-default,
+.gp-ds.page-body .panel-body {
+  background: var(--gp-surface);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds.page-body .btn-info,
+.gp-ds.page-body .btn-primary {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: #fff;
+}
+
+.gp-ds.page-body .form-control,
+.gp-ds.page-body input[type="text"],
+.gp-ds.page-body input[type="password"] {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+  border-color: var(--gp-border);
+}
+
+.gp-ds.page-body a {
+  color: var(--gp-primary);
+}
+
+/* Minimal gp_ds_alert styles — install does not load gp-components-core.css */
+.gp-ds .alert {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .alert .dot {
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-top: 7px;
+}
+
+.gp-ds .alert strong {
+  display: block;
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  margin-bottom: 2px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .alert p {
+  color: var(--gp-fg-muted);
+  margin: 0;
+}
+
+.gp-ds .alert-danger {
+  background: var(--gp-danger-soft);
+  border-color: var(--gp-danger-border);
+  color: var(--gp-danger);
+}

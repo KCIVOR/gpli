@@ -1,0 +1,231 @@
+/**
+ * Geese Project — Become an instructor (public apply form)
+ * DS card + §07 underline fields + §21 upload zone + §05 button.
+ * Keep form action / names / ids / enctype / type="phone".
+ */
+
+.gp-ds .gp-instructor-apply,
+.gp-ds .gp-instructor-apply .header-title,
+.gp-ds .gp-instructor-apply label,
+.gp-ds .gp-instructor-apply p,
+.gp-ds .gp-instructor-apply input,
+.gp-ds .gp-instructor-apply textarea,
+.gp-ds .gp-instructor-apply .breadcrumb a,
+.gp-ds .gp-instructor-apply .breadcrumb span {
+  letter-spacing: 0 !important;
+  word-spacing: normal !important;
+}
+
+.gp-ds .gp-instructor-apply .bread-crumb {
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none;
+  padding: 8px 0 0;
+  border: 0;
+}
+
+.gp-ds .gp-instructor-apply .bread-crumb h1,
+.gp-ds .gp-instructor-apply .bread-crumb .book-img {
+  display: none !important;
+}
+
+.gp-ds .gp-instructor-apply .breadcrumb {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.gp-ds .gp-instructor-apply .breadcrumb-item {
+  padding: 0 !important;
+  font-size: 13px;
+}
+
+.gp-ds .gp-instructor-apply .breadcrumb i {
+  padding: 0 !important;
+  margin: 0 6px !important;
+  font-size: 13px;
+}
+
+.gp-ds .gp-instructor-apply .breadcrumb a,
+.gp-ds .gp-instructor-apply .breadcrumb i,
+.gp-ds .gp-instructor-apply .breadcrumb span {
+  font-size: 13px;
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds .gp-instructor-apply .breadcrumb .active,
+.gp-ds .gp-instructor-apply .breadcrumb .active span {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .gp-instructor-apply-shell {
+  background: var(--gp-bg) !important;
+  padding: 16px 0 56px;
+}
+
+.gp-ds .gp-instructor-apply-card {
+  background: var(--gp-surface) !important;
+  border: 1px solid var(--gp-border) !important;
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-instructor-apply-card > .card-body {
+  padding: 26px;
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-instructor-apply-card > .card-body > .header-title {
+  margin: 0 0 22px;
+  font-family: var(--gp-font-head);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--gp-fg);
+  text-transform: none !important;
+}
+
+.gp-ds .gp-instructor-apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.gp-ds .gp-instructor-field {
+  margin: 0;
+}
+
+.gp-ds .gp-instructor-apply label {
+  display: block;
+  margin-bottom: 7px;
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-fg) !important;
+  text-transform: none !important;
+}
+
+.gp-ds .gp-instructor-apply-form input[type="phone"],
+.gp-ds .gp-instructor-apply-form input[type="tel"],
+.gp-ds .gp-instructor-apply-form input[type="text"],
+.gp-ds .gp-instructor-apply-form textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--gp-border-strong);
+  border-radius: 0;
+  padding: 4px 0 12px;
+  font-family: var(--gp-font-body);
+  font-size: 15.5px;
+  color: var(--gp-fg) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  min-height: 0;
+  appearance: none;
+  transition: border-color 0.3s;
+}
+
+.gp-ds .gp-instructor-apply-form textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+
+.gp-ds .gp-instructor-apply-form input[type="phone"]:focus,
+.gp-ds .gp-instructor-apply-form input[type="tel"]:focus,
+.gp-ds .gp-instructor-apply-form input[type="text"]:focus,
+.gp-ds .gp-instructor-apply-form textarea:focus {
+  outline: none;
+  border-bottom-color: var(--gp-gold-deep);
+  border-bottom-width: 2px;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-instructor-apply-form input::placeholder,
+.gp-ds .gp-instructor-apply-form textarea::placeholder {
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .gp-instructor-apply .upload-zone {
+  position: relative;
+  border: 2px dashed var(--gp-border-strong);
+  border-radius: 14px;
+  padding: 40px 20px;
+  text-align: center;
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-instructor-apply .gp-instructor-file {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.gp-ds .gp-instructor-apply .upload-zone .icon {
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: 10px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-instructor-apply .upload-zone h4 {
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0 0 6px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-instructor-apply .upload-zone p {
+  font-family: var(--gp-font-body);
+  font-size: 12.5px;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-instructor-apply .upload-zone .browse {
+  color: var(--gp-primary);
+  font-weight: 700;
+}
+
+.gp-ds .gp-instructor-apply .file-chip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.gp-ds .gp-instructor-apply .file-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border: 1px solid var(--gp-border);
+  border-radius: 10px;
+  font-size: 12.5px;
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-instructor-apply .file-chip .name {
+  color: var(--gp-fg);
+  word-break: break-all;
+}
+
+.gp-ds .gp-instructor-apply-form .gp-instructor-cta,
+.gp-ds .gp-instructor-apply-form button.btn-primary {
+  width: 100%;
+  margin-top: 4px;
+  min-height: 0;
+  padding: 15px 26px !important;
+  border-radius: var(--gp-radius) !important;
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 13px !important;
+  letter-spacing: 0.32px !important;
+  word-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  box-shadow: none !important;
+}

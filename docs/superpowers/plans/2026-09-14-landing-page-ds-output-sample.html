@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPLI Public Landing Page — Strict Implementation Plan Output</title>
+  <meta name="description" content="Sample HTML output representing the exact implementation of 2026-09-14-landing-page-ds-plan.md">
+
+  <!-- Google Fonts: Manrope & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       DESIGN SYSTEM TOKENS (--gp-*) & GLOBAL SCOPE
+       Strictly adhering to 2026-09-14-landing-page-ds-plan.md
+    ============================================================ */
+    :root {
+      --gp-primary: #003BA6;
+      --gp-primary-hover: #002D80;
+      --gp-secondary: #CD182A;
+      --gp-secondary-hover: #A01220;
+      --gp-accent: #00215D;
+      --gp-accent-2: #00163E;
+      --gp-gold: #FCD01C;
+      --gp-gold-light: #FFF8D6;
+      --gp-gold-deep: #D4A700;
+      --gp-ink: #0F172A;
+      --gp-text: #64748B;
+      --gp-paper: #FFFFFF;
+      --gp-bg: #F8FAFC;
+      --gp-border: #E2E8F0;
+      --gp-info-soft: #F0F5FF;
+      --gp-shadow-card: 0 10px 30px -5px rgba(0, 33, 93, 0.08);
+      --gp-shadow-hover: 0 20px 40px -5px rgba(0, 33, 93, 0.16);
+      --gp-radius-card: 14px;
+      --gp-radius-btn: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--gp-ink);
+      background-color: var(--gp-paper);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .gp-ds {
+      width: 100%;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4, .gp-heading {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      letter-spacing: 0;
+      word-spacing: 0.12em;
+      color: var(--gp-accent);
+      line-height: 1.25;
+    }
+
+    /* Eyebrow Pattern */
+    .gp-landing-eyebrow {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 0.825rem;
+      color: var(--gp-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .gp-landing-eyebrow.gp-eyebrow-gold {
+      color: var(--gp-gold);
+    }
+
+    /* Section Header */
+    .gp-landing-head {
+      text-align: center;
+      max-width: 740px;
+      margin: 0 auto 52px auto;
+    }
+
+    .gp-landing-head h2 {
+      font-size: 2.25rem;
+      margin-bottom: 14px;
+    }
+
+    .gp-landing-head p {
+      color: var(--gp-text);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      word-spacing: 0.16em;
+      padding: 14px 28px;
+      border-radius: var(--gp-radius-btn);
+      text-decoration: none;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      border: 2px solid transparent;
+      line-height: 1;
+    }
+
+    .btn-primary {
+      background-color: var(--gp-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 59, 166, 0.28);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--gp-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 59, 166, 0.38);
+    }
+
+    .btn-secondary {
+      background-color: var(--gp-secondary);
+      color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--gp-secondary-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border-color: var(--gp-primary);
+      color: var(--gp-primary);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--gp-info-soft);
+      transform: translateY(-2px);
+    }
+
+    .gp-landing-btn-on-dark {
+      background-color: #ffffff;
+      color: var(--gp-accent);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .gp-landing-btn-on-dark:hover {
+      background-color: var(--gp-gold);
+      color: var(--gp-accent-2);
+      transform: translateY(-2px);
+    }
+
+    .gp-landing-btn-on-dark-outline {
+      border-color: rgba(255, 255, 255, 0.45);
+      color: #ffffff;
+      background: transparent;
+    }
+
+    .gp-landing-btn-on-dark-outline:hover {
+      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       TOP BAR: STICKY CHROME HEADER
+    ============================================================ */
+    .gp-site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gp-border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .gp-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .gp-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .gp-brand-badge {
+      width: 38px;
+      height: 38px;
+      background: var(--gp-primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gp-gold);
+      font-weight: 800;
+      font-family: 'Manrope', sans-serif;
+      font-size: 1.1rem;
+    }
+
+    .gp-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .gp-brand-title {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--gp-accent);
+    }
+
+    .gp-brand-sub {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      color: var(--gp-secondary);
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    .gp-nav-list {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .gp-nav-item {
+      position: relative;
+    }
+
+    .gp-nav-link {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--gp-accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 0;
+      transition: color 0.2s;
+    }
+
+    .gp-nav-link:hover {
+      color: var(--gp-primary);
+    }
+
+    /* Courses Mega Dropdown */
+    .gp-courses-mega {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 580px;
+      background: #ffffff;
+      border: 1px solid var(--gp-border);
+      border-top: 3px solid var(--gp-primary);
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 16px 40px rgba(0, 33, 93, 0.12);
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: all 0.22s ease;
+      z-index: 100;
+    }
+
+    .gp-nav-item:hover .gp-courses-mega {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .gp-mega-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+    }
+
+    .gp-mega-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--gp-ink);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.15s;
+    }
+
+    .gp-mega-item:hover {
+      background: var(--gp-info-soft);
+      color: var(--gp-primary);
+    }
+
+    .gp-mega-count {
+      font-size: 0.75rem;
+      color: var(--gp-text);
+      font-weight: 500;
+    }
+
+    .gp-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .gp-icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--gp-bg);
+      border: 1px solid var(--gp-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      color: var(--gp-accent);
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .gp-icon-btn:hover {
+      background: var(--gp-info-soft);
+      color: var(--gp-primary);
+    }
+
+    .gp-badge-count {
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      background: var(--gp-secondary);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 800;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    /* ============================================================
+       1. HERO SECTION (hero_section_1.php)
+    ============================================================ */
+    .gp-landing-hero {
+      padding: 84px 0 64px 0;
+      background: radial-gradient(circle at 50% 0%, rgba(0, 59, 166, 0.04) 0%, rgba(255, 255, 255, 0) 70%);
+      text-align: center;
+    }
+
+    .gp-landing-hero-copy {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .gp-landing-hero h1 {
+      font-size: 3.4rem;
+      line-height: 1.18;
+      margin-bottom: 22px;
+    }
+
+    .gp-landing-accent {
+      color: var(--gp-primary);
+      position: relative;
+      display: inline-block;
+      text-decoration: underline;
+      text-decoration-color: var(--gp-gold);
+      text-decoration-thickness: 6px;
+      text-underline-offset: 8px;
+    }
+
+    .gp-landing-hero p {
+      font-size: 1.25rem;
+      color: var(--gp-text);
+      max-width: 680px;
+      margin: 0 auto 36px auto;
+    }
+
+    .gp-landing-hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .gp-landing-cta-wide {
+      padding: 16px 36px;
+    }
+
+    /* Hero Search Bar */
+    .gp-landing-search {
+      max-width: 640px;
+      margin: 0 auto 60px auto;
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      padding: 6px 8px 6px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--gp-border);
+      box-shadow: 0 10px 30px rgba(0, 33, 93, 0.08);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .gp-landing-search:focus-within {
+      border-color: var(--gp-primary);
+      box-shadow: 0 12px 35px rgba(0, 59, 166, 0.15);
+    }
+
+    .gp-landing-search input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      color: var(--gp-ink);
+      font-family: inherit;
+    }
+
+    .gp-landing-search input::placeholder {
+      color: #94A3B8;
+    }
+
+    /* Hero Stats Bar */
+    .gp-landing-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      padding: 32px;
+      background: #ffffff;
+      border-radius: var(--gp-radius-card);
+      border: 1px solid var(--gp-border);
+      box-shadow: var(--gp-shadow-card);
+      text-align: left;
+    }
+
+    .gp-landing-stat {
+      border-left: 3px solid var(--gp-primary);
+      padding-left: 18px;
+    }
+
+    .gp-landing-stat:nth-child(2) { border-left-color: var(--gp-secondary); }
+    .gp-landing-stat:nth-child(3) { border-left-color: var(--gp-gold-deep); }
+    .gp-landing-stat:nth-child(4) { border-left-color: var(--gp-accent); }
+
+    .gp-landing-stat .num {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      color: var(--gp-accent);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .gp-landing-stat .lbl {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--gp-ink);
+      margin-bottom: 2px;
+    }
+
+    .gp-landing-stat .sub {
+      font-size: 0.8rem;
+      color: var(--gp-text);
+      line-height: 1.35;
+    }
+
+    /* ============================================================
+       2. FEATURE TRIO (feature_trio.php)
+    ============================================================ */
+    .gp-landing-trio {
+      padding: 40px 0 60px 0;
+    }
+
+    .gp-landing-trio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .gp-landing-feat {
+      background: #ffffff;
+      padding: 36px 30px;
+      border-radius: var(--gp-radius-card);
+      border: 1px solid var(--gp-border);
+      box-shadow: var(--gp-shadow-card);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gp-landing-feat::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--gp-primary);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .gp-landing-feat:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--gp-shadow-hover);
+    }
+
+    .gp-landing-feat:hover::before {
+      opacity: 1;
+    }
+
+    .gp-landing-feat-icon {
+      font-size: 2rem;
+      margin-bottom: 18px;
+      display: inline-block;
+    }
+
+    .gp-landing-feat h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--gp-accent);
+    }
+
+    .gp-landing-feat p {
+      font-size: 0.95rem;
+      color: var(--gp-text);
+      line-height: 1.55;
+    }
+
+    /* ============================================================
+       3. MEDIA STRIP (media_strip.php)
+    ============================================================ */
+    .gp-landing-media {
+      padding: 40px 0 80px 0;
+    }
+
+    .gp-landing-media-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .gp-media-video-tile {
+      position: relative;
+      border-radius: var(--gp-radius-card);
+      overflow: hidden;
+      box-shadow: var(--gp-shadow-card);
+      min-height: 320px;
+      background: #000;
+      display: block;
+      text-decoration: none;
+    }
+
+    .gp-media-video-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      transition: transform 0.4s ease;
+    }
+
+    .gp-media-video-tile:hover img {
+      transform: scale(1.04);
+    }
+
+    .gp-media-play-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 24px;
+      background: linear-gradient(to top, rgba(0, 33, 93, 0.95) 0%, rgba(0, 33, 93, 0.4) 60%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gp-video-tag {
+      background: var(--gp-secondary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      align-self: flex-start;
+      margin-bottom: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    .gp-video-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.35;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    .gp-play-btn {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--gp-gold);
+      color: var(--gp-accent-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 0 32px rgba(252, 208, 28, 0.6);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gp-media-video-tile:hover .gp-play-btn {
+      transform: translate(-50%, -50%) scale(1.12);
+    }
+
+    .gp-media-photo-tile {
+      border-radius: var(--gp-radius-card);
+      overflow: hidden;
+      box-shadow: var(--gp-shadow-card);
+      min-height: 320px;
+    }
+
+    .gp-media-photo-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .gp-media-photo-tile:hover img {
+      transform: scale(1.04);
+    }
+
+    /* ============================================================
+       4. TOP COURSES (top_courses_1.php)
+    ============================================================ */
+    .gp-landing-courses {
+      padding: 84px 0;
+      background: var(--gp-bg);
+    }
+
+    .gp-courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .tc-card {
+      background: #ffffff;
+      border-radius: var(--gp-radius-card);
+      border: 1px solid var(--gp-border);
+      overflow: hidden;
+      box-shadow: var(--gp-shadow-card);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tc-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--gp-shadow-hover);
+    }
+
+    .tc-thumb-wrap {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+    }
+
+    .tc-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tc-level-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(0, 33, 93, 0.85);
+      color: #ffffff;
+      backdrop-filter: blur(4px);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.06em;
+    }
+
+    .tc-wishlist-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94A3B8;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .tc-wishlist-btn:hover {
+      color: var(--gp-secondary);
+      transform: scale(1.1);
+    }
+
+    .tc-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .tc-rating {
+      color: #F59E0B;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 700;
+    }
+
+    .tc-rating span {
+      color: var(--gp-text);
+      font-weight: 500;
+      font-size: 0.8rem;
+    }
+
+    .tc-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--gp-accent);
+      margin-bottom: 12px;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .tc-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--gp-text);
+      margin-bottom: 24px;
+    }
+
+    .tc-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--gp-border);
+    }
+
+    .tc-price {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--gp-primary);
+    }
+
+    /* ============================================================
+       5. COURSES BY FUNCTION (function_grid.php)
+    ============================================================ */
+    .gp-landing-functions {
+      padding: 84px 0;
+    }
+
+    .gp-fn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .gp-landing-fn-card {
+      background: #ffffff;
+      border: 1px solid var(--gp-border);
+      border-radius: var(--gp-radius-card);
+      padding: 28px 32px;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .gp-landing-fn-card:hover {
+      border-color: var(--gp-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--gp-shadow-card);
+    }
+
+    .gp-landing-fn-card h3 {
+      font-size: 1.25rem;
+      color: var(--gp-accent);
+      margin-bottom: 8px;
+    }
+
+    .gp-landing-fn-card p {
+      font-size: 0.95rem;
+      color: var(--gp-text);
+      line-height: 1.5;
+      max-width: 440px;
+    }
+
+    .gp-landing-fn-card span {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--gp-primary);
+      white-space: nowrap;
+      margin-left: 16px;
+      background: var(--gp-info-soft);
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    /* ============================================================
+       6. CATEGORY CHIPS (top_categories_1.php)
+    ============================================================ */
+    .gp-landing-chips {
+      padding: 20px 0 60px 0;
+    }
+
+    .gp-chips-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .gp-landing-chip {
+      background: var(--gp-bg);
+      border: 1px solid var(--gp-border);
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--gp-accent);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .gp-landing-chip:hover, .gp-landing-chip.active {
+      background: var(--gp-primary);
+      color: #ffffff;
+      border-color: var(--gp-primary);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       7. QUIZ BANNER (quiz_banner.php)
+    ============================================================ */
+    .gp-landing-quiz-wrap {
+      padding: 40px 0 60px 0;
+    }
+
+    .gp-landing-quiz {
+      background: linear-gradient(135deg, var(--gp-accent) 0%, var(--gp-accent-2) 100%);
+      border-radius: var(--gp-radius-card);
+      padding: 56px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0, 33, 93, 0.2);
+    }
+
+    /* Geese chevrons CSS ::before background watermark */
+    .gp-landing-quiz::before {
+      content: "";
+      position: absolute;
+      right: -30px;
+      top: -30px;
+      width: 260px;
+      height: 260px;
+      background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03) 20px, transparent 20px, transparent 40px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .gp-landing-quiz-content {
+      max-width: 680px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gp-landing-quiz-content h2 {
+      font-size: 2.2rem;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .gp-landing-quiz-content p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 1.1rem;
+      line-height: 1.55;
+    }
+
+    .gp-landing-quiz-action {
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       8. WHY GPLI (why_section.php)
+    ============================================================ */
+    .gp-landing-why {
+      padding: 84px 0;
+      background: var(--gp-info-soft);
+      border-top: 1px solid var(--gp-border);
+      border-bottom: 1px solid var(--gp-border);
+    }
+
+    .gp-why-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 56px;
+    }
+
+    .gp-why-tile {
+      background: #ffffff;
+      padding: 36px 30px;
+      border-radius: var(--gp-radius-card);
+      border: 1px solid rgba(0, 59, 166, 0.1);
+      box-shadow: var(--gp-shadow-card);
+    }
+
+    .gp-why-tile h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: var(--gp-accent);
+    }
+
+    .gp-why-tile p {
+      font-size: 0.95rem;
+      color: var(--gp-text);
+      line-height: 1.6;
+    }
+
+    .gp-why-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+
+    .gp-why-stat-box {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 59, 166, 0.1);
+    }
+
+    .gp-why-stat-box .num {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 2.2rem;
+      color: var(--gp-primary);
+    }
+
+    .gp-why-stat-box .lbl {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--gp-accent);
+    }
+
+    /* ============================================================
+       9. TOP INSTRUCTORS (top_instructors_1.php)
+    ============================================================ */
+    .gp-landing-instructors {
+      padding: 84px 0;
+    }
+
+    .gp-instructors-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .instr-card {
+      background: #ffffff;
+      border: 1px solid var(--gp-border);
+      border-radius: var(--gp-radius-card);
+      padding: 32px 24px;
+      text-align: center;
+      box-shadow: var(--gp-shadow-card);
+      transition: transform 0.3s;
+    }
+
+    .instr-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--gp-shadow-hover);
+    }
+
+    .instr-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 16px auto;
+      border: 3px solid var(--gp-info-soft);
+    }
+
+    .instr-card h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--gp-accent);
+      margin-bottom: 4px;
+    }
+
+    .instr-card p {
+      font-size: 0.825rem;
+      color: var(--gp-text);
+      line-height: 1.4;
+    }
+
+    /* ============================================================
+       10. PRESERVED LEFTOVER CMS SECTIONS (Cleanly restyled)
+    ============================================================ */
+    .gp-landing-cms-preserved {
+      padding: 64px 0;
+      background: var(--gp-bg);
+      border-top: 1px solid var(--gp-border);
+    }
+
+    .gp-faq-accordion {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .gp-faq-item {
+      background: #ffffff;
+      border: 1px solid var(--gp-border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .gp-faq-question {
+      padding: 18px 24px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--gp-accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .gp-faq-answer {
+      padding: 0 24px 18px 24px;
+      color: var(--gp-text);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       11. DUAL PROMOTIONAL CTA (promotional_section_1.php)
+    ============================================================ */
+    .gp-landing-dual-cta {
+      padding: 60px 0 80px 0;
+    }
+
+    .gp-dual-cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .gp-dual-card {
+      border-radius: var(--gp-radius-card);
+      padding: 44px 38px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 260px;
+      box-shadow: var(--gp-shadow-card);
+    }
+
+    .gp-dual-card.learner {
+      background: linear-gradient(135deg, var(--gp-accent) 0%, #00328B 100%);
+    }
+
+    .gp-dual-card.instructor {
+      background: linear-gradient(135deg, var(--gp-secondary) 0%, #8E0F1D 100%);
+    }
+
+    .gp-dual-card h3 {
+      font-size: 1.65rem;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .gp-dual-card p {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    /* ============================================================
+       12. DARK CTA BAND (cta_band.php)
+    ============================================================ */
+    .gp-landing-cta-band {
+      background: linear-gradient(135deg, var(--gp-accent) 0%, var(--gp-accent-2) 100%);
+      color: #ffffff;
+      padding: 90px 0;
+      text-align: center;
+    }
+
+    .gp-landing-cta-inner {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .gp-landing-cta-inner h2 {
+      font-size: 2.75rem;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+
+    .gp-landing-cta-inner p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 38px;
+      line-height: 1.6;
+    }
+
+    .gp-landing-cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .gp-landing-cta-footnote {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.55);
+      letter-spacing: 0.04em;
+    }
+
+    /* ============================================================
+       13. FOOTER (footer.php)
+    ============================================================ */
+    .gp-site-footer {
+      background: var(--gp-accent-2);
+      color: #ffffff;
+      padding: 80px 0 32px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gp-footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .gp-foot-col h4 {
+      font-size: 1.05rem;
+      color: #ffffff;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    .gp-foot-col p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .gp-foot-links {
+      list-style: none;
+    }
+
+    .gp-foot-links li {
+      margin-bottom: 10px;
+    }
+
+    .gp-foot-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .gp-foot-links a:hover {
+      color: var(--gp-gold);
+    }
+
+    .gp-subscribe-form {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .gp-subscribe-form input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+      color: white;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .gp-subscribe-form input:focus {
+      border-color: var(--gp-gold);
+    }
+
+    .gp-footer-bottom {
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 992px) {
+      .gp-header-inner { height: 68px; }
+      .gp-nav-list { display: none; }
+      .gp-landing-hero h1 { font-size: 2.5rem; }
+      .gp-landing-stats { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .gp-landing-trio-grid { grid-template-columns: 1fr; }
+      .gp-landing-media-grid { grid-template-columns: 1fr; }
+      .gp-courses-grid { grid-template-columns: 1fr; }
+      .gp-fn-grid { grid-template-columns: 1fr; }
+      .gp-why-tiles { grid-template-columns: 1fr; }
+      .gp-why-stats { grid-template-columns: repeat(2, 1fr); }
+      .gp-instructors-grid { grid-template-columns: repeat(2, 1fr); }
+      .gp-dual-cta-grid { grid-template-columns: 1fr; }
+      .gp-footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .gp-landing-hero h1 { font-size: 2rem; }
+      .gp-landing-hero-actions { flex-direction: column; width: 100%; }
+      .gp-landing-hero-actions .btn { width: 100%; }
+      .gp-landing-stats { grid-template-columns: 1fr; }
+      .gp-landing-quiz { flex-direction: column; align-items: flex-start; padding: 36px 24px; }
+      .gp-instructors-grid { grid-template-columns: 1fr; }
+      .gp-landing-cta-actions { flex-direction: column; }
+      .gp-footer-grid { grid-template-columns: 1fr; }
+      .gp-footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+
+<body class="gp-ds">
+
+  <!-- ============================================================
+       TOP BAR: STICKY CHROME HEADER
+  ============================================================ -->
+  <header class="gp-site-header">
+    <div class="container">
+      <div class="gp-header-inner">
+        <!-- Logo -->
+        <a href="#" class="gp-brand">
+          <div class="gp-brand-badge">G</div>
+          <div class="gp-brand-text">
+            <span class="gp-brand-title">GPLI</span>
+            <span class="gp-brand-sub">ACADEMY</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation with Courses Mega -->
+        <ul class="gp-nav-list">
+          <li class="gp-nav-item">
+            <a href="#" class="gp-nav-link">Courses <span>▾</span></a>
+            <div class="gp-courses-mega">
+              <div class="gp-mega-grid">
+                <a href="#" class="gp-mega-item">
+                  <span>Executive Leadership</span>
+                  <span class="gp-mega-count">12 Courses</span>
+                </a>
+                <a href="#" class="gp-mega-item">
+                  <span>Human Resources</span>
+                  <span class="gp-mega-count">8 Courses</span>
+                </a>
+                <a href="#" class="gp-mega-item">
+                  <span>Sales & Revenue Ops</span>
+                  <span class="gp-mega-count">14 Courses</span>
+                </a>
+                <a href="#" class="gp-mega-item">
+                  <span>Finance & Accounting</span>
+                  <span class="gp-mega-count">9 Courses</span>
+                </a>
+                <a href="#" class="gp-mega-item">
+                  <span>Digital Transformation</span>
+                  <span class="gp-mega-count">11 Courses</span>
+                </a>
+                <a href="#" class="gp-mega-item">
+                  <span>Agile Operations</span>
+                  <span class="gp-mega-count">7 Courses</span>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="gp-nav-item"><a href="#lms-courses" class="gp-nav-link">Functions</a></li>
+          <li class="gp-nav-item"><a href="#why-gpli" class="gp-nav-link">Why GPLI</a></li>
+          <li class="gp-nav-item"><a href="#instructors" class="gp-nav-link">Instructors</a></li>
+        </ul>
+
+        <!-- Right Action Controls -->
+        <div class="gp-header-actions">
+          <a href="#" class="gp-icon-btn" title="Search">🔍</a>
+          <a href="#" class="gp-icon-btn" title="Shopping Cart">
+            🛒 <span class="gp-badge-count">2</span>
+          </a>
+          <a href="#" class="btn btn-outline" style="padding: 10px 20px;">Log In</a>
+          <a href="#" class="btn btn-primary" style="padding: 10px 20px;">Join Now</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       1. HERO SECTION (hero_section_1.php)
+  ============================================================ -->
+  <section class="gp-landing-hero">
+    <div class="container">
+      <div class="gp-landing-hero-copy">
+        <span class="gp-landing-eyebrow">The #1 Learning Platform for SMEs</span>
+        <h1>Empower Your Workforce from <span class="gp-landing-accent">Great to World Class</span></h1>
+        <p>Access enterprise-grade business training curated specifically for growing companies and SMEs.</p>
+
+        <div class="gp-landing-hero-actions">
+          <a href="#" class="btn btn-primary gp-landing-cta-wide">Get Started</a>
+          <a href="#" class="btn btn-outline">Explore Courses</a>
+        </div>
+
+        <form class="gp-landing-search" onsubmit="event.preventDefault();">
+          <input type="text" placeholder="What do you want to learn today? (e.g. Sales, HR, Leadership)">
+          <button type="submit" class="btn btn-primary" style="padding: 10px 22px;">Search</button>
+        </form>
+      </div>
+
+      <div class="gp-landing-stats">
+        <div class="gp-landing-stat">
+          <div class="num">100+</div>
+          <div class="lbl">Expert Courses</div>
+          <div class="sub">One subscription, the whole library</div>
+        </div>
+        <div class="gp-landing-stat">
+          <div class="num">8</div>
+          <div class="lbl">Business Functions</div>
+          <div class="sub">HR to operations to leadership</div>
+        </div>
+        <div class="gp-landing-stat">
+          <div class="num">2hrs</div>
+          <div class="lbl">Avg. Course Length</div>
+          <div class="sub">Built for microlearning</div>
+        </div>
+        <div class="gp-landing-stat">
+          <div class="num">SME</div>
+          <div class="lbl">Focused Content</div>
+          <div class="sub">Curated for SME realities</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       2. FEATURE TRIO (feature_trio.php)
+  ============================================================ -->
+  <section class="gp-landing-trio">
+    <div class="container">
+      <div class="gp-landing-trio-grid">
+        <div class="gp-landing-feat">
+          <span class="gp-landing-feat-icon">📚</span>
+          <h3>100+ Online Courses</h3>
+          <p>Explore a variety of fresh business topics designed to elevate your team's operational excellence.</p>
+        </div>
+        <div class="gp-landing-feat">
+          <span class="gp-landing-feat-icon">🎓</span>
+          <h3>Expert Instruction</h3>
+          <p>Find the right course, taught by seasoned executive practitioners and industry veterans.</p>
+        </div>
+        <div class="gp-landing-feat">
+          <span class="gp-landing-feat-icon">💡</span>
+          <h3>Smart Solution</h3>
+          <p>Learn on your own schedule, at your own pace, on any modern device seamlessly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. MEDIA STRIP (media_strip.php)
+  ============================================================ -->
+  <section class="gp-landing-media">
+    <div class="container">
+      <div class="gp-landing-media-grid">
+        <a href="#" class="gp-media-video-tile">
+          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80" alt="Featured Video Keynote">
+          <div class="gp-play-btn">▶</div>
+          <div class="gp-media-play-overlay">
+            <span class="gp-video-tag">Featured</span>
+            <div class="gp-video-title">Stop Losing Top Talent: The 24/7 Solution That Actually Works</div>
+          </div>
+        </a>
+        <div class="gp-media-photo-tile">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=500&q=80" alt="Executive Training">
+        </div>
+        <div class="gp-media-photo-tile">
+          <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=500&q=80" alt="Strategy Session">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. TOP COURSES (top_courses_1.php)
+  ============================================================ -->
+  <section class="gp-landing-courses">
+    <div class="container">
+      <div class="gp-landing-head">
+        <span class="gp-landing-eyebrow">Start Learning Today</span>
+        <h2>Top Featured Courses</h2>
+        <p>Hand-picked, high-impact modules for managers, team leads, and SME business owners.</p>
+      </div>
+
+      <div class="gp-courses-grid">
+        <!-- Card 1 -->
+        <div class="tc-card">
+          <div class="tc-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=500&q=80" alt="Executive Leadership">
+            <span class="tc-level-badge">Intermediate</span>
+            <button class="tc-wishlist-btn" title="Save to Wishlist">♥</button>
+          </div>
+          <div class="tc-body">
+            <div class="tc-rating">★★★★★ <span>(4.9)</span></div>
+            <h3 class="tc-title">Executive Leadership & Strategic Talent Management</h3>
+            <div class="tc-meta">
+              <span>⏱ 2.5 Hours</span>
+              <span>📖 12 Lessons</span>
+            </div>
+            <div class="tc-footer">
+              <span class="tc-price">$49.99</span>
+              <a href="#" class="btn btn-outline" style="padding: 8px 18px;">Enroll</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="tc-card">
+          <div class="tc-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80" alt="Financial Literacy">
+            <span class="tc-level-badge">Beginner</span>
+            <button class="tc-wishlist-btn" title="Save to Wishlist">♥</button>
+          </div>
+          <div class="tc-body">
+            <div class="tc-rating">★★★★★ <span>(4.8)</span></div>
+            <h3 class="tc-title">Financial Literacy for Non-Finance Business Owners</h3>
+            <div class="tc-meta">
+              <span>⏱ 1.8 Hours</span>
+              <span>📖 9 Lessons</span>
+            </div>
+            <div class="tc-footer">
+              <span class="tc-price">$39.99</span>
+              <a href="#" class="btn btn-outline" style="padding: 8px 18px;">Enroll</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="tc-card">
+          <div class="tc-thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=500&q=80" alt="Sales Operations">
+            <span class="tc-level-badge">Advanced</span>
+            <button class="tc-wishlist-btn" title="Save to Wishlist">♥</button>
+          </div>
+          <div class="tc-body">
+            <div class="tc-rating">★★★★★ <span>(5.0)</span></div>
+            <h3 class="tc-title">High-Performance B2B Sales & Revenue Operations</h3>
+            <div class="tc-meta">
+              <span>⏱ 3.0 Hours</span>
+              <span>📖 15 Lessons</span>
+            </div>
+            <div class="tc-footer">
+              <span class="tc-price">$59.99</span>
+              <a href="#" class="btn btn-outline" style="padding: 8px 18px;">Enroll</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. COURSES BY FUNCTION (function_grid.php)
+  ============================================================ -->
+  <section class="gp-landing-functions" id="lms-courses">
+    <div class="container">
+      <div class="gp-landing-head">
+        <span class="gp-landing-eyebrow">The Library</span>
+        <h2>Courses by Function</h2>
+        <p>Function-specific courses carefully curated to match your company requirements.</p>
+      </div>
+
+      <div class="gp-fn-grid">
+        <a href="#" class="gp-landing-fn-card">
+          <div>
+            <h3>Human Resources</h3>
+            <p>Recruitment, talent retention, organizational policy, and culture design.</p>
+          </div>
+          <span>18 Courses →</span>
+        </a>
+
+        <a href="#" class="gp-landing-fn-card">
+          <div>
+            <h3>Sales & Revenue</h3>
+            <p>B2B sales strategy, negotiation, client management, and revenue growth.</p>
+          </div>
+          <span>24 Courses →</span>
+        </a>
+
+        <a href="#" class="gp-landing-fn-card">
+          <div>
+            <h3>Executive Leadership</h3>
+            <p>Decision making, change management, crisis navigation, and executive coaching.</p>
+          </div>
+          <span>30 Courses →</span>
+        </a>
+
+        <a href="#" class="gp-landing-fn-card">
+          <div>
+            <h3>Finance & Accounting</h3>
+            <p>Cashflow budgeting, financial reporting, valuation, and SME compliance.</p>
+          </div>
+          <span>15 Courses →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. CATEGORY CHIPS (top_categories_1.php)
+  ============================================================ -->
+  <section class="gp-landing-chips">
+    <div class="container">
+      <div class="gp-chips-flex">
+        <a href="#" class="gp-landing-chip active">All Categories</a>
+        <a href="#" class="gp-landing-chip">Talent Management (18)</a>
+        <a href="#" class="gp-landing-chip">Digital Transformation (14)</a>
+        <a href="#" class="gp-landing-chip">Agile Operations (22)</a>
+        <a href="#" class="gp-landing-chip">Financial Literacy (15)</a>
+        <a href="#" class="gp-landing-chip">Executive Coaching (12)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. QUIZ BANNER (quiz_banner.php)
+  ============================================================ -->
+  <section class="gp-landing-quiz-wrap">
+    <div class="container">
+      <div class="gp-landing-quiz">
+        <div class="gp-landing-quiz-content">
+          <span class="gp-landing-eyebrow gp-eyebrow-gold">Discover Yourself</span>
+          <h2>What's Your Leadership Style?</h2>
+          <p>Take our free quiz to understand your unique leadership approach and get personalized course recommendations.</p>
+        </div>
+        <div class="gp-landing-quiz-action">
+          <a href="#" class="btn gp-landing-btn-on-dark">Take the Quiz Now →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. WHY GPLI (why_section.php)
+  ============================================================ -->
+  <section class="gp-landing-why" id="why-gpli">
+    <div class="container">
+      <div class="gp-landing-head">
+        <span class="gp-landing-eyebrow">Why GPLI</span>
+        <h2>Why GP Leadership Institute?</h2>
+        <p>Our courses are based on the best practices of global companies tailored for SME execution.</p>
+      </div>
+
+      <div class="gp-why-tiles">
+        <div class="gp-why-tile">
+          <h3>Affordable</h3>
+          <p>Low monthly cost makes world-class training accessible for growing teams of all sizes.</p>
+        </div>
+        <div class="gp-why-tile">
+          <h3>Function Specific</h3>
+          <p>Courses organized by business function so staff learn exactly what applies to their role.</p>
+        </div>
+        <div class="gp-why-tile">
+          <h3>World-Class Content</h3>
+          <p>Content created by experienced practitioners who have successfully scaled real companies.</p>
+        </div>
+      </div>
+
+      <div class="gp-why-stats">
+        <div class="gp-why-stat-box">
+          <div class="num">100+</div>
+          <div class="lbl">Professional Courses</div>
+        </div>
+        <div class="gp-why-stat-box">
+          <div class="num">8</div>
+          <div class="lbl">Business Functions</div>
+        </div>
+        <div class="gp-why-stat-box">
+          <div class="num">2hrs</div>
+          <div class="lbl">Average Course Length</div>
+        </div>
+        <div class="gp-why-stat-box">
+          <div class="num">SME</div>
+          <div class="lbl">Focused Content</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       9. TOP INSTRUCTORS (top_instructors_1.php)
+  ============================================================ -->
+  <section class="gp-landing-instructors" id="instructors">
+    <div class="container">
+      <div class="gp-landing-head">
+        <span class="gp-landing-eyebrow">World-Class Mentors</span>
+        <h2>Learn from Senior Facilitators</h2>
+        <p>Seasoned executives and industry leaders ready to share proven strategies.</p>
+      </div>
+
+      <div class="gp-instructors-grid">
+        <div class="instr-card">
+          <img class="instr-avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Facilitator">
+          <h3>Dr. Elena Rostova</h3>
+          <p>Head of Talent & Organizational Design</p>
+        </div>
+        <div class="instr-card">
+          <img class="instr-avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80" alt="Facilitator">
+          <h3>Marcus Vance</h3>
+          <p>Former VP of Sales & Revenue Growth</p>
+        </div>
+        <div class="instr-card">
+          <img class="instr-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80" alt="Facilitator">
+          <h3>Sarah Jenkins</h3>
+          <p>Senior Financial Consultant & Auditor</p>
+        </div>
+        <div class="instr-card">
+          <img class="instr-avatar" src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80" alt="Facilitator">
+          <h3>David Chen</h3>
+          <p>Agile Operations & Supply Specialist</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       10. PRESERVED LEFTOVER CMS SECTIONS (faq_section_1.php preview)
+  ============================================================ -->
+  <section class="gp-landing-cms-preserved">
+    <div class="container">
+      <div class="gp-landing-head">
+        <span class="gp-landing-eyebrow">Frequently Asked Questions</span>
+        <h2>Everything You Need to Know</h2>
+        <p>Answers to common questions about subscriptions, certifications, and enterprise licensing.</p>
+      </div>
+
+      <div class="gp-faq-accordion">
+        <div class="gp-faq-item">
+          <div class="gp-faq-question">
+            <span>How does team access work for SMEs?</span>
+            <span>▾</span>
+          </div>
+          <div class="gp-faq-answer">
+            Subscriptions include unlimited access to our 100+ course library for all active team seats, with a 5-seat minimum for SME corporate pricing.
+          </div>
+        </div>
+        <div class="gp-faq-item">
+          <div class="gp-faq-question">
+            <span>Are professional certificates recognized?</span>
+            <span>▾</span>
+          </div>
+          <div class="gp-faq-answer">
+            Yes, every completed module issues a verified digital certificate that can be added to LinkedIn or company HR records.
+          </div>
+        </div>
+        <div class="gp-faq-item">
+          <div class="gp-faq-question">
+            <span>Can I learn on mobile devices?</span>
+            <span>▾</span>
+          </div>
+          <div class="gp-faq-answer">
+            Our platform is completely responsive and optimized for smartphones, tablets, and desktops for microlearning on the go.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       11. DUAL PROMOTIONAL CTA (promotional_section_1.php)
+  ============================================================ -->
+  <section class="gp-landing-dual-cta">
+    <div class="container">
+      <div class="gp-dual-cta-grid">
+        <div class="gp-dual-card learner">
+          <div>
+            <h3>Join Now to Start Learning</h3>
+            <p>Empower yourself or your entire team with instant access to over 100+ business courses.</p>
+          </div>
+          <div>
+            <a href="#" class="btn gp-landing-btn-on-dark">Get Started Now</a>
+          </div>
+        </div>
+
+        <div class="gp-dual-card instructor">
+          <div>
+            <h3>Become a Facilitator</h3>
+            <p>Share your business expertise with thousands of SME leaders and professionals worldwide.</p>
+          </div>
+          <div>
+            <a href="#" class="btn gp-landing-btn-on-dark-outline">Apply as Instructor</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       12. DARK CTA BAND (cta_band.php)
+  ============================================================ -->
+  <section class="gp-landing-cta-band">
+    <div class="container">
+      <div class="gp-landing-cta-inner">
+        <h2>Ready to Transform Your Business?</h2>
+        <p>Join SMEs worldwide that have empowered their teams with GP Leadership Institute.</p>
+
+        <div class="gp-landing-cta-actions">
+          <a href="#" class="btn gp-landing-btn-on-dark">Get Started Free</a>
+          <a href="#" class="btn gp-landing-btn-on-dark-outline">Explore Courses</a>
+        </div>
+
+        <div class="gp-landing-cta-footnote">
+          Minimum 5 users per subscription • Unlimited access • Professional certificates included
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       13. FOOTER (footer.php)
+  ============================================================ -->
+  <footer class="gp-site-footer">
+    <div class="container">
+      <div class="gp-footer-grid">
+        <div class="gp-foot-col">
+          <h4 style="color: var(--gp-gold);">GPLI ACADEMY</h4>
+          <p style="margin-bottom: 16px;">Empowering businesses and professionals through practical, enterprise-grade online education.</p>
+          <p>📍 Singapore • Manila • Kuala Lumpur</p>
+        </div>
+
+        <div class="gp-foot-col">
+          <h4>Functions</h4>
+          <ul class="gp-foot-links">
+            <li><a href="#">Human Resources</a></li>
+            <li><a href="#">Sales & Growth</a></li>
+            <li><a href="#">Leadership</a></li>
+            <li><a href="#">Finance & SME</a></li>
+          </ul>
+        </div>
+
+        <div class="gp-foot-col">
+          <h4>Quick Links</h4>
+          <ul class="gp-foot-links">
+            <li><a href="#">All Courses</a></li>
+            <li><a href="#">Leadership Quiz</a></li>
+            <li><a href="#">Become Instructor</a></li>
+            <li><a href="#">Pricing Plans</a></li>
+          </ul>
+        </div>
+
+        <div class="gp-foot-col">
+          <h4>Legal</h4>
+          <ul class="gp-foot-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Support Center</a></li>
+          </ul>
+        </div>
+
+        <div class="gp-foot-col">
+          <h4>Newsletter</h4>
+          <p>Get the latest SME insights & course drops delivered to your inbox.</p>
+          <form class="gp-subscribe-form" onsubmit="event.preventDefault();">
+            <input type="email" placeholder="Enter your email">
+            <button type="submit" class="btn btn-secondary" style="padding: 10px 16px;">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="gp-footer-bottom">
+        <div>© 2026 GP Leadership Institute. All rights reserved.</div>
+        <div>Built with GPLI Design System</div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

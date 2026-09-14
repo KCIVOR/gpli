@@ -1,3 +1,4 @@
+<div class="gp-settings-page">
 <form action="<?php echo site_url('admin/frontend_settings/review_store')?>" method="post">
     <div class="form-group">
         <label for="user_id"><?php echo get_phrase('Select User'); ?></label>
@@ -30,9 +31,13 @@
 
 
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary"><?php echo get_phrase('submit'); ?></button>
+		<?php echo gp_ds_button(get_phrase('submit'), [
+			'variant' => 'primary',
+			'type' => 'submit',
+		], true); ?>
 	</div>
 </form>
+</div>
 
 <script>
     $(document).ready(function() {

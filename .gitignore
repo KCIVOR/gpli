@@ -17,6 +17,7 @@ backups/*
 .DS_Store
 Thumbs.db
 desktop.ini
+.cursor/
 
 # Never commit SSH keys if they ever end up in this folder
 deploy_key

@@ -1,4 +1,4 @@
-
+<div class="gp-settings-page">
 <form class="required-form" action="<?php echo site_url('admin/badges/' . $type); ?>" method="post" enctype="multipart/form-data">
     <input type="hidden" name="type" value="<?php echo $type; ?>">
     <div class="form-group">
@@ -33,7 +33,11 @@
     </div>       
     <div class="row">
         <div class="col-md-8">
-            <button type="submit" class="btn btn-primary btn-block" ><?php echo get_phrase('create'); ?></button>
+            <?php echo gp_ds_button(get_phrase('create'), [
+                'variant' => 'primary',
+                'type' => 'submit',
+            ], true); ?>
         </div>
     </div>
 </form>
+</div>

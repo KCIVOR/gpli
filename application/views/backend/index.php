@@ -14,7 +14,13 @@
     <!-- all the css files -->
     <?php include 'includes_top.php'; ?>
 </head>
-<body data-layout="detached">
+<body data-layout="detached"<?php
+    $gp_ds_active = gp_ds_is_active(isset($page_name) ? $page_name : '');
+    echo $gp_ds_active ? ' class="gp-ds"' : '';
+?>>
+<?php if (!empty($gp_ds_active)): ?>
+<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
+<?php endif; ?>
     <!-- HEADER -->
     <?php include 'header.php'; ?>
     <div class="container-fluid">

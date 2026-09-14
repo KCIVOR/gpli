@@ -1,0 +1,297 @@
+/**
+ * Geese Project — Public payment chrome
+ * UI only. Does not change gateway SDK forms, field names, actions,
+ * or JS hooks (.payment-gateway, .gateway, .tick-icon, selectedPaymentGateway).
+ * Tokens only so Light / Dark follow --gp-* .
+ */
+
+.gp-ds {
+  background: var(--gp-bg);
+  color: var(--gp-fg);
+  font-family: var(--gp-font-body);
+  min-height: 100vh;
+}
+
+.gp-ds .gp-payment-page {
+  background: var(--gp-bg);
+  color: var(--gp-fg);
+  padding: 40px 16px 64px;
+}
+
+.gp-ds .gp-payment-shell {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.gp-ds .gp-payment-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.gp-ds .gp-payment-head .eyebrow {
+  margin-bottom: 8px;
+}
+
+.gp-ds .gp-payment-head h1 {
+  font-family: var(--gp-font-head);
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  word-spacing: normal;
+  line-height: 1.15;
+  color: var(--gp-fg);
+  margin: 0;
+}
+
+.gp-ds .gp-payment-page .icon-btn,
+.gp-ds .gp-payment-page .close-btn-light {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 0;
+  line-height: 1;
+  font-size: 16px;
+}
+
+.gp-ds .gp-payment-page .close-btn-light:hover,
+.gp-ds .gp-payment-page .icon-btn:hover {
+  background: var(--gp-danger-soft);
+  border-color: var(--gp-danger-border);
+  color: var(--gp-danger);
+}
+
+.gp-ds .gp-payment-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.gp-ds .gp-payment-page .card.gp-payment-panel {
+  margin: 0;
+}
+
+.gp-ds .gp-payment-page .card.gp-payment-panel .card-body {
+  padding: 22px 24px;
+}
+
+.gp-ds .gp-payment-page .payment-header,
+.gp-ds .gp-payment-page .payment-header-text {
+  font-family: var(--gp-font-head);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--gp-fg-muted);
+  margin: 0 0 14px;
+}
+
+.gp-ds .gp-payment-gateways {
+  display: grid;
+  gap: 10px;
+}
+
+.gp-ds .gp-payment-page .payment-gateway {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 64px;
+  padding: 12px 14px;
+  margin: 0;
+  border: 1px solid var(--gp-border);
+  border-radius: 12px;
+  background: var(--gp-surface);
+  cursor: pointer;
+}
+
+.gp-ds .gp-payment-page .payment-gateway:hover,
+.gp-ds .gp-payment-page .payment-gateway.selected {
+  border-color: var(--gp-primary);
+  background: var(--gp-info-soft);
+}
+
+.gp-ds .gp-payment-page .payment-gateway-icon {
+  float: none;
+  max-width: 72%;
+  max-height: 32px;
+  width: auto;
+  margin: 0 0 0 auto;
+  object-fit: contain;
+}
+
+.gp-ds .gp-payment-page .tick-icon {
+  display: none;
+  float: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.gp-ds .gp-payment-items {
+  display: grid;
+  gap: 12px;
+}
+
+.gp-ds .gp-payment-page .item,
+.gp-ds .gp-payment-item {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+
+.gp-ds .gp-payment-page .count-item {
+  float: none;
+  margin: 0;
+  padding: 4px 0;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gp-primary);
+  background: var(--gp-info-soft);
+  border-radius: 8px;
+}
+
+.gp-ds .gp-payment-item-copy {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.gp-ds .gp-payment-page .item-title {
+  display: block;
+  font-family: var(--gp-font-head);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+  margin: 0;
+}
+
+.gp-ds .gp-payment-page .item-price {
+  float: none;
+  font-family: var(--gp-font-head);
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--gp-primary);
+  white-space: nowrap;
+}
+
+.gp-ds .gp-payment-page .item-price del {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .gp-payment-page .by-owner,
+.gp-ds .gp-payment-sub {
+  display: block;
+  font-size: 12.5px;
+  color: var(--gp-fg-muted);
+  margin: 0;
+}
+
+.gp-ds .gp-payment-total,
+.gp-ds .gp-payment-page .indicated-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-payment-page .total,
+.gp-ds .gp-payment-page .total-price {
+  float: none;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  font-family: var(--gp-font-head);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-payment-actions {
+  margin-top: 20px;
+}
+
+.gp-ds .gp-payment-page .gateway {
+  display: none;
+}
+
+.gp-ds .gp-payment-page .payment-button,
+.gp-ds .gp-payment-page button.payment-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  float: none;
+  margin: 0;
+  padding: 15px 26px;
+  border: 2px solid var(--gp-primary);
+  border-radius: var(--gp-radius);
+  background: var(--gp-primary) !important;
+  color: #fff !important;
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.32px;
+  cursor: pointer;
+}
+
+.gp-ds .gp-payment-page .payment-button:hover,
+.gp-ds .gp-payment-page .payment-button:focus {
+  background: var(--gp-accent) !important;
+  border-color: var(--gp-accent);
+  color: #fff !important;
+}
+
+.gp-ds .gp-payment-page .payment-button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.gp-ds .gp-payment-page #paypal-button-container,
+.gp-ds .gp-payment-page .offline_payment_instruction {
+  width: 100%;
+  text-align: left;
+  background: var(--gp-info-soft);
+  color: var(--gp-fg);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 0;
+}
+
+.gp-ds .gp-payment-page #paypal-button-container {
+  background: transparent;
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .gp-ds .gp-payment-layout {
+    grid-template-columns: 1fr;
+  }
+}

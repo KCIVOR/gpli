@@ -1,24 +1,10 @@
-<?php
-    
-?>
-<!-- start page title -->
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('setup_payment_informations'); ?></h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
-
+<?php gp_ds_page_title(get_phrase('setup_payment_informations')); ?>
+<div class="gp-settings-page">
 <div class="row">
-    <div class="col-md-7" style="padding: 0;">
-        <!-- System Currency Settings -->
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="header-title"><p><?php echo get_phrase('system_currency_settings'); ?></p></h4>
+    <div class="col-md-7">
+        <?php
+        ob_start();
+        ?>
                     <form class="" action="<?php echo site_url('admin/payment_settings/system_currency'); ?>" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label><?php echo get_phrase('system_currency'); ?></label>
@@ -44,24 +30,22 @@
                             </select>
                         </div>
 
-                        <div class="row justify-content-md-center">
-                            <div class="form-group col-md-6">
-                                <button class="btn btn-block btn-primary" type="submit"><?php echo get_phrase('update_system_currency'); ?></button>
-                            </div>
-                        </div>
+                        <?php echo gp_ds_button(get_phrase('update_system_currency'), ['variant' => 'primary', 'type' => 'submit'], true); ?>
                     </form>
-                </div>
-            </div>
-        </div>
+        <?php
+        gp_ds_card([
+            'title' => get_phrase('system_currency_settings'),
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
 
         <?php foreach($payment_gateways as $payment_gateway): ?>
             <!-- if is addon and deactivate -->
             <?php if($payment_gateway['is_addon'] && !addon_status($payment_gateway['identifier']) || $payment_gateway['identifier'] == 'offline_payment') continue; ?>
-
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="header-title"><p><?php echo $payment_gateway['title'] ?> <?php echo get_phrase('settings'); ?></p></h4>
+            <?php
+            ob_start();
+            ?>
                         <form class="" action="<?php echo site_url('admin/payment_settings'); ?>" method="post" enctype="multipart/form-data">
 
                             <input type="hidden" name="identifier" value="<?php echo $payment_gateway['identifier']; ?>">
@@ -99,8 +83,10 @@
 
                             <?php foreach(json_decode($payment_gateway['keys'], true) as $key => $value): ?>
                                 <?php if($key == 'theme_color'): ?>
-                                    <label><?php echo get_phrase($key); ?></label>
-                                    <input type="color" name="<?php echo $key; ?>" class="form-control" value="<?php echo $value;?>" required />
+                                    <div class="form-group">
+                                        <label><?php echo get_phrase($key); ?></label>
+                                        <input type="color" name="<?php echo $key; ?>" class="form-control" value="<?php echo $value;?>" required />
+                                    </div>
                                 <?php else: ?>
                                     <div class="form-group">
                                         <label><?php echo get_phrase($key); ?></label>
@@ -109,21 +95,19 @@
                                 <?php endif; ?>
                             <?php endforeach; ?>
 
-                            <div class="row justify-content-md-center">
-                                <div class="form-group col-md-6">
-                                    <button class="btn btn-block btn-primary" type="submit"><?php echo get_phrase('update'); ?> <?php echo $payment_gateway['title']; ?> <?php echo get_phrase('settings'); ?></button>
-                                </div>
-                            </div>
+                            <?php echo gp_ds_button(get_phrase('update') . ' ' . $payment_gateway['title'] . ' ' . get_phrase('settings'), ['variant' => 'primary', 'type' => 'submit'], true); ?>
                         </form>
-                    </div>
-                </div>
-            </div>
+            <?php
+            gp_ds_card([
+                'title' => $payment_gateway['title'] . ' ' . get_phrase('settings'),
+                'body' => ob_get_clean(),
+                'extra_class' => 'gp-dash-panel',
+            ]);
+            ?>
         <?php endforeach; ?>
     </div>
     <div class="col-md-5">
-        <div class="alert alert-info" role="alert">
-            <h4 class="alert-heading"><?php echo get_phrase('heads_up'); ?>!</h4>
-            <p><?php echo get_phrase('ensure_that_the_system_currency_and_all_active_payment_gateway_currencies_are_same'); ?>.</p>
-        </div>
+        <?php echo gp_ds_alert(get_phrase('heads_up'), get_phrase('ensure_that_the_system_currency_and_all_active_payment_gateway_currencies_are_same'), 'info', true); ?>
     </div>
+</div>
 </div>

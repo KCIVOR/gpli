@@ -1,0 +1,156 @@
+/**
+ * Geese Project Design System — Tooltips
+ * Phase 2c — Low-footprint component
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ * Section: 17 (Dropdowns, tooltips & popovers) — lines 327-329
+ * 
+ * Bootstrap 5 tooltip structure:
+ * <div class="tooltip bs-tooltip-{placement}" role="tooltip">
+ *   <div class="tooltip-arrow"></div>
+ *   <div class="tooltip-inner">Tooltip text</div>
+ * </div>
+ * 
+ * Preserves Bootstrap JS behavior (data-bs-toggle="tooltip")
+ * Only changes visual styling to match design system
+ */
+
+/* ========== TOOLTIP CONTAINER ========== */
+.gp-ds .tooltip {
+  position: absolute;
+  z-index: 1080;
+  display: block;
+  margin: 0;
+  font-family: var(--gp-font-body);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-break: normal;
+  word-spacing: normal;
+  white-space: normal;
+  line-break: auto;
+  font-size: 12px;
+  word-wrap: break-word;
+  opacity: 0;
+}
+
+.gp-ds .tooltip.show {
+  opacity: 1;
+}
+
+/* ========== TOOLTIP INNER (the actual bubble) ========== */
+.gp-ds .tooltip-inner {
+  max-width: 220px;
+  padding: 6px 10px;
+  color: #fff;
+  text-align: center;
+  background: var(--gp-ink);
+  border-radius: 7px;
+  white-space: nowrap;
+}
+
+/* ========== TOOLTIP ARROW ========== */
+.gp-ds .tooltip-arrow {
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 5px;
+}
+
+.gp-ds .tooltip-arrow::before {
+  position: absolute;
+  content: "";
+  border-color: transparent;
+  border-style: solid;
+}
+
+/* ========== TOP PLACEMENT ========== */
+.gp-ds .bs-tooltip-top,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="top"] {
+  padding: 5px 0;
+}
+
+.gp-ds .bs-tooltip-top .tooltip-arrow,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow {
+  bottom: 0;
+}
+
+.gp-ds .bs-tooltip-top .tooltip-arrow::before,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
+  top: -1px;
+  border-width: 5px 5px 0;
+  border-top-color: var(--gp-ink);
+}
+
+/* ========== RIGHT PLACEMENT ========== */
+.gp-ds .bs-tooltip-end,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="right"] {
+  padding: 0 5px;
+}
+
+.gp-ds .bs-tooltip-end .tooltip-arrow,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow {
+  left: 0;
+  width: 5px;
+  height: 10px;
+}
+
+.gp-ds .bs-tooltip-end .tooltip-arrow::before,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
+  right: -1px;
+  border-width: 5px 5px 5px 0;
+  border-right-color: var(--gp-ink);
+}
+
+/* ========== BOTTOM PLACEMENT ========== */
+.gp-ds .bs-tooltip-bottom,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="bottom"] {
+  padding: 5px 0;
+}
+
+.gp-ds .bs-tooltip-bottom .tooltip-arrow,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow {
+  top: 0;
+}
+
+.gp-ds .bs-tooltip-bottom .tooltip-arrow::before,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
+  bottom: -1px;
+  border-width: 0 5px 5px;
+  border-bottom-color: var(--gp-ink);
+}
+
+/* ========== LEFT PLACEMENT ========== */
+.gp-ds .bs-tooltip-start,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="left"] {
+  padding: 0 5px;
+}
+
+.gp-ds .bs-tooltip-start .tooltip-arrow,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="left"] .tooltip-arrow {
+  right: 0;
+  width: 5px;
+  height: 10px;
+}
+
+.gp-ds .bs-tooltip-start .tooltip-arrow::before,
+.gp-ds .bs-tooltip-auto[data-popper-placement^="left"] .tooltip-arrow::before {
+  left: -1px;
+  border-width: 5px 0 5px 5px;
+  border-left-color: var(--gp-ink);
+}
+
+/* ========== DARK MODE ========== */
+/* Tooltips maintain dark background even in light mode (as per design system) */
+/* In dark mode, they remain visible with the same dark background */
+[data-theme="dark"] .gp-ds .tooltip-inner,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .gp-ds .tooltip-inner {
+    background: var(--gp-ink);
+    color: #fff;
+  }
+}

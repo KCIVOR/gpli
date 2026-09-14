@@ -1,3 +1,4 @@
+<div class="gp-settings-page">
 <form action="<?php echo site_url('admin/edit_email_template/'.$notification['id'].'/update'); ?>" method="post">
 	<?php foreach(json_decode($notification['subject'], true) as $user_type => $subject): ?>
 		<div class="form-group">
@@ -15,9 +16,13 @@
 	<?php endforeach; ?>
 
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary"><?php echo get_phrase('Save changes'); ?></button>
+		<?php echo gp_ds_button(get_phrase('Save changes'), [
+			'variant' => 'primary',
+			'type' => 'submit',
+		], true); ?>
 	</div>
 </form>
+</div>
 
 <script type="text/javascript">
 	initSummerNote(['textarea']);

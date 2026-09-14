@@ -1,0 +1,122 @@
+/**
+ * Geese Project Design System — Base Typography & Layout
+ * Phase 0 — Typography scale and base element styles
+ * Source: C:\Users\Rovick\Downloads\geeseprojdesignsystem (1).html
+ */
+
+/* ========== Base Element Resets (scoped under .gp-ds) ========== */
+.gp-ds {
+  background: var(--gp-bg);
+  color: var(--gp-fg);
+  font-family: var(--gp-font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.gp-ds *,
+.gp-ds *::before,
+.gp-ds *::after {
+  box-sizing: border-box;
+}
+
+/* ========== Typography ========== */
+.gp-ds h1,
+.gp-ds h2,
+.gp-ds h3,
+.gp-ds h4 {
+  font-family: var(--gp-font-head);
+  color: var(--gp-fg);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.gp-ds p {
+  margin: 0;
+  color: var(--gp-fg-muted);
+  line-height: 1.7;
+}
+
+.gp-ds a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gp-ds code,
+.gp-ds .mono {
+  font-family: var(--gp-font-mono);
+}
+
+.gp-ds ::selection {
+  background: var(--gp-gold);
+  color: #171613;
+}
+
+/* ========== Typography Scale ========== */
+.gp-ds h1 {
+  font-size: clamp(38px, 6vw, 72px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+.gp-ds h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.gp-ds h3 {
+  font-size: clamp(19px, 2.5vw, 22px);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+.gp-ds h4 {
+  font-size: 16.5px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  line-height: 1.4;
+}
+
+/* ========== Eyebrow / Kicker Label ========== */
+.gp-ds .eyebrow,
+.gp-ds .kicker {
+  font-family: var(--gp-font-head);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gp-secondary);
+  margin-bottom: 14px;
+}
+
+/* ========== Body Text ========== */
+.gp-ds .body-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--gp-fg-muted);
+}
+
+/* ========== Utility Classes ========== */
+.gp-ds .text-center {
+  text-align: center;
+}
+
+.gp-ds .text-primary {
+  color: var(--gp-primary);
+}
+
+.gp-ds .text-secondary {
+  color: var(--gp-secondary);
+}
+
+.gp-ds .text-muted {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .text-faint {
+  color: var(--gp-fg-faint);
+}

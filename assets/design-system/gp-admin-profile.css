@@ -1,0 +1,121 @@
+/**
+ * Geese Project — Admin Manage Profile
+ * Tokens from gp-tokens.css only. No leftover Hyper hex.
+ *
+ * In-scope page_name: manage_profile
+ *
+ * Forbidden:
+ *   rewriting Admin.php manage_profile
+ *   changing form names / ids / actions
+ *   editing navigation.php
+ *   touching backend/user/manage_profile
+ *
+ * Hooks later phases must keep:
+ *   admin/manage_profile/update_profile_info/{id}
+ *   admin/manage_profile/change_password/{id}
+ *   first_name, last_name, email, facebook_link, twitter_link, linkedin_link
+ *   title, skills, biography, user_image
+ *   current_password, new_password, confirm_password
+ *   #skills tagsinput, #biography initSummerNote, #user_image
+ *   changeTitleOfImageUploader
+ */
+
+.gp-ds .gp-profile-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gp-ds .gp-profile-page .btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-profile-page a.btn:not(.btn-icon):not(.action-icon):not(.icon-btn),
+.gp-ds .gp-profile-page button.btn:not(.btn-icon):not(.action-icon):not(.icon-btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto !important;
+  min-width: 96px;
+  padding: 8px 16px !important;
+  font-size: 12.5px !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.2em;
+  line-height: 1.2;
+  min-height: 38px !important;
+  border-radius: var(--gp-radius) !important;
+  box-shadow: none !important;
+}
+
+.gp-ds .gp-profile-page .btn,
+.gp-ds .gp-profile-page .header-title,
+.gp-ds .gp-profile-page label {
+  word-spacing: 0.2em;
+}
+
+.gp-ds .gp-profile-page .gp-dash-panel > .card-body > .header-title,
+.gp-ds .gp-profile-page .card > .card-body > .header-title {
+  margin: 0 0 16px;
+  font-family: var(--gp-font-head);
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-profile-page .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-profile-page .form-group {
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-profile-page .form-group > label {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-profile-page .form-control,
+.gp-ds .gp-profile-page textarea.form-control,
+.gp-ds .gp-profile-page .custom-file-label {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-profile-page .form-control:focus,
+.gp-ds .gp-profile-page textarea.form-control:focus {
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-profile-page .text-muted {
+  color: var(--gp-fg-muted) !important;
+}
+
+.gp-ds .gp-profile-page .custom-file-label {
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-profile-page .img-thumbnail {
+  height: 50px;
+  width: 50px;
+  border-color: var(--gp-border);
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-profile-page #skills,
+.gp-ds .gp-profile-page .bootstrap-tagsinput {
+  width: 100%;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: none;
+}

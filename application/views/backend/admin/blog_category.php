@@ -1,30 +1,34 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body py-2">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('blog_categories'); ?>
-                    <button onclick="showAjaxModal('<?php echo site_url('admin/add_blog_category'); ?>', '<?php echo get_phrase('add_a_new_category'); ?>');" class="btn btn-outline-primary btn-rounded alignToTitle"><i class="mdi mdi-plus"></i><?php echo get_phrase('add_new_category'); ?></button>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php
+gp_ds_page_title(
+    get_phrase('blog_categories'),
+    gp_ds_button(get_phrase('add_new_category'), [
+        'href' => '#',
+        'variant' => 'outline',
+        'tag' => 'button',
+        'type' => 'button',
+        'attrs' => [
+            'onclick' => "showAjaxModal('" . site_url('admin/add_blog_category') . "', '" . get_phrase('add_a_new_category') . "');",
+        ],
+    ], true)
+);
+?>
 
+<div class="gp-blog-page">
 <div class="row">
 	<?php foreach($categories->result_array() as $category): ?>
 	    <div class="col-md-4 mb-3">
-			<ul class="list-group list-group-numbered">
+			<ul class="list-group list-group-numbered gp-blog-category-tile">
 				<li class="list-group-item d-flex justify-content-between align-items-start">
 					<div class="ml-2 mr-auto">
-						<div class="fw-bold" style="font-size: 20px; font-weight: 600;"><?php echo $category['title']; ?></div>
+						<div class="gp-blog-category-title"><?php echo $category['title']; ?></div>
 						<span class="mt-1 d-block"><?php echo $category['subtitle']; ?></span>
 					</div>
 					<div class="ml-auto text-center">
-						<span class="badge badge-primary text-right"><?php echo $this->crud_model->get_blogs_by_category_id($category['blog_category_id'])->num_rows(); ?></span>
+						<?php echo gp_ds_badge((string) $this->crud_model->get_blogs_by_category_id($category['blog_category_id'])->num_rows(), 'primary', true); ?>
 						
 
 						<div class="btn-group d-block mt-2">
-							<button type="button" class="border-0 bg-white" data-toggle="dropdown" aria-expanded="false">
+							<button type="button" class="icon-btn" data-toggle="dropdown" aria-expanded="false">
 								<i class="mdi mdi-dots-vertical"></i>
 							</button>
 							<div class="dropdown-menu dropdown-menu-right">
@@ -37,4 +41,5 @@
 			</ul>
 		</div>
 	<?php endforeach; ?>
+</div>
 </div>

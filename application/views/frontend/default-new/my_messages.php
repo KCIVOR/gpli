@@ -1,21 +1,23 @@
 <?php $user_details = $this->user_model->get_all_user($this->session->userdata('user_id'))->row_array(); ?>
+<div class="gp-student-page">
 <?php include "breadcrumb.php"; ?>
 
 <!--------  Wish List body section start------>
-<section class="wish-list-body message">
+<section class="wish-list-body message gp-student-shell">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-4 col-sm-12">
                 <?php include "profile_menus.php"; ?>
             </div>
-            <div class="col-lg-9">
-                <div class="conversation-fulllll-body common-card">
+            <div class="col-lg-9 col-md-8 col-sm-12">
+                <?php gp_ds_page_title(get_phrase('Messages')); ?>
+                <div class="conversation-fulllll-body">
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="conversation ">
                                 <h5 class="d-flex align-items-center">
                                     <?php echo get_phrase('Message') ?>
-                                    <a href="#" onclick="$('.message-box-content').toggleClass('d-hidden');" class="btn ms-auto" data-bs-toggle="tooltip" title="<?php echo get_phrase('New message') ?>" data-><i class="fas fa-plus"></i></a>
+                                    <a href="#" onclick="$('.message-box-content').toggleClass('d-hidden');" class="icon-btn ms-auto" data-bs-toggle="tooltip" title="<?php echo get_phrase('New message') ?>"><i class="fas fa-plus"></i></a>
                                 </h5>
                                 <form action="#">
                                     <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -53,7 +55,7 @@
                                                         <div class="conversation-img">
                                                             <img loading="lazy" class="rounded-circle" src="<?php echo $this->user_model->get_user_image_url($conversation_user_info['id']); ?>">
                                                             <?php if ($number_of_unreaded_message > 0) : ?>
-                                                                <p><?php echo $number_of_unreaded_message; ?></p>
+                                                                <?php gp_ds_badge($number_of_unreaded_message, 'primary'); ?>
                                                             <?php endif; ?>
                                                         </div>
                                                         <div class="conversation-name">
@@ -148,7 +150,12 @@
                                         <form action="<?php echo site_url('home/my_messages/send_reply/' . $message_thread_code); ?>" method="post">
                                             <textarea class="form-control" placeholder="<?php echo get_phrase('Write your message') ?>..." name="message"></textarea>
                                             
-                                            <button type="submit" class="btn btn-primary float-end mb-3"><?php echo get_phrase('Send') ?></button>
+                                            <?php gp_ds_button(get_phrase('Send'), [
+                                                'variant'     => 'primary',
+                                                'tag'         => 'button',
+                                                'type'        => 'submit',
+                                                'extra_class' => 'gp-student-cta float-end mb-3',
+                                            ]); ?>
                                         </form>
                                     </div>
                                 </div>
@@ -179,7 +186,12 @@
                                         </div>
                                         <textarea class="form-control" placeholder="<?php echo get_phrase('Write your message') ?>..." name="message"></textarea>
                                         
-                                        <button type="submit" class="btn btn-primary float-end mb-3"><?php echo get_phrase('Send') ?></button>
+                                        <?php gp_ds_button(get_phrase('Send'), [
+                                            'variant'     => 'primary',
+                                            'tag'         => 'button',
+                                            'type'        => 'submit',
+                                            'extra_class' => 'gp-student-cta float-end mb-3',
+                                        ]); ?>
                                     </form>
                                 </div>
                             </div>
@@ -190,6 +202,7 @@
         </div>
     </div>
 </section>
+</div>
 <!-------- wish list bosy section end ------->
 
 <script type="text/javascript">

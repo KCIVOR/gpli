@@ -1,35 +1,11 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body py-2">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('instructors_pending_blog'); ?>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php gp_ds_page_title(get_phrase('instructors_pending_blog')); ?>
 
-<div class="row">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="mb-3 header-title"><?php echo get_phrase('total_pending'); ?> <?php echo $pending_blogs->num_rows(); ?> <?php echo get_phrase('blogs'); ?></h4>
-                <div class="table-responsive-sm mt-4">
-                    <table id="basic-datatable" class="table table-striped dt-responsive nowrap dataTable no-footer dtr-inline collapsed">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th><?php echo get_phrase('creator'); ?></th>
-                                <th><?php echo get_phrase('title'); ?></th>
-                                <th><?php echo get_phrase('category'); ?></th>
-                                <th><?php echo get_phrase('status'); ?></th>
-                                <th><?php echo get_phrase('actions'); ?></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($pending_blogs->result_array() as $key => $blog) : ?>
-                            	<?php $user_details = $this->user_model->get_all_user($blog['user_id'])->row_array(); ?>
+<div class="gp-blog-page">
+    <?php
+    ob_start();
+    foreach ($pending_blogs->result_array() as $key => $blog) :
+        $user_details = $this->user_model->get_all_user($blog['user_id'])->row_array();
+    ?>
                                 <tr>
                                     <td><?php echo $key + 1; ?></td>
                                     <td>
@@ -51,7 +27,7 @@
                                     </td>
                                     <td><?php echo $this->crud_model->get_blog_categories($blog['blog_category_id'])->row('title'); ?></td>
                                     <td>
-                                        <span class="badge badge-danger"><?php echo get_phrase($blog['status']); ?></span>
+                                        <?php gp_ds_badge(get_phrase($blog['status']), 'danger'); ?>
                                     </td>
                                     <td>
                                         <div class="dropright dropright">
@@ -67,11 +43,27 @@
                                         </div>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
+    <?php
+    endforeach;
+    $pending_rows = ob_get_clean();
+
+    gp_ds_card([
+        'title' => get_phrase('total_pending') . ' ' . $pending_blogs->num_rows() . ' ' . get_phrase('blogs'),
+        'body' => gp_ds_table([
+            'table_id' => 'basic-datatable',
+            'extra_class' => 'mb-0',
+            'headers' => [
+                '#',
+                get_phrase('creator'),
+                get_phrase('title'),
+                get_phrase('category'),
+                get_phrase('status'),
+                get_phrase('actions'),
+            ],
+            'body_html' => $pending_rows,
+            'allow_empty' => true,
+        ], true),
+        'extra_class' => 'gp-dash-panel',
+    ]);
+    ?>
 </div>

@@ -1,4 +1,5 @@
 <?php $home_page = $this->db->where('id', $param2)->get('home_pages')->row_array(); ?>
+<div class="gp-settings-page">
 <form action="<?php echo site_url('admin/home_page_builder/update/'.$home_page['id']); ?>" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title"><?php echo get_phrase('Title'); ?></label>
@@ -16,9 +17,13 @@
     </div>
 
     <div class="form-group mt-4">
-        <button class="btn btn-success"><?php echo get_phrase('Update'); ?></button>
+        <?php echo gp_ds_button(get_phrase('Update'), [
+            'variant' => 'primary',
+            'type' => 'submit',
+        ], true); ?>
     </div>
 </form>
+</div>
 
 <script>
     $('#summernote-basic').summernote({

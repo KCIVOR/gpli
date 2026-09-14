@@ -1,39 +1,25 @@
 <?php
     $applications = $this->user_model->get_applications($this->session->userdata('user_id'), 'user');
- ?>
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('become_an_instructor'); ?></h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+?>
+<?php gp_ds_page_title(get_phrase('Become an instructor')); ?>
+
+<div class="gp-users-page">
 <?php if ($this->session->userdata('is_instructor') != 1): ?>
-    <div class="row justify-content-center">
-        <div class="col-xl-12">
-            <div class="card">
-                <div class="card-body">
-                    <?php if ($applications->num_rows() == 0): ?>
-                        <?php include 'application_form.php'; ?>
-                    <?php else: ?>
-                        <?php include 'application_list.php'; ?>
-                    <?php endif; ?>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div>
-    </div>
+    <?php
+    $has_application = $applications->num_rows() > 0;
+    ob_start();
+    if (! $has_application) {
+        include 'application_form.php';
+    } else {
+        include 'application_list.php';
+    }
+    gp_ds_card([
+        'title'       => $has_application ? get_phrase('your_application') : get_phrase('instructor_application_form'),
+        'extra_class' => 'gp-dash-panel',
+        'body'        => ob_get_clean(),
+    ]);
+    ?>
 <?php else: ?>
-    <div class="alert alert-info" role="alert">
-        <h4 class="alert-heading"><?php echo get_phrase('congratulations'); ?>!</h4>
-        <p><?php echo get_phrase('you_are_already_an_instructor'); ?></p>
-    </div>
+    <?php gp_ds_alert(get_phrase('congratulations') . '!', get_phrase('you_are_already_an_instructor'), 'info'); ?>
 <?php endif; ?>
-
-
-<style media="screen">
-body {
-    overflow-x: hidden;
-}
-</style>
+</div>

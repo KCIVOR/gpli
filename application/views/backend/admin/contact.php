@@ -1,39 +1,37 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body d-flex justify-content-between">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo $page_title; ?>
-                </h4>
-                <!-- Delete Button -->
-                <button id="delete_selected" class="alignToTitle btn btn-outline-danger btn-rounded" style="display: none;"><?php echo get_phrase('Delete Selected'); ?></button>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
+<?php
+gp_ds_page_title(
+    $page_title,
+    gp_ds_button(get_phrase('Delete Selected'), [
+        'variant' => 'secondary',
+        'type' => 'button',
+        'attrs' => [
+            'id' => 'delete_selected',
+            'style' => 'display: none;',
+        ],
+    ], true)
+);
+?>
 
-<div class="row">
-  <div class="col-lg-12">
-      <div class="card">
-        <div class="card-body" data-collapsed="0">
-          <h4 class="mb-3 header-title"><?php echo get_phrase('Contact Users'); ?></h4>
-          <table class="table table-striped table-centered w-100" id="server_side_users_data">
-            <thead>
-              <tr>
-                <th>
-                  <input type="checkbox" id="select_all">
-                </th>
-                <th>#</th>
-                <th><?php echo get_phrase('Name'); ?></th>
-                <th><?php echo get_phrase('Contact'); ?></th>
-                <th><?php echo get_phrase('Message'); ?></th>
-                <th><?php echo get_phrase('Action'); ?></th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-      </div>
-    </div>
-  </div><!-- end col-->
+<div class="gp-contact-page">
+    <?php
+    gp_ds_card([
+        'title' => get_phrase('Contact Users'),
+        'body' => gp_ds_table([
+            'table_id' => 'server_side_users_data',
+            'extra_class' => 'mb-0',
+            'headers' => [
+                '<input type="checkbox" id="select_all">',
+                '#',
+                get_phrase('Name'),
+                get_phrase('Contact'),
+                get_phrase('Message'),
+                get_phrase('Action'),
+            ],
+            'allow_empty' => true,
+        ], true),
+        'extra_class' => 'gp-dash-panel',
+    ]);
+    ?>
 </div>
 
 <script>
@@ -58,7 +56,13 @@
         { "data": "contact" },
         { "data": "message" },
         { "data": "action" }
-      ]
+      ],
+      language: {
+        paginate: {
+          previous: '‹',
+          next: '›'
+        }
+      }
     });
 
     // Function to show or hide delete button based on selected rows

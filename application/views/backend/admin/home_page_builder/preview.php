@@ -28,7 +28,7 @@ if ($language_dirs) {
     </style>
 </head>
 
-<body class="<?php echo $this->session->userdata('theme_mode'); ?>">
+<body class="<?php echo $this->session->userdata('theme_mode'); ?> gp-ds" data-theme="light">
 
     <?php
     //user wishlist items

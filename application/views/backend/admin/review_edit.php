@@ -1,3 +1,4 @@
+<div class="gp-settings-page">
 <form action="<?php echo site_url('admin/frontend_settings/review_update')?>" method="post">
 <input type="hidden" name="id" value="<?php echo $rating['id']; ?>">
     <div class="form-group">
@@ -32,9 +33,13 @@
 	</div>
 
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary"><?php echo get_phrase('submit'); ?></button>
+		<?php echo gp_ds_button(get_phrase('submit'), [
+			'variant' => 'primary',
+			'type' => 'submit',
+		], true); ?>
 	</div>
 </form>
+</div>
 
 <script>
 $(document).ready(function() {

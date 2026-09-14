@@ -1,17 +1,11 @@
-<div class="row ">
-	<div class="col-xl-12">
-		<div class="card">
-			<div class="card-body">
-				<h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('manage_language'); ?></h4>
-			</div>
-		</div>
-	</div>
-</div>
+<?php gp_ds_page_title(get_phrase('manage_language')); ?>
 
+<div class="gp-settings-page">
 <div class="row">
 	<div class="col-12">
-		<div class="card">
-			<div class="card-body">
+		<?php
+		ob_start();
+		?>
 				<ul class="nav nav-tabs nav-bordered mb-3">
 					<?php if (isset($edit_profile)) : ?>
 						<li class="nav-item">
@@ -45,21 +39,24 @@
 					<?php if (isset($edit_profile)) :
 						$current_editing_language	=	$edit_profile;
 					?>
-						<div class="tab-pane show active" id="edit" style="padding: 30px">
+						<div class="tab-pane show active" id="edit">
 							<div class="row">
 								<?php foreach (openJSONFile($edit_profile) as $key => $value) : ?>
 									<div class="col-xl-3 col-lg-6">
-										<div class="card">
-											<div class="card-header">
-												<?php echo $key; ?>
-											</div>
-											<div class="card-body">
+										<?php
+										ob_start();
+										?>
 												<p>
 													<input type="text" class="form-control" name="updated_phrase" value="<?php echo $value; ?>" id="phrase-<?php echo slugify($key); ?>">
 												</p>
-												<button type="button" class="btn btn-icon btn-primary" style="float: right;" id="btn-<?php echo slugify($key); ?>" onclick="updatePhrase('<?php echo slugify($key); ?>', '<?php echo $key; ?>')"> <i class="mdi mdi-check-circle"></i> </button>
-											</div>
-										</div>
+												<button type="button" class="icon-btn gp-settings-phrase-save" id="btn-<?php echo slugify($key); ?>" onclick="updatePhrase('<?php echo slugify($key); ?>', '<?php echo $key; ?>')"> <i class="mdi mdi-check-circle"></i> </button>
+										<?php
+										gp_ds_card([
+											'header' => $key,
+											'body' => ob_get_clean(),
+											'extra_class' => 'gp-settings-phrase-card',
+										]);
+										?>
 									</div>
 								<?php endforeach; ?>
 							</div>
@@ -69,61 +66,69 @@
 
 					<!----TABLE LISTING STARTS-->
 					<div class="tab-pane <?php if (!isset($edit_profile)) echo 'show active'; ?>" id="list">
-
-						<div class="table-responsive-sm">
-							<table class="table table-bordered table-centered mb-0">
-								<thead>
-									<tr>
-										<th><?php echo get_phrase('language'); ?></th>
-										<th><?php echo get_phrase('Direction'); ?></th>
-										<th><?php echo get_phrase('option'); ?></th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
-									$language_dirs = get_settings('language_dirs') ? json_decode(get_settings('language_dirs'), true) : ['english' => 'ltr'];
-									foreach ($languages as $language) :
-										if(array_key_exists($language, $language_dirs)){
-											$dir = $language_dirs[$language];
-										}else{
-											$dir = 'ltr';
-										}
+						<?php
+						ob_start();
+						$language_dirs = get_settings('language_dirs') ? json_decode(get_settings('language_dirs'), true) : ['english' => 'ltr'];
+						foreach ($languages as $language) :
+							if(array_key_exists($language, $language_dirs)){
+								$dir = $language_dirs[$language];
+							}else{
+								$dir = 'ltr';
+							}
+							?>
+							<tr>
+								<td><?php echo ucwords($language); ?></td>
+								<td>
+									<div class="form-group">
+										<form action="#">
+											<input onchange="update_language_dir('<?php echo $language; ?>', 'ltr')" name="direction" id="direction_ltr<?php echo $language; ?>" type="radio" value="ltr" <?php if($dir == 'ltr') echo 'checked'; ?>>
+											<label for="direction_ltr<?php echo $language; ?>"><?php echo get_phrase('LTR') ?></label>
+											&nbsp;&nbsp;
+											<input onchange="update_language_dir('<?php echo $language; ?>', 'rtl')" name="direction" id="direction_rtl<?php echo $language; ?>" type="radio" value="rtl" <?php if($dir == 'rtl') echo 'checked'; ?>>
+											<label for="direction_rtl<?php echo $language; ?>"><?php echo get_phrase('RTL') ?></label>
+										</form>
+									</div>
+								</td>
+								<td>
+									<div class="gp-settings-lang-actions">
+										<?php
+										gp_ds_button(get_phrase('edit_phrase'), [
+											'variant' => 'outline',
+											'href' => site_url('admin/manage_language/edit_phrase/' . $language),
+										]);
+										gp_ds_button(get_phrase('export'), [
+											'variant' => 'primary',
+											'href' => site_url('admin/export_language/' . $language),
+										]);
+										gp_ds_button(get_phrase('delete_language'), [
+											'variant' => 'quiet',
+											'href' => 'javascript:;',
+											'attrs' => [
+												'onclick' => "confirm_modal('" . site_url('admin/manage_language/delete_language/' . $language) . "')",
+											],
+										]);
 										?>
-										<tr>
-											<td><?php echo ucwords($language); ?></td>
-											<td>
-												<div class="form-group">
-													<form action="#">
-														<input onchange="update_language_dir('<?php echo $language; ?>', 'ltr')" name="direction" id="direction_ltr<?php echo $language; ?>" type="radio" value="ltr" <?php if($dir == 'ltr') echo 'checked'; ?>>
-														<label for="direction_ltr<?php echo $language; ?>"><?php echo get_phrase('LTR') ?></label>
-														&nbsp;&nbsp;
-														<input onchange="update_language_dir('<?php echo $language; ?>', 'rtl')" name="direction" id="direction_rtl<?php echo $language; ?>" type="radio" value="rtl" <?php if($dir == 'rtl') echo 'checked'; ?>>
-														<label for="direction_rtl<?php echo $language; ?>"><?php echo get_phrase('RTL') ?></label>
-													</form>
-												</div>
-											</td>
-											<td>
-												<a href="<?php echo site_url('admin/manage_language/edit_phrase/' . $language); ?>" class="btn btn-info">
-													<?php echo get_phrase('edit_phrase'); ?>
-												</a>
-												<a href="<?php echo site_url('admin/export_language/' . $language); ?>" class="btn btn-success">
-													<?php echo get_phrase('export'); ?>
-												</a>
-												<a href="javascript:;" onclick="confirm_modal('<?php echo site_url('admin/manage_language/delete_language/' . $language); ?>')" class="btn btn-danger">
-													<?php echo get_phrase('delete_language'); ?>
-												</a>
-											</td>
-										</tr>
-									<?php endforeach; ?>
-								</tbody>
-							</table>
-
-						</div>
+									</div>
+								</td>
+							</tr>
+						<?php endforeach; ?>
+						<?php
+						echo gp_ds_table([
+							'headers' => [
+								get_phrase('language'),
+								get_phrase('Direction'),
+								get_phrase('option'),
+							],
+							'body_html' => ob_get_clean(),
+							'allow_empty' => true,
+							'extra_class' => 'mb-0',
+						], true);
+						?>
 					</div>
 					<!----TABLE LISTING ENDS--->
 
 					<!----PHRASE CREATION FORM STARTS---->
-					<div class="tab-pane" id="add" style="padding: 30px">
+					<div class="tab-pane" id="add">
 						<div class="row">
 							<div class="col-xl-6">
 								<form class="" action="<?php echo site_url('admin/manage_language/add_phrase') ?>" method="post">
@@ -131,7 +136,7 @@
 										<label for="simpleinput"><?php echo get_phrase('add_new_phrase'); ?></label>
 										<input type="text" id="phrase" name="phrase" class="form-control" placeholder="Eg. Contamination">
 									</div>
-									<button type="submit" class="btn btn-primary" name="button"><?php echo get_phrase('save'); ?></button>
+									<?php echo gp_ds_button(get_phrase('save'), ['variant' => 'primary', 'type' => 'submit', 'attrs' => ['name' => 'button']], true); ?>
 								</form>
 							</div>
 						</div>
@@ -139,7 +144,7 @@
 					<!----PHRASE CREATION FORM ENDS--->
 
 					<!----ADD NEW LANGUAGE---->
-					<div class="tab-pane" id="add_lang" style="padding: 30px">
+					<div class="tab-pane" id="add_lang">
 						<div class="row">
 							<div class="col-xl-6">
 								<form class="" action="<?php echo site_url('admin/manage_language/add_language'); ?>" method="post">
@@ -147,7 +152,7 @@
 										<label for="language"><?php echo get_phrase('add_new_language'); ?></label>
 										<input type="text" id="language" name="language" class="form-control" placeholder="<?php echo get_phrase('no_special_character_or_space_is_allowed') . '. ' . get_phrase('valid_examples') . ' : French, Spanish, Bengali etc'; ?>">
 									</div>
-									<button type="submit" class="btn btn-primary" name="button"><?php echo get_phrase('save'); ?></button>
+									<?php echo gp_ds_button(get_phrase('save'), ['variant' => 'primary', 'type' => 'submit', 'attrs' => ['name' => 'button']], true); ?>
 								</form>
 							</div>
 						</div>
@@ -155,7 +160,7 @@
 					<!----LANGUAGE ADDING FORM ENDS-->
 
 					<!----ADD NEW LANGUAGE---->
-					<div class="tab-pane" id="import_language" style="padding: 30px">
+					<div class="tab-pane" id="import_language">
 						<div class="row">
 							<div class="col-xl-6">
 								<p>Import your language files from here.</p>
@@ -167,11 +172,11 @@
 												<label class="custom-file-label ellipsis" for="language_files"><?php echo get_phrase('choose_your_json_file'); ?></label>
 											</div>
 										</div>
-										<span class="badge badge-light">Ex: english.json</span>
+										<span class="gp-settings-import-hint"><?php echo gp_ds_badge('Ex: english.json', 'neutral', true); ?></span>
 									</div>
 
 									<div class="form-group">
-										<button type="submit" class="btn btn-primary"> <i class="mdi mdi-database-export"></i> <?php echo get_phrase('import'); ?></button>
+										<?php echo gp_ds_button(get_phrase('import'), ['variant' => 'primary', 'type' => 'submit'], true); ?>
 									</div>
 								</form>
 							</div>
@@ -179,9 +184,14 @@
 					</div>
 					<!----LANGUAGE ADDING FORM ENDS-->
 				</div>
-			</div>
-		</div>
+		<?php
+		gp_ds_card([
+			'body' => ob_get_clean(),
+			'extra_class' => 'gp-dash-panel',
+		]);
+		?>
 	</div>
+</div>
 </div>
 
 <script type="text/javascript">

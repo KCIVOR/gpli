@@ -1,19 +1,10 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-apple-keyboard-command title_icon"></i> <?php echo get_phrase('website_notification'); ?></h4>
-            </div>
-        </div>
-    </div>
-</div>
-
+<?php gp_ds_page_title(get_phrase('website_notification')); ?>
+<div class="gp-settings-page">
 <div class="row justify-content-center">
     <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-
-
+        <?php
+        ob_start();
+        ?>
                 <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
                     <li class="nav-item">
                         <a href="#smtpSettings" data-toggle="tab" aria-expanded="<?php  echo $tab == 'smtp-settings' ? 'true':'false'; ?>" class="nav-link rounded-0 <?php  echo $tab == 'smtp-settings' ? 'active':''; ?>">
@@ -77,26 +68,21 @@
                                         <input onfocus="$(this).attr('type', 'text');" onblur="$(this).attr('type', 'password');" type="password" name = "smtp_pass" id = "smtp_pass" class="form-control" value="<?php echo get_settings('smtp_pass');  ?>" required>
                                     </div>
 
-                                    <button type="button" class="btn btn-primary" onclick="checkRequiredFields()"><?php echo get_phrase('save'); ?></button>
+                                    <?php echo gp_ds_button(get_phrase('save'), [
+                                        'variant' => 'primary',
+                                        'type' => 'button',
+                                        'attrs' => ['onclick' => 'checkRequiredFields()'],
+                                    ], true); ?>
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane <?php  echo $tab == 'email-template' ? 'show active':''; ?>" id="emailTemplate">
 
-                        <div class="table-responsive-sm mt-4">
-                            <table class="table table-striped table-centered mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th><?php echo get_phrase('Email type'); ?></th>
-                                        <th><?php echo get_phrase('Email subject'); ?></th>
-                                        <th><?php echo get_phrase('Email template'); ?></th>
-                                        <th><?php echo get_phrase('Action'); ?></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($notify_settings as $key => $notification_row) :?>
+                        <?php
+                        ob_start();
+                        foreach ($notify_settings as $key => $notification_row) :
+                        ?>
                                         <tr>
                                             <td><?php echo ++$key; ?></td>
                                             <td>
@@ -114,13 +100,24 @@
                                                 <?php endforeach; ?>
                                             </td>
                                             <td>
-                                                <a onclick="showRightModal('<?php echo site_url('admin/edit_email_template/'.$notification_row['id']); ?>', '<?php echo nl2br($notification_row['setting_title']) ?>')" class="btn btn-primary btn-rounded" href="javascript:;" data-toggle="tooltip" title="<?php echo get_phrase('Edit email template'); ?>" style="min-width: 40px;"><i class="mdi mdi-pencil"></i></a>
+                                                <a onclick="showRightModal('<?php echo site_url('admin/edit_email_template/'.$notification_row['id']); ?>', '<?php echo nl2br($notification_row['setting_title']) ?>')" class="icon-btn" href="javascript:;" data-toggle="tooltip" title="<?php echo get_phrase('Edit email template'); ?>"><i class="mdi mdi-pencil"></i></a>
                                             </td>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                        <?php
+                        endforeach;
+                        echo gp_ds_table([
+                            'headers' => [
+                                '#',
+                                get_phrase('Email type'),
+                                get_phrase('Email subject'),
+                                get_phrase('Email template'),
+                                get_phrase('Action'),
+                            ],
+                            'body_html' => ob_get_clean(),
+                            'responsive' => true,
+                            'extra_class' => 'mt-4',
+                        ], true);
+                        ?>
                     </div>
                     <div class="tab-pane <?php  echo $tab == 'notification' ? 'show active':''; ?>" id="notification">
                         <h4 class="mb-3 header-title"><?php echo get_phrase('Configure your notification settings');?></h4>
@@ -166,10 +163,14 @@
                         </div>
                     </div>
                 </div>
-
-            </div> <!-- end card-body-->
-        </div>
+        <?php
+        gp_ds_card([
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
     </div>
+</div>
 </div>
 
 
@@ -201,5 +202,3 @@
     });
   }
 </script>
-
-

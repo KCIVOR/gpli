@@ -1,5 +1,4 @@
-
-
+<div class="gp-newsletter-page gp-newsletter-modal">
 <form action="<?php echo site_url('admin/newsletters/send'); ?>" method="post">
 	<div class="form-group">
 		<label for="send_to"><?php echo get_phrase('Send To'); ?></label>
@@ -31,9 +30,13 @@
 	</div>
 
 	<div class="form-group">
-		<button type="submit" class="btn btn-success"><i class="mdi mdi-send  mdi-rotate-315"></i> <?php echo get_phrase('Send'); ?></button>
+		<?php echo gp_ds_button(get_phrase('Send'), [
+			'variant' => 'primary',
+			'type' => 'submit',
+		], true); ?>
 	</div>
 </form>
+</div>
 
 <script type="text/javascript">
 	initSummerNote(['#newsletter_description']);

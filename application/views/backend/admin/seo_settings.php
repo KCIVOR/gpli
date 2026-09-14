@@ -1,20 +1,10 @@
-<div class="row ">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="page-title"> <i class="mdi mdi-play-protected-content title_icon"></i> <?php echo get_phrase('seo_settings'); ?>
-                </h4>
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div>
- 
+<?php gp_ds_page_title(get_phrase('seo_settings')); ?>
+<div class="gp-settings-page">
 <div class="row">
 	<div class="col-lg-12">
-        <div class="card">
-			<div class="card-body">
-                <div class="course-playing-sidebar">
-                    <h4 class="title"><?php echo get_phrase('Seo Content'); ?></h4>
+        <?php
+        ob_start();
+        ?>
                     <div class="accordion custom-accordion" id="accordionContent">
                         <?php foreach($seo_meta_tags as $seo_meta_tag): ?>
                             <?php 
@@ -75,7 +65,7 @@
 
                                                 <div class="form-group">
                                                     <label for="og_title"><?php echo get_phrase('Og Title'); ?></label>
-                                                    <input type="text" class="form-control" id="og_title" name="og_title" value="<?php echo $seo_meta_tag['og_title']; ?>" />
+                                                    <input class="form-control" id="og_title" name="og_title" value="<?php echo $seo_meta_tag['og_title']; ?>" />
                                                 </div>
 
                                                 <div class="form-group">
@@ -106,7 +96,7 @@
                                                     <textarea class="form-control" id="json_ld" name="json_ld" rows="5"><?php echo $seo_meta_tag['json_ld']; ?></textarea>
                                                 </div>
 
-                                                <button type="submit" class="btn btn-primary"><?php echo get_phrase('Update'); ?></button>
+                                                <?php echo gp_ds_button(get_phrase('Update'), ['variant' => 'primary', 'type' => 'submit'], true); ?>
                                             </form>
                                         </div>
                                     </div>
@@ -114,8 +104,13 @@
                             </div>
                         <?php endforeach; ?>
                     </div>
-                </div>
-            </div>
-        </div>
+        <?php
+        gp_ds_card([
+            'title' => get_phrase('Seo Content'),
+            'body' => ob_get_clean(),
+            'extra_class' => 'gp-dash-panel',
+        ]);
+        ?>
     </div>
+</div>
 </div>

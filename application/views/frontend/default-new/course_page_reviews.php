@@ -19,7 +19,7 @@ $my_rating = $this->db->where('user_id', $user_id)->where('ratable_id', $course_
                     </select>
                     <textarea class="form-control text-section" name="review" placeholder="<?php echo get_phrase('Write your comment') ?>" ></textarea>
                     <div class="msg mt-3">
-                        <button type="submit" class="btn btn-primary"><?php echo get_phrase('Submit'); ?></button>
+                        <?php gp_ds_button(get_phrase('Submit'), ['type' => 'submit']); ?>
                     </div>
                 </form>
             </div>
@@ -85,7 +85,7 @@ $user_details = $this->user_model->get_user($rating['user_id'])->row_array();
                         </select>
                         <textarea class="form-control text-section" rows="4" name="review" placeholder="<?php echo get_phrase('Write your comment') ?>" ><?php echo $rating['review']; ?></textarea>
                         <div class="msg mt-3">
-                            <button type="submit" class="btn btn-primary"><?php echo get_phrase('Submit'); ?></button>
+                            <?php gp_ds_button(get_phrase('Submit'), ['type' => 'submit']); ?>
                         </div>
                     </form>
                 </div>

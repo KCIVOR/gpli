@@ -19,7 +19,11 @@
                     </div>
                     <div class="instructor-icon">
                         
-                        <a class="btn btn-primary py-2 btn-sm" href="<?php echo site_url('home/instructor_page/'.$instructor_id) ?>" target="_blank"><?php echo get_phrase('View Profile'); ?></a>
+                        <?php gp_ds_button(get_phrase('View Profile'), [
+                            'href' => site_url('home/instructor_page/'.$instructor_id),
+                            'variant' => 'outline',
+                            'attrs' => ['target' => '_blank'],
+                        ]); ?>
                         <?php 
                         $is_following = $this->user_model->is_following($instructor_id, $this->session->userdata('user_id')); 
                         $user_id = $this->session->userdata('user_id');

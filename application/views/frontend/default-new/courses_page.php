@@ -7,29 +7,39 @@
     $selected_sorting  = isset($_GET['sort_by']) ? $_GET['sort_by'] : 'all';
 ?>
 
+<div class="gp-catalog-page">
 <?php include "breadcrumb.php"; ?>
 
-
-<section class="grid-view courses-list-view">
+<section class="gp-catalog">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-4 col-12">
-                <?php include "courses_page_sidebar.php"; ?>
+        <header class="gp-catalog-head">
+            <div class="eyebrow"><?php echo get_phrase('Catalog'); ?></div>
+            <div class="gp-catalog-head-row">
+                <h1><?php echo $page_title; ?></h1>
+                <p class="gp-catalog-count"><?php echo site_phrase('showing').' '.count($courses).' '.site_phrase('of').' '.$total_result.' '.site_phrase('results'); ?></p>
             </div>
-            <div class="col-lg-9 col-md-9 col-sm-8"> 
-                 <?php include 'courses_page_' . $layout . '_layout.php'; ?>
+        </header>
 
-                 <?php if(count($courses) == 0): ?>
-                    <div class="not-found w-100 text-center d-flex align-items-center flex-column">
-                        <img loading="lazy" width="80px" src="<?php echo base_url('assets/global/image/not-found.svg'); ?>">
+        <div class="gp-catalog-layout">
+            <aside class="gp-catalog-aside">
+                <?php include "courses_page_sidebar.php"; ?>
+            </aside>
+            <div class="gp-catalog-main">
+                <?php include 'courses_page_' . $layout . '_layout.php'; ?>
+
+                <?php if(count($courses) == 0): ?>
+                    <div class="not-found gp-catalog-empty">
+                        <div class="gp-catalog-empty-icon" aria-hidden="true">＋</div>
                         <h5><?php echo get_phrase('Course Not Found'); ?></h5>
                         <p><?php echo get_phrase('Sorry, try using more similar words in your search.') ?></p>
+                        <a class="btn btn-primary" href="<?php echo site_url('home/courses'); ?>"><?php echo get_phrase('Reset'); ?></a>
                     </div>
-                 <?php endif; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
 </section>
+</div>
 
 
 <script type="text/javascript">

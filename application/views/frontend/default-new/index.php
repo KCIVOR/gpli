@@ -34,7 +34,13 @@
 
     </head>
 
-    <body class="<?php echo $this->session->userdata('theme_mode'); ?>">
+    <body class="<?php echo $this->session->userdata('theme_mode'); ?><?php
+        $gp_ds_active = gp_ds_is_active(isset($page_name) ? $page_name : '');
+        echo $gp_ds_active ? ' gp-ds' : '';
+    ?>">
+        <?php if (!empty($gp_ds_active)): ?>
+        <script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
+        <?php endif; ?>
         <?php
             //user wishlist items
             $my_wishlist_items = [];
