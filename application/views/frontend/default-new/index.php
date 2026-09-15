@@ -41,6 +41,9 @@
         <?php if (!empty($gp_ds_active)): ?>
         <script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
         <?php endif; ?>
+        <div style="background:#16a34a;color:#fff;text-align:center;padding:6px;font-weight:bold;">
+            Automated cPanel Git deploy test — <?php echo date('Y-m-d H:i:s'); ?>
+        </div>
         <?php
             //user wishlist items
             $my_wishlist_items = [];
