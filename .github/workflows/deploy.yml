@@ -44,6 +44,19 @@ name: Auto Deploy to Production (cPanel)
 #     and SFTP has no separate passive data channel to misconfigure — it's
 #     a single persistent SSH connection for everything.
 #
+# Why deploys were taking 45+ minutes even for a one-line change: `git
+# archive` stamps every extracted file with the current time, not its real
+# last-commit date. mirror decides what to re-upload by comparing
+# size+mtime against what's already on the server, so a fresh checkout
+# makes literally everything look "newer" than the last deploy — the
+# ~2,900-file AWS SDK vendor folder (application/libraries/s3-vendor)
+# alone accounts for most of that time, re-uploaded in full on every push
+# even when nothing in it changed. .github/scripts/restore_mtimes.py
+# walks `git log` once and resets each staged file's mtime to its real
+# last-commit time so unchanged files correctly look unchanged, which is
+# what lets `mirror` actually skip them instead of re-transferring the
+# whole repo every time.
+#
 # Database schema changes are NEVER part of this workflow on purpose —
 # those stay manual, reviewed SQL applied by hand in phpMyAdmin. See
 # DEPLOYMENT.md for the full policy.
@@ -77,6 +90,9 @@ jobs:
           rm -f deploy_stage/assets/design-system/dropdown-bs5-verify.html
           rm -f deploy_stage/assets/design-system/email-preview.html
           rm -f deploy_stage/geeseprojdesignsystem.html
+
+      - name: Restore real commit timestamps on staged files
+        run: python3 .github/scripts/restore_mtimes.py deploy_stage
 
       - name: Setup SSH
         run: |
