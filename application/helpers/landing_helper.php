@@ -30,9 +30,9 @@ function gp_landing_extras()
         ],
         'media' => [
             'image_1' => '', 'image_2' => '', 'image_3' => '',
-            'video_url' => '',
-            'video_title' => 'Stop Losing Top Talent: The 24/7 Solution That Actually Works',
-            'video_tag' => 'Featured',
+            'video_url_1' => '', 'video_title_1' => '', 'video_tag_1' => 'Featured',
+            'video_url_2' => '', 'video_title_2' => '', 'video_tag_2' => 'Featured',
+            'video_url_3' => '', 'video_title_3' => 'Stop Losing Top Talent: The 24/7 Solution That Actually Works', 'video_tag_3' => 'Featured',
         ],
         'function_blurbs' => [],
         'section_bg' => [
@@ -72,7 +72,18 @@ function gp_landing_extras()
             'footnote' => 'Minimum 5 users per subscription • Unlimited access • Professional certificates included',
         ],
     ];
-    return array_replace_recursive($defaults, $data);
+    $merged = array_replace_recursive($defaults, $data);
+
+    // Migrate the old single-video fields (before the media strip supported
+    // 3 videos) into slot 3, so a site that already saved a video keeps
+    // showing it under the new per-slot structure without re-entering it.
+    if ($merged['media']['video_url_3'] === '' && isset($data['media']['video_url']) && $data['media']['video_url'] !== '') {
+        $merged['media']['video_url_3']   = $data['media']['video_url'];
+        $merged['media']['video_title_3'] = $data['media']['video_title'] ?? $merged['media']['video_title_3'];
+        $merged['media']['video_tag_3']   = $data['media']['video_tag'] ?? $merged['media']['video_tag_3'];
+    }
+
+    return $merged;
 }
 
 function gp_landing_section_bg_url($key)

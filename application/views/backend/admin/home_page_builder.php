@@ -423,31 +423,17 @@ $gp_landing_extras_data = gp_landing_extras();
                                     </div>
 
                                     <h4 class="mt-3"><?php echo get_phrase('Media strip'); ?></h4>
+                                    <p class="text-muted"><?php echo get_phrase('All 3 boxes are videos: upload a thumbnail photo for each and paste its video link. Leave a Video URL blank to show that box as a plain photo instead.'); ?></p>
                                     <div class="row">
+                                        <?php for ($gpli_media_i = 1; $gpli_media_i <= 3; $gpli_media_i++): ?>
                                         <div class="col-md-4 form-group">
-                                            <label><?php echo get_phrase('Image 1'); ?></label>
-                                            <input type="file" class="form-control" name="landing_media[image_1]" accept="image/*">
+                                            <label><?php echo get_phrase('Thumbnail') . ' ' . $gpli_media_i; ?></label>
+                                            <input type="file" class="form-control mb-1" name="landing_media[image_<?php echo $gpli_media_i; ?>]" accept="image/*">
+                                            <input type="text" class="form-control mb-1" placeholder="<?php echo get_phrase('Video URL'); ?>" name="landing[media][video_url_<?php echo $gpli_media_i; ?>]" value="<?php echo htmlspecialchars($extras['media']['video_url_' . $gpli_media_i]); ?>">
+                                            <input type="text" class="form-control mb-1" placeholder="<?php echo get_phrase('Video title'); ?>" name="landing[media][video_title_<?php echo $gpli_media_i; ?>]" value="<?php echo htmlspecialchars($extras['media']['video_title_' . $gpli_media_i]); ?>">
+                                            <input type="text" class="form-control" placeholder="<?php echo get_phrase('Video tag'); ?>" name="landing[media][video_tag_<?php echo $gpli_media_i; ?>]" value="<?php echo htmlspecialchars($extras['media']['video_tag_' . $gpli_media_i]); ?>">
                                         </div>
-                                        <div class="col-md-4 form-group">
-                                            <label><?php echo get_phrase('Image 2'); ?></label>
-                                            <input type="file" class="form-control" name="landing_media[image_2]" accept="image/*">
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <label><?php echo get_phrase('Image 3'); ?></label>
-                                            <input type="file" class="form-control" name="landing_media[image_3]" accept="image/*">
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <label><?php echo get_phrase('Video URL'); ?></label>
-                                            <input type="text" class="form-control" name="landing[media][video_url]" value="<?php echo htmlspecialchars($extras['media']['video_url']); ?>">
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <label><?php echo get_phrase('Video title'); ?></label>
-                                            <input type="text" class="form-control" name="landing[media][video_title]" value="<?php echo htmlspecialchars($extras['media']['video_title']); ?>">
-                                        </div>
-                                        <div class="col-md-4 form-group">
-                                            <label><?php echo get_phrase('Video tag'); ?></label>
-                                            <input type="text" class="form-control" name="landing[media][video_tag]" value="<?php echo htmlspecialchars($extras['media']['video_tag']); ?>">
-                                        </div>
+                                        <?php endfor; ?>
                                     </div>
 
                                     <h4 class="mt-3"><?php echo get_phrase('Courses by function — blurbs'); ?></h4>

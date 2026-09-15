@@ -142,37 +142,46 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
 
   <!-- PHOTO / VIDEO STRIP -->
   <?php
-    // Each image slot falls back to the original default photo when nothing
+    // Each thumbnail falls back to the original default photo when nothing
     // has been uploaded from Home Page Builder yet — same pattern as the
-    // hero/quiz/CTA background photos above.
+    // hero/quiz/CTA background photos above. All 3 slots are video-capable:
+    // a slot with no Video URL saved renders as a plain photo (no play
+    // button / tag / caption), same as the first two boxes always used to.
     $gpli_media = $extras['media'];
-    $gpli_media_image_1 = $gpli_media['image_1'] !== '' ? base_url($gpli_media['image_1']) : base_url('assets/frontend/default-new/home/gpli-landing/team-highfive.jpg');
-    $gpli_media_image_2 = $gpli_media['image_2'] !== '' ? base_url($gpli_media['image_2']) : base_url('assets/frontend/default-new/home/gpli-landing/learner-portrait.jpg');
-    $gpli_media_image_3 = $gpli_media['image_3'] !== '' ? base_url($gpli_media['image_3']) : base_url('assets/frontend/default-new/home/gpli-landing/featured-video-thumb.jpg');
-    $gpli_media_video_url = gp_landing_url($gpli_media['video_url']);
+    $gpli_media_defaults = [
+      1 => ['img' => 'team-highfive.jpg', 'alt' => 'Team collaborating in the office'],
+      2 => ['img' => 'learner-portrait.jpg', 'alt' => 'Professional portrait of a learner'],
+      3 => ['img' => 'featured-video-thumb.jpg', 'alt' => 'Featured video thumbnail'],
+    ];
   ?>
   <section class="section-pad gp-landing" style="padding-top:64px;">
     <div class="container">
       <div class="lms-strip">
-        <div class="strip-media">
-          <img src="<?php echo $gpli_media_image_1; ?>" alt="<?php echo get_phrase('Team collaborating in the office'); ?>">
-        </div>
-        <div class="strip-media">
-          <img src="<?php echo $gpli_media_image_2; ?>" alt="<?php echo get_phrase('Professional portrait of a learner'); ?>">
-        </div>
+        <?php for ($gpli_media_i = 1; $gpli_media_i <= 3; $gpli_media_i++): ?>
+        <?php
+          $gpli_media_image = $gpli_media['image_' . $gpli_media_i] !== ''
+            ? base_url($gpli_media['image_' . $gpli_media_i])
+            : base_url('assets/frontend/default-new/home/gpli-landing/' . $gpli_media_defaults[$gpli_media_i]['img']);
+          $gpli_media_has_video = $gpli_media['video_url_' . $gpli_media_i] !== '';
+        ?>
         <div>
-          <?php if ($gpli_media['video_url'] !== ''): ?><a href="<?php echo $gpli_media_video_url; ?>" target="_blank" rel="noopener"><?php endif; ?>
-          <div class="strip-media featured-video">
-            <img src="<?php echo $gpli_media_image_3; ?>" alt="<?php echo get_phrase('Featured video thumbnail'); ?>">
-            <span class="video-tag"><?php echo htmlspecialchars($gpli_media['video_tag']); ?></span>
+          <?php if ($gpli_media_has_video): ?><a href="<?php echo gp_landing_url($gpli_media['video_url_' . $gpli_media_i]); ?>" target="_blank" rel="noopener"><?php endif; ?>
+          <div class="strip-media<?php echo $gpli_media_has_video ? ' featured-video' : ''; ?>">
+            <img src="<?php echo $gpli_media_image; ?>" alt="<?php echo get_phrase($gpli_media_defaults[$gpli_media_i]['alt']); ?>">
+            <?php if ($gpli_media_has_video): ?>
+            <span class="video-tag"><?php echo htmlspecialchars($gpli_media['video_tag_' . $gpli_media_i]); ?></span>
             <div class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+            <?php endif; ?>
           </div>
-          <?php if ($gpli_media['video_url'] !== ''): ?></a><?php endif; ?>
+          <?php if ($gpli_media_has_video): ?></a><?php endif; ?>
+          <?php if ($gpli_media_has_video && $gpli_media['video_title_' . $gpli_media_i] !== ''): ?>
           <div class="video-caption">
-            <h4><?php echo htmlspecialchars($gpli_media['video_title']); ?></h4>
+            <h4><?php echo htmlspecialchars($gpli_media['video_title_' . $gpli_media_i]); ?></h4>
             <span class="pace"><?php echo get_phrase('Self-paced'); ?></span>
           </div>
+          <?php endif; ?>
         </div>
+        <?php endfor; ?>
       </div>
     </div>
   </section>
