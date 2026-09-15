@@ -58,8 +58,10 @@ jobs:
       - name: Deploy to public_html/lms via SFTP
         run: |
           lftp -e "
-            set sftp:connect-program 'ssh -a -x -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=~/.ssh/known_hosts';
-            open -p 22 sftp://startuplabcc@89.116.134.177;
+            set sftp:auto-confirm yes;
+            set sftp:key-file $HOME/.ssh/deploy_key;
+            set sftp:connect-program 'ssh -a -x -i $HOME/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=$HOME/.ssh/known_hosts -o BatchMode=yes';
+            open -u startuplabcc, -p 22 sftp://89.116.134.177;
             mirror --reverse --verbose --parallel=4 \
               --exclude-glob .git* \
               --exclude-glob .github/ \
