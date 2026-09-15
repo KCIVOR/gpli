@@ -11,6 +11,11 @@ $gpli_total_courses    = $this->db->where('status', 'active')->get('course')->nu
 $gpli_total_categories = $this->db->get('category')->num_rows();
 $gpli_total_students   = $this->db->where('is_instructor', 0)->get('users')->num_rows();
 
+// Admin-edited copy/media (Home Page Builder → hero/trio/media/quiz/why/CTA
+// fields). Falls back to the same default English copy this page always
+// had when nothing has been saved yet.
+$extras = gp_landing_extras();
+
 // Admin-uploaded section backgrounds (Home Page Builder screen) — optional;
 // each falls back to its default look when nothing has been uploaded. The
 // photo URL is set inline per section (dynamic, from the DB); the
@@ -47,7 +52,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
     $words = explode(' ', $phrase);
     $tail  = implode(' ', array_splice($words, -$tail_words));
     $head  = implode(' ', $words);
-    return trim($head . ' <span class="gp-two-tone-' . $tone . '">' . $tail . '</span>');
+    return trim(htmlspecialchars($head) . ' <span class="gp-two-tone-' . $tone . '">' . htmlspecialchars($tail) . '</span>');
 }
 ?>
 
@@ -57,93 +62,114 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
   <section class="page-hero ph-light<?php echo $gpli_hero_bg['class']; ?>"<?php echo $gpli_hero_bg['style']; ?>>
     <div class="ph-grid">
       <div class="ph-copy">
-        <div class="eyebrow"><?php echo get_phrase('The #1 Learning Platform for SMEs'); ?></div>
+        <div class="eyebrow"><?php echo htmlspecialchars($extras['hero']['eyebrow']); ?></div>
         <?php
-          // "Great to World Class" as one existing phrase, split in two
-          // tones (blue + red) rather than calling get_phrase() again on
-          // "Great to" / "World Class" separately — see gpli_two_tone_heading
-          // above for why that would corrupt the casing.
-          $gpli_hero_accent_words = explode(' ', get_phrase('Great to World Class'));
+          // Admin's "Gold accent word(s)" field, split into the last 2 words
+          // (tail, red) vs everything before them (head, blue) — same two-tone
+          // treatment as before, now driven by the saved value instead of a
+          // fixed phrase.
+          $gpli_hero_accent_words = explode(' ', $extras['hero']['accent']);
           $gpli_hero_accent_tail  = implode(' ', array_splice($gpli_hero_accent_words, -2));
           $gpli_hero_accent_head  = implode(' ', $gpli_hero_accent_words);
         ?>
-        <h1><?php echo get_phrase('Transform Your Team from'); ?> <span class="gp-two-tone-blue"><?php echo $gpli_hero_accent_head; ?></span> <span class="gp-two-tone-red"><?php echo $gpli_hero_accent_tail; ?></span></h1>
+        <h1><?php echo get_phrase('Transform Your Team from'); ?> <span class="gp-two-tone-blue"><?php echo htmlspecialchars($gpli_hero_accent_head); ?></span> <span class="gp-two-tone-red"><?php echo htmlspecialchars($gpli_hero_accent_tail); ?></span></h1>
         <p class="ph-sub"><?php echo site_phrase(get_frontend_settings('banner_sub_title')); ?></p>
         <div class="ph-actions">
-          <a class="btn btn-primary" href="<?php echo site_url('home/courses'); ?>"><?php echo get_phrase('Get Started'); ?></a>
-          <a class="btn btn-outline-blue" href="<?php echo site_url('home/courses'); ?>"><?php echo get_phrase('Explore Courses'); ?></a>
+          <a class="btn btn-primary" href="<?php echo gp_landing_url($extras['hero']['cta1_url']); ?>"><?php echo htmlspecialchars($extras['hero']['cta1_label']); ?></a>
+          <a class="btn btn-outline-blue" href="<?php echo gp_landing_url($extras['hero']['cta2_url']); ?>"><?php echo htmlspecialchars($extras['hero']['cta2_label']); ?></a>
         </div>
         <form class="hero-search" action="<?php echo site_url('home/courses'); ?>" method="get">
           <input type="text" name="search" placeholder="<?php echo get_phrase('What do you want to learn?'); ?>" aria-label="<?php echo get_phrase('Search courses'); ?>">
           <button class="btn btn-primary" type="submit"><?php echo get_phrase('Search'); ?></button>
         </form>
       </div>
+      <?php
+        // Numbers 1-3 always show the real, live counts (courses/categories/
+        // students) rather than the admin's saved "num" — those are kept
+        // accurate automatically instead of needing a manual update every
+        // time a course is added. Only the labels/sub-text are admin-edited.
+        // Stat 4 ("SME") has no live count, so it's fully admin-controlled.
+        $gpli_hero_stats = $extras['hero']['stats'];
+      ?>
       <div class="hero-stats">
         <div class="stat">
           <div class="num"><?php echo $gpli_total_courses; ?>+</div>
-          <div class="lbl"><?php echo get_phrase('Expert Courses'); ?></div>
-          <div class="sub"><?php echo get_phrase('One subscription, the whole library'); ?></div>
+          <div class="lbl"><?php echo htmlspecialchars($gpli_hero_stats[0]['lbl'] ?? 'Expert Courses'); ?></div>
+          <div class="sub"><?php echo htmlspecialchars($gpli_hero_stats[0]['sub'] ?? ''); ?></div>
         </div>
         <div class="stat">
           <div class="num"><?php echo $gpli_total_categories; ?></div>
-          <div class="lbl"><?php echo get_phrase('Business Functions'); ?></div>
-          <div class="sub"><?php echo get_phrase('HR to operations to leadership'); ?></div>
+          <div class="lbl"><?php echo htmlspecialchars($gpli_hero_stats[1]['lbl'] ?? 'Business Functions'); ?></div>
+          <div class="sub"><?php echo htmlspecialchars($gpli_hero_stats[1]['sub'] ?? ''); ?></div>
         </div>
         <div class="stat">
           <div class="num"><?php echo $gpli_total_students; ?>+</div>
-          <div class="lbl"><?php echo get_phrase('Learners'); ?></div>
-          <div class="sub"><?php echo get_phrase('Already growing with GPLI'); ?></div>
+          <div class="lbl"><?php echo htmlspecialchars($gpli_hero_stats[2]['lbl'] ?? 'Learners'); ?></div>
+          <div class="sub"><?php echo htmlspecialchars($gpli_hero_stats[2]['sub'] ?? ''); ?></div>
         </div>
         <div class="stat">
-          <div class="num">SME</div>
-          <div class="lbl"><?php echo get_phrase('Focused Content'); ?></div>
-          <div class="sub"><?php echo get_phrase('Curated for SME realities'); ?></div>
+          <div class="num"><?php echo htmlspecialchars($gpli_hero_stats[3]['num'] ?? 'SME'); ?></div>
+          <div class="lbl"><?php echo htmlspecialchars($gpli_hero_stats[3]['lbl'] ?? 'Focused Content'); ?></div>
+          <div class="sub"><?php echo htmlspecialchars($gpli_hero_stats[3]['sub'] ?? ''); ?></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FEATURE TRIO -->
+  <?php
+    // Icons stay fixed per position (not admin-editable); title/text pull
+    // from the admin's "Feature trio" fields.
+    $gpli_trio_icons = [
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>',
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M12 14a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0"/>',
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>',
+    ];
+  ?>
   <section class="section-pad gp-landing" style="padding:56px 0;">
     <div class="container">
       <div class="feat-trio">
+        <?php foreach ($extras['trio'] as $gpli_trio_i => $gpli_trio_item): ?>
         <div class="feat">
-          <div class="feat-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg></div>
-          <h3><?php echo get_phrase('100+ Online Courses'); ?></h3>
-          <p><?php echo get_phrase('Explore a variety of fresh business topics'); ?></p>
+          <div class="feat-icon"><svg viewBox="0 0 24 24"><?php echo $gpli_trio_icons[$gpli_trio_i] ?? $gpli_trio_icons[0]; ?></svg></div>
+          <h3><?php echo htmlspecialchars($gpli_trio_item['title']); ?></h3>
+          <p><?php echo htmlspecialchars($gpli_trio_item['text']); ?></p>
         </div>
-        <div class="feat">
-          <div class="feat-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14a4 4 0 100-8 4 4 0 000 8zM4 21a8 8 0 0116 0"/></svg></div>
-          <h3><?php echo get_phrase('Expert Instruction'); ?></h3>
-          <p><?php echo get_phrase('Find the right course, taught by seasoned practitioners'); ?></p>
-        </div>
-        <div class="feat">
-          <div class="feat-icon"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
-          <h3><?php echo get_phrase('Smart Solution'); ?></h3>
-          <p><?php echo get_phrase('Learn on your own schedule, at your own pace'); ?></p>
-        </div>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
 
   <!-- PHOTO / VIDEO STRIP -->
+  <?php
+    // Each image slot falls back to the original default photo when nothing
+    // has been uploaded from Home Page Builder yet — same pattern as the
+    // hero/quiz/CTA background photos above.
+    $gpli_media = $extras['media'];
+    $gpli_media_image_1 = $gpli_media['image_1'] !== '' ? base_url($gpli_media['image_1']) : base_url('assets/frontend/default-new/home/gpli-landing/team-highfive.jpg');
+    $gpli_media_image_2 = $gpli_media['image_2'] !== '' ? base_url($gpli_media['image_2']) : base_url('assets/frontend/default-new/home/gpli-landing/learner-portrait.jpg');
+    $gpli_media_image_3 = $gpli_media['image_3'] !== '' ? base_url($gpli_media['image_3']) : base_url('assets/frontend/default-new/home/gpli-landing/featured-video-thumb.jpg');
+    $gpli_media_video_url = gp_landing_url($gpli_media['video_url']);
+  ?>
   <section class="section-pad gp-landing" style="padding-top:64px;">
     <div class="container">
       <div class="lms-strip">
         <div class="strip-media">
-          <img src="<?php echo base_url('assets/frontend/default-new/home/gpli-landing/team-highfive.jpg'); ?>" alt="<?php echo get_phrase('Team collaborating in the office'); ?>">
+          <img src="<?php echo $gpli_media_image_1; ?>" alt="<?php echo get_phrase('Team collaborating in the office'); ?>">
         </div>
         <div class="strip-media">
-          <img src="<?php echo base_url('assets/frontend/default-new/home/gpli-landing/learner-portrait.jpg'); ?>" alt="<?php echo get_phrase('Professional portrait of a learner'); ?>">
+          <img src="<?php echo $gpli_media_image_2; ?>" alt="<?php echo get_phrase('Professional portrait of a learner'); ?>">
         </div>
         <div>
+          <?php if ($gpli_media['video_url'] !== ''): ?><a href="<?php echo $gpli_media_video_url; ?>" target="_blank" rel="noopener"><?php endif; ?>
           <div class="strip-media featured-video">
-            <img src="<?php echo base_url('assets/frontend/default-new/home/gpli-landing/featured-video-thumb.jpg'); ?>" alt="<?php echo get_phrase('Featured video thumbnail'); ?>">
-            <span class="video-tag"><?php echo get_phrase('Featured'); ?></span>
+            <img src="<?php echo $gpli_media_image_3; ?>" alt="<?php echo get_phrase('Featured video thumbnail'); ?>">
+            <span class="video-tag"><?php echo htmlspecialchars($gpli_media['video_tag']); ?></span>
             <div class="play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
           </div>
+          <?php if ($gpli_media['video_url'] !== ''): ?></a><?php endif; ?>
           <div class="video-caption">
-            <h4><?php echo get_phrase('Stop Losing Top Talent: The 24/7 Solution That Actually Works'); ?></h4>
+            <h4><?php echo htmlspecialchars($gpli_media['video_title']); ?></h4>
             <span class="pace"><?php echo get_phrase('Self-paced'); ?></span>
           </div>
         </div>
@@ -250,10 +276,10 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
           <div class="ph-chevron" style="top:70%;left:60%;transform:scale(.8);"></div>
         </div>
         <div>
-          <div class="eyebrow"><?php echo get_phrase('Discover Yourself'); ?></div>
-          <h2><?php echo gpli_two_tone_heading(get_phrase("What's Your Leadership Style?"), 2, 'red'); ?></h2>
-          <p><?php echo get_phrase('Take our free, AI-powered quiz to understand your unique leadership approach, identify your strengths, and get a personalized course path.'); ?></p>
-          <a class="btn btn-white" href="<?php echo site_url('home/courses'); ?>"><?php echo get_phrase('Take the Quiz Now'); ?> →</a>
+          <div class="eyebrow"><?php echo htmlspecialchars($extras['quiz']['eyebrow']); ?></div>
+          <h2><?php echo gpli_two_tone_heading($extras['quiz']['title'], 2, 'red'); ?></h2>
+          <p><?php echo htmlspecialchars($extras['quiz']['text']); ?></p>
+          <a class="btn btn-white" href="<?php echo gp_landing_url($extras['quiz']['button_url'] !== '' ? $extras['quiz']['button_url'] : 'home/courses'); ?>"><?php echo htmlspecialchars($extras['quiz']['button_label']); ?> →</a>
         </div>
         <div class="quiz-badge">
           <div class="ql1">GP LEADERSHIP</div>
@@ -268,40 +294,35 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
   <section class="section-pad bg-blue-soft gp-landing">
     <div class="container">
       <div class="section-head">
-        <div class="section-eyebrow"><?php echo get_phrase('Why GPLI'); ?></div>
-        <h2><?php echo gpli_two_tone_heading(get_phrase('Why GP Leadership Institute?'), 3, 'red'); ?></h2>
-        <p><?php echo get_phrase('Our courses are based on the best practices of global companies, curated and designed for the realities of small and medium enterprises.'); ?></p>
+        <div class="section-eyebrow"><?php echo htmlspecialchars($extras['why']['eyebrow']); ?></div>
+        <h2><?php echo gpli_two_tone_heading($extras['why']['title'], 3, 'red'); ?></h2>
+        <p><?php echo htmlspecialchars($extras['why']['text']); ?></p>
       </div>
       <div class="g3">
+        <?php foreach ($extras['why']['tiles'] as $gpli_why_tile): ?>
         <div class="tile">
-          <h3><?php echo get_phrase('Affordable'); ?></h3>
-          <p><?php echo get_phrase('Low monthly cost makes world-class training accessible to any SME, at any budget.'); ?></p>
+          <h3><?php echo htmlspecialchars($gpli_why_tile['title']); ?></h3>
+          <p><?php echo htmlspecialchars($gpli_why_tile['text']); ?></p>
         </div>
-        <div class="tile">
-          <h3><?php echo get_phrase('Function Specific'); ?></h3>
-          <p><?php echo get_phrase('Courses organized by business function, so every team finds exactly what it needs.'); ?></p>
-        </div>
-        <div class="tile">
-          <h3><?php echo get_phrase('World-Class Content'); ?></h3>
-          <p><?php echo get_phrase('Content created by experienced practitioners and facilitators from global companies.'); ?></p>
-        </div>
+        <?php endforeach; ?>
       </div>
+      <?php $gpli_why_stats = $extras['why']['stats']; ?>
       <div class="why-stats">
         <div class="stat">
           <div class="num"><?php echo $gpli_total_courses; ?>+</div>
-          <div class="lbl"><?php echo get_phrase('Professional Courses'); ?></div>
+          <div class="lbl"><?php echo htmlspecialchars($gpli_why_stats[0]['lbl'] ?? 'Professional Courses'); ?></div>
         </div>
         <div class="stat">
           <div class="num"><?php echo $gpli_total_categories; ?></div>
-          <div class="lbl"><?php echo get_phrase('Business Functions'); ?></div>
+          <div class="lbl"><?php echo htmlspecialchars($gpli_why_stats[1]['lbl'] ?? 'Business Functions'); ?></div>
         </div>
         <div class="stat">
           <div class="num"><?php echo $gpli_total_students; ?>+</div>
-          <div class="lbl"><?php echo get_phrase('Learners'); ?></div>
+          <div class="lbl"><?php echo htmlspecialchars($gpli_why_stats[2]['lbl'] ?? 'Learners'); ?></div>
         </div>
         <div class="stat">
-          <div class="num">SME</div>
-          <div class="lbl"><?php echo get_phrase('Focused Content'); ?></div>
+          <div class="num"><?php echo htmlspecialchars($gpli_why_stats[3]['num'] ?? 'SME'); ?></div>
+          <div class="lbl"><?php echo htmlspecialchars($gpli_why_stats[3]['lbl'] ?? 'Focused Content'); ?></div>
         </div>
       </div>
     </div>
@@ -387,13 +408,13 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
       <div class="ph-chevron" style="top:78%;left:26%;transform:scale(.75);"></div>
     </div>
     <div class="container">
-      <h2><?php echo get_phrase('Ready to Transform Your Business?'); ?></h2>
-      <p><?php echo get_phrase("Join SMEs worldwide that have empowered their teams with GPLI's comprehensive e-learning platform."); ?></p>
+      <h2><?php echo htmlspecialchars($extras['cta_band']['title']); ?></h2>
+      <p><?php echo htmlspecialchars($extras['cta_band']['text']); ?></p>
       <div class="cta-actions">
-        <a class="btn btn-primary" href="<?php echo site_url('sign_up'); ?>"><?php echo get_phrase('Get Started Free'); ?></a>
-        <a class="btn btn-white" href="<?php echo site_url('home/courses'); ?>"><?php echo get_phrase('Explore Courses'); ?></a>
+        <a class="btn btn-primary" href="<?php echo gp_landing_url($extras['cta_band']['cta1_url']); ?>"><?php echo htmlspecialchars($extras['cta_band']['cta1_label']); ?></a>
+        <a class="btn btn-white" href="<?php echo gp_landing_url($extras['cta_band']['cta2_url']); ?>"><?php echo htmlspecialchars($extras['cta_band']['cta2_label']); ?></a>
       </div>
-      <p style="margin-top:22px;font-size:13px;color:rgba(255,255,255,.75);"><?php echo get_phrase('Minimum 5 users per subscription'); ?> &bull; <?php echo get_phrase('Unlimited access'); ?> &bull; <?php echo get_phrase('Professional certificates included'); ?></p>
+      <p style="margin-top:22px;font-size:13px;color:rgba(255,255,255,.75);"><?php echo htmlspecialchars($extras['cta_band']['footnote']); ?></p>
     </div>
   </section>
 
