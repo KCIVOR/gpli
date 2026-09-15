@@ -1,61 +1,29 @@
 name: Auto Deploy to Production (cPanel)
 
-# Ships this repo's production files to public_html/lms via SFTP.
+# Ships this repo's production files to startuplabcc's public_html/lms via
+# FTPS, using FTP-Deploy-Action's git-diff-based sync — it only uploads
+# files that actually changed in the pushed commits, and never touches
+# anything that isn't tracked in git (which is exactly why uploads/,
+# backups/, application/logs/, and application/config/database.php are
+# safe: they're gitignored, so this workflow has no record of them and
+# can never upload over or delete them).
 #
-# IMPORTANT: this does NOT mirror the checkout directory directly. It first
-# stages a clean copy via `git archive`, which by construction can only ever
-# contain tracked files at the deployed commit — .git, node_modules, and
-# any other untracked/ignored content structurally cannot appear in it,
-# full stop. A handful of files ARE tracked but still shouldn't ship
-# (internal planning docs, design-system scratch/reference pages, this
-# project's local Claude Code skill folder) — those are removed from the
-# staged copy with plain `rm`, not filtered mid-transfer.
+# Uses a dedicated FTP account (deploy@startuplab.cc) created via cPanel
+# FTP Accounts and jailed directly to public_html/lms — so its FTP
+# session root ("/") already IS that folder. server-dir is "/" for that
+# reason, not "/public_html/lms/".
 #
-# We tried filtering mid-transfer first (lftp's --exclude-glob and the
-# mirror:exclude-regex setting) and both silently did nothing on this
-# runner's lftp build when combined with `mirror --reverse` — verified by
-# reproducing it against a disposable test path before trusting anything
-# near production. That's what caused run #11 to start uploading the
-# entire .git directory (full commit history) into the live web root
-# before it was caught and cancelled. The stage-then-sync approach here
-# doesn't depend on that exclude mechanism working at all, so it can't
-# regress the same way even if a future lftp version changes behavior
-# again.
-#
-# lftp's mirror runs WITHOUT --delete, so it can only add/update files on
-# the server, never remove them — this is what keeps uploads/, backups/,
-# application/logs/, and application/config/database.php safe: they're
-# gitignored, so `git archive` never puts them in the staged copy, and
-# without --delete their absence there can never translate into deletion
-# on the server either.
-#
-# History of how we got to SFTP specifically:
-#   - SSH/rsync (the original setup) fails because Shell Access is disabled
-#     on this cPanel account: SSH auth succeeds, but command execution
-#     (which `rsync --server` requires on the remote end) is rejected with
-#     "Shell access is not enabled on your account!" — fatal to rsync.
-#   - FTPS (SamKirkland/FTP-Deploy-Action) was tried next, but cPanel's FTP
-#     daemon has a passive-mode/NAT misconfiguration: the control
-#     connection stays alive while data-channel transfers silently stall,
-#     so instead of failing fast the job hung for 2+ hours before erroring
-#     with "Server sent FIN packet unexpectedly, closing connection."
-#   - SFTP has neither problem: cPanel's SFTP subsystem runs independently
-#     of the interactive-shell restriction (confirmed by testing directly),
-#     and SFTP has no separate passive data channel to misconfigure — it's
-#     a single persistent SSH connection for everything.
-#
-# Why deploys were taking 45+ minutes even for a one-line change: `git
-# archive` stamps every extracted file with the current time, not its real
-# last-commit date. mirror decides what to re-upload by comparing
-# size+mtime against what's already on the server, so a fresh checkout
-# makes literally everything look "newer" than the last deploy — the
-# ~2,900-file AWS SDK vendor folder (application/libraries/s3-vendor)
-# alone accounts for most of that time, re-uploaded in full on every push
-# even when nothing in it changed. .github/scripts/restore_mtimes.py
-# walks `git log` once and resets each staged file's mtime to its real
-# last-commit time so unchanged files correctly look unchanged, which is
-# what lets `mirror` actually skip them instead of re-transferring the
-# whole repo every time.
+# NOTE on history: this project already tried FTPS once before, using a
+# DIFFERENT FTP account on the same physical server (89.116.134.177), and
+# hit a passive-mode/NAT bug there — the control connection stayed alive
+# while data-channel transfers silently stalled, so the job hung for 2+
+# hours instead of failing fast ("Server sent FIN packet unexpectedly,
+# closing connection"). That bug is almost certainly server-wide, not
+# account-specific, so it may resurface here too. We switched to SFTP
+# (via lftp + CPANEL_SSH_KEY, see git history of this file) specifically
+# to route around that bug, and that SFTP path does work — this FTPS
+# attempt is a deliberate retry on the user's request, not a sign the
+# SFTP path was abandoned because it's broken.
 #
 # Database schema changes are NEVER part of this workflow on purpose —
 # those stay manual, reviewed SQL applied by hand in phpMyAdmin. See
@@ -76,43 +44,36 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - name: Stage deployable files only
-        run: |
-          mkdir -p deploy_stage
-          git archive HEAD | tar -x -C deploy_stage
-          rm -f deploy_stage/*.md
-          rm -rf deploy_stage/docs
-          rm -rf deploy_stage/.claude
-          rm -rf deploy_stage/.github
-          rm -f deploy_stage/.gitignore
-          rm -rf deploy_stage/assets/design-system/reference
-          rm -f deploy_stage/assets/design-system/dropdown-bs5-verify.html
-          rm -f deploy_stage/assets/design-system/email-preview.html
-          rm -f deploy_stage/geeseprojdesignsystem.html
-
-      - name: Restore real commit timestamps on staged files
-        run: python3 .github/scripts/restore_mtimes.py deploy_stage
-
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          printf "%s" "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keygen -p -m PEM -f ~/.ssh/deploy_key -N "" -q
-          ssh-keyscan -H 89.116.134.177 >> ~/.ssh/known_hosts
-
-      - name: Install lftp
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-
-      - name: Deploy staged files to public_html/lms via SFTP
-        working-directory: deploy_stage
-        run: |
-          lftp -e "
-            set sftp:auto-confirm yes;
-            set sftp:key-file $HOME/.ssh/deploy_key;
-            set sftp:connect-program 'ssh -a -x -i $HOME/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=$HOME/.ssh/known_hosts -o BatchMode=yes';
-            open -u startuplabcc, -p 22 sftp://89.116.134.177;
-            mirror --reverse --verbose --parallel=4 ./ public_html/lms/;
-            bye
-          "
+      - name: Deploy to public_html/lms via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          server-dir: /
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
+            application/config/database.php
+            uploads/**
+            backups/**
+            application/logs/**
+            **/*.log
+            **/*.md
+            docs/**
+            .claude/**
+            assets/design-system/reference/**
+            assets/design-system/dropdown-bs5-verify.html
+            assets/design-system/email-preview.html
+            geeseprojdesignsystem.html
+            .DS_Store
+            Thumbs.db
+            desktop.ini
