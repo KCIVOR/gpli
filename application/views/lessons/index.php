@@ -78,7 +78,7 @@ if($language_dirs){
 </head>
 
 <body class="gp-ds">
-<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
+<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=no-system-1"></script>
 <?php $full_page = $this->session->userdata('full_page_layout'); ?>
 <nav class="navbar navbar-expand bg-dark fixed-top" style="height: 65px;">
 	<div class="container-fluid">
@@ -88,7 +88,6 @@ if($language_dirs){
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<div class="gp-theme-row me-3">
 				<button type="button" id="gp-theme-light" class="gp-theme-btn">Light</button>
-				<button type="button" id="gp-theme-system" class="gp-theme-btn">System</button>
 				<button type="button" id="gp-theme-dark" class="gp-theme-btn">Dark</button>
 			</div>
 			<ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0">

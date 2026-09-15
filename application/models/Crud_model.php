@@ -2510,6 +2510,44 @@ class Crud_model extends CI_Model
         }
     }
 
+    /**
+     * GPLI homepage section backgrounds — dedicated, independently-keyed
+     * settings (NOT reusing update_frontend_banner()'s `banner_image`
+     * mechanism, which keys images by the stale `frontend_settings.home_page`
+     * string rather than the real active row in `home_pages` — see
+     * get_current_banner() in common_helper.php). Same upload/replace
+     * pattern as update_light_logo() below, just parameterized by which
+     * section's setting key to touch. $setting_key must be one of the keys
+     * GPLI_SECTION_BACKGROUNDS lists in Admin.php — that whitelist is
+     * enforced in the controller before this is ever called, not here,
+     * since this model method has no request context of its own to check.
+     */
+    public function update_gpli_section_background($setting_key)
+    {
+        if (isset($_FILES[$setting_key]) && $_FILES[$setting_key]['name'] != "") {
+            $this->ensure_frontend_setting($setting_key, '');
+            $existing = get_frontend_settings($setting_key);
+            if ($existing && file_exists('uploads/system/' . $existing)) {
+                unlink('uploads/system/' . $existing);
+            }
+            $data['value'] = md5(rand(1000, 100000)) . '.jpg';
+            $this->db->where('key', $setting_key);
+            $this->db->update('frontend_settings', $data);
+            move_uploaded_file($_FILES[$setting_key]['tmp_name'], 'uploads/system/' . $data['value']);
+        }
+    }
+
+    public function remove_gpli_section_background($setting_key)
+    {
+        $this->ensure_frontend_setting($setting_key, '');
+        $existing = get_frontend_settings($setting_key);
+        if ($existing && file_exists('uploads/system/' . $existing)) {
+            unlink('uploads/system/' . $existing);
+        }
+        $this->db->where('key', $setting_key);
+        $this->db->update('frontend_settings', ['value' => '']);
+    }
+
     public function update_light_logo()
     {
         if (isset($_FILES['light_logo']) && $_FILES['light_logo']['name'] != "") {

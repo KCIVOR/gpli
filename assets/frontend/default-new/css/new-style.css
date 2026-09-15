@@ -751,11 +751,11 @@ font-family: 'Secular One', sans-serif; */
   }
   .title-one .title {
     /* font-family: 'Clash Grotesk'; */
-    font-family: 'Basier Square';
+    font-family: var(--gp-font-head, 'Basier Square');
     font-size: 31px;
     font-weight: 600;
     line-height: 42px;
-    color: #0f101a;
+    color: var(--gp-fg);
     padding-bottom: 8px;
   }
   .title-one .bar {
@@ -768,7 +768,7 @@ font-family: 'Secular One', sans-serif; */
     font-size: 36px;
     font-weight: 700;
     line-height: 42px;
-    color: #062320;
+    color: var(--gp-fg);
     padding-bottom: 23px;
   }
   .title-two .info {
@@ -831,7 +831,7 @@ font-family: 'Secular One', sans-serif; */
     font-size: 18px;
     font-weight: 600;
     line-height: 26px;
-    color: #151d27;
+    color: var(--gp-fg);
     padding-bottom: 12px;
   }
   .blog-item-5 .info {
@@ -987,7 +987,7 @@ font-family: 'Secular One', sans-serif; */
   .faq-5 .accordion-item .accordion-header .accordion-button {
     font-family: "Raleway", sans-serif;
     font-weight: 700;
-    color: #151d27;
+    color: var(--gp-fg);
   }
   .faq-6 .accordion-item .accordion-header .accordion-button {
     font-family: "Mulish", sans-serif;
@@ -1180,7 +1180,7 @@ font-family: 'Secular One', sans-serif; */
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
-    color: #151d27;
+    color: var(--gp-fg);
   }
   .instructor-item-5 .social {
     position: absolute;
@@ -1335,7 +1335,7 @@ font-family: 'Secular One', sans-serif; */
     padding-top: 16px;
   }
   .course-item-one .content .title {
-    font-family: "SF Pro Display", sans-serif;
+    font-family: var(--gp-font-head, "SF Pro Display", sans-serif);
     font-size: 18px;
     font-weight: 500;
     line-height: 26px;
@@ -1481,7 +1481,7 @@ font-family: 'Secular One', sans-serif; */
     position: relative;
   }
   .category-item .info {
-    font-family: "SF Pro Display";
+    font-family: var(--gp-font-head, "SF Pro Display");
     font-size: 18px;
     font-weight: 500;
     line-height: 25px;
@@ -1648,7 +1648,7 @@ font-family: 'Secular One', sans-serif; */
     font-size: 15px;
     font-weight: 400;
     line-height: 24px;
-    color: #8a9097;
+    color: var(--gp-fg-muted);
     padding-bottom: 30px;
     max-width: 470px;
   }
@@ -1687,7 +1687,7 @@ font-family: 'Secular One', sans-serif; */
     font-size: 15px;
     font-weight: 500;
     line-height: 19px;
-    color: #151d27;
+    color: var(--gp-fg);
   }
   .banner-five-content .link-video .icon {
     flex: 0 0 46px;
@@ -1798,7 +1798,7 @@ font-family: 'Secular One', sans-serif; */
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
-    color: #8a9097;
+    color: var(--gp-fg-muted);
     padding-bottom: 5px;
   }
   .testimonial-item-5 .t-info {
@@ -1806,7 +1806,7 @@ font-family: 'Secular One', sans-serif; */
     font-size: 14px;
     font-weight: 400;
     line-height: 24px;
-    color: #8a9097;
+    color: var(--gp-fg-muted);
     padding-bottom: 8px;
   }
   .testimonial-item-5 .rate-no {
@@ -1822,7 +1822,7 @@ font-family: 'Secular One', sans-serif; */
     font-size: 21px;
     font-weight: 500;
     line-height: 37px;
-    color: #151d27;
+    color: var(--gp-fg);
     padding-bottom: 0;
   }
 .testimonial-5 .slick-dots li button::before{
@@ -1879,7 +1879,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
-  color: #8a9097;
+  color: var(--gp-fg-muted);
   padding-bottom: 40px;
   transition: all 0.3s;
 }
@@ -1891,7 +1891,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
-  color: #8a9097;
+  color: var(--gp-fg-muted);
   display: flex;
   align-items: center;
   gap: 5px;
@@ -1901,7 +1901,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 48px;
   font-weight: 500;
   line-height: 26px;
-  color: #151d27;
+  color: var(--gp-fg);
   transition: all 0.3s;
 }
 .price-item-5 .link {
@@ -1972,7 +1972,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 32px;
   font-weight: 700;
   line-height: 42px;
-  color: #151d27;
+  color: var(--gp-fg);
   padding-bottom: 30px;
 }
 .title-three .info {
@@ -1980,7 +1980,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 15px;
   font-weight: 400;
   line-height: 25px;
-  color: #8a9097;
+  color: var(--gp-fg-muted);
   padding-bottom: 30px;
 }
 .title-three .list {
@@ -1992,7 +1992,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 16px;
   font-weight: 600;
   line-height: 21px;
-  color: #151d27;
+  color: var(--gp-fg);
   padding-left: 26px;
   margin-bottom: 18px;
 }
@@ -2125,7 +2125,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
-  color: #151d27;
+  color: var(--gp-fg);
 }
 .course-item-5 .content .info span svg path {
   fill: var(--fill-bg);
@@ -2242,14 +2242,14 @@ font-family: 'Secular One', sans-serif; */
   font-size: 15px;
   font-weight: 400;
   line-height: 26px;
-  color: #8a9097;
+  color: var(--gp-fg-muted);
 }
 .upcoming-course-five li .date span {
   display: block;
   font-family: "Raleway", sans-serif;
   font-size: 38px;
   font-weight: 600;
-  color: #151d27;
+  color: var(--gp-fg);
   padding-bottom: 9px;
 }
 @media screen and (max-width: 575px) {
@@ -2315,7 +2315,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
-  color: #8a9097;
+  color: var(--gp-fg-muted);
   padding-bottom: 14px;
 }
 .upcoming-course-five li .course .price {
@@ -2323,7 +2323,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 18px;
   font-weight: 500;
   line-height: 26px;
-  color: #151d27;
+  color: var(--gp-fg);
 }
 .upcoming-course-list-six li {
   padding-bottom: 28px;
@@ -2477,7 +2477,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 18px;
   font-weight: 600;
   line-height: 25px;
-  color: #151d27;
+  color: var(--gp-fg);
   padding-bottom: 15px;
 }
 .course-training-five .content .info {
@@ -2485,7 +2485,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 15px;
   font-weight: 400;
   line-height: 24px;
-  color: #8a9097;
+  color: var(--gp-fg-muted);
 }
 .counter-5 {
   display: flex;
@@ -2528,7 +2528,7 @@ font-family: 'Secular One', sans-serif; */
 	font-family: "Raleway", sans-serif;
 	font-size: 60px;
 	font-weight: 600;
-	color: #151d27;
+	color: var(--gp-fg);
 	line-height: 78px;
 }
 .counter-5 .item .info {
@@ -2537,7 +2537,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 18px;
   font-weight: 500;
   line-height: 25px;
-  color: #151d27;
+  color: var(--gp-fg);
 }
 .counter-6 {
   display: flex;
@@ -2607,7 +2607,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 18px;
   font-weight: 500;
   line-height: 25px;
-  color: #151d27;
+  color: var(--gp-fg);
 }
 .become-instructor-6-img {
   position: relative;
@@ -2673,7 +2673,7 @@ font-family: 'Secular One', sans-serif; */
   font-size: 16px;
   font-weight: 700;
   line-height: 21px;
-  color: #151d27;
+  color: var(--gp-fg);
 }
 .section-kitchen-img {
   max-width: 596px;

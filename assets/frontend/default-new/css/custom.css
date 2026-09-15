@@ -447,13 +447,13 @@
 
 .title-two .title {
     /* font-family: 'Inter', sans-serif; */
-    font-family: 'Clash Grotesk';
+    font-family: var(--gp-font-head, 'Clash Grotesk');
 
     font-weight: 500;
 }
 
 .efont {
-    font-family: 'Clash Grotesk';
+    font-family: var(--gp-font-head, 'Clash Grotesk');
     font-weight: 500;
 }
 
@@ -1647,6 +1647,128 @@ ul.step-down li:last-child::before {
     margin-bottom: 50px !important;
 }
 
+/*===================================
+Compare page redesign
+=====================================*/
+.compare-toolbar {
+    background-color: var(--bg-white);
+    border: 1px solid #f3f1f8;
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 15px 0px;
+    padding: 20px 24px 24px;
+    margin-bottom: 24px;
+}
+
+.compare-toolbar-head {
+    margin-bottom: 16px;
+}
+
+.compare-toolbar-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-1);
+}
+
+.compare-toolbar-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 0;
+}
+
+.compare-field {
+    flex: 1 1 240px;
+    min-width: 200px;
+}
+
+.compare-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-16);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+}
+
+.compare-slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.compare-slots .card.courses-card-body {
+    margin-bottom: 0;
+    height: 100%;
+}
+
+.compare-empty-state {
+    height: 100%;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    border: 1.5px dashed #6e798a4d;
+    border-radius: 10px;
+    background-color: var(--bg-white-2);
+    padding: 24px;
+}
+
+.compare-empty-state i {
+    font-size: 26px;
+    color: var(--color-4);
+}
+
+.compare-empty-state p {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-16);
+    margin: 0;
+}
+
+@media (max-width: 991px) {
+    .compare-slots {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 575px) {
+    .compare-slots {
+        grid-template-columns: 1fr;
+    }
+
+    .compare-toolbar-fields {
+        flex-direction: column;
+    }
+
+    .compare-field {
+        flex-basis: auto;
+    }
+}
+
+/* Comparison table card */
+.compare-2 .compare-2-table {
+    border: 1px solid #f3f1f8;
+    box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 15px 0px;
+}
+
+.compare-table .table th {
+    background-color: var(--bg-white-2);
+}
+
+.compare-table .table tbody tr:nth-child(even) td,
+.compare-table .table tbody tr:nth-child(even) th {
+    background-color: var(--hover-color);
+}
+
+.compare-table .table td,
+.compare-table .table th {
+    vertical-align: middle;
+}
+
 .mb-60px {
     margin-bottom: 60px !important;
 }
@@ -1910,7 +2032,7 @@ ul.step-down li:last-child::before {
 
 /* title */
 .title-1 {
-    font-family: 'Poppins';
+    font-family: var(--gp-font-head, 'Poppins');
     color: #030531;
     font-weight: 600;
     line-height: 1.3;
@@ -1926,49 +2048,49 @@ ul.step-down li:last-child::before {
 }
 
 .subtitle-1 {
-    font-family: 'Rubik';
+    font-family: var(--gp-font-body, 'Rubik');
     font-weight: 400;
     color: #86868d;
     line-height: 1.5;
 }
 
 .title-2 {
-    font-family: 'Poppins';
+    font-family: var(--gp-font-head, 'Poppins');
     color: #062320;
     font-weight: 600;
     line-height: 1.3;
 }
 
 .title-3 {
-    font-family: 'Lexend Deca';
+    font-family: var(--gp-font-head, 'Lexend Deca');
     font-weight: 500;
     line-height: 1.3;
     color: #0f101a;
 }
 
 .subtitle-2 {
-    font-family: 'Outfit';
+    font-family: var(--gp-font-body, 'Outfit');
     font-weight: 400;
     line-height: 1.5;
     color: #93949e;
 }
 
 .subtitle-3 {
-    font-family: 'Poppins';
+    font-family: var(--gp-font-body, 'Poppins');
     font-weight: 400;
     line-height: 1.5;
     color: #8f919b;
 }
 
 .subtitle-4 {
-    font-family: 'Poppins';
+    font-family: var(--gp-font-body, 'Poppins');
     font-weight: 400;
     line-height: 1.5;
     color: #838b95;
 }
 
 .title-4 {
-    font-family: 'Lato';
+    font-family: var(--gp-font-head, 'Lato');
     font-weight: 600;
     line-height: 1.3;
     color: #1d242d;
@@ -1997,7 +2119,7 @@ ul.step-down li:last-child::before {
 
 .title-6 {
     color: var(--whiteColor);
-    font-family: 'Outfit';
+    font-family: var(--gp-font-head, 'Outfit');
     font-style: normal;
     font-weight: 600;
     line-height: 130.5%;
@@ -2005,7 +2127,7 @@ ul.step-down li:last-child::before {
 
 .subtitle-7 {
     color: var(--whiteColor);
-    font-family: 'Outfit';
+    font-family: var(--gp-font-body, 'Outfit');
     font-style: normal;
     font-weight: 500;
     line-height: 140%;
@@ -2013,7 +2135,7 @@ ul.step-down li:last-child::before {
 
 .title-7 {
     color: #121314;
-    font-family: 'Manrope';
+    font-family: var(--gp-font-head, 'Manrope');
     font-style: normal;
     font-weight: 600;
     line-height: 150%;

@@ -20,6 +20,10 @@
 
   /* ========== Neutrals (Light Mode) ========== */
   --gp-paper: #F5F5F2;
+  /* --gp-ink and --gp-text have no dark-mode override — deprecated for new use.
+     Use --gp-fg / --gp-fg-muted / --gp-fg-faint instead (see gp-landing.css:5-6).
+     Kept only for two frozen pairings where the paired background is equally
+     unthemed: gp-admin-shell.css .side-nav .badge, gp-tooltip.css .tooltip-inner. */
   --gp-ink: #0d0d0c;
   --gp-text: #6B6B6B;
   --gp-line: #E7E5DF;
@@ -109,7 +113,27 @@
     --bg-white-3: var(--gp-fg-muted);
     --bg-white-4: var(--gp-surface);
     --bg-white-5: var(--gp-surface);
+    --bg-white-6: var(--gp-surface-sunk);
     --bg-white-7: var(--gp-bg);
+
+    /* Same bridge, extended to style.css's --color-N vars. style.css's own
+       .dark-theme class is dead (nothing toggles it — see script.js's
+       commented-out classList.toggle), so these were frozen at light-mode
+       values under the real (data-theme) dark mode. Only bridging the
+       unambiguous text/accent/hover roles; translucent overlay vars
+       (--color-7/8/11/12/15/16, --border-color, --color-linear) are left
+       alone rather than guessed. */
+    --primary-color: var(--gp-fg-muted);
+    --primary-color-2: var(--gp-fg-muted);
+    --color-1: var(--gp-fg);
+    --color-3: var(--gp-fg);
+    --color-4: var(--gp-primary);
+    --color-5: var(--gp-fg);
+    --color-6: var(--gp-fg-muted);
+    --color-13: var(--gp-fg-muted);
+    --color-14: var(--gp-fg);
+    --hover-color: var(--gp-surface-sunk);
+    --hover-color-2: var(--gp-surface-sunk);
   }
 }
 
@@ -149,5 +173,20 @@
   --bg-white-3: var(--gp-fg-muted);
   --bg-white-4: var(--gp-surface);
   --bg-white-5: var(--gp-surface);
+  --bg-white-6: var(--gp-surface-sunk);
   --bg-white-7: var(--gp-bg);
+
+  /* Same bridge, extended to style.css's --color-N vars — see the
+     .gp-ds[data-theme="system"] block above for the full explanation. */
+  --primary-color: var(--gp-fg-muted);
+  --primary-color-2: var(--gp-fg-muted);
+  --color-1: var(--gp-fg);
+  --color-3: var(--gp-fg);
+  --color-4: var(--gp-primary);
+  --color-5: var(--gp-fg);
+  --color-6: var(--gp-fg-muted);
+  --color-13: var(--gp-fg-muted);
+  --color-14: var(--gp-fg);
+  --hover-color: var(--gp-surface-sunk);
+  --hover-color-2: var(--gp-surface-sunk);
 }

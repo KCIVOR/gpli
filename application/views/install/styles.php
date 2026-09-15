@@ -11,5 +11,5 @@
 <!-- App css -->
 <link href="<?php echo base_url('assets/backend/css/icons.min.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('assets/backend/css/app.min.css') ?>" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css') . '?v=color-bridge-1'; ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-install.css'); ?>">

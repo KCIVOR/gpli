@@ -60,7 +60,7 @@
     border: 1.5px solid #6e798a45;
     margin-top: 18px;
     margin-left: 0;
-    background-color: #754FFE;
+    background-color: var(--gp-primary);
     margin-bottom: 30px;
     padding: 6px 12px 6px 12px;
   }
@@ -151,7 +151,7 @@
   .btn-bar {
     font-size: 30px;
     margin-right: 12px;
-    color: #754FFE;
+    color: var(--gp-primary);
   }
 
   .m-search-icon {
@@ -317,7 +317,7 @@
     border: 1.5px solid #6e798a45;
     margin-top: 18px;
     margin-left: 0;
-    background-color: #754FFE;
+    background-color: var(--gp-primary);
     margin-bottom: 30px;
     padding: 6px 12px 6px 12px;
   }
@@ -573,7 +573,7 @@
     border: 1.5px solid #6e798a45;
     margin-top: 18px;
     margin-left: 0;
-    background-color: #754FFE;
+    background-color: var(--gp-primary);
     margin-bottom: 30px;
     padding: 6px 12px 6px 12px;
   }
@@ -587,7 +587,7 @@
     border: 1.5px solid #6e798a45;
     margin-top: 18px;
     margin-left: 0;
-    background-color: #754FFE;
+    background-color: var(--gp-primary);
     margin-bottom: 30px;
     padding: 6px 12px 6px 12px;
   }
@@ -597,7 +597,7 @@
   }
 
   .course-play-right .review-icon ul li i {
-    color: #F9B23A;
+    color: var(--gp-gold);
     margin-right: 5px;
   }
 
@@ -1553,7 +1553,7 @@
 
   .grid-view-body .btn {
     background-color: #fff;
-    color: #6E798A;
+    color: var(--gp-fg-muted);
     margin-left: 4px;
     border: 1.5px solid #6e798a45;
   }
@@ -1663,7 +1663,7 @@
     border: 1.5px solid #6e798a45;
     margin-top: 18px;
     margin-left: 0;
-    background-color: #754FFE;
+    background-color: var(--gp-primary);
     margin-bottom: 30px;
     padding: 6px 12px 6px 12px;
   }
@@ -1704,7 +1704,7 @@
   }
 
   .instructor-1 .instructor-about .rating .rating-point i {
-    color: #F9B23A;
+    color: var(--gp-gold);
     font-size: 14px;
     margin: 3px 2px 0px 4px;
   }
@@ -1744,14 +1744,14 @@
   }
 
   .invoice-no .invoice-color {
-    color: #754FFE;
+    color: var(--gp-primary);
     margin-right: 3px;
   }
 
   .invoice-bill .invoice-total h2 {
     font-size: 25px;
     font-weight: 600;
-    color: #754FFE;
+    color: var(--gp-primary);
   }
 
   .invoice-2 .invoice-total {

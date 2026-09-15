@@ -7,8 +7,8 @@ body {
   font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
-  color: #737982;
-  background-color: #fff;
+  color: var(--gp-fg-muted);
+  background-color: var(--gp-bg);
   -moz-osx-font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   cursor: default;
@@ -136,19 +136,19 @@ select:visited {
   font-size: 22px;
   font-weight: 600;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
   padding-bottom: 20px;
 }
 .course-playing-content .content .cp-info {
   font-size: 15px;
   font-weight: 400;
   line-height: 28px;
-  color: #737982;
+  color: var(--gp-fg-muted);
 }
 .course-playing-sidebar {
   margin: 0 auto;
   padding: 30px 0px;
-  background-color: #fff;
+  background-color: var(--gp-surface);
   border: 1px solid rgba(110, 121, 138, 0.1);
   border-radius: 10px;
   box-shadow: 0 30px 55px rgba(110, 121, 138, 0.1);
@@ -157,7 +157,7 @@ select:visited {
   font-size: 24px;
   font-weight: 600;
   line-height: 34px;
-  color: #0a192e;
+  color: var(--gp-fg);
   text-align: center;
   padding-bottom: 30px;
 }
@@ -183,9 +183,9 @@ select:visited {
   font-size: 16px;
   font-weight: 600;
   line-height: 34px;
-  color: #0a192e;
+  color: var(--gp-fg);
   padding: 20px 22px !important;
-  background-color: #fff;
+  background-color: var(--gp-surface);
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 .custom-accordion .accordion-item .accordion-header .accordion-button:not(.collapsed){
@@ -249,11 +249,11 @@ select:visited {
   font-size: 15px;
   font-weight: 500;
   line-height: 34px;
-  color: #737982;
+  color: var(--gp-fg-muted);
   transition: all 0.3s;
 }
 .course-content-items .item.active {
-  background-color: #754ffe;
+  background-color: var(--gp-primary);
 }
 .course-content-items .item.active .left .icon {
   background-color: #fff;
@@ -317,7 +317,7 @@ select:visited {
   font-size: 15px;
   font-weight: 600;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
   padding-left: 0;
   padding-right: 0;
   padding: 0 0 14px 0;
@@ -326,14 +326,14 @@ select:visited {
   transition: all 0.3s;
 }
 .ct-tabs-custom-one button.nav-link.active, .ct-tabs-custom-one button.nav-link:hover {
-  color: #754ffe;
+  color: var(--gp-primary);
   border-color: transparent;
   background: transparent !important;
 }
 .ct-tabs-custom-one button.nav-link.active span, .ct-tabs-custom-one button.nav-link:hover span {
   opacity: 1;
   z-index: 1;
-  background-color: #754ffe;
+  background-color: var(--gp-primary);
 }
 .ct-tabs-custom-one button.nav-link span {
   display: inline-block;
@@ -342,7 +342,7 @@ select:visited {
   position: absolute;
   bottom: 0;
   left: 0;
-  background-color: #754ffe;
+  background-color: var(--gp-primary);
   z-index: 1;
   opacity: 0;
 }
@@ -351,7 +351,7 @@ select:visited {
   font-size: 18px;
   font-weight: 600;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
   padding-bottom: 30px;
 }
 
@@ -370,14 +370,14 @@ select:visited {
   font-size: 15px;
   font-weight: 600;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
   padding-bottom: 20px;
 }
 .assignment-item .text {
   font-size: 15px;
   font-weight: 400;
   line-height: 28px;
-  color: #737982;
+  color: var(--gp-fg-muted);
   padding-bottom: 30px;
 }
 .assignment-item .text:last-child {
@@ -387,13 +387,13 @@ select:visited {
   font-size: 14px;
   font-weight: 400;
   line-height: 14px;
-  color: #737982;
+  color: var(--gp-fg-muted);
 }
 .assignment-item .date span {
   font-size: 15px;
   font-weight: 600;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
 }
 .assignment-item .status-mark {
   margin-top: 20px;
@@ -407,13 +407,13 @@ select:visited {
   font-size: 15px;
   font-weight: 600;
   line-height: 28px;
-  color: #5cb660;
+  color: var(--gp-success);
 }
 .assignment-item .status-mark .ass-mark {
   font-size: 15px;
   font-weight: 600;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
 }
 
 .tab-certificate {
@@ -425,7 +425,7 @@ select:visited {
   flex: 0 0 154px;
   width: 154px;
   height: 154px;
-  border: 1px solid #5cb660;
+  border: 1px solid var(--gp-success);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -433,13 +433,13 @@ select:visited {
   font-size: 32px;
   font-weight: 500;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
 }
 .tab-certificate .content .title {
   font-size: 20px;
   font-weight: 600;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
   padding-bottom: 16px;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(110, 121, 138, 0.2);
@@ -448,7 +448,7 @@ select:visited {
   font-size: 15px;
   font-weight: 400;
   line-height: 28px;
-  color: #737982;
+  color: var(--gp-fg-muted);
 }
 
 .s_search {
@@ -488,7 +488,7 @@ select:visited {
 
 .s_search input:focus,
 .s_search input:hover {
-  border-color: #754ffe;
+  border-color: var(--gp-primary);
 }
 
 .s_search span {
@@ -503,7 +503,7 @@ select:visited {
   font-size: 18px;
   font-weight: 600;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
   padding-bottom: 20px;
 }
 
@@ -522,7 +522,7 @@ select:visited {
   font-size: 15px;
   font-weight: 600;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
   padding-bottom: 30px;
 }
 
@@ -554,21 +554,21 @@ select:visited {
   font-size: 14px;
   font-weight: 600;
   line-height: 24px;
-  color: #0a192e;
+  color: var(--gp-fg);
 }
 .forum-item .user .date {
   font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 14px;
-  color: #737982;
+  color: var(--gp-fg-muted);
 }
 .forum-item .forum-text {
   font-family: "Inter", sans-serif;
   font-size: 13px;
   font-weight: 400;
   line-height: 26px;
-  color: #737982;
+  color: var(--gp-fg-muted);
   padding: 16px 0;
 }
 .forum-item .reaction-reply {
@@ -586,16 +586,16 @@ select:visited {
   font-size: 13px;
   font-weight: 500;
   line-height: 26px;
-  color: #754ffe;
+  color: var(--gp-primary);
 }
 .forum-item .reaction-reply .item .icon {
   display: flex;
 }
 .forum-item .reaction-reply .item .icon svg path {
-  fill: #737982;
+  fill: var(--gp-fg-muted);
 }
 .forum-item .reaction-reply .item:has(.no) .icon svg path {
-  fill: #754ffe;
+  fill: var(--gp-primary);
 }
 
 .forum-form .f-subtitle {
@@ -603,7 +603,7 @@ select:visited {
   font-size: 15px;
   font-weight: 600;
   line-height: 28px;
-  color: #0a192e;
+  color: var(--gp-fg);
   padding-bottom: 30px;
 }
 
@@ -636,7 +636,7 @@ select:visited {
 
 .forum-input:focus,
 .forum-input:hover {
-  border-color: #754ffe;
+  border-color: var(--gp-primary);
 }
 
 textarea.forum-input {
@@ -647,7 +647,7 @@ textarea.forum-input {
   display: inline-block;
   padding: 14px 35px;
   border-radius: 10px;
-  background-color: #754ffe;
+  background-color: var(--gp-primary);
   font-family: "Inter", sans-serif;
   font-size: 15px;
   font-weight: 500;
@@ -679,11 +679,11 @@ textarea.forum-input {
 }
 .live_class{
   padding: 30px 0;
-  color: #212529;
+  color: var(--gp-fg);
 }
 .btn_zoom {
-  background-color: #2781FF;
-  border-color: #2781FF;
+  background-color: var(--gp-primary);
+  border-color: var(--gp-primary);
   color: #fff !important;
   font-size: 14px;
 }
@@ -691,9 +691,9 @@ textarea.forum-input {
   box-shadow: none;
 }
 .live_class_note {
-	border: 1px solid #bfdde4;
-	background-color: aliceblue;
-	color: #007791;
+	border: 1px solid var(--gp-info-border);
+	background-color: var(--gp-info-soft);
+	color: var(--gp-info);
 	font-size: 12px;
 	padding: 10px;
 	max-width: 300px;
@@ -705,7 +705,7 @@ textarea.forum-input {
 .description p {
 	font-size: 16px;
 	margin-top: 10px;
-  color: #212529;
+  color: var(--gp-fg);
 }
 .question-search-input {
   height: 44px;
@@ -727,7 +727,7 @@ textarea.forum-input {
 }
 .text-right h5{
   font-size: 16px;
-  color: #212529;
+  color: var(--gp-fg);
 }
 .add-question-form label{
   margin: 5px 0;
@@ -755,7 +755,7 @@ textarea.forum-input {
   padding: 30px 30px;
 }
 .locked-card i{
-  color: #000;
+  color: var(--gp-fg);
 }
 .locked-card h3, .locked-card h4, .locked-card h5, .locked-card h6{
   font-weight: 800;
@@ -886,6 +886,6 @@ textarea.forum-input {
 
 
 .icon-upvot-comment{
-  background-color: #fff;
+  background-color: var(--gp-surface);
 }
 

@@ -4061,6 +4061,154 @@ public function custom_field_section_sort_update()
         $this->load->view('backend/index', $page_data);
     }
 
+    /**
+     * One-time maintenance action for the GPLI dummy-data seed: assigns each
+     * seeded GPLI course a distinct real photo from
+     * assets/frontend/default-new/home/gpli-course-photos/ (92 real,
+     * freely-licensed stock photos), since course thumbnails need an actual
+     * file on disk, not just a database value (see
+     * Crud_model::get_course_thumbnail_url()). Safe to click more than
+     * once — deterministic by course id, so re-running just re-assigns the
+     * same photos rather than reshuffling. Gated by the same admin-session
+     * check every Admin controller method already has (see __construct()
+     * above) — no separate password/token needed.
+     */
+    public function gpli_assign_course_thumbnails()
+    {
+        $theme = get_frontend_settings('theme');
+        $pool_dir = FCPATH . 'assets/frontend/default-new/home/gpli-course-photos/';
+        $dest_dir = FCPATH . 'uploads/thumbnails/course_thumbnails/';
+        $dest_optimized_dir = $dest_dir . 'optimized/';
+
+        $gpli_function_slugs = [
+            'hr', 'sales', 'gpli-marketing', 'gpli-operations',
+            'customer-support', 'gpli-leadership', 'gpli-management', 'professional-development',
+        ];
+
+        // --- Error handling: every failure mode reports a specific reason
+        // and stops before touching anything, rather than silently doing
+        // nothing or crashing with a raw PHP warning. ---
+
+        if (!is_dir($pool_dir)) {
+            $this->session->set_flashdata('flash_message', get_phrase('GPLI thumbnail assignment failed: photo pool folder not found at assets/frontend/default-new/home/gpli-course-photos/. Make sure that folder was deployed.'));
+            redirect(site_url('admin/home_page_builder'), 'refresh');
+        }
+
+        if (!is_dir($dest_dir)) {
+            @mkdir($dest_dir, 0777, true);
+        }
+        if (!is_dir($dest_optimized_dir)) {
+            @mkdir($dest_optimized_dir, 0777, true);
+        }
+        if (!is_dir($dest_dir) || !is_writable($dest_dir) || !is_dir($dest_optimized_dir) || !is_writable($dest_optimized_dir)) {
+            $this->session->set_flashdata('flash_message', get_phrase('GPLI thumbnail assignment failed: uploads/thumbnails/course_thumbnails/ (or its optimized/ subfolder) does not exist and could not be created, or is not writable by the web server. Check folder permissions.'));
+            redirect(site_url('admin/home_page_builder'), 'refresh');
+        }
+
+        $pool = glob($pool_dir . 'gpli_stock_*.jpg');
+        sort($pool);
+        $pool_size = count($pool);
+
+        if ($pool_size === 0) {
+            $this->session->set_flashdata('flash_message', get_phrase('GPLI thumbnail assignment failed: no photos found in the gpli-course-photos folder.'));
+            redirect(site_url('admin/home_page_builder'), 'refresh');
+        }
+
+        $courses = $this->db->select('course.id, course.title, course.last_modified')
+            ->from('course')
+            ->join('category', 'category.id = course.category_id')
+            ->where_in('category.slug', $gpli_function_slugs)
+            ->order_by('course.id', 'ASC')
+            ->get()->result_array();
+
+        if (empty($courses)) {
+            $this->session->set_flashdata('flash_message', get_phrase('No GPLI courses found yet — import the 2026_gpli_data_*.sql migration files first, then run this again.'));
+            redirect(site_url('admin/home_page_builder'), 'refresh');
+        }
+
+        // Distinguishes three outcomes instead of one blind count: courses
+        // that already had the correct photo (re-running this is a no-op
+        // for them, not a duplicate write), courses newly assigned this
+        // run, and courses that failed (missing/unreadable source file,
+        // or the copy() call itself failing) — each reported separately so
+        // a partial failure is visible rather than hidden inside a total.
+        $already_correct = 0;
+        $newly_assigned = 0;
+        $failed = [];
+
+        foreach ($courses as $i => $row) {
+            $src_file = $pool[$i % $pool_size];
+
+            if (!is_readable($src_file)) {
+                $failed[] = $row['title'] . ' (source photo unreadable: ' . basename($src_file) . ')';
+                continue;
+            }
+
+            $last_modified = $row['last_modified']; // NULL becomes '' when concatenated, matching get_course_thumbnail_url()
+            $filename = 'course_thumbnail_' . $theme . '_' . $row['id'] . $last_modified . '.jpg';
+            $dest_file = $dest_dir . $filename;
+            $dest_optimized_file = $dest_optimized_dir . $filename;
+
+            if (file_exists($dest_file) && filesize($dest_file) === filesize($src_file)) {
+                $already_correct++;
+                continue;
+            }
+
+            $ok1 = @copy($src_file, $dest_file);
+            $ok2 = @copy($src_file, $dest_optimized_file);
+            if ($ok1 && $ok2) {
+                $newly_assigned++;
+            } else {
+                $failed[] = $row['title'] . ' (could not write thumbnail file — check disk space and folder permissions)';
+            }
+        }
+
+        $message = get_phrase('GPLI thumbnails:') . ' ' . $newly_assigned . ' ' . get_phrase('newly assigned') . ', '
+            . $already_correct . ' ' . get_phrase('already correct (skipped)') . ', '
+            . count($failed) . ' ' . get_phrase('failed') . '. ('
+            . $pool_size . ' ' . get_phrase('photos in pool') . ')';
+        if (!empty($failed)) {
+            $message .= ' ' . get_phrase('Failures:') . ' ' . implode('; ', array_slice($failed, 0, 5)) . (count($failed) > 5 ? '…' : '');
+        }
+        $this->session->set_flashdata('flash_message', $message);
+        redirect(site_url('admin/home_page_builder'), 'refresh');
+    }
+
+    /**
+     * GPLI section background upload — a dedicated setting per section,
+     * independent of the app's older `banner_image` mechanism (see the
+     * audit note on Crud_model::update_gpli_section_background()). Falls
+     * back to home_gpli.php's plain default look when nothing's uploaded.
+     * The list of eligible sections lives in gpli_section_backgrounds()
+     * in common_helper.php, not here — it's a plain function (not a
+     * controller method) specifically so the admin VIEW can call it too:
+     * `$this` inside a view is CI_Loader, not the controller, and only
+     * gets the controller's *properties* copied onto it, never its
+     * methods, so a controller method can't be called as $this->... from
+     * a view (that's exactly the fatal error this replaced).
+     */
+    public function gpli_section_background_update($section = '')
+    {
+        $sections = gpli_section_backgrounds();
+        if (!isset($sections[$section])) {
+            show_404();
+        }
+        $this->crud_model->update_gpli_section_background($sections[$section]['key']);
+        $this->session->set_flashdata('flash_message', get_phrase($sections[$section]['label']) . ' ' . get_phrase('background updated.'));
+        redirect(site_url('admin/home_page_builder'), 'refresh');
+    }
+
+    public function gpli_section_background_remove($section = '')
+    {
+        $sections = gpli_section_backgrounds();
+        if (!isset($sections[$section])) {
+            show_404();
+        }
+        $this->crud_model->remove_gpli_section_background($sections[$section]['key']);
+        $this->session->set_flashdata('flash_message', get_phrase($sections[$section]['label']) . ' ' . get_phrase('background removed — it will use its default look.'));
+        redirect(site_url('admin/home_page_builder'), 'refresh');
+    }
+
     public function home_page($type = '', $id = "")
     {
         $page_data['page'] = $this->db->get_where('home_pages', ['id' => $id])->row_array();

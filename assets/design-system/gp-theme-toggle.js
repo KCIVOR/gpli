@@ -1,6 +1,6 @@
 /**
  * Geese Project Design System — Theme Toggle
- * Phase 0 — Light/System/Dark theme switcher
+ * Phase 0 — Light/Dark theme switcher (System option removed per design direction)
  * Inert on any page without .gp-ds class
  */
 
@@ -17,13 +17,12 @@
 
   var buttons = {
     light: document.getElementById('gp-theme-light'),
-    dark: document.getElementById('gp-theme-dark'),
-    system: document.getElementById('gp-theme-system')
+    dark: document.getElementById('gp-theme-dark')
   };
 
   /**
    * Apply theme mode to the body element
-   * @param {string} mode - 'light', 'dark', or 'system'
+   * @param {string} mode - 'light' or 'dark'
    */
   function applyTheme(mode) {
     document.documentElement.setAttribute('data-theme', mode);
@@ -31,9 +30,6 @@
     body.setAttribute('data-theme', mode);
 
     var useDark = mode === 'dark';
-    if (mode === 'system' && window.matchMedia) {
-      useDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
     document.documentElement.style.colorScheme = useDark ? 'dark' : 'light';
     document.documentElement.style.backgroundColor = useDark ? '#111015' : '#FBFAF7';
 
@@ -57,14 +53,14 @@
 
   /**
    * Initialize theme from localStorage or default to light.
-   * Default remains 'light'. System now sets data-theme="system" so OS-dark
-   * leftover surfaces in gp-dark-surfaces.css can apply.
+   * A previously-stored 'system' value (from before the System option was
+   * removed) falls back to 'light' here, same as any other unrecognized value.
    */
   function initTheme() {
     var savedTheme = 'light';
     try {
       var stored = localStorage.getItem('gp-ds-theme');
-      if (stored === 'light' || stored === 'dark' || stored === 'system') {
+      if (stored === 'light' || stored === 'dark') {
         savedTheme = stored;
       }
     } catch (e) {
@@ -91,11 +87,6 @@
     if (buttons.dark && !buttons.dark.hasAttribute('data-gp-theme')) {
       buttons.dark.addEventListener('click', function() {
         applyTheme('dark');
-      });
-    }
-    if (buttons.system && !buttons.system.hasAttribute('data-gp-theme')) {
-      buttons.system.addEventListener('click', function() {
-        applyTheme('system');
       });
     }
   }

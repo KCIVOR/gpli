@@ -1,7 +1,10 @@
 /**
  * Geese Project — Admin / instructor chrome
  * Sidebar + topbar only. Tokens from gp-tokens.css.
- * Source: geeseprojdesignsystem.html §23 (admin sidebar) + §08 navbar language.
+ * Source: geeseprojdesignsystem.html §23 (admin sidebar) + §08 navbar language,
+ * corrected per designer direction: chrome (sidebar/topbar) is neutral
+ * surface (near-black/near-white, theme-aware), not navy — navy/red are
+ * reserved for components (active nav item, buttons, badges, accents).
  * Hooks kept: MetisMenu, .side-nav-link, .mm-active, dropdowns, button-menu-mobile.
  */
 
@@ -23,19 +26,19 @@
   min-width: 0;
 }
 
-/* ========== Topbar — 64px navy, sticky ========== */
+/* ========== Topbar — 64px neutral surface, sticky ========== */
 .gp-ds .navbar-custom.topnav-navbar,
 .gp-ds .navbar-custom.topnav-navbar-dark,
 .gp-ds .gp-admin-topbar {
   position: sticky;
   top: 0;
   z-index: 1040;
-  background: var(--gp-accent-2);
+  background: var(--gp-surface);
   box-shadow: none;
   margin: 0;
   min-height: 64px;
   padding: 0 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--gp-border);
 }
 
 .gp-ds .navbar-custom.topnav-navbar .container-fluid,
@@ -56,7 +59,7 @@
 
 .gp-ds .gp-admin-topbar .button-menu-mobile {
   display: none;
-  color: #fff;
+  color: var(--gp-fg);
 }
 
 .gp-ds .gp-admin-topbar .button-menu-mobile .lines {
@@ -75,7 +78,7 @@
   font-weight: 800;
   font-size: 15px;
   letter-spacing: -0.2px;
-  color: #fff;
+  color: var(--gp-fg);
 }
 
 .gp-ds .navbar-custom .topbar-right-menu,
@@ -96,7 +99,7 @@
 .gp-ds .navbar-custom .topbar-right-menu .nav-link:not(.nav-user),
 .gp-ds .topbar-dropdown .nav-link:not(.nav-user),
 .gp-ds .notification-list .noti-icon {
-  color: var(--gp-gold-light);
+  color: var(--gp-fg-muted);
   line-height: 1;
   min-height: 36px;
   height: 36px;
@@ -114,7 +117,7 @@
 
 .gp-ds .navbar-custom .topbar-right-menu .nav-link:hover,
 .gp-ds .topbar-dropdown .nav-link:hover {
-  color: #fff;
+  color: var(--gp-fg);
 }
 
 .gp-ds .gp-admin-topbar .nav-user,
@@ -129,10 +132,10 @@
   min-width: 0;
   margin: 0;
   padding: 4px 12px 4px 4px !important; /* leftover Hyper uses !important */
-  background: var(--gp-accent);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
   border-radius: var(--gp-radius);
-  color: #fff;
+  color: var(--gp-fg);
   line-height: 1.2;
   text-align: left;
   overflow: hidden;
@@ -171,7 +174,7 @@
   font-weight: 700;
   font-size: 13px;
   line-height: 1.2;
-  color: #fff;
+  color: var(--gp-fg);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -184,7 +187,7 @@
   font-family: var(--gp-font-body);
   font-size: 11px;
   line-height: 1.2;
-  color: var(--gp-gold-light);
+  color: var(--gp-fg-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -193,13 +196,13 @@
 .gp-ds .gp-admin-topbar .gp-theme-row {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--gp-border);
   border-radius: 999px;
   padding: 3px;
   gap: 2px;
   height: 36px;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--gp-surface-sunk);
 }
 
 .gp-ds .gp-admin-topbar .gp-theme-btn,
@@ -212,7 +215,7 @@
   padding: 0;
   margin: 0;
   border-radius: 999px;
-  color: var(--gp-gold-light);
+  color: var(--gp-fg-muted);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -233,8 +236,8 @@
 
 .gp-ds .gp-admin-topbar .gp-theme-btn.active,
 .gp-ds .navbar-custom .gp-theme-btn.active {
-  background: #fff;
-  color: var(--gp-accent-2);
+  background: var(--gp-fg);
+  color: var(--gp-surface);
   border-color: transparent;
 }
 
@@ -252,8 +255,8 @@
   letter-spacing: 0.32px;
   text-transform: uppercase;
   border-radius: var(--gp-radius);
-  border: 2px solid rgba(255, 255, 255, 0.28);
-  color: #fff;
+  border: 2px solid var(--gp-border-strong);
+  color: var(--gp-fg);
   background: transparent;
   padding: 8px 14px;
 }
@@ -265,16 +268,16 @@
 }
 
 .gp-ds .navbar-custom .noti-icon-badge {
-  background: var(--gp-gold);
+  background: var(--gp-secondary);
 }
 
-/* ========== Sidebar — 250px navy, sticky ========== */
+/* ========== Sidebar — 250px neutral surface, sticky ========== */
 .gp-ds .left-side-menu,
 .gp-ds .left-side-menu.left-side-menu-detached {
   position: sticky;
   top: 80px;
   align-self: stretch;
-  background: var(--gp-accent-2);
+  background: var(--gp-surface);
   box-shadow: none;
   min-width: 250px;
   max-width: 250px;
@@ -284,6 +287,7 @@
   max-height: calc(100vh - 96px);
   overflow-x: hidden;
   overflow-y: auto;
+  border: 1px solid var(--gp-border);
   border-radius: 14px;
   padding: 12px 10px 20px;
   scrollbar-width: none;
@@ -311,14 +315,14 @@
 }
 
 .gp-ds .leftbar-user img {
-  border: 2px solid rgba(255, 255, 255, 0.12);
+  border: 2px solid var(--gp-border);
 }
 
 .gp-ds .leftbar-user .leftbar-user-name {
   font-family: var(--gp-font-head);
   font-weight: 800;
   font-size: 13.5px;
-  color: #fff;
+  color: var(--gp-fg);
   margin: 0;
 }
 
@@ -332,7 +336,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gp-primary-3);
+  color: var(--gp-fg-faint);
   padding: 14px 10px 6px;
 }
 
@@ -341,7 +345,7 @@
 }
 
 .gp-ds .left-side-menu-detached .side-nav-light .side-nav-title {
-  color: var(--gp-primary-3);
+  color: var(--gp-fg-faint);
 }
 
 .gp-ds .side-nav .side-nav-link,
@@ -351,7 +355,7 @@
   gap: 8px;
   padding: 9px 10px;
   border-radius: 8px;
-  color: var(--gp-gold-light);
+  color: var(--gp-fg-muted);
   font-family: var(--gp-font-body);
   font-size: 13px;
   font-weight: 500;
@@ -368,7 +372,7 @@
 
 .gp-ds .side-nav .menu-arrow {
   right: 10px;
-  color: var(--gp-primary-3);
+  color: var(--gp-fg-faint);
 }
 
 .gp-ds .side-nav .side-nav-link:hover,
@@ -376,8 +380,8 @@
 .gp-ds .left-side-menu-detached .side-nav-light .side-nav-link:hover,
 .gp-ds .left-side-menu-detached .side-nav-light .side-nav-link:focus,
 .gp-ds .left-side-menu-detached .side-nav-light .side-nav-link:active {
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
 }
 
 .gp-ds .side-nav .side-nav-link.active,
@@ -402,7 +406,7 @@
   font-family: var(--gp-font-body);
   font-size: 13px;
   word-spacing: 0.2em;
-  color: var(--gp-gold-light);
+  color: var(--gp-fg-muted);
   text-decoration: none;
 }
 
@@ -410,8 +414,8 @@
 .gp-ds .side-nav .side-nav-third-level a:hover,
 .gp-ds .side-nav .side-nav-second-level li.active > a,
 .gp-ds .side-nav .side-nav-third-level li.active > a {
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
 }
 
 .gp-ds .side-nav .badge {
@@ -672,4 +676,15 @@
 .gp-ds .gp-admin-topbar .gp-admin-notify-empty a:hover {
   background: transparent;
   color: var(--gp-gold-deep);
+}
+
+/* Ajax page-loader bar (main.css .start_ajax_loading) — global, not scoped to
+   .gp-course-wizard, since frontend_settings.php and badges.php also use it.
+   No legacy rule remains to beat, so no !important needed. */
+.gp-ds .start_ajax_loading {
+  background-color: var(--gp-info-soft);
+}
+
+.gp-ds .start_ajax_loading .ajax_loaderBar {
+  background-color: var(--gp-primary);
 }

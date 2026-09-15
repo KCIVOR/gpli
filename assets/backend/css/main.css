@@ -309,12 +309,7 @@ body.show {
   width:0;
   animation:borealisBar 1s linear infinite;
 }
-.start_ajax_loading{
-  background-color: #aae8d0 !important;
-}
-.start_ajax_loading .ajax_loaderBar{
-  background-color: #0acf97 !important;
-}
+/* Migrated to assets/design-system/gp-admin-shell.css (.gp-ds .start_ajax_loading) */
 
 @keyframes borealisBar {
   0% {

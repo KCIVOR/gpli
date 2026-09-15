@@ -18,13 +18,13 @@
 <link rel="stylesheet" href="<?php echo base_url().'assets/global/toastr/toastr.css' ?>">
 
 
-<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
+<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=no-system-1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css') . '?v=color-bridge-1'; ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-base.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-components-core.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-shell.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dark-surfaces.css'); ?>">
-<script src="<?php echo base_url('assets/design-system/gp-theme-toggle.js'); ?>" defer></script>
+<script src="<?php echo base_url('assets/design-system/gp-theme-toggle.js'); ?>?v=no-system-1" defer></script>
 <script src="<?php echo base_url('assets/backend/js/jquery-3.3.1.min.js'); ?>"></script>

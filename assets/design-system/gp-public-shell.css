@@ -684,18 +684,18 @@
 .gp-ds[data-theme="dark"] header.gp-site-header .menu_pro_cart_tgl:hover,
 .gp-ds[data-theme="dark"] header.gp-site-header .wisth_tgl_2div>a:hover {
   color: var(--gp-fg) !important;
-  background: #25242c;
+  background: var(--gp-border);
 }
 
 .gp-ds[data-theme="dark"] header.gp-site-header .gp-lang-toggle {
-  background: #25242c !important;
+  background: var(--gp-border) !important;
   color: var(--gp-fg) !important;
   border-color: var(--gp-border-strong) !important;
 }
 
 .gp-ds[data-theme="dark"] header.gp-site-header .gp-theme-row {
   border-color: var(--gp-border-strong);
-  background: #25242c;
+  background: var(--gp-border);
 }
 
 .gp-ds[data-theme="dark"] header.gp-site-header .gp-theme-btn {
@@ -720,14 +720,14 @@
   }
 
   .gp-ds[data-theme="system"] header.gp-site-header .gp-lang-toggle {
-    background: #25242c !important;
+    background: var(--gp-border) !important;
     color: var(--gp-fg) !important;
     border-color: var(--gp-border-strong) !important;
   }
 
   .gp-ds[data-theme="system"] header.gp-site-header .gp-theme-row {
     border-color: var(--gp-border-strong);
-    background: #25242c;
+    background: var(--gp-border);
   }
 }
 

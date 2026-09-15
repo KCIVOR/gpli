@@ -3,7 +3,7 @@
  * UI only. Keeps #course_filter_form, filterCourse(), wishlist, compare, enroll.
  */
 
-.gp-ds .gp-catalog-page .bread-crumb {
+.gp-ds .gp-catalog-page .gp-page-header {
   background: transparent !important;
   background-image: none !important;
   box-shadow: none;
@@ -11,8 +11,7 @@
   border: 0;
 }
 
-.gp-ds .gp-catalog-page .bread-crumb h1,
-.gp-ds .gp-catalog-page .bread-crumb .book-img {
+.gp-ds .gp-catalog-page .gp-page-header-title {
   display: none;
 }
 
@@ -79,6 +78,22 @@
   align-items: start;
 }
 
+.gp-ds .gp-catalog-aside {
+  position: sticky;
+  top: 94px;
+  max-height: calc(100vh - 110px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gp-ds .gp-catalog-aside::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 @media (max-width: 991px) {
   .gp-ds .gp-catalog-layout {
     grid-template-columns: 1fr;
@@ -86,12 +101,9 @@
 
   .gp-ds .gp-catalog-aside {
     position: static;
+    max-height: none;
+    overflow: visible;
   }
-}
-
-.gp-ds .gp-catalog-aside {
-  position: sticky;
-  top: 94px;
 }
 
 .gp-ds .gp-catalog .course-all-category {

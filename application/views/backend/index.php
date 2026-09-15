@@ -19,7 +19,7 @@
     echo $gp_ds_active ? ' class="gp-ds"' : '';
 ?>>
 <?php if (!empty($gp_ds_active)): ?>
-<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
+<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=no-system-1"></script>
 <?php endif; ?>
     <!-- HEADER -->
     <?php include 'header.php'; ?>

@@ -147,9 +147,13 @@
 /* ========== DARK MODE ========== */
 /* Tooltips maintain dark background even in light mode (as per design system) */
 /* In dark mode, they remain visible with the same dark background */
-[data-theme="dark"] .gp-ds .tooltip-inner,
+[data-theme="dark"] .gp-ds .tooltip-inner {
+  background: var(--gp-ink);
+  color: #fff;
+}
+
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .gp-ds .tooltip-inner {
+  .gp-ds[data-theme="system"] .tooltip-inner {
     background: var(--gp-ink);
     color: #fff;
   }

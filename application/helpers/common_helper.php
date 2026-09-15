@@ -347,6 +347,36 @@ if (!function_exists('currency_code_and_symbol')) {
     }
 }
 
+if (!function_exists('gpli_section_backgrounds')) {
+    /**
+     * The 3 GPLI homepage sections an admin can give a custom background
+     * photo — deliberately not every section (course/category/facilitator
+     * grids don't suit a background photo the way a promotional block
+     * does). Short name => {frontend_settings key, human label}.
+     *
+     * A plain helper function, not a controller method, on purpose: it's
+     * called from both Admin.php (the upload/remove actions) and the
+     * admin/home_page_builder.php VIEW that lists the upload cards. Inside
+     * a view, `$this` is CI_Loader, not the controller — CI_Loader only
+     * gets the controller's public *properties* copied onto it
+     * (Loader::_ci_load() loops get_object_vars($CI)), never its methods —
+     * so `$this->someControllerMethod()` fails inside a view even though
+     * `$this->someProperty` works fine. A global function sidesteps that
+     * entirely. Both gpli_section_background_update() and _remove() in
+     * Admin.php check the requested section against this whitelist before
+     * touching anything — the URL segment is user input and must never
+     * become a raw DB key.
+     */
+    function gpli_section_backgrounds()
+    {
+        return [
+            'hero' => ['key' => 'gpli_hero_background', 'label' => 'Hero'],
+            'quiz' => ['key' => 'gpli_quiz_background', 'label' => 'Leadership Quiz banner'],
+            'cta'  => ['key' => 'gpli_cta_background', 'label' => 'Closing CTA band'],
+        ];
+    }
+}
+
 if (!function_exists('get_frontend_settings')) {
     function get_frontend_settings($key = '')
     {

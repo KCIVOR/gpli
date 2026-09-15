@@ -4,7 +4,7 @@
  * Tokens only so Light / Dark follow --gp-* .
  */
 
-.gp-ds .gp-cart-page .bread-crumb {
+.gp-ds .gp-cart-page .gp-page-header {
   background: transparent !important;
   background-image: none !important;
   box-shadow: none;
@@ -12,8 +12,7 @@
   border: 0;
 }
 
-.gp-ds .gp-cart-page .bread-crumb h1,
-.gp-ds .gp-cart-page .bread-crumb .book-img {
+.gp-ds .gp-cart-page .gp-page-header-title {
   display: none;
 }
 

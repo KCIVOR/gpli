@@ -185,9 +185,9 @@
    pale lavender surface tint, not gold at all. This is a deliberate one-off tint,
    not an overlooked literal. */
 @media (prefers-color-scheme: dark) {
-  .gp-ds:not([data-theme="light"]) .gp-landing-accent { color: #ffe985; }
+  .gp-ds:not([data-theme="light"]) .gp-landing-accent { color: #ffe985; } /* gp-check:allow deliberate dark-only tint, see comment above */
 }
-.gp-ds[data-theme="dark"] .gp-landing-accent { color: #ffe985; }
+.gp-ds[data-theme="dark"] .gp-landing-accent { color: #ffe985; } /* gp-check:allow deliberate dark-only tint, see comment above */
 
 .gp-ds .gp-landing-hero p {
   color: var(--gp-fg-muted);
@@ -850,6 +850,19 @@
   .gp-ds .gp-landing-hero-banner {
     animation: gp-landing-fade-up 0.8s cubic-bezier(.16, .8, .3, 1) 0.3s both;
   }
+
+  /* GPLI homepage hero (.page-hero) — same treatment, real class names. */
+  .gp-ds .gpli-home .page-hero .ph-copy > * {
+    animation: gp-landing-fade-up 0.7s cubic-bezier(.16, .8, .3, 1) both;
+  }
+  .gp-ds .gpli-home .page-hero .ph-copy > *:nth-child(1) { animation-delay: 0s; }
+  .gp-ds .gpli-home .page-hero .ph-copy > *:nth-child(2) { animation-delay: 0.08s; }
+  .gp-ds .gpli-home .page-hero .ph-copy > *:nth-child(3) { animation-delay: 0.16s; }
+  .gp-ds .gpli-home .page-hero .ph-copy > *:nth-child(4) { animation-delay: 0.24s; }
+  .gp-ds .gpli-home .page-hero .ph-copy > *:nth-child(5) { animation-delay: 0.32s; }
+  .gp-ds .gpli-home .page-hero .hero-stats {
+    animation: gp-landing-fade-up 0.8s cubic-bezier(.16, .8, .3, 1) 0.3s both;
+  }
 }
 
 @keyframes gp-landing-fade-up {
@@ -880,7 +893,14 @@ html.gp-landing-anim .gp-ds section.gp-landing.gp-landing-in {
    10 reads as a delay rather than an effect. */
 html.gp-landing-anim .gp-ds .gp-landing-trio-grid > *,
 html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *,
-html.gp-landing-anim .gp-ds .gp-landing-chips > * {
+html.gp-landing-anim .gp-ds .gp-landing-chips > *,
+html.gp-landing-anim .gp-ds .gpli-home .feat-trio > *,
+html.gp-landing-anim .gp-ds .gpli-home .g3 > *,
+html.gp-landing-anim .gp-ds .gpli-home .cat-chips > *,
+html.gp-landing-anim .gp-ds .gpli-home .instr-grid > *,
+html.gp-landing-anim .gp-ds .gpli-home .testi-grid > *,
+html.gp-landing-anim .gp-ds .gpli-home .why-stats > *,
+html.gp-landing-anim .gp-ds .gpli-home .dual-cta > * {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.5s ease, transform 0.5s ease;
@@ -888,24 +908,59 @@ html.gp-landing-anim .gp-ds .gp-landing-chips > * {
 
 html.gp-landing-anim .gp-ds section.gp-landing.gp-landing-in .gp-landing-trio-grid > *,
 html.gp-landing-anim .gp-ds section.gp-landing.gp-landing-in .gp-landing-fn-grid > *,
-html.gp-landing-anim .gp-ds section.gp-landing.gp-landing-in .gp-landing-chips > * {
+html.gp-landing-anim .gp-ds section.gp-landing.gp-landing-in .gp-landing-chips > *,
+html.gp-landing-anim .gp-ds .gpli-home section.gp-landing.gp-landing-in .feat-trio > *,
+html.gp-landing-anim .gp-ds .gpli-home section.gp-landing.gp-landing-in .g3 > *,
+html.gp-landing-anim .gp-ds .gpli-home section.gp-landing.gp-landing-in .cat-chips > *,
+html.gp-landing-anim .gp-ds .gpli-home section.gp-landing.gp-landing-in .instr-grid > *,
+html.gp-landing-anim .gp-ds .gpli-home section.gp-landing.gp-landing-in .testi-grid > *,
+html.gp-landing-anim .gp-ds .gpli-home section.gp-landing.gp-landing-in .why-stats > *,
+html.gp-landing-anim .gp-ds .gpli-home section.gp-landing.gp-landing-in .dual-cta > * {
   opacity: 1;
   transform: none;
 }
 
 html.gp-landing-anim .gp-ds .gp-landing-trio-grid > *:nth-child(1),
 html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(1),
-html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(1) { transition-delay: 0.05s; }
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(1),
+html.gp-landing-anim .gp-ds .gpli-home .feat-trio > *:nth-child(1),
+html.gp-landing-anim .gp-ds .gpli-home .g3 > *:nth-child(1),
+html.gp-landing-anim .gp-ds .gpli-home .cat-chips > *:nth-child(1),
+html.gp-landing-anim .gp-ds .gpli-home .instr-grid > *:nth-child(1),
+html.gp-landing-anim .gp-ds .gpli-home .testi-grid > *:nth-child(1),
+html.gp-landing-anim .gp-ds .gpli-home .why-stats > *:nth-child(1),
+html.gp-landing-anim .gp-ds .gpli-home .dual-cta > *:nth-child(1) { transition-delay: 0.05s; }
 html.gp-landing-anim .gp-ds .gp-landing-trio-grid > *:nth-child(2),
 html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(2),
-html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(2) { transition-delay: 0.1s; }
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(2),
+html.gp-landing-anim .gp-ds .gpli-home .feat-trio > *:nth-child(2),
+html.gp-landing-anim .gp-ds .gpli-home .g3 > *:nth-child(2),
+html.gp-landing-anim .gp-ds .gpli-home .cat-chips > *:nth-child(2),
+html.gp-landing-anim .gp-ds .gpli-home .instr-grid > *:nth-child(2),
+html.gp-landing-anim .gp-ds .gpli-home .testi-grid > *:nth-child(2),
+html.gp-landing-anim .gp-ds .gpli-home .why-stats > *:nth-child(2),
+html.gp-landing-anim .gp-ds .gpli-home .dual-cta > *:nth-child(2) { transition-delay: 0.1s; }
 html.gp-landing-anim .gp-ds .gp-landing-trio-grid > *:nth-child(3),
 html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(3),
-html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(3) { transition-delay: 0.15s; }
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(3),
+html.gp-landing-anim .gp-ds .gpli-home .feat-trio > *:nth-child(3),
+html.gp-landing-anim .gp-ds .gpli-home .g3 > *:nth-child(3),
+html.gp-landing-anim .gp-ds .gpli-home .cat-chips > *:nth-child(3),
+html.gp-landing-anim .gp-ds .gpli-home .instr-grid > *:nth-child(3),
+html.gp-landing-anim .gp-ds .gpli-home .testi-grid > *:nth-child(3),
+html.gp-landing-anim .gp-ds .gpli-home .why-stats > *:nth-child(3) { transition-delay: 0.15s; }
 html.gp-landing-anim .gp-ds .gp-landing-trio-grid > *:nth-child(4),
 html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(4),
-html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(4) { transition-delay: 0.2s; }
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(4),
+html.gp-landing-anim .gp-ds .gpli-home .g3 > *:nth-child(4),
+html.gp-landing-anim .gp-ds .gpli-home .cat-chips > *:nth-child(4),
+html.gp-landing-anim .gp-ds .gpli-home .instr-grid > *:nth-child(4),
+html.gp-landing-anim .gp-ds .gpli-home .testi-grid > *:nth-child(4),
+html.gp-landing-anim .gp-ds .gpli-home .why-stats > *:nth-child(4) { transition-delay: 0.2s; }
 html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(5),
-html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(5) { transition-delay: 0.25s; }
+html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(5),
+html.gp-landing-anim .gp-ds .gpli-home .cat-chips > *:nth-child(5),
+html.gp-landing-anim .gp-ds .gpli-home .testi-grid > *:nth-child(5) { transition-delay: 0.25s; }
 html.gp-landing-anim .gp-ds .gp-landing-fn-grid > *:nth-child(6),
-html.gp-landing-anim .gp-ds .gp-landing-chips > *:nth-child(6) { transition-delay: 0.3s; }
+html.gp-landing-anim .gp-ds .gpli-home .cat-chips > *:nth-child(6),
+html.gp-landing-anim .gp-ds .gpli-home .testi-grid > *:nth-child(6) { transition-delay: 0.3s; }

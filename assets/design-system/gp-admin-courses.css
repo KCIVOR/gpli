@@ -794,11 +794,11 @@
 }
 
 .gp-ds .gp-course-wizard .start_ajax_loading {
-  background-color: var(--gp-info-soft) !important; /* leftover Hyper #aae8d0 !important */
+  background-color: var(--gp-info-soft);
 }
 
 .gp-ds .gp-course-wizard .start_ajax_loading .ajax_loaderBar {
-  background-color: var(--gp-primary) !important; /* leftover Hyper #0acf97 !important */
+  background-color: var(--gp-primary);
 }
 
 .gp-ds .gp-course-wizard .form-wizard-header,

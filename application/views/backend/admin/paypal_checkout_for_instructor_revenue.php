@@ -4,10 +4,10 @@
     <title>Paypal | <?php echo get_settings('system_name');?></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css') . '?v=color-bridge-1'; ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-payout-checkout.css'); ?>?v=payout-checkout-1">
     <link name="favicon" type="image/x-icon" href="<?php echo base_url('uploads/system/'.get_frontend_settings('favicon'));?>" rel="shortcut icon" />
-    <script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=no-system-1"></script>
 </head>
 <body>
 

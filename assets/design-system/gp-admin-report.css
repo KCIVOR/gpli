@@ -139,8 +139,8 @@
 }
 
 .gp-ds .daterangepicker .ranges li.active {
-  background: var(--gp-info-soft) !important; /* leftover Hyper #08c */
-  color: var(--gp-primary) !important;
+  background: var(--gp-info-soft);
+  color: var(--gp-info);
   font-weight: 700;
 }
 
@@ -157,9 +157,9 @@
 
 .gp-ds .daterangepicker td.active,
 .gp-ds .daterangepicker td.active:hover {
-  background-color: var(--gp-primary) !important; /* leftover Hyper #357ebd */
+  background-color: var(--gp-primary);
   border-color: transparent;
-  color: var(--gp-on-primary) !important;
+  color: var(--gp-on-primary);
 }
 
 .gp-ds .daterangepicker td.in-range {

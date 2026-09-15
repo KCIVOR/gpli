@@ -18,13 +18,8 @@
     color: var(--gp-fg);
 }
 
-/* new-style.css hardcodes .title-two .title to #062320 (near-black) with no
-   dark-mode value — every leftover section kept unchanged from the old theme
-   (Latest courses, Think more clearly, reviews, FAQ, blog) uses this exact
-   class for its heading, so all of them went near-invisible in dark mode. */
-.gp-ds .title-two .title {
-    color: var(--gp-fg) !important;
-}
+/* Migrated: new-style.css's .title-two .title now sets color: var(--gp-fg)
+   directly (was hardcoded #062320 with no dark-mode value). No patch needed. */
 
 .gp-ds .cTitle p,
 .gp-ds .h-3-expert-instructor-heading p,

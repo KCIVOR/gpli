@@ -117,7 +117,7 @@
 }
 
 /* ========== BREADCRUMB (cart pattern) ========== */
-.gp-ds .gp-student-page .bread-crumb {
+.gp-ds .gp-student-page .gp-page-header {
   background: transparent !important;
   background-image: none !important;
   box-shadow: none;
@@ -125,8 +125,7 @@
   border: 0;
 }
 
-.gp-ds .gp-student-page .bread-crumb h1,
-.gp-ds .gp-student-page .bread-crumb .book-img {
+.gp-ds .gp-student-page .gp-page-header-title {
   display: none !important;
 }
 

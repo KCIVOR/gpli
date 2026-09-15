@@ -1,7 +1,9 @@
 /* Geese Project Design System — landing page scroll-reveal.
  * Reveals each .gp-landing section (except the hero, which animates on
- * load instead) the first time it scrolls into view, then stops watching
- * it — a one-time entrance, not a replay-on-every-scroll effect. */
+ * load instead) every time it scrolls into view, and re-hides it once it
+ * scrolls back out — a repeating entrance, so the transition plays again
+ * each time a section comes into the viewport (scrolling down, then back
+ * up and down again), not just once per page load. */
 document.addEventListener('DOMContentLoaded', function () {
   if (!document.documentElement.classList.contains('gp-landing-anim')) return;
 
@@ -10,10 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('gp-landing-in');
-        io.unobserve(entry.target);
-      }
+      entry.target.classList.toggle('gp-landing-in', entry.isIntersecting);
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 

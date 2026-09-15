@@ -22,13 +22,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
 
 <!-- Geese Project Design System — apply saved theme before first paint -->
-<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
+<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=no-system-1"></script>
 <!-- Geese Project Design System — Phase 0 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css') . '?v=color-bridge-1'; ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-base.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-components-core.css'); ?>?v=select2-1">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-components-core.css'); ?>?v=btn-variants-1">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-accordion.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dropdown.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-collapse.css'); ?>">
@@ -45,7 +45,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-popover.css'); ?>?v=popover-3">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tooltip.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-shell.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-shell.css'); ?>?v=admin-shell-10">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-shell.css'); ?>?v=admin-shell-neutral-chrome-1">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dashboard.css'); ?>?v=dash-2">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-courses.css'); ?>?v=courses-22">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-custom-field.css'); ?>?v=customfield-1">
@@ -65,7 +65,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-settings.css'); ?>?v=settings-11">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-carousel.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dark-surfaces.css'); ?>">
-<script src="<?php echo base_url('assets/design-system/gp-theme-toggle.js'); ?>" defer></script>
+<script src="<?php echo base_url('assets/design-system/gp-theme-toggle.js'); ?>?v=no-system-1" defer></script>
 
 <script src="<?php echo base_url('assets/backend/js/jquery-3.3.1.min.js'); ?>" charset="utf-8"></script>
 <script src="<?php echo site_url('assets/backend/js/onDomChange.js');?>"></script>

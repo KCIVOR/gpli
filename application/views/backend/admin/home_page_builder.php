@@ -38,6 +38,64 @@ $gp_landing_extras_data = gp_landing_extras();
                         </a>
                     </div>
 
+                    <?php if ($this->db->get_where('category', ['slug' => 'gpli-leadership'])->num_rows() > 0): ?>
+                    <div class="col-12 px-4 mb-3">
+                        <div class="alert alert-info d-flex align-items-center justify-content-between flex-wrap gap-2">
+                            <span>
+                                <i class="mdi mdi-image-multiple mr-1"></i>
+                                <?php echo get_phrase('GPLI dummy-data seed: course thumbnails need to be assigned once after importing the migration .sql files.'); ?>
+                            </span>
+                            <a href="<?php echo site_url('admin/gpli_assign_course_thumbnails'); ?>"
+                               class="btn btn-sm btn-info"
+                               onclick="return confirm('<?php echo get_phrase('Assign distinct real thumbnails to every seeded GPLI course? Safe to run more than once.'); ?>');">
+                                <?php echo get_phrase('Assign GPLI Course Thumbnails'); ?>
+                            </a>
+                        </div>
+                    </div>
+
+                    <?php foreach (gpli_section_backgrounds() as $gpli_section_id => $gpli_section): ?>
+                    <?php $gpli_section_bg = get_frontend_settings($gpli_section['key']); ?>
+                    <div class="col-xl-4 col-lg-6 px-4 mb-3">
+                        <?php
+                        ob_start();
+                        ?>
+                        <div class="row justify-content-center">
+                            <form action="<?php echo site_url('admin/gpli_section_background_update/' . $gpli_section_id); ?>" method="post" enctype="multipart/form-data" style="text-align: center;">
+                                <div class="form-group mb-2">
+                                    <div class="wrapper-image-preview">
+                                        <div class="box" style="width: 250px;">
+                                            <div class="js--image-preview" style="background-image: url(<?php echo $gpli_section_bg ? base_url('uploads/system/' . $gpli_section_bg) : ''; ?>); background-color: var(--gp-surface-sunk); background-size: cover; background-position: center;"></div>
+                                            <div class="upload-options">
+                                                <label for="gpli_bg_<?php echo $gpli_section_id; ?>" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('Upload'); ?> <br> <small>(1600 x 900 <?php echo get_phrase('recommended'); ?>)</small> </label>
+                                                <input id="gpli_bg_<?php echo $gpli_section_id; ?>" style="visibility:hidden;" type="file" class="image-upload" name="<?php echo $gpli_section['key']; ?>" accept="image/*">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php echo gp_ds_button(get_phrase('Upload'), [
+                                    'variant' => 'primary',
+                                    'type' => 'submit',
+                                ], true); ?>
+                            </form>
+                            <?php if ($gpli_section_bg): ?>
+                            <a href="<?php echo site_url('admin/gpli_section_background_remove/' . $gpli_section_id); ?>"
+                               class="btn btn-sm btn-outline-secondary mt-2"
+                               onclick="return confirm('<?php echo get_phrase('Remove this background image? The section will go back to its default look.'); ?>');">
+                                <?php echo get_phrase('Remove'); ?>
+                            </a>
+                            <?php endif; ?>
+                        </div>
+                        <?php
+                        gp_ds_card([
+                            'title' => get_phrase($gpli_section['label']) . ' ' . get_phrase('Background'),
+                            'body' => ob_get_clean(),
+                            'extra_class' => 'gp-dash-panel',
+                        ]);
+                        ?>
+                    </div>
+                    <?php endforeach; ?>
+                    <?php endif; ?>
+
                     <?php foreach ($this->db->order_by('id', 'desc')->get('home_pages')->result_array() as $home_page): ?>
                         <div class="col-md-6">
                             <?php

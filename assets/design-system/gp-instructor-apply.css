@@ -16,7 +16,7 @@
   word-spacing: normal !important;
 }
 
-.gp-ds .gp-instructor-apply .bread-crumb {
+.gp-ds .gp-instructor-apply .gp-page-header {
   background: transparent !important;
   background-image: none !important;
   box-shadow: none;
@@ -24,8 +24,7 @@
   border: 0;
 }
 
-.gp-ds .gp-instructor-apply .bread-crumb h1,
-.gp-ds .gp-instructor-apply .bread-crumb .book-img {
+.gp-ds .gp-instructor-apply .gp-page-header-title {
   display: none !important;
 }
 

@@ -8,16 +8,18 @@
     .ratio{
         height: 430px;
     }
-  .list-group-item {
-	border: 1px solid #e1dede !important;
+  .gp-ds .list-group-item {
+	border: 1px solid var(--gp-border) !important;
 	border-radius: 5px;
+	background: var(--gp-surface);
+	color: var(--gp-fg);
 }
 .card-text {
-    display: -webkit-box;        
-    -webkit-line-clamp: 3;          
-    -webkit-box-orient: vertical;   
-    overflow: hidden;               
-    text-overflow: ellipsis;   
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .eCard  .card-body {
 	padding: 11px 14px;
@@ -26,23 +28,23 @@
 	font-size: 16px !important;
 	font-weight: 600 !important;
 }
-.bg-card{
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    border-color: #e7e7e7;
-    background: #fff;
+.gp-ds .bg-card{
+    box-shadow: var(--gp-shadow-card);
+    border-color: var(--gp-border);
+    background: var(--gp-surface);
 }
 .ratio > * {
 	border-radius: 10px;
 }
 
 
-.eControll .fa-edit {
-	background: #1982FE;
-    color: #fff ;
+.gp-ds .eControll .fa-edit {
+	background: var(--gp-primary);
+    color: var(--gp-on-primary);
 }
-.eControll .fa-trash {
-	background: #ff4625;
-    color: #fff ;
+.gp-ds .eControll .fa-trash {
+	background: var(--gp-danger);
+    color: var(--gp-on-primary);
 }
 .list-group-item p{
     font-size: 14px;

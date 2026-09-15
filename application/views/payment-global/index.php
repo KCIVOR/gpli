@@ -15,7 +15,7 @@
 	<?php include 'includes_top.php';?>
 </head>
 <body class="gp-ds">
-<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
+<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=no-system-1"></script>
 	<?php
 		$iso_country_codes = json_decode(get_settings('iso_country_codes'), true);
 		if($this->session->userdata('app_url')):

@@ -9,7 +9,7 @@
   var theme = 'light';
   try {
     var stored = localStorage.getItem('gp-ds-theme');
-    if (stored === 'light' || stored === 'dark' || stored === 'system') {
+    if (stored === 'light' || stored === 'dark') {
       theme = stored;
     }
   } catch (e) {}
@@ -19,9 +19,6 @@
   root.setAttribute('data-theme', theme);
 
   var useDark = theme === 'dark';
-  if (theme === 'system' && window.matchMedia) {
-    useDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  }
 
   root.style.colorScheme = useDark ? 'dark' : 'light';
   root.style.backgroundColor = useDark ? '#111015' : '#FBFAF7';

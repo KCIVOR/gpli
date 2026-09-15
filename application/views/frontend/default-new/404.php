@@ -10,7 +10,6 @@
             </div>
             <div class="col-lg-6">
                 <div class="error-body-text">
-                    <h1><?php echo get_phrase('404 Not Found') ?></h1>
 					<p><?php echo get_phrase('The page you requested could not be found') ?></p>
 					<p class="mb-2">Please try the following:</p>
 					<ul>

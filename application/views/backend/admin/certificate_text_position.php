@@ -4,7 +4,7 @@
 	<title><?php echo get_phrase('certificates_text_position'); ?> | <?php echo get_settings('system_title'); ?></title>
 	<link rel="shortcut icon" href="<?php echo base_url('uploads/system/').get_frontend_settings('favicon');?>">
 	<link href="<?php echo base_url('assets/backend/css/fontawesome-all.min.css') ?>" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css'); ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css') . '?v=color-bridge-1'; ?>">
 	<script src="<?php echo base_url('assets/backend/js/jquery-3.3.1.min.js'); ?>" charset="utf-8"></script>
 	<script src="https://www.jqueryscript.net/demo/drag-drop-touch/jquery.draggableTouch.js"></script>
 	<style type="text/css">

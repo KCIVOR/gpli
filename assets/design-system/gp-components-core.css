@@ -122,6 +122,95 @@
   outline-offset: 2px;
 }
 
+/* hyper-admin-theme.css gives every Bootstrap .btn-* variant a tinted glow
+   (e.g. rgba(114,124,245,.5) on .btn-primary) that never matches this DS's
+   brand colors. Removed across the board — the DS's own buttons carry no
+   colored shadow. */
+.gp-ds .btn-primary,
+.gp-ds .btn-secondary,
+.gp-ds .btn-success,
+.gp-ds .btn-info,
+.gp-ds .btn-warning,
+.gp-ds .btn-danger,
+.gp-ds .btn-light,
+.gp-ds .btn-dark {
+  box-shadow: none;
+}
+
+/* geeseprojdesignsystem.html §05 defines exactly four button variants
+   (primary / secondary / outline / quiet) — no colored success/info/warning
+   variant exists in the source design system. Two real usage patterns for
+   the leftover Bootstrap .btn-success/.btn-info/.btn-warning/.btn-danger
+   classes exist in this codebase:
+     1. Small icon-only add/remove-field controls (always paired with
+        .btn-sm) — these match §14's row-action pattern exactly
+        (`<button class="icon-btn">✎</button>`), so they get icon-btn
+        treatment.
+     2. Full labeled action buttons (Submit, Add, Update, confirm-delete,
+        and the home-page-builder's draggable "Success/Info/Warning/Danger"
+        palette buttons, whose .draggable class survives being dropped onto
+        a live page — see enhance_dragable_elements() in
+        home_page_builder/js.php, which never strips it) — §11 states
+        danger reuses the same hex as --secondary and info reuses --primary,
+        so labeled danger buttons map to .btn-secondary's treatment and
+        labeled success/info/warning map to .btn-primary's. This does mean
+        the builder palette's 4 labeled swatches now render as only 2
+        visually distinct colors — a disclosed consequence of there being no
+        4th/5th/6th button variant in the source design system, not a
+        silent guess. */
+.gp-ds .btn-success.btn-sm,
+.gp-ds .btn-info.btn-sm,
+.gp-ds .btn-warning.btn-sm,
+.gp-ds .btn-danger.btn-sm {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+  font-size: 13px;
+  line-height: 1;
+  box-shadow: none;
+}
+
+.gp-ds .btn-success.btn-sm:hover,
+.gp-ds .btn-info.btn-sm:hover,
+.gp-ds .btn-warning.btn-sm:hover,
+.gp-ds .btn-danger.btn-sm:hover {
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+}
+
+.gp-ds .btn-success:not(.btn-sm),
+.gp-ds .btn-info:not(.btn-sm),
+.gp-ds .btn-warning:not(.btn-sm) {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+  color: #fff;
+}
+
+.gp-ds .btn-success:not(.btn-sm):hover,
+.gp-ds .btn-info:not(.btn-sm):hover,
+.gp-ds .btn-warning:not(.btn-sm):hover {
+  background: var(--gp-accent);
+  border-color: var(--gp-accent);
+  color: #fff;
+}
+
+.gp-ds .btn-danger:not(.btn-sm) {
+  background: var(--gp-secondary);
+  border-color: var(--gp-secondary);
+  color: #fff;
+}
+
+.gp-ds .btn-danger:not(.btn-sm):hover {
+  background: var(--gp-secondary-hover);
+  border-color: var(--gp-secondary-hover);
+  color: #fff;
+}
+
 /* ========== CARDS & SURFACES (Section 06) ========== */
 /* No extra padding — Hyper .card-body already pads. Scratch cards use .gp-ds-card. */
 .gp-ds .card {
