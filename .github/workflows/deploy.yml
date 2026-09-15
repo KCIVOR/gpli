@@ -1,9 +1,29 @@
 name: Auto Deploy to Production (cPanel)
 
+# Ships this repo's production files to public_html/lms via FTPS, using
+# FTP-Deploy-Action's git-diff-based sync — it only uploads files that
+# actually changed in the pushed commits, and never touches anything that
+# isn't tracked in git (which is exactly why uploads/, backups/,
+# application/logs/, and application/config/database.php are safe: they're
+# gitignored, so this workflow has no record of them and can never upload
+# over or delete them).
+#
+# Uses a dedicated FTP account (deploy@starfleetinnotech.com) created via
+# cPanel FTP Accounts and jailed directly to public_html/lms — so its FTP
+# session root ("/") already IS that folder. server-dir is "/" for exactly
+# that reason, not "/public_html/lms/".
+#
+# Switched from SSH/rsync because Shell Access is disabled on this cPanel
+# account (confirmed: SSH auth succeeds but command execution returns
+# "Shell access is not enabled on your account!", which is fatal to rsync).
+#
+# Database schema changes are NEVER part of this workflow on purpose —
+# those stay manual, reviewed SQL applied by hand in phpMyAdmin. See
+# DEPLOYMENT.md for the full policy.
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch: {}
 
 concurrency:
@@ -13,39 +33,38 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          printf "%s" "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keygen -p -m PEM -f ~/.ssh/id_ed25519 -N "" -q
-          ssh-keyscan -H 89.116.134.177 >> ~/.ssh/known_hosts
-
-      - name: Deploy to cPanel
-        run: |
-          rsync -avz \
-            -e "ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no -o LogLevel=ERROR -T -o 'UserKnownHostsFile=/dev/null'" \
-            --exclude='.git' \
-            --exclude='.github' \
-            --exclude='.gitignore' \
-            --exclude='application/config/database.php' \
-            --exclude='uploads/' \
-            --exclude='backups/' \
-            --exclude='application/logs/' \
-            --exclude='.DS_Store' \
-            --exclude='Thumbs.db' \
-            --exclude='desktop.ini' \
-            --exclude='*.log' \
-            --exclude='*.md' \
-            --exclude='docs/' \
-            --exclude='assets/design-system/reference/' \
-            --exclude='assets/design-system/dropdown-bs5-verify.html' \
-            --exclude='assets/design-system/email-preview.html' \
-            --exclude='geeseprojdesignsystem.html' \
-            ./ \
-            startuplabcc@89.116.134.177:/home/startuplabcc/public_html/lms
+      - name: Deploy to public_html/lms via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          server-dir: /
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/node_modules/**
+            application/config/database.php
+            uploads/**
+            backups/**
+            application/logs/**
+            **/*.log
+            **/*.md
+            docs/**
+            assets/design-system/reference/**
+            assets/design-system/dropdown-bs5-verify.html
+            assets/design-system/email-preview.html
+            geeseprojdesignsystem.html
+            .DS_Store
+            Thumbs.db
+            desktop.ini
