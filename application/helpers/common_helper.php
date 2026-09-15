@@ -370,9 +370,10 @@ if (!function_exists('gpli_section_backgrounds')) {
     function gpli_section_backgrounds()
     {
         return [
-            'hero' => ['key' => 'gpli_hero_background', 'label' => 'Hero'],
-            'quiz' => ['key' => 'gpli_quiz_background', 'label' => 'Leadership Quiz banner'],
-            'cta'  => ['key' => 'gpli_cta_background', 'label' => 'Closing CTA band'],
+            'hero' => ['key' => 'gpli_hero_background', 'label' => 'Hero', 'hint' => '1600 x 900'],
+            'quiz' => ['key' => 'gpli_quiz_background', 'label' => 'Leadership Quiz banner', 'hint' => '1600 x 900'],
+            'cta'  => ['key' => 'gpli_cta_background', 'label' => 'Closing CTA band', 'hint' => '1600 x 900'],
+            'auth' => ['key' => 'gpli_auth_illustration', 'label' => 'Login / Signup Illustration', 'card_title' => 'Login / Signup Illustration', 'hint' => '500 x 500, square photo'],
         ];
     }
 }

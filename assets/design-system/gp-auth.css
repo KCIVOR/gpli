@@ -71,7 +71,9 @@
   position: relative;
   border-radius: 14px;
   overflow: hidden;
+  width: 100%;
   max-width: 340px;
+  aspect-ratio: 1 / 1;
   box-shadow: var(--gp-shadow-card);
   margin-top: 34px;
   background: rgba(255, 255, 255, 0.06);
@@ -79,7 +81,10 @@
 
 .gp-ds .gp-auth-portrait img {
   width: 100%;
+  height: 100%;
   display: block;
+  object-fit: cover;
+  object-position: center;
 }
 
 .gp-ds .gp-auth-stats {

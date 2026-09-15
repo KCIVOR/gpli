@@ -66,7 +66,7 @@ $gp_landing_extras_data = gp_landing_extras();
                                         <div class="box" style="width: 250px;">
                                             <div class="js--image-preview" style="background-image: url(<?php echo $gpli_section_bg ? base_url('uploads/system/' . $gpli_section_bg) : ''; ?>); background-color: var(--gp-surface-sunk); background-size: cover; background-position: center;"></div>
                                             <div class="upload-options">
-                                                <label for="gpli_bg_<?php echo $gpli_section_id; ?>" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('Upload'); ?> <br> <small>(1600 x 900 <?php echo get_phrase('recommended'); ?>)</small> </label>
+                                                <label for="gpli_bg_<?php echo $gpli_section_id; ?>" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('Upload'); ?> <br> <small>(<?php echo htmlspecialchars($gpli_section['hint'] ?? '1600 x 900'); ?> <?php echo get_phrase('recommended'); ?>)</small> </label>
                                                 <input id="gpli_bg_<?php echo $gpli_section_id; ?>" style="visibility:hidden;" type="file" class="image-upload" name="<?php echo $gpli_section['key']; ?>" accept="image/*">
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@ $gp_landing_extras_data = gp_landing_extras();
                         </div>
                         <?php
                         gp_ds_card([
-                            'title' => get_phrase($gpli_section['label']) . ' ' . get_phrase('Background'),
+                            'title' => isset($gpli_section['card_title']) ? get_phrase($gpli_section['card_title']) : (get_phrase($gpli_section['label']) . ' ' . get_phrase('Background')),
                             'body' => ob_get_clean(),
                             'extra_class' => 'gp-dash-panel',
                         ]);
