@@ -1,29 +1,48 @@
 name: Auto Deploy to Production (cPanel)
 
-# Ships this repo's production files to startuplabcc's public_html/lms via
-# FTPS, using FTP-Deploy-Action's git-diff-based sync — it only uploads
-# files that actually changed in the pushed commits, and never touches
-# anything that isn't tracked in git (which is exactly why uploads/,
-# backups/, application/logs/, and application/config/database.php are
-# safe: they're gitignored, so this workflow has no record of them and
-# can never upload over or delete them).
+# Ships this repo's production files to public_html/lms using cPanel's
+# native Git Version Control feature — not FTPS, not SFTP. The actual
+# file sync happens server-side, on the same machine, via a plain
+# `rsync` command defined in .cpanel.yml, so there's no per-file network
+# round-trip the way there is with FTP/SFTP. This step just tells cPanel
+# "pull the latest commit, then run that rsync" over its own HTTPS API.
 #
-# Uses a dedicated FTP account (deploy@startuplab.cc) created via cPanel
-# FTP Accounts and jailed directly to public_html/lms — so its FTP
-# session root ("/") already IS that folder. server-dir is "/" for that
-# reason, not "/public_html/lms/".
+# History of every transport that came before this one, in order, and
+# why each was replaced (kept here so nobody re-discovers the same dead
+# ends this project already worked through):
+#   - SSH/rsync directly from CI: fails because Shell Access is disabled
+#     on this cPanel account — SSH auth succeeds, but command execution
+#     ("rsync --server", which rsync needs on the remote end) is rejected
+#     with "Shell access is not enabled on your account!"
+#   - FTPS (SamKirkland/FTP-Deploy-Action), tried on two different FTP
+#     accounts on this same physical server: both hit a passive-mode/NAT
+#     bug where the control connection stays alive while data-channel
+#     transfers silently stall — instead of failing fast, the job hung
+#     for 2+ hours before erroring with "Server sent FIN packet
+#     unexpectedly, closing connection." Confirmed server-wide, not
+#     account-specific, by reproducing it on both accounts.
+#   - SFTP (lftp mirror + CPANEL_SSH_KEY): worked, but is inherently slow
+#     for a repo this size (~9,000 tracked files) because SFTP pays a
+#     network round-trip per file just to check whether it changed,
+#     before any transfer even starts. Also hit a real lftp 4.9.2 bug
+#     where --exclude-glob and mirror:exclude-regex both silently did
+#     nothing combined with `mirror --reverse` — caused a near-miss where
+#     the entire .git directory almost got fully uploaded to the live
+#     web root (caught and cancelled in time).
+#   - This (cPanel Git deploy): clone and deploy-task execution BOTH run
+#     through cPanel's own mechanism, independent of the disabled Shell
+#     Access restriction — confirmed by testing directly. The rsync copy
+#     from the cloned repo (repositories/gpli) into public_html/lms
+#     happens on the same filesystem, so it's fast regardless of file
+#     count, with none of FTP/SFTP's per-file network overhead.
 #
-# NOTE on history: this project already tried FTPS once before, using a
-# DIFFERENT FTP account on the same physical server (89.116.134.177), and
-# hit a passive-mode/NAT bug there — the control connection stayed alive
-# while data-channel transfers silently stalled, so the job hung for 2+
-# hours instead of failing fast ("Server sent FIN packet unexpectedly,
-# closing connection"). That bug is almost certainly server-wide, not
-# account-specific, so it may resurface here too. We switched to SFTP
-# (via lftp + CPANEL_SSH_KEY, see git history of this file) specifically
-# to route around that bug, and that SFTP path does work — this FTPS
-# attempt is a deliberate retry on the user's request, not a sign the
-# SFTP path was abandoned because it's broken.
+# Deliberately did NOT use a third-party GitHub Action for the trigger
+# step (there's a "cpanel-deploy-action" on the Marketplace that does
+# this) — its source wasn't fully auditable from here, and this credential
+# is powerful enough that "can't verify what it does with the token" was
+# reason enough to write the ~15 lines ourselves instead. The two API
+# calls below were confirmed by reading that action's actual source code
+# first, not guessed.
 #
 # Database schema changes are NEVER part of this workflow on purpose —
 # those stay manual, reviewed SQL applied by hand in phpMyAdmin. See
@@ -38,42 +57,33 @@ concurrency:
   group: production-deployment
   cancel-in-progress: true
 
+env:
+  CPANEL_HOST: https://startuplab.cc:2083
+  CPANEL_USERNAME: startuplabcc
+  REPOSITORY_ROOT: /home/startuplabcc/repositories/gpli
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
+      - name: Update cPanel's clone from GitHub
+        run: |
+          response=$(curl -sS -w '\n%{http_code}' \
+            -H "Authorization: cpanel ${CPANEL_USERNAME}:${{ secrets.CPANEL_TOKEN }}" \
+            "${CPANEL_HOST}/execute/VersionControl/update?repository_root=${REPOSITORY_ROOT}&branch=main")
+          status="${response##*$'\n'}"
+          body="${response%$'\n'*}"
+          echo "$body"
+          [ "$status" = "200" ] || { echo "::error::cPanel update call returned HTTP $status"; exit 1; }
+          echo "$body" | jq -e '.status == 1' > /dev/null || { echo "::error::cPanel reported the update failed — see response body above"; exit 1; }
 
-      - name: Deploy to public_html/lms via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          server-dir: /
-          dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
-            **/node_modules/**
-            application/config/database.php
-            uploads/**
-            backups/**
-            application/logs/**
-            **/*.log
-            **/*.md
-            docs/**
-            .claude/**
-            assets/design-system/reference/**
-            assets/design-system/dropdown-bs5-verify.html
-            assets/design-system/email-preview.html
-            geeseprojdesignsystem.html
-            .DS_Store
-            Thumbs.db
-            desktop.ini
+      - name: Run the deploy task (.cpanel.yml)
+        run: |
+          response=$(curl -sS -w '\n%{http_code}' \
+            -H "Authorization: cpanel ${CPANEL_USERNAME}:${{ secrets.CPANEL_TOKEN }}" \
+            "${CPANEL_HOST}/execute/VersionControlDeployment/create?repository_root=${REPOSITORY_ROOT}")
+          status="${response##*$'\n'}"
+          body="${response%$'\n'*}"
+          echo "$body"
+          [ "$status" = "200" ] || { echo "::error::cPanel deploy call returned HTTP $status"; exit 1; }
+          echo "$body" | jq -e '.status == 1' > /dev/null || { echo "::error::cPanel reported the deploy failed — see response body above"; exit 1; }
