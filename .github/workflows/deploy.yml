@@ -1,13 +1,33 @@
 name: Auto Deploy to Production (cPanel)
 
-# Ships this repo's production files to public_html/lms via SFTP, using
-# lftp's mirror command to only upload files that are new or changed
-# (compared by size/timestamp against what's already on the server) — it
-# never touches anything not present locally, which is exactly why
-# uploads/, backups/, application/logs/, and application/config/database.php
-# are safe: they're gitignored, so this workflow has no record of them and
-# can never upload over or delete them. mirror runs WITHOUT --delete on
-# purpose — see the non-negotiable rule below.
+# Ships this repo's production files to public_html/lms via SFTP.
+#
+# IMPORTANT: this does NOT mirror the checkout directory directly. It first
+# stages a clean copy via `git archive`, which by construction can only ever
+# contain tracked files at the deployed commit — .git, node_modules, and
+# any other untracked/ignored content structurally cannot appear in it,
+# full stop. A handful of files ARE tracked but still shouldn't ship
+# (internal planning docs, design-system scratch/reference pages, this
+# project's local Claude Code skill folder) — those are removed from the
+# staged copy with plain `rm`, not filtered mid-transfer.
+#
+# We tried filtering mid-transfer first (lftp's --exclude-glob and the
+# mirror:exclude-regex setting) and both silently did nothing on this
+# runner's lftp build when combined with `mirror --reverse` — verified by
+# reproducing it against a disposable test path before trusting anything
+# near production. That's what caused run #11 to start uploading the
+# entire .git directory (full commit history) into the live web root
+# before it was caught and cancelled. The stage-then-sync approach here
+# doesn't depend on that exclude mechanism working at all, so it can't
+# regress the same way even if a future lftp version changes behavior
+# again.
+#
+# lftp's mirror runs WITHOUT --delete, so it can only add/update files on
+# the server, never remove them — this is what keeps uploads/, backups/,
+# application/logs/, and application/config/database.php safe: they're
+# gitignored, so `git archive` never puts them in the staged copy, and
+# without --delete their absence there can never translate into deletion
+# on the server either.
 #
 # History of how we got to SFTP specifically:
 #   - SSH/rsync (the original setup) fails because Shell Access is disabled
@@ -44,6 +64,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Stage deployable files only
+        run: |
+          mkdir -p deploy_stage
+          git archive HEAD | tar -x -C deploy_stage
+          rm -f deploy_stage/*.md
+          rm -rf deploy_stage/docs
+          rm -rf deploy_stage/.claude
+          rm -rf deploy_stage/.github
+          rm -f deploy_stage/.gitignore
+          rm -rf deploy_stage/assets/design-system/reference
+          rm -f deploy_stage/assets/design-system/dropdown-bs5-verify.html
+          rm -f deploy_stage/assets/design-system/email-preview.html
+          rm -f deploy_stage/geeseprojdesignsystem.html
+
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
@@ -55,31 +89,14 @@ jobs:
       - name: Install lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
-      - name: Deploy to public_html/lms via SFTP
+      - name: Deploy staged files to public_html/lms via SFTP
+        working-directory: deploy_stage
         run: |
           lftp -e "
             set sftp:auto-confirm yes;
             set sftp:key-file $HOME/.ssh/deploy_key;
             set sftp:connect-program 'ssh -a -x -i $HOME/.ssh/deploy_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=$HOME/.ssh/known_hosts -o BatchMode=yes';
             open -u startuplabcc, -p 22 sftp://89.116.134.177;
-            mirror --reverse --verbose --parallel=4 \
-              --exclude-glob .git* \
-              --exclude-glob .github/ \
-              --exclude-glob node_modules/ \
-              --exclude-glob application/config/database.php \
-              --exclude-glob uploads/ \
-              --exclude-glob backups/ \
-              --exclude-glob application/logs/ \
-              --exclude-glob '*.log' \
-              --exclude-glob '*.md' \
-              --exclude-glob docs/ \
-              --exclude-glob assets/design-system/reference/ \
-              --exclude-glob assets/design-system/dropdown-bs5-verify.html \
-              --exclude-glob assets/design-system/email-preview.html \
-              --exclude-glob geeseprojdesignsystem.html \
-              --exclude-glob .DS_Store \
-              --exclude-glob Thumbs.db \
-              --exclude-glob desktop.ini \
-              ./ public_html/lms/;
+            mirror --reverse --verbose --parallel=4 ./ public_html/lms/;
             bye
           "
