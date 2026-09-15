@@ -1,6 +1,28 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/startuplabcc/deploy-test/
+    - export REPOPATH=/home/startuplabcc/repositories/gpli
+    - export DEPLOYPATH=/home/startuplabcc/deploy-test-rsync/
     - /bin/mkdir -p $DEPLOYPATH
-    - /bin/echo "cpanel git deploy task ran at $(date)" > $DEPLOYPATH/deploy-test-marker.txt
+    - /usr/bin/rsync -a --delete
+        --exclude='.git'
+        --exclude='.github'
+        --exclude='.cpanel.yml'
+        --exclude='.gitignore'
+        --exclude='.claude'
+        --exclude='node_modules'
+        --exclude='application/config/database.php'
+        --exclude='uploads'
+        --exclude='backups'
+        --exclude='application/logs'
+        --exclude='*.log'
+        --exclude='*.md'
+        --exclude='docs'
+        --exclude='assets/design-system/reference'
+        --exclude='assets/design-system/dropdown-bs5-verify.html'
+        --exclude='assets/design-system/email-preview.html'
+        --exclude='geeseprojdesignsystem.html'
+        --exclude='.DS_Store'
+        --exclude='Thumbs.db'
+        --exclude='desktop.ini'
+        $REPOPATH/ $DEPLOYPATH/
