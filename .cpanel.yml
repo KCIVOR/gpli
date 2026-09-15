@@ -2,7 +2,7 @@
 deployment:
   tasks:
     - export REPOPATH=/home/startuplabcc/repositories/gpli
-    - export DEPLOYPATH=/home/startuplabcc/deploy-test-rsync/
+    - export DEPLOYPATH=/home/startuplabcc/public_html/lms/
     - /bin/mkdir -p $DEPLOYPATH
     - /usr/bin/rsync -a --delete
         --exclude='.git'
@@ -25,4 +25,7 @@ deployment:
         --exclude='.DS_Store'
         --exclude='Thumbs.db'
         --exclude='desktop.ini'
+        --exclude='certificate.zip'
+        --exclude='themes'
+        --exclude='.ftpquota'
         $REPOPATH/ $DEPLOYPATH/
