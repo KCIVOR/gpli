@@ -1,0 +1,146 @@
+/**
+ * Geese Project Design System — Contact Us page
+ * (frontend/default-new/contact_us.php)
+ * UI only. Form action, field names/ids, and recaptcha attrs are untouched.
+ */
+
+.gp-ds .gp-contact-page {
+  background: var(--gp-bg);
+  padding: 56px 0 72px;
+}
+
+.gp-ds .gp-contact-heading {
+  max-width: 620px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.gp-ds .gp-contact-heading h3 {
+  font-family: var(--gp-font-head);
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin-bottom: 12px;
+}
+
+.gp-ds .gp-contact-heading p {
+  color: var(--gp-fg-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.gp-ds .gp-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .gp-ds .gp-contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gp-ds .gp-contact-info-img {
+  width: 100%;
+  border-radius: var(--gp-radius);
+  margin-bottom: 24px;
+}
+
+.gp-ds .gp-contact-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 480px) {
+  .gp-ds .gp-contact-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gp-ds .gp-contact-info-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.gp-ds .gp-contact-info-icon {
+  flex: 0 0 40px;
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  background: var(--gp-info-soft);
+  color: var(--gp-info);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.gp-ds .gp-contact-info-text h4 {
+  font-family: var(--gp-font-head);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+  margin-bottom: 4px;
+}
+
+.gp-ds .gp-contact-info-text {
+  font-size: 13.5px;
+  color: var(--gp-fg-muted);
+  line-height: 1.6;
+}
+
+.gp-ds .gp-contact-form-card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  padding: 28px;
+}
+
+.gp-ds .gp-contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 480px) {
+  .gp-ds .gp-contact-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gp-ds .gp-contact-form-card .form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-contact-form-card .form-control:focus {
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-contact-form-card textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.gp-ds .gp-contact-agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.gp-ds .gp-contact-agree .form-check-label {
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+  line-height: 1.6;
+}

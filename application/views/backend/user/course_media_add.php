@@ -3,7 +3,7 @@
   $course_media_placeholders = themeConfiguration(get_frontend_settings('theme'), 'course_media_placeholders');
   foreach ($course_media_files as $course_media => $size): ?>
   <div class="col-xl-8">
-    <div class="form-group row mb-3">
+    <div class="form-group row mb-3 gp-user-course-media">
       <label class="col-md-2 col-form-label" for="<?php echo $course_media.'_label' ?>"><?php echo get_phrase($course_media); ?></label>
       <div class="col-md-10">
         <div class="wrapper-image-preview" style="margin-left: -6px;">

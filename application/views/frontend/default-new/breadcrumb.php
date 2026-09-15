@@ -1,32 +1,17 @@
-<!---------- Bread Crumb Area Start ---------->
-<section>
-    <div class="bread-crumb">
-        <div class="container">
-            <div class="row">
-                <div class="col-auto">
-                    <nav  aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item p-0">
-                                <a href="<?php echo site_url(); ?>">
-                                <i class="fas fa-home brd-home"></i>
-                                    <span><?php echo get_phrase('Home') ?></span>
-                                </a>
-                            </li>
-                            <li><i class="fa-solid fa-chevron-right"></i></li>
-                            <li class="breadcrumb-item active" aria-current="page">
-                                <span><?php echo $page_title; ?></span>
-                            </li>
-                        </ol>
-                    </nav>
-                    <h1><?php echo $page_title; ?></h1>
-                </div>
-                <div class="col-3 ms-auto d-none d-sm-inline-block">
-                    <div class="book-img">
-                        <img loading="lazy" src="<?php echo base_url('assets/frontend/default-new/image/brd-book.png') ?>" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
+<!---------- Page header / breadcrumb (DS) ---------->
+<section class="gp-page-header">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="<?php echo site_url(); ?>"><?php echo get_phrase('Home') ?></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <?php echo $page_title; ?>
+                </li>
+            </ol>
+        </nav>
+        <h1 class="gp-page-header-title"><?php echo $page_title; ?></h1>
     </div>
 </section>
-<!---------- Bread Crumb Area End ---------->
+<!---------- Page header / breadcrumb end ---------->

@@ -1,6 +1,6 @@
 
 
-<section class="" style="background-image: url('<?php echo site_url('uploads/blog/page-banner/'.get_frontend_settings('blog_page_banner')); ?>'); background-size: cover; background-position: center; position: relative;">
+<section class="gp-blog-hero" style="background-image: url('<?php echo site_url('uploads/blog/page-banner/'.get_frontend_settings('blog_page_banner')); ?>'); background-size: cover; background-position: center;">
     <div class="image-placeholder-2"></div>
     <div class="container-lg position-relative py-5">
         <div class="row my-0 my-md-4 justify-content-center">

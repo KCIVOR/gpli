@@ -99,6 +99,108 @@
   box-shadow: none !important;
 }
 
+/* ========== MODAL BODY FORM CONTENT ========== */
+/* Shared shell for ~50 AJAX-loaded lesson/question/quiz fragments
+   (#large-modal, #scrollable-modal, #right-modal, #ai-modal) — styling
+   here covers all of them without editing each individual fragment file. */
+.gp-ds .modal-body .form-group > label,
+.gp-ds .modal-body label:not(.custom-file-label) {
+  font-family: var(--gp-font-head);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+}
+
+.gp-ds .modal-body .form-control,
+.gp-ds .modal-body select.form-control,
+.gp-ds .modal-body textarea.form-control,
+.gp-ds .modal-body .custom-file-input,
+.gp-ds .modal-body .custom-file-label {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .modal-body .form-control:focus,
+.gp-ds .modal-body select.form-control:focus,
+.gp-ds .modal-body textarea.form-control:focus {
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .modal-body .custom-file-label {
+  font-size: 13px;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .modal-body p {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .modal-body h5 {
+  color: var(--gp-fg);
+}
+
+/* Dragula sort screens (sort_lesson.php / sort_section.php, admin + instructor) —
+   dragula's own drag/drop JS and .draggable-item ids are untouched. */
+.gp-ds .modal-body .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+.gp-ds .modal-body .bg-dragula {
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .modal-body .draggable-item {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .modal-body .draggable-item .card-body {
+  padding: 12px 14px;
+}
+
+.gp-ds .modal-body .input-group-text {
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  color: var(--gp-fg);
+}
+
+/* Custom-control checkbox/radio boxes (checked/focus state already covered
+   generically below — this adds the surrounding box look). */
+.gp-ds .modal-body .custom-control {
+  min-height: 36px;
+  padding: 8px 12px 8px 36px;
+  margin-bottom: 6px;
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  background: var(--gp-surface);
+}
+
+.gp-ds .modal-body .custom-control:hover {
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border-strong);
+}
+
+.gp-ds .modal-body .custom-control-label {
+  font-weight: 600;
+  color: var(--gp-fg);
+}
+
+.gp-ds .modal-body input[type="radio"]:not(.custom-control-input),
+.gp-ds .modal-body input[type="checkbox"]:not(.custom-control-input) {
+  accent-color: var(--gp-primary);
+}
+
 /* Leftover Hyper confirm (#alert-modal) — DS §18 header/body/footer, no glow pills */
 .gp-ds .gp-confirm-modal .modal-body p {
   margin: 0;

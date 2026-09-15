@@ -5,23 +5,28 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link href="<?php echo base_url('assets/payment/css/stripe.css');?>" rel="stylesheet">
+		<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css'); ?>">
+		<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-payout-checkout.css'); ?>?v=payout-checkout-1">
 		<link name="favicon" type="image/x-icon" href="<?php echo base_url('uploads/system/'.get_settings('favicon'));?>" rel="shortcut icon" />
+		<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>"></script>
 
 		<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 	</head>
-	<body style="background-color: #fff !important;">
+	<body>
 
-		<div class="package-details" style="width: 100%; float: left">
+		<div class="gp-payout-checkout">
+			<img class="gp-payout-checkout-logo" src="<?php echo base_url('assets/payment/razorpay.png'); ?>" alt="Razorpay">
 
-			<strong>
-				<img style="padding-bottom: 25px;" src="<?php echo base_url('assets/payment/razorpay.png'); ?>" width="150" style="">
-			</strong>
-			<br>
-			<strong><?php echo site_phrase('customer_name');?> | <?php echo $user_details['first_name'].' '.$user_details['last_name'];?></strong> <br>
-			<strong><?php echo site_phrase('amount_to_pay');?> | <?php echo $amount_to_pay.' '.get_settings('razorpay_currency');?></strong> <br>
+			<div class="package-details">
+				<strong><?php echo site_phrase('customer_name');?> | <?php echo $user_details['first_name'].' '.$user_details['last_name'];?></strong> <br>
+				<strong><?php echo site_phrase('amount_to_pay');?> | <?php echo $amount_to_pay.' '.get_settings('razorpay_currency');?></strong> <br>
 
-			<button id="rzp-button1" style="padding: 5px; float: none !important; cursor: pointer; background-color: rgb(43, 131, 234); margin-left: auto !important; margin-right: auto !important; width: 200px; padding: 0px; height: 35px; line-height: 35px;"><?php echo get_phrase('pay'); ?></button>
+				<?php echo gp_ds_button(get_phrase('pay'), [
+					'variant' => 'primary',
+					'extra_class' => 'gp-payout-checkout-action',
+					'attrs' => ['id' => 'rzp-button1'],
+				], true); ?>
+			</div>
 		</div>
 		<?php $preparedData = $this->payment_model->razorpayPrepareData($user_details['id'], true, $amount_to_pay); ?>
 

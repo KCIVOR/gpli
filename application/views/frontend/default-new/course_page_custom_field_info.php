@@ -1,50 +1,12 @@
 <link rel="stylesheet" href="<?php echo base_url() . 'assets/frontend/default-new/css/venobox/venobox.css'; ?>">
 <link rel="stylesheet" href="<?php echo base_url() . 'assets/frontend/default-new/css/venobox/venobox.js'; ?>">
 
-<style>
-    .hText{
-        font-size: 18px !important;
-    }
-    .cusImage img {
-	height: 150px;
-	width: 100%;
-	object-fit: cover;
-}
-   .cusImageText h5 {
-	font-size: 18px;
-	font-weight: 600;
-	margin-bottom: 10px;
-    color: #000;
-}
-  .cusImageText p {
-	font-size: 14px;
-}
-.cusVideo iframe{
-    border-radius: 12px;
-}
-.cusFaq .accordion-header {
-	margin: 12px 0px 12px;
-}
-.cusFaq .accordion-body {
-	padding: 0 0 0 0;
-	font-size: 14px;
-	margin-bottom: 10px;
-    color: rgb(103, 117, 139);
-}
-.cusFaq  .accordion-button::after {
-	background-size: 12px;
-	top: 0;
-	right: 0;
-}
-.cusFaq  .accordion-button {
-	padding: 0px 0px 10px 0;
-}
-.cusFaq .accordion-button {
-	font-size: 16px;
-	font-weight: 500;
-}
-</style>
-<?php 
+<?php
+// Sizing/layout rules (image dimensions, video radius, FAQ spacing) now live
+// scoped under .gp-course-page in gp-course-detail.css alongside the rest of
+// this page's DS styling — this used to be an inline <style> block that
+// hardcoded colors (#000, rgb(103,117,139)) with no dark-mode value and
+// fought the DS accordion's own button/body styling.
 $custom_fields = $this->db->where('course_id', $course_id)->order_by('sorting', 'ASC')->get('custom_fields')->result_array();
 
 ?>

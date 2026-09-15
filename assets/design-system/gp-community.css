@@ -1,0 +1,486 @@
+/**
+ * Geese Project Design System — Community pages
+ * Covers: community_index.php, community_my_posts.php, community_saved_posts.php,
+ * community_shared_post.php, community_comments.php, community_sidebar.php
+ *
+ * All four post-feed pages reuse the same .post-card/.post-header/.post-body/
+ * .post-footer markup and the same .comment-section include — styled once here.
+ * Every data-post-id/data-comment-id, onclick/confirm_modal call, and JS-bound
+ * class (.toggleLikeBtn, .savePostBtn, .commentForm, .replyForm, etc. — all
+ * read by community_scripts.php) is untouched; this is CSS + one inline
+ * <style> removal only.
+ */
+
+/* ---------- Sidebar ---------- */
+.gp-ds .course-all-category {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  overflow: hidden;
+}
+
+.gp-ds .community-user-card {
+  padding: 24px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--gp-border);
+}
+
+.gp-ds .community-profile img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.gp-ds .community-profile h5 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin-bottom: 2px;
+}
+
+.gp-ds .community-profile p {
+  color: var(--gp-fg-muted);
+  font-size: 12.5px;
+  margin: 0;
+}
+
+.gp-ds .community-menu {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+}
+
+.gp-ds .community-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg-muted);
+  font-size: 13.5px;
+  text-decoration: none;
+}
+
+.gp-ds .community-menu li a:hover {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+}
+
+.gp-ds .community-menu li.active a {
+  background: var(--gp-info-soft);
+  color: var(--gp-info);
+  font-weight: 600;
+}
+
+/* ---------- Feed heading + toolbar ---------- */
+/* style.css sets several of these text colors to --color-2 (a static near-
+   black, no dark-mode value) with !important — match it with !important. */
+.gp-ds .community-content h2 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg) !important;
+  margin-bottom: 4px;
+}
+
+.gp-ds .community-content > p {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .community-toolbar {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  box-shadow: none;
+}
+
+.gp-ds .community-toolbar ::placeholder {
+  color: var(--gp-fg-faint) !important;
+}
+
+.gp-ds .community-toolbar .form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .create-post-btn,
+.gp-ds .cancel-post-btn {
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  background: var(--gp-surface);
+  color: var(--gp-fg) !important;
+  padding: 9px 18px;
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.gp-ds .create-post-btn {
+  background: var(--gp-primary);
+  color: var(--gp-on-primary) !important;
+  border-color: var(--gp-primary);
+}
+
+/* ---------- Create-post card ---------- */
+.gp-ds .create-post-card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.gp-ds .create-post-body {
+  padding: 18px;
+}
+
+.gp-ds .post-user-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.gp-ds .create-post-body strong {
+  color: var(--gp-fg);
+}
+
+.gp-ds .post-textarea {
+  border: none;
+  resize: vertical;
+  min-height: 70px;
+  background: transparent;
+  color: var(--gp-fg);
+  padding: 0;
+  box-shadow: none !important;
+}
+
+.gp-ds .create-post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-top: 1px solid var(--gp-border);
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .upload-btn {
+  color: var(--gp-fg-muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.gp-ds .selected-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gp-fg-muted);
+  font-size: 12.5px;
+}
+
+.gp-ds .selected-file button {
+  background: none;
+  border: none;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .btn-submit-post {
+  background: var(--gp-primary);
+  color: var(--gp-on-primary);
+  border: none;
+  border-radius: var(--gp-radius);
+  padding: 8px 20px;
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* ---------- Post card ---------- */
+.gp-ds .post-card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.gp-ds .post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+}
+
+.gp-ds .post-card strong {
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds .post-header small {
+  color: var(--gp-fg-faint);
+  font-size: 12px;
+}
+
+.gp-ds .post-option-btn {
+  color: var(--gp-fg-muted);
+  background: none;
+  border: none;
+}
+
+.gp-ds .post-body {
+  padding: 0 16px 8px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .post-image {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+.gp-ds .post-card small span {
+  color: var(--gp-fg);
+  font-weight: 700;
+}
+
+.gp-ds .post-card > div small {
+  color: var(--gp-fg-muted);
+  font-size: 12.5px;
+}
+
+.gp-ds .post-footer {
+  display: flex;
+  gap: 20px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--gp-border);
+}
+
+.gp-ds .post-footer a {
+  color: var(--gp-fg-muted);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.gp-ds .post-footer a:hover {
+  color: var(--gp-fg);
+}
+
+.gp-ds .post-footer a.liked-post {
+  color: var(--gp-info);
+  font-weight: 700;
+}
+
+.gp-ds .not-found h5 {
+  color: var(--gp-fg);
+  margin-top: 12px;
+}
+
+.gp-ds .not-found p {
+  color: var(--gp-fg-muted);
+}
+
+/* ---------- Comments ---------- */
+.gp-ds .comment-wrapper {
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--gp-border);
+}
+
+.gp-ds .comment-wrapper h5 {
+  color: var(--gp-fg);
+  font-size: 14px;
+  padding-top: 14px;
+}
+
+.gp-ds .comment-user-image,
+.gp-ds .reply-user-image {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.gp-ds .comment-form-area {
+  display: flex;
+  gap: 10px;
+}
+
+.gp-ds .comment-form-content {
+  flex: 1;
+}
+
+.gp-ds .commentForm .form-control,
+.gp-ds .replyForm .form-control {
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .post-comment-btn,
+.gp-ds .post-replay-btn {
+  background: var(--gp-primary);
+  color: var(--gp-on-primary);
+  border: none;
+  border-radius: var(--gp-radius);
+  padding: 7px 16px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.gp-ds .post-replay-cancel-btn {
+  color: var(--gp-fg-muted);
+  font-size: 12.5px;
+  align-self: center;
+}
+
+.gp-ds .comment-box {
+  background: var(--gp-surface-sunk);
+  border-radius: var(--gp-radius);
+  padding: 10px 14px;
+}
+
+.gp-ds .comment-box strong {
+  color: var(--gp-fg);
+  font-size: 13px;
+}
+
+.gp-ds .comment-box div.mt-1 {
+  color: var(--gp-fg);
+  font-size: 13.5px;
+}
+
+.gp-ds .replyBtn,
+.gp-ds .toggleRepliesBtn {
+  color: var(--gp-fg-muted);
+  font-size: 12px;
+  text-decoration: none;
+  margin-right: 12px;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.gp-ds .replyBtn:hover,
+.gp-ds .toggleRepliesBtn:hover {
+  color: var(--gp-info);
+}
+
+.gp-ds .reply-item {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* ---------- Shared single-post view (community_shared_post.php) ---------- */
+.gp-ds .shared-post-wrapper {
+  padding: 40px 0;
+}
+
+.gp-ds .shared-post-card,
+.gp-ds .sidebar-card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  padding: 20px;
+}
+
+.gp-ds .author-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.gp-ds .author-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.gp-ds .author-info h6 {
+  color: var(--gp-fg);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.gp-ds .post-media {
+  width: 100%;
+  border-radius: var(--gp-radius);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.gp-ds .post-media img,
+.gp-ds .post-media video {
+  width: 100%;
+  max-height: 650px;
+  object-fit: cover;
+  display: block;
+}
+
+.gp-ds .post-description {
+  font-size: 15px;
+  line-height: 1.8;
+  white-space: pre-line;
+  color: var(--gp-fg);
+}
+
+.gp-ds .sidebar-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--gp-fg);
+  font-family: var(--gp-font-head);
+}
+
+.gp-ds .popular-post-item {
+  display: flex;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--gp-fg);
+  margin-bottom: 18px;
+}
+
+.gp-ds .popular-post-item:last-child {
+  margin-bottom: 0;
+}
+
+.gp-ds .popular-post-item:hover {
+  color: var(--gp-info);
+}
+
+.gp-ds .popular-thumb {
+  width: 120px;
+  min-width: 120px;
+  height: 80px;
+  border-radius: var(--gp-radius);
+  overflow: hidden;
+  background: var(--gp-surface-sunk);
+}
+
+.gp-ds .popular-thumb img,
+.gp-ds .popular-thumb video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gp-ds .popular-content h6 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  line-height: 1.5;
+  color: var(--gp-fg);
+}
+
+.gp-ds .popular-content small {
+  color: var(--gp-fg-muted);
+}

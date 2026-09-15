@@ -1,17 +1,12 @@
-<link rel="stylesheet" type="text/css" href="<?php echo site_url(); ?>assets/frontend/eu-cookie/purecookie.css" async />
-
-<div class="cookieConsentContainer" id="cookieConsentContainer" style="opacity: .9; display: block; display: none; border-radius: 12px;">
-    <!-- <div class="cookieTitle">
-    <a>Cookies.</a>
-  </div> -->
-    <div class="cookieDesc">
+<div class="gp-cookie-banner" id="cookieConsentContainer" style="display: none;">
+    <div class="gp-cookie-banner-desc">
         <p>
             <?php echo get_frontend_settings('cookie_note'); ?>
-            <a class="link-cookie-policy" href="<?php echo site_url('home/cookie_policy'); ?>"><?php echo site_phrase('cookie_policy'); ?></a>
+            <a class="gp-cookie-banner-link" href="<?php echo site_url('home/cookie_policy'); ?>"><?php echo site_phrase('cookie_policy'); ?></a>
         </p>
     </div>
-    <div class="cookieButton">
-        <a style="border-radius: 8px;" onclick="cookieAccept();"><?php echo site_phrase('accept'); ?></a>
+    <div class="gp-cookie-banner-actions">
+        <?php echo gp_ds_button(site_phrase('accept'), ['variant' => 'primary', 'extra_class' => 'gp-cookie-banner-btn', 'attrs' => ['onclick' => 'cookieAccept();']], true); ?>
     </div>
 </div>
 <script>

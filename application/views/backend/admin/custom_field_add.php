@@ -1,10 +1,4 @@
-<style>
-.form-select:focus {
-	box-shadow: none;
-}
-</style>
-
-<form class="ajaxFormSubmission" action="<?php echo site_url('admin/custom_field_add/' . $param2); ?>" method="post" enctype="multipart/form-data">
+<form class="ajaxFormSubmission gp-custom-field-form" action="<?php echo site_url('admin/custom_field_add/' . $param2); ?>" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="custom_type" ><?php echo get_phrase('select_type'); ?></label>
         <select name="custom_type" id="custom_type" class="form-control ol-form-control ol-select2">

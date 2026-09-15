@@ -1,0 +1,205 @@
+/**
+ * Geese Project Design System — Blog pages
+ * (frontend/default-new/blogs.php, blog_sidebar.php, blog_details.php,
+ * blog_categories.php, blogs_all.php, blog_latest_and_popular.php)
+ *
+ * blogs_all.php / blog_latest_and_popular.php reuse the course-catalog card
+ * markup (.courses-card-body/.courses-text/.courses-price-*), already
+ * styled generically by gp-homepage-builder.css — no changes needed there.
+ * blog_categories.php reuses .list-group/.list-group-item, already generic
+ * via gp-list-group.css.
+ * This file covers what's left: the page hero banner, the sidebar widget,
+ * and the article/comments layout.
+ */
+
+/* ---------- Hero banner (blogs.php) ---------- */
+.gp-ds .gp-blog-hero {
+  position: relative;
+}
+
+.gp-ds .gp-blog-hero .image-placeholder-2 {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 33, 93, 0.72), rgba(0, 33, 93, 0.55));
+}
+
+/* ---------- Category counts (blog_categories.php, blog_sidebar.php) ---------- */
+.gp-ds .list-group-item .badge.bg-primary,
+.gp-ds .categories .badge.bg-primary {
+  background: var(--gp-primary) !important;
+  color: var(--gp-on-primary);
+}
+
+/* ---------- Sidebar (blog_sidebar.php) ---------- */
+.gp-ds .right-section {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  padding: 24px;
+}
+
+.gp-ds .right-section .search-bar {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.gp-ds .right-section .search-bar .form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  padding-left: 40px;
+}
+
+.gp-ds .right-section .search-bar .search-btn {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--gp-fg-muted);
+  z-index: 1;
+}
+
+.gp-ds .right-section .title h4 {
+  font-family: var(--gp-font-head);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin-bottom: 12px;
+}
+
+.gp-ds .right-section .categories ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gp-ds .right-section .categories li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--gp-border);
+}
+
+.gp-ds .right-section .categories li a {
+  color: var(--gp-fg-muted);
+  text-decoration: none;
+  font-size: 13.5px;
+}
+
+.gp-ds .right-section .categories li a:hover {
+  color: var(--gp-info);
+}
+
+.gp-ds .right-section .post {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gp-border);
+}
+
+.gp-ds .right-section .post:last-child {
+  border-bottom: none;
+}
+
+.gp-ds .right-section .post h5 {
+  font-family: var(--gp-font-head);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--gp-fg);
+  margin-bottom: 6px;
+}
+
+.gp-ds .right-section .post p {
+  font-size: 12px;
+  color: var(--gp-fg-muted);
+  margin: 0;
+}
+
+.gp-ds .right-section .post img {
+  width: 100%;
+  border-radius: var(--gp-radius);
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+
+/* ---------- Article / comments (blog_details.php) ---------- */
+.gp-ds .blog-body .top h3 {
+  font-family: var(--gp-font-head);
+  color: var(--gp-fg);
+  font-weight: 800;
+}
+
+.gp-ds .blog-body .top .profile-img h6,
+.gp-ds .blog-body .top .profile-img p {
+  color: var(--gp-fg-muted);
+  margin: 0;
+}
+
+.gp-ds .blog-body .left-tag h3 {
+  font-size: 15px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .blog-body .left-tag a {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1px solid var(--gp-border);
+  border-radius: 999px;
+  color: var(--gp-fg-muted);
+  font-size: 12.5px;
+  text-decoration: none;
+  margin-right: 6px;
+}
+
+.gp-ds .blog-body .left-tag a:hover {
+  border-color: var(--gp-primary);
+  color: var(--gp-info);
+}
+
+.gp-ds .instructor-student-feed-back {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--gp-border);
+}
+
+.gp-ds .student-feed-back-text h6 {
+  color: var(--gp-fg);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.gp-ds .student-feed-back-text p {
+  color: var(--gp-fg-muted);
+  font-size: 12.5px;
+  margin: 0 0 4px;
+}
+
+.gp-ds .student-feed-back-text .std {
+  color: var(--gp-fg);
+  font-size: 13.5px;
+}
+
+.gp-ds .reply .student-feed-back-text {
+  margin-left: 24px;
+}
+
+.gp-ds .feedback-form .form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+}
+
+.gp-ds .message-btn {
+  background: var(--gp-primary);
+  color: var(--gp-on-primary);
+  border: none;
+  border-radius: var(--gp-radius);
+  padding: 8px 20px;
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.gp-ds .message-btn:hover {
+  opacity: 0.92;
+}

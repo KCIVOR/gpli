@@ -537,73 +537,80 @@
 }
 
 @media (max-width: 1199px) {
-  .gp-ds header.gp-site-header .gp-header-tools .language-control {
+  .gp-ds header.gp-site-header .gp-header-tools .gp-lang-dropdown {
     display: none;
   }
 }
 
-.gp-ds header.gp-site-header .gp-header-tools .language-control {
-  max-width: 124px;
-  margin: 0;
-  position: relative;
-}
-
-/* nice-select hides the real <select>; do not un-hide it */
-.gp-ds header.gp-site-header .gp-header-tools select.select-control,
-.gp-ds header.gp-site-header .gp-header-tools select.form-select,
-.gp-ds header.gp-site-header .gp-header-tools select.nice-select {
-  display: none !important;
-}
-
-.gp-ds header.gp-site-header .gp-header-tools div.nice-select {
-  display: flex !important;
+/* Language switcher — plain DS dropdown component (gp-dropdown.css), not
+   the jQuery nice-select plugin skinned to look like one. Matches the
+   quiet, transparent-until-hover treatment of the theme-toggle pill and
+   cart/wishlist icons right next to it, instead of a filled surface-sunk
+   chip that reads as a form input rather than a header nav control. */
+.gp-ds header.gp-site-header .gp-lang-toggle {
+  display: flex;
   align-items: center;
+  gap: 7px;
   box-sizing: border-box;
+  height: 36px;
+  padding: 0 12px !important;
+  max-width: 124px;
+  background: transparent !important;
+  color: var(--gp-fg) !important;
+  border: 1px solid var(--gp-border) !important;
+  border-radius: 999px !important;
   font-family: var(--gp-font-body);
   font-size: 12.5px;
-  min-height: 36px;
-  height: 36px;
-  line-height: 1 !important;
-  padding: 0 36px 0 14px !important;
-  background: var(--gp-surface-sunk) !important;
-  color: var(--gp-fg) !important;
-  border: 1.5px solid var(--gp-border-strong) !important;
-  max-width: 124px;
-  float: none;
+  font-weight: 600;
+  line-height: 1;
+  transition: background var(--gp-dur-fast) var(--gp-ease-out);
 }
 
-.gp-ds header.gp-site-header .gp-header-tools .nice-select .current {
-  color: var(--gp-fg) !important;
-  letter-spacing: 0;
-  word-spacing: 0.12em;
-}
-
-.gp-ds header.gp-site-header .gp-header-tools .nice-select::after {
-  width: 6px !important;
-  height: 6px !important;
-  right: 14px !important;
-  top: 50% !important;
-  margin-top: -5px !important;
-  border-width: 0 1.5px 1.5px 0 !important;
-  border-color: var(--gp-fg-muted) !important;
-}
-
-.gp-ds header.gp-site-header .gp-header-tools .nice-select .list {
-  background: var(--gp-surface) !important;
-  border: 1px solid var(--gp-border) !important;
-  box-shadow: var(--gp-shadow-card);
-}
-
-.gp-ds header.gp-site-header .gp-header-tools .nice-select .option {
-  color: var(--gp-fg) !important;
-  background: transparent !important;
-}
-
-.gp-ds header.gp-site-header .gp-header-tools .nice-select .option:hover,
-.gp-ds header.gp-site-header .gp-header-tools .nice-select .option.focus,
-.gp-ds header.gp-site-header .gp-header-tools .nice-select .option.selected.focus {
+.gp-ds header.gp-site-header .gp-lang-toggle:hover {
   background: var(--gp-paper) !important;
-  color: var(--gp-fg) !important;
+}
+
+.gp-ds header.gp-site-header .gp-lang-toggle svg {
+  flex-shrink: 0;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds header.gp-site-header .gp-lang-toggle-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gp-ds header.gp-site-header .gp-lang-toggle::after {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.gp-ds header.gp-site-header .gp-lang-menu {
+  min-width: 170px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+/* Plain DS dropdown list (see reference/geeseprojdesignsystem.html §17) —
+   hover-only, no solid-fill "active" state. The current language gets a
+   checkmark instead of gp-dropdown.css's .active fill, which reads as a
+   giant colored block when (as here) there's only one item in the list. */
+.gp-ds header.gp-site-header .gp-lang-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.gp-ds header.gp-site-header .gp-lang-item-current {
+  color: var(--gp-primary) !important;
+  font-weight: 700;
+}
+
+.gp-ds header.gp-site-header .gp-lang-item-current svg {
+  flex-shrink: 0;
+  color: var(--gp-primary);
 }
 
 .gp-ds header.gp-site-header .gp-theme-row {
@@ -680,14 +687,10 @@
   background: #25242c;
 }
 
-.gp-ds[data-theme="dark"] header.gp-site-header .gp-header-tools div.nice-select {
+.gp-ds[data-theme="dark"] header.gp-site-header .gp-lang-toggle {
   background: #25242c !important;
   color: var(--gp-fg) !important;
   border-color: var(--gp-border-strong) !important;
-}
-
-.gp-ds[data-theme="dark"] header.gp-site-header .gp-header-tools .nice-select .list {
-  background: var(--gp-surface) !important;
 }
 
 .gp-ds[data-theme="dark"] header.gp-site-header .gp-theme-row {
@@ -716,7 +719,7 @@
     color: var(--gp-fg-muted) !important;
   }
 
-  .gp-ds[data-theme="system"] header.gp-site-header .gp-header-tools div.nice-select {
+  .gp-ds[data-theme="system"] header.gp-site-header .gp-lang-toggle {
     background: #25242c !important;
     color: var(--gp-fg) !important;
     border-color: var(--gp-border-strong) !important;
@@ -791,6 +794,89 @@
 .gp-ds header.gp-site-header .inline-form .search-btn {
   background: var(--gp-primary) !important;
   color: var(--gp-on-primary) !important;
+}
+
+/* ========== Page header / breadcrumb band (shared by ~29 inner pages) ========== */
+/* Replaces the old .bread-crumb purple-pattern banner + decorative book image.
+   breadcrumb.php is included by many pages, some already DS, some not (see
+   the coverage audit) — keep this purely token-driven so it looks correct
+   regardless of what the rest of the page looks like yet. */
+.gp-ds .gp-page-header {
+  background: var(--gp-paper);
+  border-bottom: 1px solid var(--gp-border);
+  padding-block: 28px;
+}
+
+.gp-ds .gp-page-header .breadcrumb {
+  margin-bottom: 10px;
+}
+
+.gp-ds .gp-page-header-title {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  letter-spacing: 0;
+  color: var(--gp-fg);
+  margin: 0;
+  font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+}
+
+/* ========== Cookie consent banner (site-wide, included on every page) ========== */
+/* Replaces purecookie.css's .cookieConsentContainer with a plain DS card.
+   JS hook (#cookieConsentContainer, cookieAccept()) is untouched — this is
+   a pure restyle, still hidden by default and faded in/out by the same
+   inline script. */
+.gp-ds .gp-cookie-banner {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1200;
+  max-width: 640px;
+  margin-inline: auto;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.gp-ds .gp-cookie-banner-desc {
+  flex: 1 1 320px;
+}
+
+.gp-ds .gp-cookie-banner-desc p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-cookie-banner-link {
+  color: var(--gp-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.gp-ds .gp-cookie-banner-actions {
+  flex: 0 0 auto;
+}
+
+.gp-ds .gp-cookie-banner-btn {
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .gp-ds .gp-cookie-banner {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 16px;
+  }
 }
 
 /* ========== Footer (DS paper grid — keep all admin-driven blocks) ========== */

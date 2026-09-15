@@ -1,0 +1,173 @@
+/**
+ * Geese Project Design System — standalone FAQ page (/home/faq)
+ * Same numbered-card accordion treatment as the landing page's FAQ section,
+ * built as its own component (not reusing .gp-landing-faq-* classes) since
+ * this page isn't part of the homepage section stack and shouldn't inherit
+ * gp-landing.css's homepage-only behavior (100vh sections, scroll-reveal).
+ */
+
+.gp-ds .gp-faq-page {
+  padding-block: 48px 72px;
+}
+
+.gp-ds .gp-faq-page-intro {
+  max-width: 640px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+
+.gp-ds .gp-faq-page-eyebrow {
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--gp-secondary);
+}
+
+.gp-ds .gp-faq-page-intro h2 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin: 10px 0 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+}
+
+.gp-ds .gp-faq-page-list {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.gp-ds .gp-faq-page-item {
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  background: var(--gp-surface);
+  overflow: hidden;
+  transition: border-color var(--gp-dur-fast) var(--gp-ease-out), box-shadow var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-faq-page-item:has(.gp-faq-page-q[aria-expanded="true"]) {
+  border-color: var(--gp-primary);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-faq-page-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 22px;
+  background: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-faq-page-num {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: var(--gp-fg-faint);
+  flex-shrink: 0;
+  min-width: 30px;
+  transition: color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-faq-page-q[aria-expanded="true"] .gp-faq-page-num {
+  color: var(--gp-info);
+}
+
+.gp-ds .gp-faq-page-q-text {
+  flex: 1;
+  line-height: 1.4;
+}
+
+.gp-ds .gp-faq-page-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--gp-border-strong);
+  flex-shrink: 0;
+  transition: background var(--gp-dur-fast) var(--gp-ease-out), border-color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-faq-page-icon::before,
+.gp-ds .gp-faq-page-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: var(--gp-fg);
+  transform: translate(-50%, -50%);
+  transition: transform var(--gp-dur-fast) var(--gp-ease-out), opacity var(--gp-dur-fast) var(--gp-ease-out), background var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-faq-page-icon::before { width: 10px; height: 1.6px; }
+.gp-ds .gp-faq-page-icon::after { width: 1.6px; height: 10px; }
+
+.gp-ds .gp-faq-page-q[aria-expanded="true"] .gp-faq-page-icon {
+  background: var(--gp-primary);
+  border-color: var(--gp-primary);
+}
+
+.gp-ds .gp-faq-page-q[aria-expanded="true"] .gp-faq-page-icon::before,
+.gp-ds .gp-faq-page-q[aria-expanded="true"] .gp-faq-page-icon::after {
+  background: var(--gp-on-primary);
+}
+
+.gp-ds .gp-faq-page-q[aria-expanded="true"] .gp-faq-page-icon::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  opacity: 0;
+}
+
+.gp-ds .gp-faq-page-a {
+  padding: 0 22px 22px 68px;
+  color: var(--gp-fg-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.gp-ds .gp-faq-page-a p { margin: 0; }
+
+.gp-ds .gp-faq-page-cta {
+  max-width: 760px;
+  margin: 40px auto 0;
+  padding: 26px 28px;
+  border-radius: var(--gp-radius);
+  background: var(--gp-paper);
+  border: 1px solid var(--gp-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.gp-ds .gp-faq-page-cta h3 {
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--gp-fg);
+  margin: 0 0 4px;
+}
+
+.gp-ds .gp-faq-page-cta p {
+  font-size: 0.88rem;
+  color: var(--gp-fg-muted);
+  margin: 0;
+}
+
+@media (max-width: 560px) {
+  .gp-ds .gp-faq-page-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

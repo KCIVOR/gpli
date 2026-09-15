@@ -50,13 +50,6 @@ $total_students = $this->db->get('enrol')->num_rows();
                                         <p>(<?php echo $number_of_ratings.' '.get_phrase('Reviews'); ?>)</p>
                                     </div>
 									<!-- Badges -->
-									 <style>
-										.instructor-1 .eBadges img {
-												width: 40px;
-												height: 40px;
-												object-fit: cover;
-											}
-									 </style>
 									 <ul class="eBadges d-flex justify-content-end gap-2 mt-3">
 										<?php if (!empty($earned_badge)): ?>
 											<li>

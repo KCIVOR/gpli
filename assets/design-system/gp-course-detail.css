@@ -155,6 +155,41 @@
 
 .gp-ds .gp-course-page .cusImageText h5 {
   color: var(--gp-fg) !important;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Custom-field course-description extras (image/video/gallery/FAQ blocks) —
+   moved out of an inline <style> block in course_page_custom_field_info.php
+   so colors follow the theme instead of being hardcoded per-page. */
+.gp-ds .gp-course-page .cusImage img {
+  height: 150px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.gp-ds .gp-course-page .cusVideo iframe {
+  border-radius: 12px;
+}
+
+.gp-ds .gp-course-page .cusFaq .accordion-header {
+  margin: 12px 0;
+}
+
+.gp-ds .gp-course-page .cusFaq .accordion-button {
+  padding: 0 0 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gp-fg);
+  background: transparent;
+}
+
+.gp-ds .gp-course-page .cusFaq .accordion-body {
+  padding: 0;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--gp-fg-muted);
 }
 
 .gp-ds .gp-course-page .cusFaq .accordion-body {

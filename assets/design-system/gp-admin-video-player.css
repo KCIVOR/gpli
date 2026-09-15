@@ -1,0 +1,21 @@
+/**
+ * Geese Project Design System — Admin video player page
+ * (admin/video_player.php)
+ */
+
+.gp-ds .gp-video-player-page .gp-video-player-meta h4 {
+  font-family: var(--gp-font-head);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gp-fg);
+  margin-bottom: 8px;
+}
+
+.gp-ds .gp-video-player-page .gp-video-player-meta h4 span {
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-video-player-page .gp-video-player-embed {
+  margin-top: 8px;
+}

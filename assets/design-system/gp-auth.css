@@ -402,3 +402,11 @@
   background-color: var(--gp-bg);
   color: var(--gp-fg);
 }
+
+/* Facebook login button wrapper — the button itself renders as a Facebook
+   SDK iframe (not stylable from our CSS), so this only sets the container's
+   reserved height/spacing instead of an inline style="height:45px". */
+.gp-ds .gp-fb-login {
+  min-height: 45px;
+  margin-bottom: 4px;
+}

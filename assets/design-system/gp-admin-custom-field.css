@@ -1,0 +1,51 @@
+/**
+ * Geese Project Design System — Course custom-field modal form
+ * (admin/custom_field_add.php, loaded via showLargeModal into custom_field.php)
+ * Buttons keyed by JS ( .btn-success / .btn-danger add/remove-field hooks,
+ * #submit_button_wrapper .btn-primary ) are left as Bootstrap defaults —
+ * restyling them would require changing the classes jQuery selects on.
+ */
+
+.gp-ds .gp-custom-field-form .form-label,
+.gp-ds .gp-custom-field-form label {
+  font-family: var(--gp-font-head);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gp-fg);
+  margin-bottom: 6px;
+}
+
+.gp-ds .gp-custom-field-form .form-control,
+.gp-ds .gp-custom-field-form select.form-control,
+.gp-ds .gp-custom-field-form textarea.form-control {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  color: var(--gp-fg);
+  padding: 8px 12px;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+.gp-ds .gp-custom-field-form .form-control:focus,
+.gp-ds .gp-custom-field-form select.form-control:focus,
+.gp-ds .gp-custom-field-form textarea.form-control:focus {
+  background: var(--gp-surface);
+  border-color: var(--gp-border-strong);
+  color: var(--gp-fg);
+  box-shadow: none;
+}
+
+.gp-ds .gp-custom-field-form .form-control[readonly] {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .gp-custom-field-form .image-field-repeat,
+.gp-ds .gp-custom-field-form .text-field-repeat,
+.gp-ds .gp-custom-field-form .video-field-repeat,
+.gp-ds .gp-custom-field-form .faq-field-repeat,
+.gp-ds .gp-custom-field-form .gallery-field-repeat {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border) !important;
+  border-radius: var(--gp-radius, 10px);
+}

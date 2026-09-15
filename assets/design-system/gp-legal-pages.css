@@ -1,0 +1,112 @@
+/**
+ * Geese Project Design System — legal/policy content pages
+ * (privacy_policy.php, terms_and_condition.php, refund_policy.php)
+ *
+ * All three render arbitrary admin-authored rich text (a Summernote field)
+ * with zero prior styling beyond browser defaults — the old `.privacy-policy`
+ * class only set a background color. This is a "prose" typography pass so
+ * whatever headings/lists/links an admin writes come out legible and on
+ * brand, in both themes, without knowing the content ahead of time.
+ */
+
+.gp-ds .gp-policy-page {
+  padding-block: 40px 72px;
+}
+
+.gp-ds .gp-policy-page-card {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  padding: clamp(24px, 5vw, 48px);
+  color: var(--gp-fg-muted);
+  font-family: var(--gp-font-body);
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+.gp-ds .gp-policy-page-card :where(h1, h2, h3, h4) {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg);
+  line-height: 1.3;
+  margin: 1.6em 0 0.6em;
+}
+
+.gp-ds .gp-policy-page-card :where(h1, h2, h3, h4):first-child {
+  margin-top: 0;
+}
+
+.gp-ds .gp-policy-page-card h1 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
+.gp-ds .gp-policy-page-card h2 { font-size: 1.3rem; }
+.gp-ds .gp-policy-page-card h3 { font-size: 1.1rem; }
+.gp-ds .gp-policy-page-card h4 { font-size: 1rem; }
+
+.gp-ds .gp-policy-page-card p {
+  margin: 0 0 1.1em;
+}
+
+.gp-ds .gp-policy-page-card :where(ul, ol) {
+  margin: 0 0 1.1em;
+  padding-left: 1.4em;
+}
+
+.gp-ds .gp-policy-page-card li {
+  margin-bottom: 0.5em;
+}
+
+.gp-ds .gp-policy-page-card a {
+  color: var(--gp-info);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.gp-ds .gp-policy-page-card a:hover {
+  color: var(--gp-accent);
+}
+
+.gp-ds .gp-policy-page-card strong { color: var(--gp-fg); }
+
+.gp-ds .gp-policy-page-card blockquote {
+  margin: 0 0 1.1em;
+  padding: 12px 18px;
+  border-left: 3px solid var(--gp-border-strong);
+  background: var(--gp-paper);
+  color: var(--gp-fg-muted);
+  border-radius: 0 8px 8px 0;
+}
+
+.gp-ds .gp-policy-page-card hr {
+  border: none;
+  border-top: 1px solid var(--gp-border);
+  margin: 2em 0;
+}
+
+.gp-ds .gp-policy-page-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.4em;
+  font-size: 0.9rem;
+}
+
+.gp-ds .gp-policy-page-card :where(th, td) {
+  border: 1px solid var(--gp-border);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.gp-ds .gp-policy-page-card th {
+  background: var(--gp-paper);
+  color: var(--gp-fg);
+  font-family: var(--gp-font-head);
+  font-weight: 700;
+}
+
+.gp-ds .gp-policy-page-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 0.5em 0;
+}

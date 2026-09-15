@@ -1,0 +1,172 @@
+/**
+ * Geese Project Design System — Public instructor profile page
+ * (frontend/default-new/instructor_page.php)
+ *
+ * The course grid on this page reuses .courses-card-body/.courses-text/
+ * .courses-price-* (generic, gp-homepage-builder.css) and the wishlist
+ * heart hook (#coursesWishlistIcon{id}) is untouched — this file only
+ * covers the profile header, bio, stats, and sidebar chrome.
+ */
+
+.gp-ds .instructor-1 .pro-heading .name h4 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin-bottom: 2px;
+}
+
+.gp-ds .instructor-1 .pro-heading .name p {
+  color: var(--gp-fg-muted);
+  margin: 0;
+}
+
+.gp-ds .instructor-1 .rating h4 {
+  color: var(--gp-fg);
+  font-size: 13px;
+}
+
+.gp-ds .instructor-1 .rating-point p {
+  color: var(--gp-fg);
+  margin: 0;
+}
+
+.gp-ds .instructor-1 .rating-point .fa-star {
+  color: var(--gp-gold);
+}
+
+.gp-ds .instructor-1 .eBadges img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.gp-ds .instructor-1 .about-text h3 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin-bottom: 12px;
+}
+
+.gp-ds .instructor-1 .about-text {
+  color: var(--gp-fg-muted);
+  line-height: 1.7;
+}
+
+.gp-ds .instructor-1 .about-text.teachers ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.gp-ds .instructor-1 .about-text.teachers li a {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid var(--gp-border);
+  border-radius: 999px;
+  color: var(--gp-fg-muted);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.gp-ds .instructor-1 .skill h3 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg);
+  margin-bottom: 16px;
+}
+
+.gp-ds .instructor-1 .skill-point {
+  display: flex;
+  gap: 16px;
+}
+
+.gp-ds .instructor-1 .skill-point-1 {
+  flex: 1;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  padding: 18px;
+  text-align: center;
+}
+
+.gp-ds .instructor-1 .skill-point-1 h1 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg);
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.gp-ds .instructor-1 .skill-point-1 h4 {
+  color: var(--gp-fg-muted);
+  font-size: 12.5px;
+  margin: 0;
+}
+
+/* ---------- Sidebar ---------- */
+.gp-ds .instructor-right {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  padding: 24px;
+}
+
+.gp-ds .instructon-icon {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.gp-ds .instructon-icon i {
+  color: var(--gp-info);
+  margin-top: 3px;
+}
+
+.gp-ds .instructon-number h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gp-fg);
+  margin-bottom: 2px;
+}
+
+.gp-ds .instructon-number p {
+  color: var(--gp-fg-muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.gp-ds .social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--gp-fg-muted);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+/* One brand SVG (Twitter/X) hardcodes a near-black fill (#0D0C23) with no
+   dark-mode value — swap just that fill to a theme-aware color. Facebook's
+   #316FF6 and LinkedIn's #0189D0 are real brand colors, left as-is. */
+.gp-ds .social-btn svg path[fill="#0D0C23"] {
+  fill: var(--gp-fg-muted);
+}
+
+.gp-ds .instructor-msg .btn-primary {
+  width: 100%;
+}
+
+.gp-ds .einsBtn .follow-btn {
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .einsBtn .follow-btn.btn-fill {
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  color: var(--gp-fg);
+}

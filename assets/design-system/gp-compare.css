@@ -1,0 +1,69 @@
+/**
+ * Geese Project Design System — Course Compare page
+ * (frontend/default-new/compare.php)
+ * The base table look and .courses-card-body/.courses-card-image are already
+ * generic (gp-tables.css / gp-homepage-builder.css) — this covers what's
+ * unique to this page: h3/h6 titles inside .courses-text (elsewhere it's
+ * h5), the empty-slot card, the level dots, and the star rating.
+ */
+
+.gp-ds .compare-card .empty-card .card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .compare-card .empty-card .card-body {
+  color: var(--gp-fg);
+}
+
+.gp-ds .compare-card .courses-text h3 {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+
+.gp-ds .compare-card .courses-text h3 a,
+.gp-ds .compare-card .courses-text > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gp-ds .compare-card .courses-text p {
+  color: var(--gp-fg-muted);
+}
+
+.gp-ds .compare-card .courses-text h6 {
+  color: var(--gp-fg-faint);
+}
+
+.gp-ds .compare-2-table .level .active {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gp-border);
+  margin-right: 2px;
+}
+
+.gp-ds .compare-2-table .level .active-1,
+.gp-ds .compare-2-table .level .active-2,
+.gp-ds .compare-2-table .level .active-3 {
+  background: var(--gp-primary);
+}
+
+.gp-ds .compare-2-table .compare-star .fa-star {
+  color: var(--gp-border-strong);
+}
+
+.gp-ds .compare-2-table .compare-star .fa-star.avg-rating {
+  color: var(--gp-gold);
+}
+
+.gp-ds .compare-2-table th {
+  color: var(--gp-fg);
+}
+
+.gp-ds .compare-2-table td {
+  color: var(--gp-fg-muted);
+}

@@ -1,0 +1,55 @@
+/**
+ * Geese Project Design System — Instructor payout checkout pages
+ * (paypal_checkout_for_instructor_revenue.php, razorpay_checkout.php)
+ *
+ * These are standalone redirect pages (no shared header/footer/sidebar),
+ * so only gp-tokens.css + gp-theme-boot.js are loaded — not the full shell.
+ * Payment SDK script tags, button ids, and onclick/redirect logic are
+ * untouched; this file only styles the surrounding markup.
+ */
+
+.gp-ds body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gp-bg);
+  font-family: var(--gp-font-body);
+}
+
+.gp-ds .gp-payout-checkout {
+  width: 100%;
+  max-width: 380px;
+  margin: 40px auto;
+  padding: 32px 28px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+  text-align: center;
+}
+
+.gp-ds .gp-payout-checkout-logo {
+  max-width: 140px;
+  margin-bottom: 20px;
+}
+
+.gp-ds .gp-payout-checkout .package-details {
+  color: var(--gp-fg);
+  font-size: 14.5px;
+  line-height: 1.9;
+}
+
+.gp-ds .gp-payout-checkout .package-details strong {
+  font-weight: 600;
+}
+
+.gp-ds .gp-payout-checkout-action {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.gp-ds button.gp-payout-checkout-action {
+  min-height: 44px;
+}

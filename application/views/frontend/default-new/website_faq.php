@@ -1,40 +1,39 @@
 <?php include "breadcrumb.php"; ?>
 
 <?php $website_faqs = json_decode(get_frontend_settings('website_faqs'), true); ?>
-<?php if(count($website_faqs) > 0): ?>
+<?php if (count($website_faqs) > 0): ?>
 <!---------- Questions Section Start  -------------->
-<section class="faq">
+<section class="gp-faq-page">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-md-5 col-sm-12 col-12 d-flex align-items-center">
-                <div class="faq-img d-none d-md-inline-block">
-                    <img loading="lazy" src="<?php echo site_url('assets/frontend/default-new/image/faq2.jpg') ?>">
-                </div>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-12 col-12">
-                <div class="faq-accrodion">
-                    <div class="faq-acc-heading">
-                        <h4><?php echo get_phrase('FAQS') ?></h4>
-                        <h1><?php echo get_phrase('Looking for answers?') ?></h1>
-                    </div>
-                    <div class="accordion" id="accordionFaq">
-                        <?php foreach($website_faqs as $key => $faq): ?>
-                            <div class="accordion-item">
-                              <h2 class="accordion-header" id="<?php echo 'faqItemHeading'.$key; ?>">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo 'faqItempanel'.$key; ?>" aria-expanded="true" aria-controls="<?php echo 'faqItempanel'.$key; ?>">
-                                    <?php echo $faq['question']; ?>
-                                </button>
-                              </h2>
-                              <div id="<?php echo 'faqItempanel'.$key; ?>" class="accordion-collapse collapse" aria-labelledby="<?php echo 'faqItemHeading'.$key; ?>"  data-bs-parent="#accordionFaq">
-                                <div class="accordion-body">
-                                    <p><?php echo nl2br($faq['answer']); ?></p>
-                                </div>
-                              </div>
-                            </div>
-                        <?php endforeach; ?>
+        <div class="gp-faq-page-intro">
+            <div class="gp-faq-page-eyebrow"><?php echo get_phrase('FAQS') ?></div>
+            <h2><?php echo get_phrase('Looking for answers?') ?></h2>
+        </div>
+        <div class="gp-faq-page-list" id="accordionFaq">
+            <?php foreach ($website_faqs as $key => $faq):
+                $gp_open = $key === 0;
+            ?>
+                <div class="gp-faq-page-item">
+                    <button class="gp-faq-page-q" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#faqItempanel<?php echo $key; ?>"
+                        aria-expanded="<?php echo $gp_open ? 'true' : 'false'; ?>" aria-controls="faqItempanel<?php echo $key; ?>">
+                        <span class="gp-faq-page-num"><?php echo sprintf('%02d', $key + 1); ?></span>
+                        <span class="gp-faq-page-q-text"><?php echo $faq['question']; ?></span>
+                        <span class="gp-faq-page-icon"></span>
+                    </button>
+                    <div id="faqItempanel<?php echo $key; ?>" class="collapse<?php echo $gp_open ? ' show' : ''; ?>"
+                        data-bs-parent="#accordionFaq">
+                        <div class="gp-faq-page-a"><p><?php echo nl2br($faq['answer']); ?></p></div>
                     </div>
                 </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="gp-faq-page-cta">
+            <div>
+                <h3><?php echo get_phrase('Still have questions?'); ?></h3>
+                <p><?php echo get_phrase("Can't find the answer you're looking for? Our team is happy to help."); ?></p>
             </div>
+            <?php echo gp_ds_button(get_phrase('Contact us'), ['variant' => 'primary', 'href' => site_url('home/contact_us')], true); ?>
         </div>
     </div>
 </section>

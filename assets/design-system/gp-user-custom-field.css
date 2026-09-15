@@ -1,0 +1,192 @@
+/**
+ * Geese Project Design System — Instructor course-builder pages (Phase 6)
+ * Covers: custom_field.php, course_media_add.php, course_media_edit.php
+ *
+ * custom_field.php previously had an inline <style> block (hardcoded hex
+ * colors, no dark-mode value, fighting the DS accordion via source-order/
+ * specificity) — removed in favor of this file. The DS accordion
+ * (gp-accordion.css) already styles .accordion-item/.accordion-button/
+ * .accordion-body generically — this file only adds the custom-field-
+ * manager-specific bits: hover-reveal edit/delete controls, the
+ * section-action icon menu, and the FAQ/card layouts.
+ * Bootstrap's data-bs-toggle="collapse" JS and every onclick hook are untouched.
+ */
+
+.gp-ds .gp-custom-field-manager .card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gp-ds .gp-custom-field-manager .eCard .card-body {
+  padding: 11px 14px;
+}
+
+.gp-ds .gp-custom-field-manager .eCard .card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-custom-field-manager .bg-card {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-custom-field-manager .ratio {
+  height: 430px;
+}
+
+.gp-ds .gp-custom-field-manager .ratio > * {
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds .gp-custom-field-manager .list-group-item {
+  border: 1px solid var(--gp-border);
+  border-radius: 5px;
+  color: var(--gp-fg);
+  background: var(--gp-surface);
+}
+
+.gp-ds .gp-custom-field-manager .list-group-item p {
+  font-size: 14px;
+  color: var(--gp-fg-muted);
+}
+
+/* ---------- Section action menu (edit/delete section, top-right of each accordion header) ---------- */
+.gp-ds .gp-custom-field-manager .accor_wrap {
+  position: relative;
+}
+
+.gp-ds .gp-custom-field-manager .accor_wrap ul {
+  position: absolute;
+  right: 50px;
+  top: 8px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--gp-dur-base) var(--gp-ease-out);
+  z-index: 2;
+  list-style: none;
+}
+
+.gp-ds .gp-custom-field-manager .accor_wrap:hover ul {
+  visibility: visible;
+  opacity: 1;
+}
+
+.gp-ds .gp-custom-field-manager .accor_wrap li a {
+  height: 30px;
+  width: 30px;
+  border-radius: 4px;
+  border: 1px solid var(--gp-border);
+  background: var(--gp-surface);
+  color: var(--gp-fg-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--gp-dur-fast) var(--gp-ease-out), border-color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-custom-field-manager .accor_wrap li a i {
+  font-size: 15px;
+}
+
+.gp-ds .gp-custom-field-manager .accor_wrap li a:hover {
+  color: var(--gp-info);
+  border-color: var(--gp-primary);
+}
+
+/* ---------- Item edit/delete controls (hover-reveal on card/list item/FAQ) ---------- */
+.gp-ds .gp-custom-field-manager .position-inherite {
+  position: inherit;
+}
+
+.gp-ds .gp-custom-field-manager .eControll {
+  position: absolute;
+  top: 8px;
+  left: 6px;
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--gp-dur-slow) var(--gp-ease-out);
+}
+
+.gp-ds .gp-custom-field-manager .eCard:hover .eControll,
+.gp-ds .gp-custom-field-manager .singleFaq:hover .eControll {
+  visibility: visible;
+  opacity: 1;
+}
+
+.gp-ds .gp-custom-field-manager .eControll i {
+  font-size: 12px;
+  border: 1px solid var(--gp-border);
+  color: var(--gp-fg-muted);
+  height: 26px;
+  width: 26px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--gp-surface);
+  transition: color var(--gp-dur-fast) var(--gp-ease-out), border-color var(--gp-dur-fast) var(--gp-ease-out);
+}
+
+.gp-ds .gp-custom-field-manager .eControll .fa-edit:hover {
+  color: var(--gp-info);
+  border-color: var(--gp-primary);
+}
+
+.gp-ds .gp-custom-field-manager .eControll .fa-trash:hover {
+  color: var(--gp-danger);
+  border-color: var(--gp-danger);
+}
+
+/* ---------- FAQ list ---------- */
+.gp-ds .gp-custom-field-manager .singleFaq {
+  border-bottom: 1px solid var(--gp-border);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.gp-ds .gp-custom-field-manager .singleFaq h4 {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: var(--gp-fg);
+}
+
+.gp-ds .gp-custom-field-manager .singleFaq p {
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--gp-fg-muted);
+}
+
+/**
+ * Instructor course-media upload (course_media_add.php / course_media_edit.php).
+ * The admin equivalent is styled via `.gp-course-wizard .gp-course-media` in
+ * gp-admin-courses.css, but the instructor course_add/course_edit wizard has
+ * no `.gp-course-wizard` wrapper yet — so this is scoped to its own class
+ * instead of depending on that ancestor.
+ */
+.gp-ds .gp-user-course-media .box {
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gp-user-course-media .js--image-preview {
+  background-color: var(--gp-surface-sunk);
+}
+
+.gp-ds .gp-user-course-media .upload-options .btn {
+  color: var(--gp-fg);
+  background: var(--gp-surface-sunk);
+  border-color: var(--gp-border);
+}
