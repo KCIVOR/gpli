@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/startuplabcc/deploy-test/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/echo "cpanel git deploy task ran at $(date)" > $DEPLOYPATH/deploy-test-marker.txt
