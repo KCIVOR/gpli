@@ -103,53 +103,6 @@
             <?php endif; ?>
 
             <?php if ($this->session->userdata('admin_login')) : ?>
-                <li class="dropdown notification-list topbar-dropdown">
-                    <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <i class="mdi mdi-help-circle-outline"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu gp-admin-menu">
-
-                        <div class="dropdown-header"><?php echo get_phrase('Help') . ' ' . get_phrase('center'); ?></div>
-
-                        <a href="https://creativeitem.com/docs/academy-lms" target="_blank" class="dropdown-item">
-                            <i class="mdi mdi-file-document-box-outline"></i>
-                            <span><?php echo get_phrase('Read') . ' ' . get_phrase('documentation'); ?></span>
-                        </a>
-
-                        <a href="https://www.youtube.com/watch?v=-HHhJUGQPeU&list=PLR1GrQCi5Zqvhh7wgtt-ShMAM1RROYJgE" target="_blank" class="dropdown-item">
-                            <i class="mdi mdi-youtube"></i>
-                            <span><?php echo get_phrase('Watch') . ' ' . get_phrase('tutorial'); ?></span>
-                        </a>
-
-                        <a href="https://support.creativeitem.com" target="_blank" class="dropdown-item">
-                            <i class="far fa-life-ring"></i>
-                            <span><?php echo get_phrase('Get') . ' ' . get_phrase('support'); ?></span>
-                        </a>
-
-                        <a href="https://support.creativeitem.com" target="_blank" class="dropdown-item">
-                            <i class="mdi mdi-arrow-right-bold-circle-outline"></i>
-                            <span><?php echo get_phrase('Order') . ' ' . get_phrase('customization'); ?></span>
-                        </a>
-
-                        <a href="https://support.creativeitem.com" target="_blank" class="dropdown-item">
-                            <i class="mdi mdi-tooltip-plus-outline"></i>
-                            <span><?php echo get_phrase('Request') . ' ' . get_phrase('feature'); ?></span>
-                        </a>
-
-                        <a href="https://codecanyon.net/collections/shared/9236f1b2a5de784f383c9ecd37b2f7b43dbfc225a5f96bc3ef32ac7ab397d392" target="_blank" class="dropdown-item">
-                            <i class="mdi mdi-open-in-new"></i>
-                            <span><?php echo get_phrase('Browse') . ' ' . get_phrase('addons'); ?></span>
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-
-                        <a href="https://creativeitem.com/services" target="_blank" class="dropdown-item">
-                            <i class="dripicons-toggles"></i>
-                            <span><?php echo get_phrase('Get') . ' ' . get_phrase('services'); ?></span>
-                        </a>
-                    </div>
-                </li>
-
                 <li class="dropdown notification-list">
                     <?php
                     $logged_user_id = $this->session->userdata('user_id');
