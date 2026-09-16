@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css') . '?v=color-bridge-1'; ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-base.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-components-core.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-shell.css'); ?>?v=lesson-topbar-2">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-shell.css'); ?>?v=lesson-topbar-3">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dark-surfaces.css'); ?>">
 <script src="<?php echo base_url('assets/design-system/gp-theme-toggle.js'); ?>?v=no-system-1" defer></script>
 

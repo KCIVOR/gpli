@@ -299,6 +299,16 @@
   align-items: center;
 }
 
+/* The lesson player's own `img { max-width:100%; height:auto; }` reset
+   (assets/playing-page/css/style.css) overrides the img's height="32"
+   attribute, blowing the logo up to its full native size. Pin it back
+   down explicitly here. */
+.gp-ds .gp-lesson-topbar .topnav-logo img {
+  height: 32px;
+  width: auto;
+  max-width: 160px;
+}
+
 .gp-ds .gp-lesson-title-link {
   display: flex;
   flex-direction: column;
