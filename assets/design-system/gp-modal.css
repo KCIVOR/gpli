@@ -5,6 +5,14 @@
  * Section: 18 (Modals & offcanvas - extension)
  */
 
+/* Select2 dropdowns (used for the Section field on Add Lesson, and other
+   modal forms) ship with a Bootstrap-4-era z-index of 1051. This site's
+   real Bootstrap 5 .modal sits at z-index 1055, so the dropdown list was
+   opening behind the modal — invisible, looking like a dead click. */
+.select2-dropdown {
+  z-index: 1075;
+}
+
 /* ========== MODAL OVERLAY & BACKDROP ========== */
 .gp-ds .modal-backdrop {
   background: rgba(13, 13, 12, 0.5);

@@ -40,7 +40,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-breadcrumb.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-nav-tabs.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-progress.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-modal.css'); ?>?v=confirm-3">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-modal.css'); ?>?v=select2-zindex-1">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-offcanvas.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-popover.css'); ?>?v=popover-3">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tooltip.css'); ?>">
