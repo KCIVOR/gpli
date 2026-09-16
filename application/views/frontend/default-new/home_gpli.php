@@ -126,7 +126,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
       '<path stroke-linecap="round" stroke-linejoin="round" d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/>',
     ];
   ?>
-  <section class="section-pad gp-landing" style="padding:56px 0;">
+  <section class="section-pad gp-landing gp-landing-compact" style="padding:56px 0;">
     <div class="container">
       <div class="feat-trio">
         <?php foreach ($extras['trio'] as $gpli_trio_i => $gpli_trio_item): ?>
@@ -139,6 +139,35 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
       </div>
     </div>
   </section>
+
+  <!-- CATEGORIES (real data) -->
+  <?php if (get_frontend_settings('top_category_section') == 1): ?>
+  <?php $top_categories = $this->crud_model->get_top_categories(8, 'sub_category_id'); ?>
+  <?php if (!empty($top_categories)): ?>
+  <section class="section-pad gp-landing">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow"><?php echo get_phrase('Browse By Topic'); ?></div>
+        <h2><?php echo gpli_two_tone_heading(get_phrase('Courses by Function'), 1, 'red'); ?></h2>
+        <p><?php echo get_phrase('Jump straight to the topics GPLI learners search for most.'); ?></p>
+      </div>
+      <div class="cat-chips">
+        <?php foreach ($top_categories as $top_category): ?>
+        <?php $category_details = $this->crud_model->get_category_details_by_id($top_category['sub_category_id'])->row_array(); ?>
+        <?php if (empty($category_details)) continue; ?>
+        <a class="cat-chip" href="<?php echo site_url('home/courses?category=' . $category_details['slug']); ?>">
+          <div class="ci"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg></div>
+          <div class="ct">
+            <h4><?php echo $category_details['name']; ?></h4>
+            <span><?php echo $top_category['course_number']; ?> <?php echo get_phrase('courses'); ?></span>
+          </div>
+        </a>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+  <?php endif; ?>
 
   <!-- PHOTO / VIDEO STRIP -->
   <?php
@@ -239,35 +268,6 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
             </div>
           </div>
         </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-  <?php endif; ?>
-  <?php endif; ?>
-
-  <!-- CATEGORIES (real data) -->
-  <?php if (get_frontend_settings('top_category_section') == 1): ?>
-  <?php $top_categories = $this->crud_model->get_top_categories(8, 'sub_category_id'); ?>
-  <?php if (!empty($top_categories)): ?>
-  <section class="section-pad gp-landing">
-    <div class="container">
-      <div class="section-head">
-        <div class="section-eyebrow"><?php echo get_phrase('Browse By Topic'); ?></div>
-        <h2><?php echo gpli_two_tone_heading(get_phrase('Top Categories'), 1, 'red'); ?></h2>
-        <p><?php echo get_phrase('Jump straight to the topics GPLI learners search for most.'); ?></p>
-      </div>
-      <div class="cat-chips">
-        <?php foreach ($top_categories as $top_category): ?>
-        <?php $category_details = $this->crud_model->get_category_details_by_id($top_category['sub_category_id'])->row_array(); ?>
-        <?php if (empty($category_details)) continue; ?>
-        <a class="cat-chip" href="<?php echo site_url('home/courses?category=' . $category_details['slug']); ?>">
-          <div class="ci"><svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg></div>
-          <div class="ct">
-            <h4><?php echo $category_details['name']; ?></h4>
-            <span><?php echo $top_category['course_number']; ?> <?php echo get_phrase('courses'); ?></span>
-          </div>
-        </a>
         <?php endforeach; ?>
       </div>
     </div>

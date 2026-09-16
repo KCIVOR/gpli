@@ -35,6 +35,16 @@
   background: var(--gp-info-soft);
 }
 
+/* .gp-landing (gp-landing.css) forces every section to at least 48vh tall
+   and vertically centers its content — meant for sections with enough
+   content to look intentional at that height. A short, single-purpose
+   band like the 3-icon feature row instead ends up with large empty
+   margins above/below on tall or zoomed-out screens. Opt out here: size
+   to the section's own padding + content instead of the viewport. */
+.gp-ds .gpli-home section.gp-landing-compact {
+  min-height: 0;
+}
+
 /* ========== Hero ========== */
 .gp-ds .gpli-home .page-hero.ph-light {
   background: linear-gradient(180deg, var(--gp-surface) 0%, var(--gp-surface-sunk) 100%);
