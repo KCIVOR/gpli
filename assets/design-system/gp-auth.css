@@ -18,6 +18,12 @@
   }
 }
 
+/* Login/Sign up with the left illustration panel removed — form takes the
+   full width and stays centered instead of leaving a blank column. */
+.gp-ds .gp-auth-shell.gp-auth-shell--no-visual {
+  grid-template-columns: 1fr;
+}
+
 .gp-ds .gp-auth-visual {
   position: relative;
   background: linear-gradient(155deg, var(--gp-accent-2) 0%, var(--gp-accent) 60%, #24396f 100%);

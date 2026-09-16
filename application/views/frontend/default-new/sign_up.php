@@ -2,9 +2,7 @@
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <?php endif; ?>
 
-<section class="gp-auth-shell">
-    <?php include 'gp_auth_visual.php'; ?>
-
+<section class="gp-auth-shell gp-auth-shell--no-visual">
     <div class="gp-auth-form-wrap">
         <div class="gp-auth-form">
             <div class="eyebrow"><?php echo get_phrase('Join us'); ?></div>
