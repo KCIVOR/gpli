@@ -153,6 +153,42 @@
   color: var(--gp-fg);
 }
 
+/* Course FAQ accordion ("Frequently asked question") — gp-accordion.css
+   already styles .accordion-item/.accordion-button generically, but this
+   page also loads several leftover/unrelated rules that land on the exact
+   same `.faq-accrodion .accordion .accordion-*` selectors:
+   - assets/frontend/default-new/css/style.css ~L5070-5097 (leftover):
+     border-bottom-only item border, and body padding-left:0 while the
+     button keeps 22px — the mismatch that made answer text hug the card's
+     left edge.
+   - gp-homepage-builder.css's "eFaq" rule (a different feature — the
+     homepage FAQ builder) also happens to match this same selector with
+     `!important`, and already keeps the button's own padding sane; only
+     the body's padding-left needed a real fix.
+   - a `radius-0` utility in the markup, removed at the source instead of
+     fought here (see course_page_info_description.php).
+   Re-declared at 4-class specificity (.gp-ds .gp-course-page
+   .faq-accrodion ...) so the intended card look wins without touching the
+   generic accordion rules other pages rely on. */
+.gp-ds .gp-course-page .faq-accrodion .accordion {
+  margin-bottom: 10px;
+}
+
+.gp-ds .gp-course-page .faq-accrodion .accordion:last-child {
+  margin-bottom: 0;
+}
+
+.gp-ds .gp-course-page .faq-accrodion .accordion-item {
+  border: 1px solid var(--gp-border);
+  border-radius: 12px;
+  margin-bottom: 0;
+}
+
+.gp-ds .gp-course-page .faq-accrodion .accordion-body {
+  font-size: 14px;
+  padding: 0 18px 18px;
+}
+
 .gp-ds .gp-course-page .cusImageText h5 {
   color: var(--gp-fg) !important;
   font-size: 18px;

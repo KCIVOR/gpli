@@ -35,7 +35,7 @@
             <?php foreach($faqs as $faq_question => $faq): ?>
                 <?php ++$counter; ?>
                 <div class="accordion">
-                    <div class="accordion-item radius-0">
+                    <div class="accordion-item">
                       <h2 class="accordion-header" id="faq<?php echo $counter; ?>">
                         <button class="faq accordion-button collapsed text-18px mt-20px" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-<?php echo $counter; ?>" aria-expanded="false" aria-controls="panelsStayOpen-<?php echo $counter; ?>">
                             <?php echo $faq_question; ?>
