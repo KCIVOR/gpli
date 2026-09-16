@@ -21,7 +21,7 @@ $sections = $this->crud_model->get_section('course', $param2)->result_array();
         ?>.
     </strong>
 
-    <strong><a href="#" class="ml-1" data-toggle="modal" data-dismiss="modal" onclick="showAjaxModal('<?php echo site_url('modal/popup/lesson_types/'.$param2.'/'.$param3); ?>', '<?php echo get_phrase('add_new_lesson'); ?>')"><?php echo get_phrase("change"); ?></a></strong>
+    <strong><a href="javascript:void(0)" class="ml-1" onclick="showAjaxModal('<?php echo site_url('modal/popup/lesson_types/'.$param2.'/'.$param3); ?>', '<?php echo get_phrase('add_new_lesson'); ?>')"><?php echo get_phrase("change"); ?></a></strong>
 </div>
 
 <!-- ACTUAL LESSON ADDING FORM -->
