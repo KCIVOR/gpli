@@ -70,7 +70,8 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-courses.css'); ?>?v=catalog-11">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-cart.css'); ?>?v=cart-2">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-course-detail.css'); ?>?v=course-7">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-student.css'); ?>?v=student-17">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-student.css'); ?>?v=student-18">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dashboard.css'); ?>?v=instr-dash-1">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-instructor-apply.css'); ?>?v=apply-3">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dark-surfaces.css'); ?>?v=auth-autofill-1">
 <script src="<?php echo base_url('assets/design-system/gp-theme-toggle.js'); ?>?v=no-system-1" defer></script>

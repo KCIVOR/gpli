@@ -21,24 +21,13 @@ foreach ($filtered->result_array() as $course) {
     ];
 }
 
-$stat_body = '<div class="row gp-student-stats">'
-    . '<div class="col-md-4 mb-3"><p>' . get_phrase('number_of_courses') . '</p><h3>' . (int) $number_of_courses . '</h3></div>'
-    . '<div class="col-md-4 mb-3"><p>' . get_phrase('number_of_enrolment') . '</p><h3>' . (int) $number_of_enrolment . '</h3></div>'
-    . '<div class="col-md-4 mb-3"><p>' . get_phrase('pending_balance') . '</p><h3>' . html_escape(currency($total_pending_amount)) . '</h3></div>'
-    . '</div>';
-
-$action_links = '<div class="gp-student-dashboard-actions mb-3">'
-    . gp_ds_button(get_phrase('create_course'), [
-        'variant'     => 'outline',
-        'href'        => site_url('home/create_course'),
-        'extra_class' => 'gp-student-cta me-2 mb-2',
-    ], true)
-    . gp_ds_button(get_phrase('dashboard'), [
-        'variant'     => 'outline',
-        'href'        => site_url('user'),
-        'extra_class' => 'gp-student-cta me-2 mb-2',
-    ], true)
-    . '</div>';
+$page_actions = gp_ds_button(get_phrase('create_course'), [
+    'variant' => 'primary',
+    'href'    => site_url('home/create_course'),
+], true) . gp_ds_button(get_phrase('dashboard'), [
+    'variant' => 'outline',
+    'href'    => site_url('user'),
+], true);
 
 $status_counts = '';
 if (is_array($courses_by_status)) {
@@ -72,18 +61,42 @@ $table = gp_ds_table([
 
 <section class="wish-list-body gp-student-shell">
     <div class="container">
-        <?php gp_ds_page_title(get_phrase('instructor_dashboard')); ?>
+        <?php gp_ds_page_title(get_phrase('instructor_dashboard'), $page_actions); ?>
         <div class="row">
             <div class="col-lg-3 col-md-4">
                 <?php include 'profile_menus.php'; ?>
             </div>
             <div class="col-lg-9 col-md-8">
+                <div class="gp-dash-stats gp-student-instructor-stats">
+                    <div class="gp-dash-stat">
+                        <span class="gp-dash-stat-icon"><i class="fa-solid fa-book-open-reader"></i></span>
+                        <span class="gp-dash-stat-value"><?php echo (int) $number_of_courses; ?></span>
+                        <span class="gp-dash-stat-label"><?php echo get_phrase('number_of_courses'); ?></span>
+                    </div>
+                    <div class="gp-dash-stat">
+                        <span class="gp-dash-stat-icon"><i class="fa-solid fa-user-graduate"></i></span>
+                        <span class="gp-dash-stat-value"><?php echo (int) $number_of_enrolment; ?></span>
+                        <span class="gp-dash-stat-label"><?php echo get_phrase('number_of_enrolment'); ?></span>
+                    </div>
+                    <div class="gp-dash-stat">
+                        <span class="gp-dash-stat-icon"><i class="fa-solid fa-sack-dollar"></i></span>
+                        <span class="gp-dash-stat-value"><?php echo html_escape(currency($total_pending_amount)); ?></span>
+                        <span class="gp-dash-stat-label"><?php echo get_phrase('pending_balance'); ?></span>
+                    </div>
+                </div>
+
                 <?php
                 gp_ds_card([
-                    'body'  => $stat_body
-                        . $action_links
-                        . '<div class="gp-student-dashboard-filters mb-3">' . $status_counts . '</div>'
-                        . $table,
+                    'extra_class' => 'gp-dash-panel gp-student-instructor-filters',
+                    'body'        => '<div class="gp-student-dashboard-filters">' . $status_counts . '</div>',
+                ]);
+                ?>
+
+                <?php
+                gp_ds_card([
+                    'title'       => get_phrase('course') . ' ' . get_phrase('list'),
+                    'extra_class' => 'gp-dash-panel',
+                    'body'        => $table,
                 ]);
                 ?>
             </div>
