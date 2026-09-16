@@ -11,7 +11,7 @@
             </a>
             <a href="<?php echo site_url($this->session->userdata('role')); ?>" class="topnav-logo">
                 <span class="topnav-logo-lg">
-                    <img src="<?php echo base_url('uploads/system/' . get_frontend_settings('small_logo')); ?>" alt="" height="32">
+                    <img src="<?php echo base_url('uploads/system/' . (get_frontend_settings('light_logo') ?: get_frontend_settings('small_logo'))); ?>" alt="" height="32">
                 </span>
                 <span class="topnav-logo-sm">
                     <img src="<?php echo base_url('uploads/system/' . get_frontend_settings('small_logo')); ?>" alt="" height="32">
