@@ -80,53 +80,62 @@ if($language_dirs){
 <body class="gp-ds">
 <script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=no-system-1"></script>
 <?php $full_page = $this->session->userdata('full_page_layout'); ?>
-<nav class="navbar navbar-expand bg-dark fixed-top" style="height: 65px;">
+<?php
+	$number_of_lessons = $this->crud_model->get_lessons('course', $course_details['id'])->num_rows();
+	$user_id = $this->session->userdata('user_id');
+	$is_course_instructor = $this->crud_model->is_course_instructor($course_details['id'], $user_id);
+?>
+<nav class="gp-lesson-topbar fixed-top">
 	<div class="container-fluid">
-		<a class="navbar-brand d-none d-md-block" href="<?php echo site_url(); ?>">
-			<img width="150px" src="<?php echo site_url('uploads/system/'.get_frontend_settings('light_logo')) ?>" alt="" />
-		</a>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<div class="gp-theme-row me-3">
-				<button type="button" id="gp-theme-light" class="gp-theme-btn">Light</button>
-				<button type="button" id="gp-theme-dark" class="gp-theme-btn">Dark</button>
-			</div>
-			<ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<a class="nav-link text-white p-0" aria-current="page" href="<?php echo site_url('home/course/'.slugify($course_details['title']).'/'.$course_details['id']); ?>">
-						<?php $number_of_lessons = $this->crud_model->get_lessons('course', $course_details['id'])->num_rows(); ?>
-						<p class="text-md-center fs-6"><?php echo $course_details['title']; ?></p>
-						<?php if(isset($watch_history) && !empty($watch_history['completed_lesson']) && is_array(json_decode($watch_history['completed_lesson'], true))): ?>
-							<p class="text-md-center text-12px"><?php echo $watch_history['course_progress'].'% '.get_phrase('Completed'); ?>(<?php echo count(json_decode($watch_history['completed_lesson'], true)) ?>/<?php echo $number_of_lessons; ?>)</p>
-						<?php endif; ?>
-					</a>
-				</li>
-			</ul>
-
-			<?php if($full_page): ?>
-				<a href="#" onclick="actionTo('<?php echo site_url('home/course_playing_page_layout'); ?>')" class="btn btn-outline-secondary mx-1"><i class="fas fa-arrows-alt"></i></a>
-			<?php else: ?>
-				<a href="#" onclick="actionTo('<?php echo site_url('home/course_playing_page_layout'); ?>')" class="btn btn-outline-secondary mx-1"><i class="fas fa-arrows-alt-h"></i></a>
-			<?php endif; ?>
-
-			<?php $user_id = $this->session->userdata('user_id');
-				$is_course_instructor = $this->crud_model->is_course_instructor($course_details['id'], $user_id);?>
-			<?php if($this->session->userdata('admin_login')): ?>
-				<a href="<?php echo site_url('admin/course_form/course_edit/'.$course_details['id']); ?>" class="btn btn-outline-secondary">
-					<span class="d-none d-sm-inline-block"><?php echo get_phrase('Course Manager'); ?></span>
-					<i class="fas fa-angle-right ms-1 me-1"></i>
-				</a>
-			<?php elseif($is_course_instructor): ?>
-				<a href="<?php echo site_url('user/course_form/course_edit/'.$course_details['id']); ?>" class="btn btn-outline-secondary">
-					<span class="d-none d-sm-inline-block"><?php echo get_phrase('Course Manager'); ?></span>
-					<i class="fas fa-angle-right ms-1 me-1"></i>
-				</a>
-			<?php else: ?>
-				<a href="<?php echo site_url('home/my_courses'); ?>" class="btn btn-outline-secondary">
-					<span class="d-none d-sm-inline-block"><?php echo get_phrase('My Courses'); ?></span>
-					<i class="fas fa-angle-right ms-1 me-1"></i>
-				</a>
-			<?php endif; ?>
+		<div class="gp-lesson-topbar-left">
+			<a class="topnav-logo d-none d-md-inline-flex" href="<?php echo site_url(); ?>">
+				<img src="<?php echo site_url('uploads/system/'.get_frontend_settings('dark_logo')) ?>" alt="" height="32">
+			</a>
+			<a class="gp-lesson-title-link" href="<?php echo site_url('home/course/'.slugify($course_details['title']).'/'.$course_details['id']); ?>">
+				<span class="gp-lesson-course-name"><?php echo $course_details['title']; ?></span>
+				<?php if(isset($watch_history) && !empty($watch_history['completed_lesson']) && is_array(json_decode($watch_history['completed_lesson'], true))): ?>
+					<span class="gp-lesson-progress"><?php echo $watch_history['course_progress'].'% '.get_phrase('Completed'); ?> (<?php echo count(json_decode($watch_history['completed_lesson'], true)) ?>/<?php echo $number_of_lessons; ?>)</span>
+				<?php endif; ?>
+			</a>
 		</div>
+
+		<ul class="list-unstyled gp-lesson-topbar-right mb-0">
+			<li class="gp-admin-theme-item">
+				<div class="gp-theme-row">
+					<button type="button" id="gp-theme-light" data-gp-theme="light" class="gp-theme-btn" aria-label="Light" title="Light">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+					</button>
+					<button type="button" id="gp-theme-dark" data-gp-theme="dark" class="gp-theme-btn" aria-label="Dark" title="Dark">
+						<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"/></svg>
+					</button>
+				</div>
+			</li>
+			<li>
+				<?php if($full_page): ?>
+					<a href="#" onclick="actionTo('<?php echo site_url('home/course_playing_page_layout'); ?>')" class="gp-lesson-btn" title="<?php echo get_phrase('Exit full width'); ?>"><i class="fas fa-arrows-alt"></i></a>
+				<?php else: ?>
+					<a href="#" onclick="actionTo('<?php echo site_url('home/course_playing_page_layout'); ?>')" class="gp-lesson-btn" title="<?php echo get_phrase('Full width'); ?>"><i class="fas fa-arrows-alt-h"></i></a>
+				<?php endif; ?>
+			</li>
+			<li>
+				<?php if($this->session->userdata('admin_login')): ?>
+					<a href="<?php echo site_url('admin/course_form/course_edit/'.$course_details['id']); ?>" class="gp-lesson-btn gp-lesson-btn-text">
+						<span class="d-none d-sm-inline-block"><?php echo get_phrase('Course Manager'); ?></span>
+						<i class="fas fa-angle-right ms-1"></i>
+					</a>
+				<?php elseif($is_course_instructor): ?>
+					<a href="<?php echo site_url('user/course_form/course_edit/'.$course_details['id']); ?>" class="gp-lesson-btn gp-lesson-btn-text">
+						<span class="d-none d-sm-inline-block"><?php echo get_phrase('Course Manager'); ?></span>
+						<i class="fas fa-angle-right ms-1"></i>
+					</a>
+				<?php else: ?>
+					<a href="<?php echo site_url('home/my_courses'); ?>" class="gp-lesson-btn gp-lesson-btn-text">
+						<span class="d-none d-sm-inline-block"><?php echo get_phrase('My Courses'); ?></span>
+						<i class="fas fa-angle-right ms-1"></i>
+					</a>
+				<?php endif; ?>
+			</li>
+		</ul>
 	</div>
 </nav>
 
