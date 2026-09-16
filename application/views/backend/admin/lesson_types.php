@@ -94,11 +94,9 @@
     </div>
 
     <div class="mt-3">
-        <a href="javascript::void(0)"
+        <a href="javascript:void(0)"
         type="button"
         class="btn btn-primary"
-        data-toggle="modal"
-        data-dismiss="modal"
         id = "lesson-add-modal"
         onclick="showLessonAddModal()"><?php echo get_phrase('next'); ?></a>
     </div>
