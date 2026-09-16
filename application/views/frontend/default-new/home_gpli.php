@@ -177,7 +177,6 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
           <?php if ($gpli_media_has_video && $gpli_media['video_title_' . $gpli_media_i] !== ''): ?>
           <div class="video-caption">
             <h4><?php echo htmlspecialchars($gpli_media['video_title_' . $gpli_media_i]); ?></h4>
-            <span class="pace"><?php echo get_phrase('Self-paced'); ?></span>
           </div>
           <?php endif; ?>
         </div>
