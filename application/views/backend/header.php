@@ -17,7 +17,6 @@
                     <img src="<?php echo base_url('uploads/system/' . get_frontend_settings('small_logo')); ?>" alt="" height="32">
                 </span>
             </a>
-            <span class="gp-admin-brand d-none d-md-inline-block"><?php echo $this->db->get_where('settings', array('key' => 'system_name'))->row()->value; ?></span>
         </div>
 
         <ul class="list-unstyled topbar-right-menu gp-admin-topbar-right mb-0">
