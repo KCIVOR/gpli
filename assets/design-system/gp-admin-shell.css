@@ -800,3 +800,40 @@
 .gp-ds .gp-admin-topbar .button-menu-mobile .lines span {
   background-color: var(--gp-fg);
 }
+
+/* ========== Admin content components on phones — Phase 5 ==========
+   Baseline (2026-09-22, admin session, ≤575px): shared components were wider than
+   the card and were clipped by `.content-page { overflow: hidden }` rather than
+   causing page overflow, so they went unnoticed. */
+@media (max-width: 575.98px) {
+  /* gp-components-core.css `.gp-page-title-actions` is a no-wrap flex row: two or
+     more buttons (e.g. course edit: 348px) exceed the 304px title card. */
+  .gp-ds[data-layout="detached"] .content-page .content .gp-page-title-row {
+    flex-wrap: wrap;
+  }
+
+  .gp-ds[data-layout="detached"] .content-page .content .gp-page-title-actions {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Profile/settings file pickers: a flex-grow child beside an avatar cannot shrink
+     below the file input's min-content width, pushing the group ~7px past the card. */
+  .gp-ds[data-layout="detached"] .content-page .content .d-flex > .flex-grow-1 {
+    min-width: 0;
+  }
+
+  .gp-ds[data-layout="detached"] .content-page .content .custom-file {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Bootstrap 4's `.custom-file-input` styling is gone under Bootstrap 5, leaving the
+     native file input at its intrinsic width (344px inside a 272px wrapper). */
+  .gp-ds[data-layout="detached"] .content-page .content .custom-file-input {
+    width: 100%;
+    max-width: 100%;
+  }
+}

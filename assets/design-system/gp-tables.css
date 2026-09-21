@@ -190,3 +190,55 @@
 }
 
 /* Dark mode via CSS variables */
+
+/* ---------- Responsive DataTables in the admin layout (Phase 5) ----------
+   Baseline (2026-09-22, admin courses + users at 390px): `.dataTables_wrapper` was
+   304px wide, but its toolbar, info line, pagination and the table (min-width 640px)
+   each kept their own 640-970px width, and `.content-page { overflow: hidden }`
+   clipped them — columns and controls beyond the card edge could not be reached.
+   The page-level owners (gp-admin-courses.css etc.) place the toolbar in a
+   two-column grid, so these rules add `.content-page .content` to outrank them (users ties otherwise
+   and loads later). At 768px the collapsed sidebar rail leaves the content ~690px wide,
+   still narrower than the 640px table plus card padding, hence 991px, not 767px. */
+@media (max-width: 991.98px) {
+    .gp-ds[data-layout="detached"] .content-page .content .dataTables_wrapper {
+        grid-template-columns: minmax(0, 1fr);
+        max-width: 100%;
+    }
+
+    .gp-ds[data-layout="detached"] .content-page .content .dataTables_wrapper > * {
+        grid-column: 1 / -1;
+        grid-row: auto;
+        justify-self: stretch;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .gp-ds[data-layout="detached"] .content-page .content .dataTables_wrapper .dataTables_paginate {
+        flex-wrap: wrap;
+    }
+
+    /* keep the export button group its natural width instead of a full-width bar */
+    .gp-ds[data-layout="detached"] .content-page .content .dataTables_wrapper .dt-buttons {
+        justify-self: start;
+        width: fit-content;
+    }
+
+    /* The table becomes its own horizontal scroller instead of being clipped. Also covers
+       plain `table.table` blocks that sit in no scroller at all (e.g. admin blog list). */
+    .gp-ds[data-layout="detached"] .content-page .content .dataTables_wrapper table.dataTable,
+    .gp-ds[data-layout="detached"] .content-page .content table.table {
+        display: block;
+        min-width: 0; /* the base rule's 640px min-width would otherwise beat max-width */
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Static tables: Bootstrap's `.table-responsive-sm` only scrolls below 576px, but the
+       sidebar rail makes the content narrower than 640px well above that. */
+    .gp-ds[data-layout="detached"] .content-page .content [class*="table-responsive-"] {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
