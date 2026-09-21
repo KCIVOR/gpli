@@ -237,6 +237,7 @@
           <?php endif; ?>
         </ul>
         <?php $gp_header_use_ids = false;
+        $gp_header_show_theme = true; // set explicitly: the desktop header (same request) turns it off
         include "gp_header_tools.php"; ?>
       </div>
 

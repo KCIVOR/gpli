@@ -101,6 +101,10 @@
                 <li><a href="<?php echo site_url('home/terms_and_condition'); ?>"><?php echo site_phrase('terms_and_condition'); ?></a></li>
                 <li><a href="<?php echo site_url('home/refund_policy'); ?>"><?php echo site_phrase('refund_policy'); ?></a></li>
             </ul>
+            <div class="gp-footer-theme">
+                <?php $gp_theme_use_ids = true;
+                include "gp_theme_toggle.php"; ?>
+            </div>
         </div>
     </div>
 </footer>

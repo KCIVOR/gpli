@@ -305,7 +305,8 @@
           <?php endif; ?>
         <?php endif; ?>
 
-        <?php $gp_header_use_ids = true;
+        <?php $gp_header_use_ids = false;
+        $gp_header_show_theme = false; // theme switch lives in the footer
         include "gp_header_tools.php"; ?>
 
         <?php if ($user_login || $admin_login): ?>
