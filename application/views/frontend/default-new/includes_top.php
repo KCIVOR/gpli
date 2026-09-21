@@ -63,11 +63,11 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-legal-pages.css'); ?>?v=legal-1">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-blog.css'); ?>?v=blog-1">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-contact-us.css'); ?>?v=contact-1">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-compare.css'); ?>?v=compare-1">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-compare.css'); ?>?v=compare-4">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-instructor-page.css'); ?>?v=instructorpage-1">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-community.css'); ?>?v=community-1">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-auth.css'); ?>?v=auth-ds-5">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-courses.css'); ?>?v=catalog-11">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-courses.css'); ?>?v=catalog-13">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-cart.css'); ?>?v=cart-2">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-course-detail.css'); ?>?v=course-7">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-student.css'); ?>?v=student-18">

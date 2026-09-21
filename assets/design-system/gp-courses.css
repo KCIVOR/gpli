@@ -96,7 +96,9 @@
 
 @media (max-width: 991px) {
   .gp-ds .gp-catalog-layout {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr), not 1fr: a bare 1fr track is minmax(auto, 1fr) and grew
+       to its content's min-content width (342px in a 336px box at 360px). */
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .gp-ds .gp-catalog-aside {
@@ -195,6 +197,19 @@
   float: none;
   margin: 0;
   accent-color: var(--gp-primary);
+}
+
+/* style.css `.course-all-category .form-check-input, .course-price .form-check-input`
+   fills unchecked radios with var(--bg-white-2) (lavender). */
+.gp-ds .gp-catalog .form-check-input {
+  background-color: var(--gp-surface);
+}
+
+/* style.css `.form-check-input:checked` paints the old purple (var(--color-4))
+   over Bootstrap's appearance:none radio; accent-color above does not reach it. */
+.gp-ds .gp-catalog .form-check-input:checked {
+  background-color: var(--gp-primary);
+  border-color: var(--gp-primary);
 }
 
 .gp-ds .gp-catalog .form-check-label,

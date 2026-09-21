@@ -67,3 +67,40 @@
 .gp-ds .compare-2-table td {
   color: var(--gp-fg-muted);
 }
+
+/* custom.css `.compare-empty-state i` paints the placeholder icon with the old
+   purple (var(--color-4)). */
+.gp-ds .compare-card .compare-empty-state i {
+  color: var(--gp-fg-faint);
+}
+
+/* Compare table wrapper + label column. style.css/custom.css give the wrapper a
+   hard-coded lavender border and the row headers `var(--bg-white-2)` (lavender).
+   The wrapper's own horizontal scroll (style.css `.compare-2 .compare-2-table`)
+   is intentional and stays. */
+.gp-ds .compare-2 .compare-2-table {
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .compare-table .table th {
+  background-color: var(--gp-paper);
+}
+
+/* custom.css: `.compare-toolbar` border is a hard-coded lavender, `.compare-empty-state`
+   fills with var(--bg-white-2) (lavender), and `.courses-card-body` forces the same
+   lavender border with !important (which beats the DS card border in
+   gp-homepage-builder.css). */
+.gp-ds .compare-card .compare-toolbar {
+  border-color: var(--gp-border);
+}
+
+.gp-ds .compare-card .compare-empty-state {
+  background-color: var(--gp-paper);
+}
+
+.gp-ds .compare-card .courses-card-body {
+  /* !important counters custom.css `.courses-card-body { border-color: ... !important }` */
+  border-color: var(--gp-border) !important;
+}
