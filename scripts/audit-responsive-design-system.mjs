@@ -97,6 +97,20 @@ const clippedContentScan = () => {
   return [...hits].slice(0, 6).map(([k, n]) => k + (n > 1 ? ' x' + n : ''));
 };
 
+// DataTables Responsive collapses narrow tables by hiding columns (display: none). Admin tables must keep every
+// column and scroll sideways instead, so any hidden column in a collapsed table with rows is a failure.
+const collapsedTableScan = () => {
+  const out = [];
+  document.querySelectorAll('table.dataTable.collapsed').forEach((t, i) => {
+    const heads = [...t.querySelectorAll('thead th')];
+    const hidden = heads.filter((th) => getComputedStyle(th).display === 'none').length;
+    const row = t.querySelector('tbody tr:not(.child)');
+    if (!hidden || !row || row.querySelector('td.dataTables_empty')) return;
+    out.push('table #' + (t.id || i) + ': ' + hidden + ' of ' + heads.length + ' columns hidden by DataTables Responsive');
+  });
+  return out;
+};
+
 // Phase 5: open the first non-destructive ajax modal, check it fits the screen, close it. Nothing is saved.
 async function modalProbe(page, row, vp, baseUrl, path, outDir, tag) {
   const fail = (m) => row.failures.push('modal: ' + m);
@@ -137,6 +151,24 @@ async function adminShellProbes(page, row, vp, baseUrl, path, outDir, tag) {
     return { barRight: bar && bar.getBoundingClientRect().right, lastRight: items.length ? Math.max(...items.map((li) => li.getBoundingClientRect().right)) : 0, btnVisible: !!br && br.width > 0, covered };
   });
   if (t.lastRight > vp.width + 1) fail('topbar items extend past the viewport (' + Math.round(t.lastRight) + ')');
+  // Icon rail (tablet / narrow desktop): a click on an item with sub-pages must expand the sidebar and open its dropdown.
+  if (vp.width >= 768) {
+    const inRail = await page.evaluate(() => document.body.classList.contains('enlarged'));
+    const parent = inRail ? await page.$('.left-side-menu .side-nav-item:has(> ul.side-nav-second-level) > a.side-nav-link') : null;
+    if (parent && (await parent.isVisible())) {
+      await parent.click({ timeout: 5000 });
+      await page.waitForTimeout(700);
+      const r = await page.evaluate(() => {
+        const sb = document.querySelector('.left-side-menu').getBoundingClientRect();
+        const open = document.querySelector('.left-side-menu .side-nav-item > ul.side-nav-second-level.in, .left-side-menu .side-nav-item > ul.side-nav-second-level.show');
+        return { w: sb.width, openVisible: !!open && getComputedStyle(open).display !== 'none' && open.getBoundingClientRect().height > 0 };
+      });
+      if (r.w < 150) fail('clicking a sidebar item with sub-pages in the icon rail does not expand the sidebar');
+      else if (!r.openVisible) fail('sidebar expanded but the dropdown did not open');
+      await page.screenshot({ path: outDir + '/' + tag + '-rail-click.png' });
+      await page.goto(baseUrl + path, { waitUntil: 'networkidle' });
+    }
+  }
   if (vp.width < 768) {
     if (!t.btnVisible) fail('menu button not visible');
     else if (t.covered) fail('menu button is covered by another element');
@@ -146,6 +178,25 @@ async function adminShellProbes(page, row, vp, baseUrl, path, outDir, tag) {
       const sb = await page.evaluate(() => { const e = document.querySelector('.left-side-menu'); const r = e.getBoundingClientRect(); return { w: r.width, l: r.left, r: r.right, disp: getComputedStyle(e).display }; });
       if (sb.disp === 'none' || sb.w === 0) fail('sidebar does not open from the menu button');
       else if (sb.l < -1 || sb.r > vp.width + 1) fail('open sidebar outside viewport');
+      // nothing on the page (rich-text toolbars, sticky headers, ...) may be drawn over the open sidebar,
+      // at any scroll position
+      const covered = await page.evaluate(async () => {
+        const sb = document.querySelector('.left-side-menu');
+        const bad = new Set();
+        const maxY = document.documentElement.scrollHeight - window.innerHeight;
+        for (const f of [0, 0.4, 0.8, 1]) {
+          window.scrollTo(0, Math.max(0, maxY) * f);
+          await new Promise((res) => setTimeout(res, 150));
+          const r = sb.getBoundingClientRect();
+          for (const y of [r.top + 60, r.top + r.height * 0.4, r.top + r.height * 0.75]) {
+            const el = document.elementFromPoint(r.left + r.width / 2, Math.min(y, window.innerHeight - 2));
+            if (el && !el.closest('.left-side-menu')) bad.add(el.tagName.toLowerCase() + '.' + String(el.className).trim().split(' ').slice(0, 2).join('.'));
+          }
+        }
+        window.scrollTo(0, 0);
+        return [...bad].slice(0, 3);
+      });
+      if (covered.length) fail('open sidebar is covered by page content: ' + covered.join(', '));
       await page.screenshot({ path: outDir + '/' + tag + '-sidebar.png' });
       await page.goto(baseUrl + path, { waitUntil: 'networkidle' });
     }
@@ -185,9 +236,12 @@ async function shellProbes(page, row, vp, baseUrl, path, outDir, tag) {
 
   if (vp.width < 992) {
     if (!chrome.bar || chrome.bar.w === 0 || chrome.bar.r > vp.width) fail('menu trigger not visible inside viewport');
-    // search overlay
+    // search overlay: opening it must not move the header's own buttons
+    const iconsBefore = await page.evaluate(() => { const r = document.querySelector('.menu-offcanves').getBoundingClientRect(); return { l: r.left, r: r.right }; });
     await page.click('.m-search-icon', { timeout: 5000 });
     await page.waitForTimeout(500);
+    const iconsAfter = await page.evaluate(() => { const r = document.querySelector('.menu-offcanves').getBoundingClientRect(); return { l: r.left, r: r.right }; });
+    if (Math.abs(iconsAfter.r - iconsBefore.r) > 1 || Math.abs(iconsAfter.l - iconsBefore.l) > 1) fail('opening the search moves the header buttons (' + Math.round(iconsBefore.l) + ' -> ' + Math.round(iconsAfter.l) + ')');
     const s = await page.evaluate(([scanSrc]) => {
       const scan = eval('(' + scanSrc + ')');
       const f = document.querySelector('.mobile-search .form-control') || document.querySelector('.mobile-search input');
@@ -301,6 +355,10 @@ for (const theme of runThemes) {
         if (!args.includes('--no-clip')) {
           const cc = await page.evaluate(`(${clippedContentScan.toString()})()`);
           if (cc.length) row.failures.push('content clipped past screen edge: ' + cc.join(', '));
+        }
+        if (!args.includes('--no-tables')) {
+          const ct = await page.evaluate(`(${collapsedTableScan.toString()})()`);
+          if (ct.length) row.failures.push('table: ' + ct.join('; '));
         }
         row.consoleErrors = consoleErrors;
         if (consoleErrors.length) row.failures.push('console errors: ' + consoleErrors.length + ' (' + consoleErrors[0] + ')');
