@@ -9,11 +9,28 @@
  * brand, in both themes, without knowing the content ahead of time.
  */
 
-.gp-ds .gp-policy-page {
+.gp-ds :is(.gp-policy-page, .privacy-policy) {
   padding-block: 40px 72px;
 }
 
-.gp-ds .gp-policy-page-card {
+/* cookie_policy.php still uses the pre-DS `.privacy-policy > .container > .row >
+   .col-12` markup (style.css: white background only, admin HTML unstyled). Give it
+   the same card as the other three legal pages without touching the view. */
+.gp-ds .privacy-policy {
+  background: transparent;
+}
+
+.gp-ds .privacy-policy .row {
+  margin-block: 0 !important; /* counters the view's .my-5 utility */
+  margin-inline: 0; /* drop Bootstrap's negative gutter so the card keeps the container padding */
+}
+
+.gp-ds .privacy-policy .col-12 {
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) {
   max-width: 860px;
   margin: 0 auto;
   background: var(--gp-surface);
@@ -27,7 +44,7 @@
   line-height: 1.75;
 }
 
-.gp-ds .gp-policy-page-card :where(h1, h2, h3, h4) {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) :where(h1, h2, h3, h4) {
   font-family: var(--gp-font-head);
   font-weight: 800;
   color: var(--gp-fg);
@@ -35,41 +52,41 @@
   margin: 1.6em 0 0.6em;
 }
 
-.gp-ds .gp-policy-page-card :where(h1, h2, h3, h4):first-child {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) :where(h1, h2, h3, h4):first-child {
   margin-top: 0;
 }
 
-.gp-ds .gp-policy-page-card h1 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
-.gp-ds .gp-policy-page-card h2 { font-size: 1.3rem; }
-.gp-ds .gp-policy-page-card h3 { font-size: 1.1rem; }
-.gp-ds .gp-policy-page-card h4 { font-size: 1rem; }
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) h1 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); }
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) h2 { font-size: 1.3rem; }
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) h3 { font-size: 1.1rem; }
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) h4 { font-size: 1rem; }
 
-.gp-ds .gp-policy-page-card p {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) p {
   margin: 0 0 1.1em;
 }
 
-.gp-ds .gp-policy-page-card :where(ul, ol) {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) :where(ul, ol) {
   margin: 0 0 1.1em;
   padding-left: 1.4em;
 }
 
-.gp-ds .gp-policy-page-card li {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) li {
   margin-bottom: 0.5em;
 }
 
-.gp-ds .gp-policy-page-card a {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) a {
   color: var(--gp-info);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.gp-ds .gp-policy-page-card a:hover {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) a:hover {
   color: var(--gp-accent);
 }
 
-.gp-ds .gp-policy-page-card strong { color: var(--gp-fg); }
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) strong { color: var(--gp-fg); }
 
-.gp-ds .gp-policy-page-card blockquote {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) blockquote {
   margin: 0 0 1.1em;
   padding: 12px 18px;
   border-left: 3px solid var(--gp-border-strong);
@@ -78,33 +95,33 @@
   border-radius: 0 8px 8px 0;
 }
 
-.gp-ds .gp-policy-page-card hr {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) hr {
   border: none;
   border-top: 1px solid var(--gp-border);
   margin: 2em 0;
 }
 
-.gp-ds .gp-policy-page-card table {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) table {
   width: 100%;
   border-collapse: collapse;
   margin: 0 0 1.4em;
   font-size: 0.9rem;
 }
 
-.gp-ds .gp-policy-page-card :where(th, td) {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) :where(th, td) {
   border: 1px solid var(--gp-border);
   padding: 8px 12px;
   text-align: left;
 }
 
-.gp-ds .gp-policy-page-card th {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) th {
   background: var(--gp-paper);
   color: var(--gp-fg);
   font-family: var(--gp-font-head);
   font-weight: 700;
 }
 
-.gp-ds .gp-policy-page-card img {
+.gp-ds :is(.gp-policy-page-card, .privacy-policy .col-12) img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;

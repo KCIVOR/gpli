@@ -484,3 +484,11 @@
 .gp-ds .popular-content small {
   color: var(--gp-fg-muted);
 }
+
+/* custom.css `.course-all-category { border/box-shadow: ... !important }` wins over
+   the DS card rule above and keeps the old lavender border and grey shadow. */
+.gp-ds .courses-list-view .course-all-category {
+  /* !important counters custom.css `.course-all-category` (border-color, box-shadow) */
+  border-color: var(--gp-border) !important;
+  box-shadow: var(--gp-shadow-card) !important;
+}
