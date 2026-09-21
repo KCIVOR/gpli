@@ -1,0 +1,6 @@
+50 rows, 5 not passing -> tmp/responsive-audit/results-dark.json
+FAIL course-detail dark 1440: console errors: 2 (pageerror: Unexpected token '}')
+FAIL course-detail dark 1024: console errors: 2 (pageerror: Unexpected token '}')
+FAIL course-detail dark 768: console errors: 4 (pageerror: Unexpected token '}')
+FAIL course-detail dark 390: console errors: 4 (pageerror: Unexpected token '}')
+FAIL course-detail dark 360: console errors: 4 (pageerror: Unexpected token '}')

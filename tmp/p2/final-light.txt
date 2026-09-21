@@ -1,0 +1,6 @@
+50 rows, 5 not passing -> tmp/responsive-audit/results-light.json
+FAIL course-detail light 1440: console errors: 2 (pageerror: Unexpected token '}')
+FAIL course-detail light 1024: console errors: 2 (pageerror: Unexpected token '}')
+FAIL course-detail light 768: console errors: 4 (pageerror: Unexpected token '}')
+FAIL course-detail light 390: console errors: 4 (pageerror: Unexpected token '}')
+FAIL course-detail light 360: console errors: 4 (pageerror: Unexpected token '}')

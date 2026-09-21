@@ -1,0 +1,5064 @@
+{
+ "scannedFiles": 4301,
+ "tokens": 194912,
+ "summary": {
+  "style.css": {
+   "total": 2560,
+   "matchedOnAuditedRoutes": 305,
+   "unmatchedOnAuditedRoutes": 2255,
+   "unmatchedButNamesReferencedInSource": 1428,
+   "candidates": 827,
+   "candidatesInMedia": 6
+  },
+  "new-style.css": {
+   "total": 457,
+   "matchedOnAuditedRoutes": 1,
+   "unmatchedOnAuditedRoutes": 456,
+   "unmatchedButNamesReferencedInSource": 313,
+   "candidates": 143,
+   "candidatesInMedia": 17
+  },
+  "responsive.css": {
+   "total": 589,
+   "matchedOnAuditedRoutes": 35,
+   "unmatchedOnAuditedRoutes": 554,
+   "unmatchedButNamesReferencedInSource": 400,
+   "candidates": 154,
+   "candidatesInMedia": 152
+  },
+  "custom.css": {
+   "total": 391,
+   "matchedOnAuditedRoutes": 104,
+   "unmatchedOnAuditedRoutes": 287,
+   "unmatchedButNamesReferencedInSource": 157,
+   "candidates": 130,
+   "candidatesInMedia": 3
+  }
+ },
+ "candidates": {
+  "style.css": [
+   {
+    "sel": ".home_1st",
+    "media": ""
+   },
+   {
+    "sel": ".home_2nd",
+    "media": ""
+   },
+   {
+    "sel": ".home_3rd",
+    "media": ""
+   },
+   {
+    "sel": ".home_4th",
+    "media": ""
+   },
+   {
+    "sel": ".home_5th",
+    "media": ""
+   },
+   {
+    "sel": ".w-65",
+    "media": ""
+   },
+   {
+    "sel": ".cart_tgl",
+    "media": ""
+   },
+   {
+    "sel": ".menu_pro_wish-f-b .prcd",
+    "media": ""
+   },
+   {
+    "sel": ".menu_pro_wish-f-b .prcd a",
+    "media": ""
+   },
+   {
+    "sel": ".menu_pro_cart .maines",
+    "media": ""
+   },
+   {
+    "sel": ".cart_tgl .menu_pro_cart .maines-2",
+    "media": ""
+   },
+   {
+    "sel": ".menu_pro_cart .maines-2::after",
+    "media": ""
+   },
+   {
+    "sel": ".homepage-2-navbar .navbarHover li a:hover",
+    "media": ""
+   },
+   {
+    "sel": ".hoverMenuSearch",
+    "media": ""
+   },
+   {
+    "sel": ".hoverMenuSearch .form-control",
+    "media": ""
+   },
+   {
+    "sel": ".hoverMenuSearch .form-control:focus",
+    "media": ""
+   },
+   {
+    "sel": ".menu-search-icon",
+    "media": ""
+   },
+   {
+    "sel": ".menu-search-icon i",
+    "media": ""
+   },
+   {
+    "sel": ".h-1-banner-img img",
+    "media": ""
+   },
+   {
+    "sel": ".course-subtitle",
+    "media": ""
+   },
+   {
+    "sel": ".courses-card .courses-card-body .courses-card-image .text-2",
+    "media": ""
+   },
+   {
+    "sel": ".courses-card .courses-card-body .courses-card-image .text-2 h3",
+    "media": ""
+   },
+   {
+    "sel": ".courses-card .courses-card-body .courses-card-image .text-2::after",
+    "media": ""
+   },
+   {
+    "sel": ".courses-card .courses-card-body .courses-card-image .text-3 h3",
+    "media": ""
+   },
+   {
+    "sel": ".courses-card .courses-card-body .courses-card-image .text-3",
+    "media": ""
+   },
+   {
+    "sel": ".courses-card .courses-card-body .courses-card-image .text-3::after",
+    "media": ""
+   },
+   {
+    "sel": ".qustion .accordion-item",
+    "media": ""
+   },
+   {
+    "sel": ".qustion .accordion-item:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".qustion .accordion-item .active",
+    "media": ""
+   },
+   {
+    "sel": ".qustion .accordion-button:focus",
+    "media": ""
+   },
+   {
+    "sel": ".qustion .accordion-item",
+    "media": ""
+   },
+   {
+    "sel": ".qustion-accrodion",
+    "media": ""
+   },
+   {
+    "sel": ".qustion-accrodion p",
+    "media": ""
+   },
+   {
+    "sel": ".introduction",
+    "media": ""
+   },
+   {
+    "sel": ".qustion .accordion-body",
+    "media": ""
+   },
+   {
+    "sel": ".qustion .accordion-item:first-of-type .accordion-button",
+    "media": ""
+   },
+   {
+    "sel": ".qustion .accordion-button",
+    "media": ""
+   },
+   {
+    "sel": ".h-1-introduction img",
+    "media": ""
+   },
+   {
+    "sel": ".introduction-name h4",
+    "media": ""
+   },
+   {
+    "sel": ".introduction-name h6",
+    "media": ""
+   },
+   {
+    "sel": ".introduction-name",
+    "media": ""
+   },
+   {
+    "sel": ".introduction .agency-dis p",
+    "media": ""
+   },
+   {
+    "sel": ".introduction-name .agency-dis",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-client-image img",
+    "media": ""
+   },
+   {
+    "sel": ".introduction-item",
+    "media": ""
+   },
+   {
+    "sel": ".introduction .owl-nav .owl-next, .introduction .owl-nav .owl-prev",
+    "media": ""
+   },
+   {
+    "sel": ".introduction .owl-nav .owl-prev:hover, .introduction .owl-nav .owl-next:hover",
+    "media": ""
+   },
+   {
+    "sel": ".blog .courses-card-body .courses-card-image .text-2",
+    "media": ""
+   },
+   {
+    "sel": ".blog .courses-card-body .courses-card-image .text-2 h3",
+    "media": ""
+   },
+   {
+    "sel": ".blog .courses-card-body .courses-card-image .text-3",
+    "media": ""
+   },
+   {
+    "sel": ".blog .courses-card-body .courses-card-image .text-3 h3",
+    "media": ""
+   },
+   {
+    "sel": ".company-logo",
+    "media": ""
+   },
+   {
+    "sel": ".company-logo img",
+    "media": ""
+   },
+   {
+    "sel": ".lattest-news-btn",
+    "media": ""
+   },
+   {
+    "sel": ".footer .copyright .footer-privacy a",
+    "media": ""
+   },
+   {
+    "sel": ".footer .copyright .footer-privacy a:hover",
+    "media": ""
+   },
+   {
+    "sel": ".bread-crumb",
+    "media": ""
+   },
+   {
+    "sel": ".bread-crumb .brd-home",
+    "media": ""
+   },
+   {
+    "sel": ".bread-crumb a",
+    "media": ""
+   },
+   {
+    "sel": ".book-img img",
+    "media": ""
+   },
+   {
+    "sel": ".bread-crumb h1",
+    "media": ""
+   },
+   {
+    "sel": ".lgGrid",
+    "media": ""
+   },
+   {
+    "sel": ".grid-view",
+    "media": ""
+   },
+   {
+    "sel": ".radio-text",
+    "media": ""
+   },
+   {
+    "sel": "#flexCheckChecked:focus-visible",
+    "media": ""
+   },
+   {
+    "sel": ".pagenation .active",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text h1",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text p",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .review",
+    "media": ""
+   },
+   {
+    "sel": ".clock-user",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .clock",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .clock i",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .user",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .user i",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .icon ul",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .icon ul li",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription li .nav-link",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription #myTab",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription li .nav-link::after",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription li .nav-link:hover::after",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription li .nav-link:hover",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side .nav-tabs .nav-item.show .nav-link, .course-left-side .nav-tabs .nav-link.active",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side",
+    "media": ""
+   },
+   {
+    "sel": ".antry-acordion",
+    "media": ""
+   },
+   {
+    "sel": ".antry-acordion .accordion-body",
+    "media": ""
+   },
+   {
+    "sel": ".antry-acordion .accordion-item",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .card-img img",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .card-img",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .card-img .card-video-icon i",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .card-img .card-video-icon",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .enrol",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .enrol .icon",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .enrol .icon img",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .ammount h1",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .ammount h3",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .enrol .icon h4",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .enrol .icon h5",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .button",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .button a",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .button a:hover",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .enrol:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".course-details-card",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side .accordion-button::after",
+    "media": ""
+   },
+   {
+    "sel": ".antry-acordion .accordion-button:not(.collapsed)::after",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side .accordion-button",
+    "media": ""
+   },
+   {
+    "sel": ".qustion .accordion-header",
+    "media": ""
+   },
+   {
+    "sel": ".qustion .accordion-button:not(.collapsed)",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side .accordion-item",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side .accordion-item:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".accordion-body-2 .accordion-body-video .icon i",
+    "media": ""
+   },
+   {
+    "sel": ".accordion-body-2 .accordion-body-video",
+    "media": ""
+   },
+   {
+    "sel": ".accordion-body-2 .accordion-body-video h2",
+    "media": ""
+   },
+   {
+    "sel": ".accordion-body-2",
+    "media": ""
+   },
+   {
+    "sel": ".accordion-body-2 .accordion-time h2",
+    "media": ""
+   },
+   {
+    "sel": ".accordion-body-2 .accordion-body-video h2 a",
+    "media": ""
+   },
+   {
+    "sel": ".accordion-body-2 .accordion-body-video h2 a:hover",
+    "media": ""
+   },
+   {
+    "sel": ".accordion-body-2 .accordion-time h2:hover",
+    "media": ""
+   },
+   {
+    "sel": ".instructor .instructor-text .tera",
+    "media": ""
+   },
+   {
+    "sel": ".comment #fname",
+    "media": ""
+   },
+   {
+    "sel": ".comment #exampleFormControlInput1:focus-visible",
+    "media": ""
+   },
+   {
+    "sel": ".feedback-form .multi-input",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .instructor-student-feed-back h1",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .tab-content p",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .comment h1",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .stdf h1",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .instructor-text p",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .student-feed-back-text p",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .student-feed-back-text .std",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .reviews p",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .reviews .text",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .reviews h2",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .accordion-header",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .accordion-body-2 .accordion-time h2",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2 .accordion-body-2 .video-2",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details-3 .courses-details-1st-text",
+    "media": ""
+   },
+   {
+    "sel": ".courses-details-3",
+    "media": ""
+   },
+   {
+    "sel": ".c-d-3-banner img",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-3 .course-left-side",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-3 .course-card",
+    "media": ""
+   },
+   {
+    "sel": ".c-d-3-banner .card-video-icon i",
+    "media": ""
+   },
+   {
+    "sel": ".c-d-3-banner .card-video-icon i:hover",
+    "media": ""
+   },
+   {
+    "sel": ".cose-p-3-r .course-card .ammount .h3-price",
+    "media": ""
+   },
+   {
+    "sel": ".cose-p-3-r .course-card .ammount",
+    "media": ""
+   },
+   {
+    "sel": ".include-icon",
+    "media": ""
+   },
+   {
+    "sel": ".include-icon h5",
+    "media": ""
+   },
+   {
+    "sel": ".include-icon i",
+    "media": ""
+   },
+   {
+    "sel": ".include-icon img",
+    "media": ""
+   },
+   {
+    "sel": ".feature-time",
+    "media": ""
+   },
+   {
+    "sel": ".feature-time h6",
+    "media": ""
+   },
+   {
+    "sel": ".tramsCondition",
+    "media": ""
+   },
+   {
+    "sel": ".trams-condition-text h1",
+    "media": ""
+   },
+   {
+    "sel": ".blog-right .left-tag",
+    "media": ""
+   },
+   {
+    "sel": ".blog-body .right-section .right-tag a",
+    "media": ""
+   },
+   {
+    "sel": ".blog-body .right-section .right-tag a:hover",
+    "media": ""
+   },
+   {
+    "sel": ".blog-body .right-section .right-tag",
+    "media": ""
+   },
+   {
+    "sel": ".sing-up-img img",
+    "media": ""
+   },
+   {
+    "sel": ".sing-up-right .eye-icon i",
+    "media": ""
+   },
+   {
+    "sel": ".sing-up-right .social-media img",
+    "media": ""
+   },
+   {
+    "sel": ".sing-up-right .social-media a",
+    "media": ""
+   },
+   {
+    "sel": ".sing-up-right .social-media .btn",
+    "media": ""
+   },
+   {
+    "sel": ".sing-up-right .social-media .btn:hover",
+    "media": ""
+   },
+   {
+    "sel": ".forget-pass",
+    "media": ""
+   },
+   {
+    "sel": ".forget-pass .name",
+    "media": ""
+   },
+   {
+    "sel": ".sing-up-right .resend-code .form-control",
+    "media": ""
+   },
+   {
+    "sel": ".sing-up-right .resend-code .btn",
+    "media": ""
+   },
+   {
+    "sel": ".sing-up-right .resend-code .btn a",
+    "media": ""
+   },
+   {
+    "sel": ".instructor-1 .instructor-video img",
+    "media": ""
+   },
+   {
+    "sel": ".instructor-1 .instructor-video",
+    "media": ""
+   },
+   {
+    "sel": ".instructor-1 .instructor-video .card-video-icon i",
+    "media": ""
+   },
+   {
+    "sel": ".wishlist-course",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-body .wish-list-search",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-body .wish-list-search .search-btn i",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-body .wish-list-search .search-btn",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-body .wish-list-search h5",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-body .wish-list-search .form-control",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-body .wish-list-search .form-control:focus",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-course .my-cosre",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-course .my-cosre a",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-course .my-cosre i",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-course .my-cosre:hover",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-course .my-cosre:hover i, .wish-list-course .my-cosre:hover a",
+    "media": ""
+   },
+   {
+    "sel": ".conversation-sending .img-attecment",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-body h5",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-body h6",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-body h4",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-body h3",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-body h3 a",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-body h3 a p",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-body img",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-body",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-2-img a",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-1",
+    "media": ""
+   },
+   {
+    "sel": ".table-head",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-2-img",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-2:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-2:first-child",
+    "media": ""
+   },
+   {
+    "sel": ".purchase-body",
+    "media": ""
+   },
+   {
+    "sel": ".profile .profile-bg img",
+    "media": ""
+   },
+   {
+    "sel": ".profile .profile-bg",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input-1",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input .form-control",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input .from-control-2",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input-1",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input-3",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input-5",
+    "media": ""
+   },
+   {
+    "sel": ".profile-font .input-group .form-select",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input-5 p",
+    "media": ""
+   },
+   {
+    "sel": ".profile-font",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input-3",
+    "media": ""
+   },
+   {
+    "sel": ".profile-font-icon",
+    "media": ""
+   },
+   {
+    "sel": ".profile-font-icon i",
+    "media": ""
+   },
+   {
+    "sel": ".profile-bio .form-control",
+    "media": ""
+   },
+   {
+    "sel": ".profile-bio",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input-4 .form-control",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input-1:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".profile-input-6",
+    "media": ""
+   },
+   {
+    "sel": ".faq .faq-accrodion .faq-acc-heading h4",
+    "media": ""
+   },
+   {
+    "sel": ".faq .faq-accrodion .faq-acc-heading h1",
+    "media": ""
+   },
+   {
+    "sel": ".faq .faq-accrodion .faq-acc-heading",
+    "media": ""
+   },
+   {
+    "sel": ".antry-acordion .accordion",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side .accordion-button",
+    "media": ""
+   },
+   {
+    "sel": ".price-card, .price-heading",
+    "media": ""
+   },
+   {
+    "sel": ".price-card",
+    "media": ""
+   },
+   {
+    "sel": ".price-card-full-body",
+    "media": ""
+   },
+   {
+    "sel": ".price-icon img",
+    "media": ""
+   },
+   {
+    "sel": ".price-icon",
+    "media": ""
+   },
+   {
+    "sel": ".price-card .price-card-full-body .price-card-heading a",
+    "media": ""
+   },
+   {
+    "sel": ".price-card-heading",
+    "media": ""
+   },
+   {
+    "sel": ".price-card .price-card-full-body .price-card-heading h6",
+    "media": ""
+   },
+   {
+    "sel": ".price-card .price-card-full-body .ammount",
+    "media": ""
+   },
+   {
+    "sel": ".price-card .price-card-full-body .ammount h5",
+    "media": ""
+   },
+   {
+    "sel": ".price-card .price-card-full-body .ammount h1",
+    "media": ""
+   },
+   {
+    "sel": ".price-card .price-card-full-body .ammount h6",
+    "media": ""
+   },
+   {
+    "sel": ".price-icon h6",
+    "media": ""
+   },
+   {
+    "sel": ".price-card .price-card-full-body .price-btn a",
+    "media": ""
+   },
+   {
+    "sel": ".price-card .price-card-full-body .price-btn",
+    "media": ""
+   },
+   {
+    "sel": ".price-card-full-body:hover",
+    "media": ""
+   },
+   {
+    "sel": ".price-card-full-body:hover .price-card-heading a",
+    "media": ""
+   },
+   {
+    "sel": ".price-card-full-body:hover .ammount",
+    "media": ""
+   },
+   {
+    "sel": ".price-card-full-body:hover .ammount h6",
+    "media": ""
+   },
+   {
+    "sel": ".price-card-full-body:hover .ammount h1",
+    "media": ""
+   },
+   {
+    "sel": ".price-card-full-body:hover .ammount h5",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page .contact-heading h3",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page .contact-heading",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page .contact-image img",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page .contact-image",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page .contact-image::after",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page .office-hour",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page .office-hour .office-hour-text h4",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page .office-hour p",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page .office-hour p:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".contact-page .office-hour .icon i",
+    "media": ""
+   },
+   {
+    "sel": ".form-section #exampleFormControlInput1:focus-visible",
+    "media": ""
+   },
+   {
+    "sel": ".form-section .cheack-box .form-check-input",
+    "media": ""
+   },
+   {
+    "sel": ".form-section .cheack-box p",
+    "media": ""
+   },
+   {
+    "sel": ".form-section .cheack-box .form-check",
+    "media": ""
+   },
+   {
+    "sel": ".form-section .form-btn a",
+    "media": ""
+   },
+   {
+    "sel": ".form-section .form-btn",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table .cart-heading-text h3",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table .cart-table-image img",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table .cart-table-image",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table .cart-table-image i",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table a",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table h5",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table .table th",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table .table th p",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table .table tr",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table .table td",
+    "media": ""
+   },
+   {
+    "sel": ".cart-page .cart-table .table tr:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".cart-total h4",
+    "media": ""
+   },
+   {
+    "sel": ".cart-total",
+    "media": ""
+   },
+   {
+    "sel": ".cart-total .sub-total",
+    "media": ""
+   },
+   {
+    "sel": ".cart-total .tax",
+    "media": ""
+   },
+   {
+    "sel": ".cart-total h6",
+    "media": ""
+   },
+   {
+    "sel": ".cart-total p",
+    "media": ""
+   },
+   {
+    "sel": ".cart-total .cart-total-btn a",
+    "media": ""
+   },
+   {
+    "sel": ".cart-total .cart-total-btn",
+    "media": ""
+   },
+   {
+    "sel": ".cart-scroll-bar",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription-2",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-heading",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-heading h2",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact .email",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact h4",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact h6",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact .form-control",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact .form-select",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact .form-select::placeholder",
+    "media": ""
+   },
+   {
+    "sel": ".shiping-information",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact #exampleFormControlInput1:focus-visible",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact .form-select:focus-visible",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card .form-check-input:checked",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card .form-check-input[type=\"checkbox\"]",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card .form-check #flexCheckChecked",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card .cradit-card",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card .cradit-card .text",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card .cradit-card .text h5",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card .cradit-card .text p",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card .cradit-card",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card:hover",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact .date-control .form-control",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact #exampleFormControlInput2:focus-visible",
+    "media": ""
+   },
+   {
+    "sel": ".payment-imformation-card .form-check #flexCheckDefault",
+    "media": ""
+   },
+   {
+    "sel": ".paypal .cradit-card",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-cart",
+    "media": ""
+   },
+   {
+    "sel": ".check-out-contact",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-dec .print-btn a",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invioce-logo img",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-heading",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-bill h6",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-bill h2",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-bill h5",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-bill p",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-bill h2 span",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-total .invoice-no-2",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-total",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-total h4",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-total h5",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-total p",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-bill::after",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2-table-head",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2-table-head h6",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 .invoice-dec p",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2 tr:nth-child(2n)",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2-note",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2-note-p",
+    "media": ""
+   },
+   {
+    "sel": ".about-us",
+    "media": ""
+   },
+   {
+    "sel": ".about-us h3",
+    "media": ""
+   },
+   {
+    "sel": ".about-us h1",
+    "media": ""
+   },
+   {
+    "sel": ".about-us p",
+    "media": ""
+   },
+   {
+    "sel": ".about-us h4",
+    "media": ""
+   },
+   {
+    "sel": ".about-us h4 img",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-btn",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-btn a",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-right",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-right .about-us-right-main-img img",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-r-1 img",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-r-1 h6",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-r-1 p",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-r-1",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-r-1 .about-us-r-1-text",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-r-2 img",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-r-2 h6",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-r-2 p",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-r-2",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-us-r-2 .about-us-r-1-text",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-star-img img",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-star-img .about-star-1",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-star-img .about-star-2",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-star-img-2 img",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-star-img-2 .about-star-1",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-star-img-2 .about-star-2",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-star-img-2 .about-star-3",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-star-img-2 .about-star-4",
+    "media": ""
+   },
+   {
+    "sel": ".about-us .about-star-img-2 .about-star-5",
+    "media": ""
+   },
+   {
+    "sel": ".about-us-related",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-banner .hello",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-banner img",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-banner",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .body-1 li",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .body-1 h4 a",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .body-1 h4",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .body-1 p a",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .body-1 a",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .body-1 a:hover",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .body-1",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .body-1:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body ul",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .video a i",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .video .card-video-icon",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .body-1-head a",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .video p a",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-body .course-play-left-body .body-1 p a:hover",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .course-play-video img",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .course-play-video",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .course-play-video .icon .card-video-icon",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .review-icon ul li",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .review-icon ul",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .review-icon ul li i",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .review-icon ul li a",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .digital h3",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .digital p",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .profile img",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .profile",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .profile .text h4 a",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .profile .text p",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .profile .text",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right .profile",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .nav-tabs .nav-link",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .nav-tabs",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-search .form-control",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-search .search-btn",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-search .search-btn i",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-text h4",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-text .course-1st",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-text p",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .like",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .like p",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .like button",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .like .like-left",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-nav-profile img",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-nav-profile",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-nav-profile h4",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-nav-profile p",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-nav-datase h4",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-nav-datase p",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-nav-datase .like-2 button",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-tab .course-nav-tommy",
+    "media": ""
+   },
+   {
+    "sel": ".course-play-right",
+    "media": ""
+   },
+   {
+    "sel": ".compare-card .empty-card",
+    "media": ""
+   },
+   {
+    "sel": ".compare-card .empty-card .icon",
+    "media": ""
+   },
+   {
+    "sel": ".compare-card .empty-card .icon a",
+    "media": ""
+   },
+   {
+    "sel": ".compare-table .table td .level .active-4",
+    "media": ""
+   },
+   {
+    "sel": ".compare-table .table td .level .active-5",
+    "media": ""
+   },
+   {
+    "sel": ".compare-table .table td .level .active-6",
+    "media": ""
+   },
+   {
+    "sel": ".compare-table .table td .level .active-7",
+    "media": ""
+   },
+   {
+    "sel": ".compare-table .table td .level .active-8",
+    "media": ""
+   },
+   {
+    "sel": ".compare-table .table td .level .active-9",
+    "media": ""
+   },
+   {
+    "sel": ".antry-compare",
+    "media": ""
+   },
+   {
+    "sel": ".compare-table-con",
+    "media": ""
+   },
+   {
+    "sel": ".compare-head",
+    "media": ""
+   },
+   {
+    "sel": ".sticky-col",
+    "media": ""
+   },
+   {
+    "sel": ".first-col",
+    "media": ""
+   },
+   {
+    "sel": ".compare-fixed i",
+    "media": ""
+   },
+   {
+    "sel": ".compare-fixed .card-head img",
+    "media": ""
+   },
+   {
+    "sel": ".compare-fixed .large-img img",
+    "media": ""
+   },
+   {
+    "sel": ".compare-fixed p",
+    "media": ""
+   },
+   {
+    "sel": ".compare-fixed .compare-star i",
+    "media": ""
+   },
+   {
+    "sel": ".homepage-2-menubar li .header-dropdown",
+    "media": ""
+   },
+   {
+    "sel": ".homepage-2-menubar .header-dropdown",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-faq h1",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-faq p",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-faq .faq-accrodion .faq-acc-heading",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-faq .faq-accrodion .accordion-body p",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-faq .faq-accrodion .accordion-body",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-clients-review .h-2-clients-review-text h1",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-clients-review .h-2-clients-review-text p",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-clients-review-carousel .h-2-carousel-parrent .child-1 img",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-clients-review-carousel .h-2-carousel-parrent",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-clients-review-carousel .h-2-carousel-parrent .child-2 h4",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-clients-review-carousel .h-2-carousel-parrent .child-2 h5",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-clients-review-carousel .h-2-carousel-parrent .child-2 a",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-clients-review-carousel .h-2-carousel-parrent .child-2 .icon i",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-clients-review-carousel .h-2-carousel-parrent .child-2",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-clients-review-carousel .h-2-carousel-parrent",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-carousel-g-parrent .child-text p",
+    "media": ""
+   },
+   {
+    "sel": ".h-2-carousel-g-parrent",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-header-banner",
+    "media": ""
+   },
+   {
+    "sel": ".homepage-3-menu-bar li .header-dropdown",
+    "media": ""
+   },
+   {
+    "sel": ".homepage-3-menu-bar .header-dropdown",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-slider",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-slider .slick-initialized .slick-slide",
+    "media": ""
+   },
+   {
+    "sel": ".testi-person",
+    "media": ""
+   },
+   {
+    "sel": ".testi-person img",
+    "media": ""
+   },
+   {
+    "sel": ".author-say h5",
+    "media": ""
+   },
+   {
+    "sel": ".author-say ul",
+    "media": ""
+   },
+   {
+    "sel": ".author-say ul li i",
+    "media": ""
+   },
+   {
+    "sel": ".author-say ul li.active i",
+    "media": ""
+   },
+   {
+    "sel": ".author-say p",
+    "media": ""
+   },
+   {
+    "sel": ".overflow-area",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-about img",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-about .h-3-about-content h4",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-about .h-3-about-content h1",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-about .h-3-about-content p",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-about .h-3-about-content ul li",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-about .h-3-about-content ul",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-about .h-3-about-content ul li a",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-about .h-3-about-content ul li a img",
+    "media": ""
+   },
+   {
+    "sel": ".h-3-about",
+    "media": ""
+   },
+   {
+    "sel": ".client-testi",
+    "media": ""
+   },
+   {
+    "sel": ".trams-condition-text",
+    "media": ""
+   },
+   {
+    "sel": ".trams-condition-text h1",
+    "media": ""
+   },
+   {
+    "sel": ".trams-condition-text p",
+    "media": ""
+   },
+   {
+    "sel": ".trams-condition-text-2",
+    "media": ""
+   },
+   {
+    "sel": ".privacy-policy-text",
+    "media": ""
+   },
+   {
+    "sel": ".privacy-policy-text p",
+    "media": ""
+   },
+   {
+    "sel": ".privacy-policy-text h1",
+    "media": ""
+   },
+   {
+    "sel": ".privacy-policy-text h3",
+    "media": ""
+   },
+   {
+    "sel": ".privacy-policy-text-2 p",
+    "media": ""
+   },
+   {
+    "sel": ".privacy-policy-text-2-img",
+    "media": ""
+   },
+   {
+    "sel": ".privacy-policy-text-3",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-full-body",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-full-body h1",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-full-body .my-course-1-full-body-card .my-course-1-img img",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-full-body .my-course-1-full-body-card",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-full-body .my-course-1-full-body-card:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-full-body .my-course-1-full-body-card .my-course-1-text .my-course-1-text-heading h3",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-full-body .my-course-1-full-body-card .my-course-1-text",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-full-body .my-course-1-full-body-card .my-course-1-text .my-course-1-text-heading",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-full-body .my-course-1-full-body-card .my-course-1-text .my-course-1-text-heading .child-icon i",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-lesson-text img",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-lesson-text i",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-lesson-text",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-lesson-text .icon-1",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-lesson-text .icon-1 p",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-lesson-text .icon-1",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-last .my-course-1-btn .btn",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-last .my-course-1-btn .btn a",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-last",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-last .icon-img",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-last .icon-img img",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-last .icon-img .star i",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-last .icon-img .star",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-last .icon-img .star .gold",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-skill",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-skill p",
+    "media": ""
+   },
+   {
+    "sel": ".skill-bar-container",
+    "media": ""
+   },
+   {
+    "sel": ".skill-bar-label",
+    "media": ""
+   },
+   {
+    "sel": ".pt-30",
+    "media": ""
+   },
+   {
+    "sel": ".pt-40",
+    "media": ""
+   },
+   {
+    "sel": ".pb-10",
+    "media": ""
+   },
+   {
+    "sel": ".pb-12",
+    "media": ""
+   },
+   {
+    "sel": ".pb-80",
+    "media": ""
+   },
+   {
+    "sel": ".pb-120",
+    "media": ""
+   },
+   {
+    "sel": ".pl-20",
+    "media": ""
+   },
+   {
+    "sel": ".g-10",
+    "media": ""
+   },
+   {
+    "sel": ".g-12",
+    "media": ""
+   },
+   {
+    "sel": ".g-20",
+    "media": ""
+   },
+   {
+    "sel": ".g-30",
+    "media": ""
+   },
+   {
+    "sel": ".rg-24",
+    "media": ""
+   },
+   {
+    "sel": ".s_title_one",
+    "media": ""
+   },
+   {
+    "sel": ".s_info_one",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_one",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_one",
+    "media": "screen and (max-width: 767px)"
+   },
+   {
+    "sel": ".s_Sidebar_one .title",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_one .title h4",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_one .content",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_title_one",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_title_one.s_bar::before",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_checkbox_one input",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_checkbox_one input:checked ~ label",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_checkbox_one label",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_checkbox_one ~ span.no",
+    "media": ""
+   },
+   {
+    "sel": ".s_Sidebar_checkbox_one:has(input:checked) ~ span.no",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one",
+    "media": "screen and (max-width: 991px)"
+   },
+   {
+    "sel": ".s_course_item_one .img",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content .title",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content .title .sub-title",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content .title .name-rating",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content .title .name",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content .title .rating",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content .title .rating p",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content .title .schedule-no",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content .info",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content .price",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_item_one .content .type",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_tag_list",
+    "media": ""
+   },
+   {
+    "sel": ".s_course_tag",
+    "media": ""
+   },
+   {
+    "sel": ".rating-icon",
+    "media": ""
+   },
+   {
+    "sel": ".rating-icon > *",
+    "media": ""
+   },
+   {
+    "sel": ".s_show_more",
+    "media": ""
+   },
+   {
+    "sel": ".s_search",
+    "media": ""
+   },
+   {
+    "sel": ".s_search_custome_bundles",
+    "media": ""
+   },
+   {
+    "sel": ".s_search input",
+    "media": ""
+   },
+   {
+    "sel": ".s_search input::placeholder",
+    "media": ""
+   },
+   {
+    "sel": ".s_search span",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-items",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-item-one",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-item-one .status",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-item-one .status.free",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-item-one .status.free p",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-item-one .status p",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-item-one .content",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-item-one .content .title",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-item-one .content .link",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-content .info",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-content .info:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".sNav-tabs",
+    "media": ""
+   },
+   {
+    "sel": ".sNav-tabs .nav-link",
+    "media": ""
+   },
+   {
+    "sel": ".sTab-content",
+    "media": ""
+   },
+   {
+    "sel": ".sTab-content p",
+    "media": ""
+   },
+   {
+    "sel": ".s_review .title",
+    "media": ""
+   },
+   {
+    "sel": ".s_review .date",
+    "media": ""
+   },
+   {
+    "sel": ".s_review .rating-no",
+    "media": ""
+   },
+   {
+    "sel": ".ebook-img img",
+    "media": ""
+   },
+   {
+    "sel": ".s_ebook_instructor",
+    "media": ""
+   },
+   {
+    "sel": ".s_ebook_instructor",
+    "media": "screen and (max-width: 575px)"
+   },
+   {
+    "sel": ".s_ebook_instructor .img",
+    "media": ""
+   },
+   {
+    "sel": ".s_ebook_instructor .content",
+    "media": ""
+   },
+   {
+    "sel": ".s_ebook_instructor .img img",
+    "media": ""
+   },
+   {
+    "sel": ".s_ebook_instructor .content .name",
+    "media": ""
+   },
+   {
+    "sel": ".s_ebook_instructor .content .subtitle",
+    "media": ""
+   },
+   {
+    "sel": ".s_ebook_instructor .content .info",
+    "media": ""
+   },
+   {
+    "sel": ".instructor_social",
+    "media": ""
+   },
+   {
+    "sel": ".instructor_social li a",
+    "media": ""
+   },
+   {
+    "sel": ".instructor_social li a:hover",
+    "media": ""
+   },
+   {
+    "sel": ".s_list_one li",
+    "media": ""
+   },
+   {
+    "sel": ".s_list_one li:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".s_list_one li:last-child::before",
+    "media": ""
+   },
+   {
+    "sel": ".s_list_one li::before",
+    "media": ""
+   },
+   {
+    "sel": ".s_list_one li::after",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-head",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-head .price",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-head .name",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-head .info",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-foot",
+    "media": ""
+   },
+   {
+    "sel": ".mt-1px",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-foot:hover",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-body",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-body::-webkit-scrollbar",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-body::-webkit-scrollbar-track",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-body::-webkit-scrollbar-thumb",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-body ul li",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-body ul li:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-item",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-item .content",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-item .content .img",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-item .content .img img",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-item .content .title",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-item .price",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-item .price",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-details .img",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-details .content .title",
+    "media": ""
+   },
+   {
+    "sel": ".bundle-active",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-details .content .title",
+    "media": "screen and (max-width: 575px)"
+   },
+   {
+    "sel": ".sTutor-details .subtitle",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-details .top h4",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-details .subtitle::before",
+    "media": ""
+   },
+   {
+    "sel": ".tutor-tab-content",
+    "media": ""
+   },
+   {
+    "sel": ".tutor-tab-content p",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-about",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-about .item",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-about .item::before",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-about .item:first-child::before",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-about .item h4",
+    "media": ""
+   },
+   {
+    "sel": ".sTutor-about .item .info",
+    "media": ""
+   },
+   {
+    "sel": ".sReview-author .name",
+    "media": ""
+   },
+   {
+    "sel": ".sReview-author .date",
+    "media": ""
+   },
+   {
+    "sel": ".sReview-author .rate-no",
+    "media": ""
+   },
+   {
+    "sel": ".sReview-content .title",
+    "media": ""
+   },
+   {
+    "sel": ".sReview-content .info",
+    "media": ""
+   },
+   {
+    "sel": ".sReview-list",
+    "media": ""
+   },
+   {
+    "sel": ".sReview-list li",
+    "media": ""
+   },
+   {
+    "sel": ".sReview-list li:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".sReview-list li::before, .sReview-list li::after",
+    "media": ""
+   },
+   {
+    "sel": ".sAdd-btn",
+    "media": ""
+   },
+   {
+    "sel": ".sSchedule-title",
+    "media": ""
+   },
+   {
+    "sel": ".sSchedule-title.slick-current",
+    "media": ""
+   },
+   {
+    "sel": ".sSchedule-items",
+    "media": ""
+   },
+   {
+    "sel": ".sSchedule-items",
+    "media": "screen and (max-width: 991px)"
+   },
+   {
+    "sel": ".sSchedule-items::-webkit-scrollbar",
+    "media": ""
+   },
+   {
+    "sel": ".sSchedule-items::-webkit-scrollbar-track",
+    "media": ""
+   },
+   {
+    "sel": ".sSchedule-items::-webkit-scrollbar-thumb",
+    "media": ""
+   },
+   {
+    "sel": ".sSchedule-item",
+    "media": ""
+   },
+   {
+    "sel": ".sSchedule-item .date",
+    "media": ""
+   },
+   {
+    "sel": ".sSchedule-item .week-day",
+    "media": ""
+   },
+   {
+    "sel": ".sSchedule-item.active .date",
+    "media": ""
+   },
+   {
+    "sel": ".sRequest-lesson",
+    "media": ""
+   },
+   {
+    "sel": ".sRequest-lesson",
+    "media": "screen and (max-width: 991px)"
+   },
+   {
+    "sel": ".sRequest-btn",
+    "media": ""
+   },
+   {
+    "sel": ".sRequest-form label",
+    "media": ""
+   },
+   {
+    "sel": ".sRequest-form input",
+    "media": ""
+   },
+   {
+    "sel": ".sRequest-form input:focus",
+    "media": ""
+   },
+   {
+    "sel": ".sRequest-form input::placeholder",
+    "media": ""
+   },
+   {
+    "sel": ".eCircle",
+    "media": ""
+   },
+   {
+    "sel": ".eCircle .circleOne img",
+    "media": ""
+   },
+   {
+    "sel": ".eCircle .cirlceTwo",
+    "media": ""
+   },
+   {
+    "sel": ".eCircle span img",
+    "media": ""
+   },
+   {
+    "sel": ".eCircle_parent",
+    "media": ""
+   },
+   {
+    "sel": ".EbannerTop",
+    "media": ""
+   },
+   {
+    "sel": ".EbannerRight",
+    "media": ""
+   },
+   {
+    "sel": ".EbannerTop .search-option .submit-cls",
+    "media": ""
+   },
+   {
+    "sel": ".EbannerTop .search-option .form-control",
+    "media": ""
+   },
+   {
+    "sel": ".EbannerTop p",
+    "media": ""
+   },
+   {
+    "sel": ".Ebanner",
+    "media": ""
+   },
+   {
+    "sel": ".EbannerLeft",
+    "media": ""
+   },
+   {
+    "sel": ".Ebanner img",
+    "media": ""
+   },
+   {
+    "sel": ".EbannerLeft h1",
+    "media": ""
+   },
+   {
+    "sel": ".Ebaner-card",
+    "media": ""
+   },
+   {
+    "sel": ".Ebaner-card .banner-card-1",
+    "media": ""
+   },
+   {
+    "sel": ".eCategory",
+    "media": ""
+   },
+   {
+    "sel": ".eCategory .cate-icon",
+    "media": ""
+   },
+   {
+    "sel": ".eCategory .cate-icon i",
+    "media": ""
+   },
+   {
+    "sel": ".category-product .eCategory:hover .cate-icon i",
+    "media": ""
+   },
+   {
+    "sel": ".category-product .eCategory:hover",
+    "media": ""
+   },
+   {
+    "sel": ".category-product .eCategory:hover p, .category-product .eCategory:hover h5",
+    "media": ""
+   },
+   {
+    "sel": ".mt-24",
+    "media": ""
+   },
+   {
+    "sel": ".arrow-side",
+    "media": ""
+   },
+   {
+    "sel": ".arrow-side::after",
+    "media": ""
+   },
+   {
+    "sel": ".arrow-side:last-child::after",
+    "media": ""
+   },
+   {
+    "sel": ".arrow-side .banner-card-1 img",
+    "media": ""
+   },
+   {
+    "sel": ".Ebaner-card .banner-card-1 p, .Ebaner-card h6",
+    "media": ""
+   },
+   {
+    "sel": ".eExpert-instruction .eInstuctor .instructor-card-text .icon-div-2",
+    "media": ""
+   },
+   {
+    "sel": ".eExpert-instruction .eInstuctor .instructor-card-img img",
+    "media": ""
+   },
+   {
+    "sel": ".eExpert-instruction .eInstuctor .instructor-card-img",
+    "media": ""
+   },
+   {
+    "sel": ".eExpert-instruction .eInstuctor .instructor-card-img::after",
+    "media": ""
+   },
+   {
+    "sel": ".nInstructor",
+    "media": ""
+   },
+   {
+    "sel": ".nInstructor::after",
+    "media": ""
+   },
+   {
+    "sel": ".nInstructor .instructor-card-text",
+    "media": ""
+   },
+   {
+    "sel": ".eCircle .cirlceTwo",
+    "media": ""
+   },
+   {
+    "sel": ".eExpert-instruction .instructor-card .instructor-card-text .icon a",
+    "media": ""
+   },
+   {
+    "sel": ".ePromotion h4",
+    "media": ""
+   },
+   {
+    "sel": ".ePromotion h4 span",
+    "media": ""
+   },
+   {
+    "sel": ".ePromotion p",
+    "media": ""
+   },
+   {
+    "sel": ".eBtn",
+    "media": ""
+   },
+   {
+    "sel": ".eBtn .btn",
+    "media": ""
+   },
+   {
+    "sel": ".eBtn .btn:hover",
+    "media": ""
+   },
+   {
+    "sel": ".ePormotion_right img",
+    "media": ""
+   },
+   {
+    "sel": ".mt-120",
+    "media": ""
+   },
+   {
+    "sel": ".Etop_right p",
+    "media": ""
+   },
+   {
+    "sel": ".Etop_right p::after",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription .course-right-section",
+    "media": ""
+   },
+   {
+    "sel": ".cate-image img",
+    "media": ""
+   },
+   {
+    "sel": ".elipis-1",
+    "media": ""
+   },
+   {
+    "sel": ".Ebaner-card h6",
+    "media": ""
+   },
+   {
+    "sel": ".EbannerTop .search-option",
+    "media": ""
+   },
+   {
+    "sel": ".cTitle",
+    "media": ""
+   },
+   {
+    "sel": ".cTitle h1",
+    "media": ""
+   },
+   {
+    "sel": ".cTitle p",
+    "media": ""
+   },
+   {
+    "sel": ".ammount .echecks",
+    "media": ""
+   },
+   {
+    "sel": ".nBread",
+    "media": ""
+   },
+   {
+    "sel": ".nBread a",
+    "media": ""
+   },
+   {
+    "sel": ".nBread .breadcrumb-item + .breadcrumb-item::before",
+    "media": ""
+   },
+   {
+    "sel": ".nBread .breadcrumb-item.active",
+    "media": ""
+   },
+   {
+    "sel": ".eInfo p",
+    "media": ""
+   },
+   {
+    "sel": ".eInfo a",
+    "media": ""
+   },
+   {
+    "sel": ".info-tag p",
+    "media": ""
+   },
+   {
+    "sel": ".f-14",
+    "media": ""
+   },
+   {
+    "sel": ".info-tag .fa-clock",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription li .nav-link",
+    "media": ""
+   },
+   {
+    "sel": ".course-details-sidebar .courses-card-image",
+    "media": ""
+   },
+   {
+    "sel": ".course-details-sidebar .courses-card-image img",
+    "media": ""
+   },
+   {
+    "sel": ".course-details-sidebar",
+    "media": ""
+   },
+   {
+    "sel": ".eSocialShare",
+    "media": ""
+   },
+   {
+    "sel": ".eSocialShare p",
+    "media": ""
+   },
+   {
+    "sel": ".eSocialShare a",
+    "media": ""
+   },
+   {
+    "sel": ".eLink",
+    "media": ""
+   },
+   {
+    "sel": ".eLink .icon",
+    "media": ""
+   },
+   {
+    "sel": ".eLink .icon .icon-div-2 a svg",
+    "media": ""
+   },
+   {
+    "sel": ".eLink:hover .icon",
+    "media": ""
+   },
+   {
+    "sel": ".eLink:hover .instructor-card-text",
+    "media": ""
+   },
+   {
+    "sel": ".eLink:hover .nInstructor::after",
+    "media": ""
+   },
+   {
+    "sel": ".mt-2px",
+    "media": ""
+   },
+   {
+    "sel": ".hero2-iconbox2-rounded",
+    "media": ""
+   },
+   {
+    "sel": ".header-wrap",
+    "media": ""
+   },
+   {
+    "sel": ".brandSlider3-height .swiper-slide",
+    "media": ""
+   },
+   {
+    "sel": ".cCard-note-badge1",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type1-category",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type1-category:hover",
+    "media": ""
+   },
+   {
+    "sel": ".bCard2-read-time",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category:hover",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category.category-color1",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category.category-color1:hover",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category.category-color2",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category.category-color2:hover",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category.category-color3",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category.category-color3:hover",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category.category-color4",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category.category-color4:hover",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category.category-color5",
+    "media": ""
+   },
+   {
+    "sel": ".bCard-type2-category.category-color5:hover",
+    "media": ""
+   },
+   {
+    "sel": ".ft2-contact-item",
+    "media": ""
+   },
+   {
+    "sel": ".ft2-contact-item p",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-footer-content",
+    "media": ""
+   },
+   {
+    "sel": ".lms-card-hover2",
+    "media": ""
+   },
+   {
+    "sel": ".lms-card-hover2:hover",
+    "media": ""
+   },
+   {
+    "sel": ".list-view-banner1",
+    "media": ""
+   },
+   {
+    "sel": ".list-view-banner1 > img",
+    "media": ""
+   },
+   {
+    "sel": ".card-rating-reviews1",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-name",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-rol",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-image",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-image img",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-col:nth-child(4n+1) .lms2-instructor-image",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-col:nth-child(4n+2) .lms2-instructor-image",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-col:nth-child(4n+3) .lms2-instructor-image",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-col:nth-child(4n+4) .lms2-instructor-image",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-wrap",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-image::after",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-col:nth-child(4n+1) .lms2-instructor-image::after",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-col:nth-child(4n+2) .lms2-instructor-image::after",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-col:nth-child(4n+3) .lms2-instructor-image::after",
+    "media": ""
+   },
+   {
+    "sel": ".lms2-instructor-col:nth-child(4n+4) .lms2-instructor-image::after",
+    "media": ""
+   },
+   {
+    "sel": ".lms3-reviewer-location",
+    "media": ""
+   },
+   {
+    "sel": ".row-28",
+    "media": ""
+   },
+   {
+    "sel": ".row-30",
+    "media": ""
+   },
+   {
+    "sel": ".gx-20px",
+    "media": ""
+   },
+   {
+    "sel": ".gap-2px",
+    "media": ""
+   },
+   {
+    "sel": ".gap-14px",
+    "media": ""
+   },
+   {
+    "sel": ".gap-18px",
+    "media": ""
+   },
+   {
+    "sel": ".gap-22px",
+    "media": ""
+   },
+   {
+    "sel": ".gap-26px",
+    "media": ""
+   },
+   {
+    "sel": ".gap-28px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-10",
+    "media": ""
+   },
+   {
+    "sel": ".mb-12",
+    "media": ""
+   },
+   {
+    "sel": ".mb-14",
+    "media": ""
+   },
+   {
+    "sel": ".mb-60",
+    "media": ""
+   },
+   {
+    "sel": ".mb-4px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-8px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-16px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-28px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-70px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-90px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-110px",
+    "media": ""
+   },
+   {
+    "sel": ".p-2px",
+    "media": ""
+   },
+   {
+    "sel": ".p-6px",
+    "media": ""
+   },
+   {
+    "sel": ".p-10px",
+    "media": ""
+   },
+   {
+    "sel": ".p-12px",
+    "media": ""
+   },
+   {
+    "sel": ".p-14px",
+    "media": ""
+   },
+   {
+    "sel": ".p-16px",
+    "media": ""
+   },
+   {
+    "sel": ".p-18px",
+    "media": ""
+   },
+   {
+    "sel": ".fs-31px",
+    "media": ""
+   },
+   {
+    "sel": ".fs-43px",
+    "media": ""
+   },
+   {
+    "sel": ".fs-56px",
+    "media": ""
+   },
+   {
+    "sel": ".fs-105px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-20px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-37px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-48px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-56px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-64px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-129px",
+    "media": ""
+   },
+   {
+    "sel": ".course-item-6 .img.customHeight",
+    "media": ""
+   },
+   {
+    "sel": ".course-item-6 .img.customHeight img",
+    "media": ""
+   },
+   {
+    "sel": ".course-item-5 .img.customHeight",
+    "media": ""
+   },
+   {
+    "sel": ".course-item-5 .img.customHeight img",
+    "media": ""
+   },
+   {
+    "sel": ".search-post",
+    "media": ""
+   },
+   {
+    "sel": ".search-post input",
+    "media": ""
+   }
+  ],
+  "new-style.css": [
+   {
+    "sel": ".maw-600",
+    "media": ""
+   },
+   {
+    "sel": ".maw-514",
+    "media": ""
+   },
+   {
+    "sel": ".pt-40",
+    "media": ""
+   },
+   {
+    "sel": ".pb-40",
+    "media": ""
+   },
+   {
+    "sel": ".pb-191",
+    "media": ""
+   },
+   {
+    "sel": ".rg-0",
+    "media": ""
+   },
+   {
+    "sel": ".cg-0",
+    "media": ""
+   },
+   {
+    "sel": ".g-30",
+    "media": ""
+   },
+   {
+    "sel": ".g-35",
+    "media": ""
+   },
+   {
+    "sel": ".bs-one",
+    "media": ""
+   },
+   {
+    "sel": ".ff-manrope",
+    "media": ""
+   },
+   {
+    "sel": ".ff-raleway",
+    "media": ""
+   },
+   {
+    "sel": ".fz_18_sb_18",
+    "media": ""
+   },
+   {
+    "sel": ".fz_sm_26_b_42",
+    "media": "screen and (max-width: 767px)"
+   },
+   {
+    "sel": ".c-800000000e96",
+    "media": ""
+   },
+   {
+    "sel": ".btn-one",
+    "media": ""
+   },
+   {
+    "sel": ".btn-two",
+    "media": ""
+   },
+   {
+    "sel": ".btn-two::before",
+    "media": ""
+   },
+   {
+    "sel": ".btn-five",
+    "media": ""
+   },
+   {
+    "sel": ".menu-header",
+    "media": ""
+   },
+   {
+    "sel": ".menu-header .container",
+    "media": ""
+   },
+   {
+    "sel": ".menu-header .main_menu_wrap",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area ul",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area li a",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area li a:hover, .navigation-main-area li a.active",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area li a:hover::before, .navigation-main-area li a.active::before",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area li a.active",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown .dropdown-menu",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown .dropdown-menu li",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown .dropdown-menu li:hover",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown .dropdown-menu li:hover a",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown .dropdown-menu li:hover a::before",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown .dropdown-menu li a",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown .dropdown-menu li a::before",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown .dropdown-menu li a:hover",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown .dropdown-menu li:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area .dropdown:hover .dropdown-menu",
+    "media": ""
+   },
+   {
+    "sel": ".navigation-main-area ul",
+    "media": "screen and (max-width: 1166px)"
+   },
+   {
+    "sel": ".navigation-main-area li",
+    "media": "screen and (max-width: 1166px)"
+   },
+   {
+    "sel": ".navigation-main-area li:first-child",
+    "media": "screen and (max-width: 1166px)"
+   },
+   {
+    "sel": ".main-header.sticky-on",
+    "media": "screen and (max-width: 1024px)"
+   },
+   {
+    "sel": ".main-header.sticky-on .menu-header",
+    "media": "screen and (max-width: 1024px)"
+   },
+   {
+    "sel": ".menu-header .container",
+    "media": "screen and (max-width: 1024px)"
+   },
+   {
+    "sel": ".menu-header .main-menu",
+    "media": "screen and (max-width: 1024px)"
+   },
+   {
+    "sel": ".navigation-main-area ul",
+    "media": "screen and (max-width: 1024px)"
+   },
+   {
+    "sel": ".menu-header .main-menu",
+    "media": "screen and (max-width: 991px)"
+   },
+   {
+    "sel": ".navigation-main-area",
+    "media": "screen and (max-width: 991px)"
+   },
+   {
+    "sel": ".logo-col",
+    "media": "(max-width: 575px)"
+   },
+   {
+    "sel": ".menu-col",
+    "media": "(max-width: 575px)"
+   },
+   {
+    "sel": ".top-header",
+    "media": ""
+   },
+   {
+    "sel": ".header-social",
+    "media": ""
+   },
+   {
+    "sel": ".header-social",
+    "media": "screen and (max-width: 575px)"
+   },
+   {
+    "sel": ".header-social a",
+    "media": ""
+   },
+   {
+    "sel": ".header-right",
+    "media": ""
+   },
+   {
+    "sel": ".header-right .item",
+    "media": ""
+   },
+   {
+    "sel": ".header-right .item span",
+    "media": ""
+   },
+   {
+    "sel": ".header-right .user",
+    "media": ""
+   },
+   {
+    "sel": ".header-right .user img",
+    "media": ""
+   },
+   {
+    "sel": ".smenu-4",
+    "media": ""
+   },
+   {
+    "sel": ".smenu-4 .header-dropdown",
+    "media": ""
+   },
+   {
+    "sel": ".smenu-5 .header-dropdown",
+    "media": ""
+   },
+   {
+    "sel": ".smenu-6 .header-dropdown",
+    "media": ""
+   },
+   {
+    "sel": ".smenu-4 .header-dropdown img",
+    "media": ""
+   },
+   {
+    "sel": ".smenu-4 ~ .s_search",
+    "media": ""
+   },
+   {
+    "sel": ".footer-subscribe",
+    "media": ""
+   },
+   {
+    "sel": ".footer-subscribe",
+    "media": "screen and (max-width: 575px)"
+   },
+   {
+    "sel": ".footer-subscribe::before",
+    "media": ""
+   },
+   {
+    "sel": ".footer-subscribe .graphic",
+    "media": ""
+   },
+   {
+    "sel": ".footer-subscribe .title",
+    "media": ""
+   },
+   {
+    "sel": ".footer-subscribe .sForm",
+    "media": ""
+   },
+   {
+    "sel": ".footer-subscribe .sForm input",
+    "media": ""
+   },
+   {
+    "sel": ".footer-subscribe .sForm input::placeholder, .footer-subscribe .sForm input:focus",
+    "media": ""
+   },
+   {
+    "sel": ".footer-subscribe .sForm button",
+    "media": ""
+   },
+   {
+    "sel": ".footer-top",
+    "media": ""
+   },
+   {
+    "sel": ".footer-widget .title",
+    "media": ""
+   },
+   {
+    "sel": ".footer-widget .info",
+    "media": ""
+   },
+   {
+    "sel": ".footer-nav li",
+    "media": ""
+   },
+   {
+    "sel": ".footer-nav li:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".footer-nav li a",
+    "media": ""
+   },
+   {
+    "sel": ".footer-nav-2",
+    "media": ""
+   },
+   {
+    "sel": ".footer-nav-2 li a",
+    "media": ""
+   },
+   {
+    "sel": ".footer-middle",
+    "media": ""
+   },
+   {
+    "sel": ".footer-middle::before",
+    "media": ""
+   },
+   {
+    "sel": ".footer-middle::after",
+    "media": ""
+   },
+   {
+    "sel": ".footer-copyright",
+    "media": ""
+   },
+   {
+    "sel": ".footer-copyright span",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-copyright",
+    "media": ""
+   },
+   {
+    "sel": ".footer-6",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-top",
+    "media": ""
+   },
+   {
+    "sel": ".footer-6 .footer-top",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-middle",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-middle::after",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-middle .footer-nav-2",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-middle .footer-nav-2 li a",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-bottom",
+    "media": ""
+   },
+   {
+    "sel": ".footer-6 .footer-bottom",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-bottom::before, .footer-6 .footer-bottom::before",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-widget .title",
+    "media": ""
+   },
+   {
+    "sel": ".footer-6 .footer-widget .title",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-nav li a",
+    "media": ""
+   },
+   {
+    "sel": ".footer-6 .footer-nav li a",
+    "media": ""
+   },
+   {
+    "sel": ".footer-5 .footer-widget .info",
+    "media": ""
+   },
+   {
+    "sel": ".footer-6 .footer-widget .info",
+    "media": ""
+   },
+   {
+    "sel": ".kitchen-social",
+    "media": ""
+   },
+   {
+    "sel": ".kitchen-social li a",
+    "media": ""
+   },
+   {
+    "sel": ".banner-five-content .link-video",
+    "media": ""
+   },
+   {
+    "sel": ".banner-five-content .link-video .icon",
+    "media": ""
+   },
+   {
+    "sel": ".brand-5 .container",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5 .p-icon",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5 .title",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5 .info",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5 .price",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5 .price span",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5 .link",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5 .list",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5 .list li",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5 .list li .icon",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5 .list li p",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5.active, .price-item-5:hover",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5.active .p-icon, .price-item-5:hover .p-icon",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5.active .price, .price-item-5:hover .price",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5.active .link, .price-item-5:hover .link",
+    "media": ""
+   },
+   {
+    "sel": ".price-item-5.active .list li .icon svg path, .price-item-5:hover .list li .icon svg path",
+    "media": ""
+   },
+   {
+    "sel": ".title-img-5 img",
+    "media": ""
+   },
+   {
+    "sel": ".title-four .title",
+    "media": ""
+   },
+   {
+    "sel": ".title-four .info",
+    "media": ""
+   },
+   {
+    "sel": ".title-four .info:last-child",
+    "media": ""
+   },
+   {
+    "sel": ".become-instructor-6-img",
+    "media": ""
+   },
+   {
+    "sel": ".become-instructor-6-img",
+    "media": "screen and (max-width: 991px)"
+   },
+   {
+    "sel": ".become-instructor-6-img::after",
+    "media": ""
+   },
+   {
+    "sel": ".become-instructor-6-img img",
+    "media": ""
+   },
+   {
+    "sel": ".become-instructor-6-img img",
+    "media": "screen and (max-width: 575px)"
+   },
+   {
+    "sel": ".become-instructor-6-img .video-icon",
+    "media": ""
+   },
+   {
+    "sel": ".section-kitchen-item",
+    "media": ""
+   },
+   {
+    "sel": ".section-kitchen-item .item",
+    "media": ""
+   },
+   {
+    "sel": ".section-kitchen-item .item .icon",
+    "media": ""
+   },
+   {
+    "sel": ".section-kitchen-item .item .info",
+    "media": ""
+   },
+   {
+    "sel": ".section-kitchen-img",
+    "media": ""
+   },
+   {
+    "sel": ".section-kitchen-img img",
+    "media": ""
+   }
+  ],
+  "responsive.css": [
+   {
+    "sel": ".navbar-toggler",
+    "media": ""
+   },
+   {
+    "sel": ".navbar-toggler:focus",
+    "media": ""
+   },
+   {
+    "sel": ".c-d-3-banner img",
+    "media": "(max-width: 1200px)"
+   },
+   {
+    "sel": ".course-decription-3 .course-left-side",
+    "media": "(max-width: 1200px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .form-control",
+    "media": "(max-width: 1200px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .btn",
+    "media": "(max-width: 1200px)"
+   },
+   {
+    "sel": ".profile-input .form-control",
+    "media": "(max-width: 1200px)"
+   },
+   {
+    "sel": ".price-card .price-card-full-body .price-btn a",
+    "media": "(max-width: 1200px)"
+   },
+   {
+    "sel": ".cart-total .cart-total-btn a",
+    "media": "(max-width: 1200px)"
+   },
+   {
+    "sel": ".c-d-3-banner img",
+    "media": "(max-width: 1100px)"
+   },
+   {
+    "sel": ".cart-total .cart-total-btn a",
+    "media": "(max-width: 1100px)"
+   },
+   {
+    "sel": ".arrow-side::after",
+    "media": "(max-width: 1100px)"
+   },
+   {
+    "sel": ".h-3-about",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".hoverMenuSearch",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".introduction-item",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".c-d-3-banner img",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".course-decription-3 .course-left-side",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".c-d-3-banner .card-video-icon i",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".forget-pass",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .form-control",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .btn",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".wish-list-body .wish-list-search .search-btn i",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".wish-list-body .wish-list-search .form-control",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".profile-input .form-control",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".profile-input",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".profile-input-3",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".input-group #inputGroupSelect04",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".profile-font-icon",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".faq .faq-accrodion .faq-acc-heading h1",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".faq .faq-accrodion .faq-acc-heading",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".about-us .about-us-r-2 img",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".about-us .about-us-r-2 .about-us-r-1-text",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".about-us .about-us-r-1 img",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".about-us .about-us-r-1 .about-us-r-1-text",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".about-us .about-us-r-1",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".about-us .about-us-r-2",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".about-us .about-us-right .about-us-right-main-img img",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".course-play-right .course-play-video .icon .card-video-icon",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".compare-card .empty-card",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".my-course-1-full-body .my-course-1-full-body-card",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".my-course-1-full-body .my-course-1-full-body-card .my-course-1-text",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".contact-page",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".contact-page .contact-image img",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".my-course-1-full-body .my-course-1-full-body-card .my-course-1-img img",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".EbannerTop",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".Ebanner img",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".EbannerRight",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".Ebaner-card",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".c-d-3-banner img",
+    "media": "(max-width: 900px)"
+   },
+   {
+    "sel": ".forget-pass",
+    "media": "(max-width: 900px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .form-control",
+    "media": "(max-width: 900px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .btn",
+    "media": "(max-width: 900px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .form-control",
+    "media": "(max-width: 900px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .btn",
+    "media": "(max-width: 900px)"
+   },
+   {
+    "sel": ".course-play-tab .nav-tabs .nav-link",
+    "media": "(max-width: 900px)"
+   },
+   {
+    "sel": ".course-play-right .review-icon ul li i",
+    "media": "(max-width: 900px)"
+   },
+   {
+    "sel": ".course-play-right .course-play-video .icon .card-video-icon",
+    "media": "(max-width: 900px)"
+   },
+   {
+    "sel": ".bread-crumb h1",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".c-d-3-banner img",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".h-3-slider .slick-initialized .slick-slide",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".company-logo",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".testi-person img",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".c-d-3-banner .card-video-icon i",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".course-decription-3 .course-left-side",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".clock-user",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .clock",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .icon ul",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".book-img img",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".sing-up-img img",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .form-control",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".price-card .price-card-full-body .price-btn a",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".course-play-body",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".course-play-right .course-play-video .icon .card-video-icon",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".course-play-banner img",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".eExpert-instruction .eInstuctor .instructor-card-img img",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".eExpert-instruction .instructor-card .instructor-card-body",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".eCircle_parent",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".Ebaner-card",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".EbannerRight",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".Ebaner-card .banner-card-1 p, .Ebaner-card h6",
+    "media": "(max-width: 768px)"
+   },
+   {
+    "sel": ".c-d-3-banner img",
+    "media": "(max-width: 668px)"
+   },
+   {
+    "sel": ".c-d-3-banner .card-video-icon i",
+    "media": "(max-width: 668px)"
+   },
+   {
+    "sel": ".course-decription-3 .course-left-side",
+    "media": "(max-width: 668px)"
+   },
+   {
+    "sel": ".courses-details-3 .courses-details-1st-text",
+    "media": "(max-width: 668px)"
+   },
+   {
+    "sel": ".sing-up-img img",
+    "media": "(max-width: 668px)"
+   },
+   {
+    "sel": ".contact-page .office-time",
+    "media": "(max-width: 668px)"
+   },
+   {
+    "sel": ".course-play-body",
+    "media": "(max-width: 668px)"
+   },
+   {
+    "sel": ".course-play-right .course-play-video .icon .card-video-icon",
+    "media": "(max-width: 668px)"
+   },
+   {
+    "sel": ".course-play-banner img",
+    "media": "(max-width: 668px)"
+   },
+   {
+    "sel": ".c-d-3-banner img",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".c-d-3-banner .card-video-icon i",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".courses-details-3 .courses-details-1st-text",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".footer .copyright .footer-privacy a",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".book-img img",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".course-play-body",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".course-play-right .course-play-video .icon .card-video-icon",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".contact-page .office-hour",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".contact-page .office-hour .icon i",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".grid-heading",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".price-card .price-card-full-body .ammount h1",
+    "media": "(max-width: 576px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text h1",
+    "media": "(max-width: 500px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text p",
+    "media": "(max-width: 500px)"
+   },
+   {
+    "sel": ".c-d-3-banner img",
+    "media": "(max-width: 500px)"
+   },
+   {
+    "sel": ".c-d-3-banner .card-video-icon i",
+    "media": "(max-width: 500px)"
+   },
+   {
+    "sel": ".sing-up-img img",
+    "media": "(max-width: 500px)"
+   },
+   {
+    "sel": ".course-play-body",
+    "media": "(max-width: 500px)"
+   },
+   {
+    "sel": ".course-play-right .course-play-video .icon .card-video-icon",
+    "media": "(max-width: 500px)"
+   },
+   {
+    "sel": ".course-play-banner img",
+    "media": "(max-width: 500px)"
+   },
+   {
+    "sel": ".hoverMenuSearch",
+    "media": "(max-width: 500px)"
+   },
+   {
+    "sel": ".hoverMenuSearch",
+    "media": "(max-width: 500px)"
+   },
+   {
+    "sel": ".hoverMenuSearch",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".hoverMenuSearch .form-control",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".c-d-3-banner img",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".c-d-3-banner .card-video-icon i",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".courses-details-3 .courses-details-1st-text",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".footer .copyright .footer-privacy a",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".book-img img",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".bread-crumb h1",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text h1",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text p",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".clock-user",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .clock",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .icon ul",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .clock i",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text .user i",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".courses-details .courses-details-1st-text p",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".course-decription li .nav-link",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".sing-up-img img",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .form-control",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".sing-up-right .resend-code .btn",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".profile-input-1",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".invoice-2 .invoice-total",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".course-play-body",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".course-play-right .course-play-video .icon .card-video-icon",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".course-play-banner img",
+    "media": "(max-width: 420px)"
+   },
+   {
+    "sel": ".ft1-newsletter-title",
+    "media": "(max-width: 1199px)"
+   },
+   {
+    "sel": ".lms2-footer-content",
+    "media": "(max-width: 1199px)"
+   },
+   {
+    "sel": ".brandSlider3-height .swiper-slide",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".ft1-newsletter-title",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".lms1-footer-content",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".ft1-logo-area",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".lms2-instructor-name",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".lms3-reviewer-location",
+    "media": "(max-width: 991px)"
+   },
+   {
+    "sel": ".brandSlider3-height .swiper-slide",
+    "media": "(max-width: 767px)"
+   },
+   {
+    "sel": ".lms1-footer-newsletter",
+    "media": "(max-width: 767px)"
+   },
+   {
+    "sel": ".ft1-newsletter-title",
+    "media": "(max-width: 767px)"
+   },
+   {
+    "sel": ".lms2-instructor-name",
+    "media": "(max-width: 767px)"
+   },
+   {
+    "sel": ".brandSlider3-height .swiper-slide",
+    "media": "(max-width: 575px)"
+   },
+   {
+    "sel": ".lms1-footer-newsletter",
+    "media": "(max-width: 575px)"
+   },
+   {
+    "sel": ".ft1-newsletter-title",
+    "media": "(max-width: 575px)"
+   },
+   {
+    "sel": ".fit1-newsLetter-btn",
+    "media": "(max-width: 575px)"
+   },
+   {
+    "sel": ".lms2-instructor-name",
+    "media": "(max-width: 575px)"
+   },
+   {
+    "sel": ".lms1-footer-newsletter",
+    "media": "(max-width: 450px)"
+   },
+   {
+    "sel": ".lms2-footer-content",
+    "media": "(max-width: 1199px)"
+   }
+  ],
+  "custom.css": [
+   {
+    "sel": ".mt-5px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-6px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-7px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-9px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-10px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-11px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-12px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-13px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-14px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-15px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-16px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-17px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-18px",
+    "media": ""
+   },
+   {
+    "sel": ".mt-19px",
+    "media": ""
+   },
+   {
+    "sel": ".me-5px",
+    "media": ""
+   },
+   {
+    "sel": ".me-6px",
+    "media": ""
+   },
+   {
+    "sel": ".me-7px",
+    "media": ""
+   },
+   {
+    "sel": ".me-8px",
+    "media": ""
+   },
+   {
+    "sel": ".me-9px",
+    "media": ""
+   },
+   {
+    "sel": ".me-10px",
+    "media": ""
+   },
+   {
+    "sel": ".me-11px",
+    "media": ""
+   },
+   {
+    "sel": ".me-12px",
+    "media": ""
+   },
+   {
+    "sel": ".me-13px",
+    "media": ""
+   },
+   {
+    "sel": ".me-14px",
+    "media": ""
+   },
+   {
+    "sel": ".me-15px",
+    "media": ""
+   },
+   {
+    "sel": ".me-16px",
+    "media": ""
+   },
+   {
+    "sel": ".me-17px",
+    "media": ""
+   },
+   {
+    "sel": ".me-18px",
+    "media": ""
+   },
+   {
+    "sel": ".me-19px",
+    "media": ""
+   },
+   {
+    "sel": ".me-20px",
+    "media": ""
+   },
+   {
+    "sel": ".text-19px",
+    "media": ""
+   },
+   {
+    "sel": ".text-11px",
+    "media": ""
+   },
+   {
+    "sel": ".text-8px",
+    "media": ""
+   },
+   {
+    "sel": ".fw-100",
+    "media": ""
+   },
+   {
+    "sel": ".fw-200",
+    "media": ""
+   },
+   {
+    "sel": ".fw-300",
+    "media": ""
+   },
+   {
+    "sel": ".fw-800",
+    "media": ""
+   },
+   {
+    "sel": ".fw-900",
+    "media": ""
+   },
+   {
+    "sel": ".radius-0",
+    "media": ""
+   },
+   {
+    "sel": ".radius-7",
+    "media": ""
+   },
+   {
+    "sel": ".radius-8",
+    "media": ""
+   },
+   {
+    "sel": ".radius-9",
+    "media": ""
+   },
+   {
+    "sel": ".radius-11",
+    "media": ""
+   },
+   {
+    "sel": ".radius-12",
+    "media": ""
+   },
+   {
+    "sel": ".radius-13",
+    "media": ""
+   },
+   {
+    "sel": ".radius-14",
+    "media": ""
+   },
+   {
+    "sel": ".radius-15",
+    "media": ""
+   },
+   {
+    "sel": ".radius-end-8",
+    "media": ""
+   },
+   {
+    "sel": ".ellipsis-line-4",
+    "media": ""
+   },
+   {
+    "sel": ".ellipsis-line-5",
+    "media": ""
+   },
+   {
+    "sel": ".object-fit-cover",
+    "media": ""
+   },
+   {
+    "sel": ".course-heading-info",
+    "media": ""
+   },
+   {
+    "sel": ".course-heading-info .info-tag",
+    "media": ""
+   },
+   {
+    "sel": ".course-heading-info .info-tag i",
+    "media": ""
+   },
+   {
+    "sel": ".course-heading-info .info-tag .text-12px",
+    "media": "only screen and (max-width: 500px)"
+   },
+   {
+    "sel": ".created-by-instructor",
+    "media": ""
+   },
+   {
+    "sel": ".created-by-instructor:hover",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side .faq.accordion-button::after",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription .course-right-section",
+    "media": ""
+   },
+   {
+    "sel": ".course-decription .course-right-section",
+    "media": "only screen and (max-width: 991px)"
+   },
+   {
+    "sel": ".course-decription .course-left-side",
+    "media": "only screen and (max-width: 991px)"
+   },
+   {
+    "sel": ".course-right-section .button a:hover, .course-right-section .button a.active",
+    "media": ""
+   },
+   {
+    "sel": ".blog-search-input",
+    "media": ""
+   },
+   {
+    "sel": ".blog-search-button",
+    "media": ""
+   },
+   {
+    "sel": ".blog-search-input.form-control:focus",
+    "media": ""
+   },
+   {
+    "sel": ".wish-list-body .wish-list-search",
+    "media": ""
+   },
+   {
+    "sel": ".my-course-1-full-body",
+    "media": ""
+   },
+   {
+    "sel": ".student-profile-info",
+    "media": ""
+   },
+   {
+    "sel": ".student-profile-info .profile-image",
+    "media": ""
+   },
+   {
+    "sel": ".student-profile-info h4",
+    "media": ""
+   },
+   {
+    "sel": ".student-profile-info span",
+    "media": ""
+   },
+   {
+    "sel": ".btn-profile-menu",
+    "media": ""
+   },
+   {
+    "sel": ".btn-profile-menu:hover, .btn-profile-menu.active",
+    "media": ""
+   },
+   {
+    "sel": ".scrollarea",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .enrol .icon h4, .course-right-section .course-card .enrol > h5",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .enrol .icon img",
+    "media": ""
+   },
+   {
+    "sel": ".font-inter-dark",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side .nav-link.active svg *, .course-left-side .nav-link:hover svg *",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side .accordion-item",
+    "media": ""
+   },
+   {
+    "sel": ".course-left-side .accordion-button",
+    "media": ""
+   },
+   {
+    "sel": ".invoice-2-table-head h6",
+    "media": ""
+   },
+   {
+    "sel": ".sbundle-items .bundle-body",
+    "media": ""
+   },
+   {
+    "sel": ".availOptions .aBox",
+    "media": ""
+   },
+   {
+    "sel": ".courses .eimage img",
+    "media": ""
+   },
+   {
+    "sel": ".grecaptcha-badge",
+    "media": ""
+   },
+   {
+    "sel": ".course-bundle-details .created-by-instructor",
+    "media": ""
+   },
+   {
+    "sel": ".course-right-section .course-card .card-img img",
+    "media": ""
+   },
+   {
+    "sel": ".eBundle-details .course-details-sidebar h1",
+    "media": ""
+   },
+   {
+    "sel": ".mb-4px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-8px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-16px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-28px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-70px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-90px",
+    "media": ""
+   },
+   {
+    "sel": ".mb-110px",
+    "media": ""
+   },
+   {
+    "sel": ".p-2px",
+    "media": ""
+   },
+   {
+    "sel": ".p-6px",
+    "media": ""
+   },
+   {
+    "sel": ".p-10px",
+    "media": ""
+   },
+   {
+    "sel": ".p-12px",
+    "media": ""
+   },
+   {
+    "sel": ".p-14px",
+    "media": ""
+   },
+   {
+    "sel": ".p-16px",
+    "media": ""
+   },
+   {
+    "sel": ".p-18px",
+    "media": ""
+   },
+   {
+    "sel": ".fs-31px",
+    "media": ""
+   },
+   {
+    "sel": ".fs-43px",
+    "media": ""
+   },
+   {
+    "sel": ".fs-56px",
+    "media": ""
+   },
+   {
+    "sel": ".fs-105px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-20px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-37px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-48px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-56px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-64px",
+    "media": ""
+   },
+   {
+    "sel": ".lh-129px",
+    "media": ""
+   },
+   {
+    "sel": ".italic-1",
+    "media": ""
+   },
+   {
+    "sel": ".subtitle-1",
+    "media": ""
+   },
+   {
+    "sel": ".title-2",
+    "media": ""
+   },
+   {
+    "sel": ".subtitle-5",
+    "media": ""
+   },
+   {
+    "sel": ".subtitle-6",
+    "media": ""
+   },
+   {
+    "sel": ".title-7",
+    "media": ""
+   },
+   {
+    "sel": ".text-dark-2",
+    "media": ""
+   },
+   {
+    "sel": ".text-dark-3",
+    "media": ""
+   },
+   {
+    "sel": ".text-dark-4",
+    "media": ""
+   },
+   {
+    "sel": ".text-danger-2",
+    "media": ""
+   },
+   {
+    "sel": ".text-pink",
+    "media": ""
+   },
+   {
+    "sel": ".text-pink-2",
+    "media": ""
+   },
+   {
+    "sel": ".text-purple-2",
+    "media": ""
+   },
+   {
+    "sel": ".text-brown-2",
+    "media": ""
+   },
+   {
+    "sel": ".text-skyblue-2",
+    "media": ""
+   },
+   {
+    "sel": ".text-secondary-2",
+    "media": ""
+   },
+   {
+    "sel": ".rounded-10px",
+    "media": ""
+   },
+   {
+    "sel": ".rounded-5px",
+    "media": ""
+   }
+  ]
+ }
+}

@@ -1,0 +1,12 @@
+import { createRequire } from 'node:module';
+import { execSync } from 'node:child_process';
+import { dirname, join } from 'node:path';
+const bin = execSync('where playwright',{encoding:'utf8'}).split(/\r?\n/)[0].trim();
+const { chromium } = createRequire(import.meta.url)(join(dirname(bin),'..','playwright'));
+const b = await chromium.launch();
+const c = await b.newContext({viewport:{width:390,height:760}});
+const p = await c.newPage();
+await p.goto('http://localhost/academy/',{waitUntil:'networkidle'});
+await p.click('.m-search-icon'); await p.waitForTimeout(500);
+console.log(await p.evaluate(()=>{const o=[];document.querySelectorAll('.mobile-search, .mobile-search *').forEach(e=>{const r=e.getBoundingClientRect(),cs=getComputedStyle(e);if(r.width===0)return;o.push((e.tagName+'.'+String(e.className).slice(0,34)).padEnd(40)+'L'+Math.round(r.left)+' R'+Math.round(r.right)+' W'+Math.round(r.width)+' pos='+cs.position+' ml='+cs.marginLeft+' left='+cs.left+' w='+cs.width+' pad='+cs.padding)});return o.join('\n')}));
+await b.close();

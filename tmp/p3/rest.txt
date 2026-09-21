@@ -1,0 +1,9 @@
+[home] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[faq] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[about] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[contact] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[blog] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[login] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[sign-up] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[forgot-password] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+ALLDONE

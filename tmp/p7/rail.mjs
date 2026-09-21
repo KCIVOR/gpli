@@ -1,0 +1,18 @@
+import { createRequire } from 'node:module';
+import { execSync } from 'node:child_process';
+import { dirname, join } from 'node:path';
+const bin = execSync('where playwright',{encoding:'utf8'}).split(/\r?\n/)[0].trim();
+const { chromium } = createRequire(import.meta.url)(join(dirname(bin),'..','playwright'));
+const [,, w='790', theme='light'] = process.argv;
+const b = await chromium.launch();
+const c = await b.newContext({viewport:{width:+w,height:800},storageState:'tmp/auth/admin.json'});
+await c.addInitScript(t=>localStorage.setItem('gp-ds-theme',t),theme);
+const p = await c.newPage(); await p.goto('http://localhost/academy/admin/dashboard',{waitUntil:'networkidle'}); await p.waitForTimeout(600);
+const link = p.locator('.left-side-menu .side-nav-item:has(> ul.side-nav-second-level) > a.side-nav-link').first();
+const st = () => p.evaluate(()=>{const li=document.querySelector('.left-side-menu .side-nav-item:has(> ul.side-nav-second-level)');const ul=li.querySelector(':scope > ul');const r=ul.getBoundingClientRect(),cs=getComputedStyle(ul);const s=document.querySelector('.left-side-menu').getBoundingClientRect();return `body.enlarged=${document.body.classList.contains('enlarged')} sidebarW=${Math.round(s.width)} li.mm-active=${li.classList.contains('mm-active')} ul.class="${ul.className}" ul.display=${cs.display} ul box=${Math.round(r.width)}x${Math.round(r.height)} @L${Math.round(r.left)},T${Math.round(r.top)} aria-expanded=${ul.getAttribute('aria-expanded')}`});
+console.log('initial     :',await st());
+await link.hover(); await p.waitForTimeout(400); console.log('after hover :',await st());
+await p.screenshot({path:`tmp/p7/rail-hover-${w}.png`,clip:{x:0,y:60,width:+w,height:420}});
+await link.click(); await p.waitForTimeout(600); console.log('after click :',await st());
+await p.screenshot({path:`tmp/p7/rail-click-${w}.png`,clip:{x:0,y:60,width:+w,height:420}});
+await b.close();

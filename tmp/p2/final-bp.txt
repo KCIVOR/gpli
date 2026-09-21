@@ -1,0 +1,8 @@
+60 rows, 7 not passing -> tmp/responsive-audit/results-both.json
+FAIL course-detail light 991: console errors: 2 (pageerror: Unexpected token '}')
+FAIL course-detail light 576: console errors: 2 (pageerror: Unexpected token '}')
+FAIL course-detail light 420: console errors: 2 (pageerror: Unexpected token '}')
+FAIL course-detail dark 991: console errors: 2 (pageerror: Unexpected token '}')
+FAIL course-detail dark 576: console errors: 2 (pageerror: Unexpected token '}')
+FAIL course-detail dark 420: console errors: 2 (pageerror: Unexpected token '}')
+FAIL faq dark 576: console errors: 1 (Failed to load resource: net::ERR_NO_BUFFER_SPACE)

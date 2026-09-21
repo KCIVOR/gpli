@@ -1,0 +1,11 @@
+import { createRequire } from 'node:module';
+import { execSync } from 'node:child_process';
+import { dirname, join } from 'node:path';
+const bin = execSync('where playwright',{encoding:'utf8'}).split(/\r?\n/)[0].trim();
+const { chromium } = createRequire(import.meta.url)(join(dirname(bin),'..','playwright'));
+const b = await chromium.launch();
+const c = await b.newContext({viewport:{width:390,height:844},storageState:'tmp/auth/admin.json'});
+const p = await c.newPage();
+await p.goto('http://localhost/academy/admin/message',{waitUntil:'networkidle'});
+console.log(await p.evaluate(()=>[...document.querySelectorAll('.gp-admin-topbar-left, .gp-admin-topbar-left *')].map(e=>{const r=e.getBoundingClientRect(),cs=getComputedStyle(e);return e.tagName+'.'+String(e.className).slice(0,30).padEnd(31)+'L'+Math.round(r.left)+' W'+Math.round(r.width)+' disp='+cs.display+' minW='+cs.minWidth+' w='+cs.width+' pad='+cs.padding}).join('\n')));
+await b.close();

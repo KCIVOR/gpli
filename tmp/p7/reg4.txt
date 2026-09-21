@@ -1,0 +1,17 @@
+[admin-dashboard wide] 6 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-dashboard phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-courses wide] 6 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-courses phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-users wide] 6 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-users phone] 4 rows, 4 not passing -> tmp/responsive-audit/results-both.json
+[admin-users phone] FAIL admin-users light 393: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-users phone] FAIL admin-users light 360: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-users phone] FAIL admin-users dark 393: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-users phone] FAIL admin-users dark 360: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-enrol-history wide] 6 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-enrol-history phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-message wide] 6 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-message phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-categories wide] 6 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-categories phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-instructors wide] 6 rows, 0 not passing -> tmp/responsive-audit/results-both.json

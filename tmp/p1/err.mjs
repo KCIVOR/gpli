@@ -1,0 +1,10 @@
+import { createRequire } from 'node:module';
+import { execSync } from 'node:child_process';
+import { dirname, join } from 'node:path';
+const bin = execSync('where playwright',{encoding:'utf8'}).split(/\r?\n/)[0].trim();
+const { chromium } = createRequire(import.meta.url)(join(dirname(bin),'..','playwright'));
+const b = await chromium.launch(); const p = await b.newPage();
+p.on('pageerror',e=>console.log('PAGEERR',e.message,(e.stack||'').split('\n').slice(0,3).join(' | ')));
+p.on('console',m=>{if(m.type()==='error')console.log('CONSOLE',m.text().slice(0,200),m.location().url)});
+await p.goto('http://localhost/academy/home/course/introduction-to-time-blocking/75',{waitUntil:'networkidle'});
+await b.close();

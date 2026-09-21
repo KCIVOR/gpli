@@ -1,0 +1,17 @@
+[guest home] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[guest catalog] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[guest cart] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[guest blog] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[guest faq] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[guest contact] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[guest login] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[guest compare] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[guest privacy-policy] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[guest community-posts] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin home] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin catalog] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin cart] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin blog] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin faq] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin contact] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+ALLDONE

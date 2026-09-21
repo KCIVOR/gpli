@@ -1,0 +1,35 @@
+[admin-dashboard] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-courses] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-users] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-enrol-history] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-message] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-categories] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-instructors] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-coupons] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-course-edit] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-system-settings] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-payment-settings] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-profile] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-revenue] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-instructor-revenue] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-blog-category] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-badges] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-newsletters] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-blog] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-frontend-settings] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[shell admin-dashboard] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[shell admin-users] 10 rows, 10 not passing -> tmp/responsive-audit/results-both.json
+[shell admin-users] FAIL admin-users light 1440: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[shell admin-users] FAIL admin-users light 1024: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[shell admin-users] FAIL admin-users light 768: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[shell admin-users] FAIL admin-users light 390: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[shell admin-users] FAIL admin-users light 360: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[shell admin-users] FAIL admin-users dark 1440: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[shell admin-users] FAIL admin-users dark 1024: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[shell admin-users] FAIL admin-users dark 768: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[shell admin-users] FAIL admin-users dark 390: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[shell admin-users] FAIL admin-users dark 360: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[public catalog] 6 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[public cart] 6 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[public home] 6 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+ALLDONE

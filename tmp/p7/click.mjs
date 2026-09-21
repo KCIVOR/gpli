@@ -1,0 +1,14 @@
+import { createRequire } from 'node:module';
+import { execSync } from 'node:child_process';
+import { dirname, join } from 'node:path';
+const bin = execSync('where playwright',{encoding:'utf8'}).split(/\r?\n/)[0].trim();
+const { chromium } = createRequire(import.meta.url)(join(dirname(bin),'..','playwright'));
+const [,, w='393', path='/admin/courses', sel='table.dataTable tbody tr:first-child td:first-child'] = process.argv;
+const b = await chromium.launch();
+const c = await b.newContext({viewport:{width:+w,height:852},storageState:'tmp/auth/admin.json'});
+const p = await c.newPage();
+await p.goto('http://localhost/academy'+path,{waitUntil:'networkidle'}); await p.waitForTimeout(800);
+await p.click(sel); await p.waitForTimeout(500);
+console.log(await p.evaluate(()=>{const t=document.querySelector('table.dataTable');return 'parent rows='+t.querySelectorAll('tr.parent').length+' child rows='+t.querySelectorAll('tr.child').length+' | child text='+(t.querySelector('tr.child')?.textContent.replace(/\s+/g,' ').trim().slice(0,160)||'-')}));
+await p.screenshot({path:`tmp/p7/dt-click-${w}.png`,clip:{x:0,y:60,width:+w,height:560}});
+await b.close();

@@ -1,0 +1,29 @@
+[home] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[catalog] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[course-detail] 10 rows, 10 not passing -> tmp/responsive-audit/results-both.json
+[course-detail] FAIL course-detail light 1440: console errors: 2 (pageerror: Unexpected token '}')
+[course-detail] FAIL course-detail light 1024: console errors: 2 (pageerror: Unexpected token '}')
+[course-detail] FAIL course-detail light 768: console errors: 4 (pageerror: Unexpected token '}')
+[course-detail] FAIL course-detail light 390: console errors: 4 (pageerror: Unexpected token '}')
+[course-detail] FAIL course-detail light 360: console errors: 4 (pageerror: Unexpected token '}')
+[course-detail] FAIL course-detail dark 1440: console errors: 2 (pageerror: Unexpected token '}')
+[course-detail] FAIL course-detail dark 1024: console errors: 2 (pageerror: Unexpected token '}')
+[course-detail] FAIL course-detail dark 768: console errors: 4 (pageerror: Unexpected token '}')
+[course-detail] FAIL course-detail dark 390: console errors: 4 (pageerror: Unexpected token '}')
+[course-detail] FAIL course-detail dark 360: console errors: 4 (pageerror: Unexpected token '}')
+[faq] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[about] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[contact] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[blog] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[cart] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[compare] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[compare-populated] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[login] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[sign-up] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[forgot-password] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[privacy-policy] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[terms] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[refund-policy] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[cookie-policy] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[community-posts] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+ALLDONE

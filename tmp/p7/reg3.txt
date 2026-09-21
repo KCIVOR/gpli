@@ -1,0 +1,22 @@
+[admin-dashboard] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-courses] 10 rows, 2 not passing -> tmp/responsive-audit/results-both.json
+[admin-courses] FAIL admin-courses light 1440: content clipped past screen edge: table.table.table-striped right=1944, thead right=1944, tr right=1944, th.sorting right=1467, th.sorting right=1646, th.sorting right=1741
+[admin-courses] FAIL admin-courses dark 1440: content clipped past screen edge: table.table.table-striped right=1944, thead right=1944, tr right=1944, th.sorting right=1467, th.sorting right=1646, th.sorting right=1741
+[admin-users] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-enrol-history] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-message] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-categories] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-instructors] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-coupons] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-course-edit] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-system-settings] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-payment-settings] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-profile] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-revenue] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-instructor-revenue] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-blog-category] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-badges] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-newsletters] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-blog] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-frontend-settings] 10 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+ALLDONE

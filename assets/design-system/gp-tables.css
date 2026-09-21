@@ -242,3 +242,42 @@
         -webkit-overflow-scrolling: touch;
     }
 }
+
+/* ---------- DataTables Responsive: keep every column, scroll sideways (admin layout) ----------
+   DataTables Responsive collapses a narrow table to its first column(s) by setting an inline
+   `display: none` on the rest, and expects a "+" on each row to open them. That "+" never rendered
+   here (Responsive 2.2.3 needs a `td.dtr-control` class DataTables 1.10.19 does not apply), so
+   courses, users and instructors showed only row numbers - even at ~730px. Hiding data behind taps
+   is also the wrong default for admin tables. Show every column and let the table scroll sideways
+   inside its card, like the other admin tables (scroller rules above). !important is required
+   because the plugin's hiding is an inline style. Nothing is hidden any more, so the plugin's
+   expandable child rows have nothing to add and are suppressed. The plugin and its init options
+   are untouched. */
+.gp-ds[data-layout="detached"] table.dataTable.collapsed > thead > tr > th,
+.gp-ds[data-layout="detached"] table.dataTable.collapsed > thead > tr > td,
+.gp-ds[data-layout="detached"] table.dataTable.collapsed > tbody > tr:not(.child) > th,
+.gp-ds[data-layout="detached"] table.dataTable.collapsed > tbody > tr:not(.child) > td,
+.gp-ds[data-layout="detached"] table.dataTable.collapsed > tfoot > tr > th,
+.gp-ds[data-layout="detached"] table.dataTable.collapsed > tfoot > tr > td {
+    display: table-cell !important;
+}
+
+.gp-ds[data-layout="detached"] table.dataTable.collapsed > tbody > tr.child {
+    display: none !important;
+}
+
+.gp-ds[data-layout="detached"] table.dataTable.collapsed > tbody > tr > td:first-child,
+.gp-ds[data-layout="detached"] table.dataTable.collapsed > tbody > tr > th:first-child {
+    cursor: default;
+}
+
+/* Every column of a collapsed table is now shown (above), so the table is as wide as its columns need
+   at ANY viewport width - at 1440px the course list is ~1,940px wide (8 no-wrap columns), and the
+   plugin was hiding columns on the desktop too. It scrolls inside its card instead of being clipped. */
+.gp-ds[data-layout="detached"] .content-page .content .dataTables_wrapper table.dataTable.collapsed {
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}

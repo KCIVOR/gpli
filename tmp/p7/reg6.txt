@@ -1,0 +1,28 @@
+[admin-dashboard wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-dashboard phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-courses wide] 8 rows, 2 not passing -> tmp/responsive-audit/results-both.json
+[admin-courses wide] FAIL admin-courses dark 991: error: UNKNOWN: unknown error, open 'C:\xampp\htdocs\academy\tmp\responsive-audit\admin-courses-dark-991.png'
+[admin-courses wide] FAIL admin-courses dark 768: error: UNKNOWN: unknown error, open 'C:\xampp\htdocs\academy\tmp\responsive-audit\admin-courses-dark-768.png'
+[admin-courses phone] 4 rows, 1 not passing -> tmp/responsive-audit/results-both.json
+[admin-courses phone] FAIL admin-courses light 393: error: UNKNOWN: unknown error, open 'C:\xampp\htdocs\academy\tmp\responsive-audit\admin-courses-light-393-sidebar.png'
+[admin-users wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-users phone] 4 rows, 4 not passing -> tmp/responsive-audit/results-both.json
+[admin-users phone] FAIL admin-users light 393: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-users phone] FAIL admin-users light 360: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-users phone] FAIL admin-users dark 393: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-users phone] FAIL admin-users dark 360: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-enrol-history wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-enrol-history phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-message wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-message phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-categories wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-categories phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-instructors wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-instructors phone] 4 rows, 4 not passing -> tmp/responsive-audit/results-both.json
+[admin-instructors phone] FAIL admin-instructors light 393: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-instructors phone] FAIL admin-instructors light 360: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-instructors phone] FAIL admin-instructors dark 393: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-instructors phone] FAIL admin-instructors dark 360: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-coupons wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-coupons phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-course-edit wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json

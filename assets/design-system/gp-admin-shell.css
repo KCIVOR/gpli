@@ -57,8 +57,12 @@
   min-width: 0;
 }
 
+/* Shown at every width so the sidebar can be collapsed to the icon rail and expanded again on
+   tablet and desktop, not only opened on phones. hyper-admin-theme.css hides
+   `.button-menu-mobile.disable-btn` above 767px; its own toggle (body.enlarged) still works. */
 .gp-ds .gp-admin-topbar .button-menu-mobile {
-  display: none;
+  display: inline-flex;
+  align-items: center;
   color: var(--gp-fg);
 }
 
@@ -836,4 +840,15 @@
     width: 100%;
     max-width: 100%;
   }
+}
+
+/* Stacking of the sidebar over page content.
+   hyper-admin-theme.css gives `.left-side-menu` `z-index: 10`, while widgets inside the page use much
+   higher values (Summernote's toolbar is 500), so on phones and tablets — where the open sidebar
+   overlays the content — the rich-text toolbar was drawn on top of the menu. 1030 clears page widgets,
+   and stays below the sticky topbar (1040), dropdowns/popovers (1050+) and modals (1055). On desktop the
+   sidebar sits beside the content and does not overlap anything, so nothing changes there. */
+.gp-ds[data-layout="detached"] .left-side-menu {
+  /* !important counters hyper-admin-theme.css `@media (max-width: 767.98px) { .left-side-menu { z-index: 10 !important } }` */
+  z-index: 1030 !important;
 }
