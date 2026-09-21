@@ -205,3 +205,6 @@ S3 is scheduled before S4 despite being larger: it's higher-traffic (every admin
 3. **Corrected the activation-mechanism description in S2/S3**: pages are already `.gp-ds`-active by shell-level default (`gp_ds_exclude_pages` is empty, confirmed live) — the remaining work is migrating legacy CSS files' rules, not wrapping pages.
 4. **Added constraint #11**: the existing `gp_ds_exclude_pages` config array is a faster, safer per-page rollback lever than a full git revert, and should be used alongside it during Phases S3–S5.
 5. **Resolved S1c** (formerly "7c") from an open Option A/B question into a direct instruction: the project has already decided to deprecate `--gp-ink`/`--gp-text` in favor of `--gp-fg`/`--gp-fg-muted`/`--gp-fg-faint`, per the standing comment in `gp-landing.css:5-6`.
+
+## Responsive remediation (2026-09-22)
+Responsive design-system pass over public and admin surfaces: see `docs/superpowers/reports/2026-09-22-responsive-final-report.md` for coverage, exceptions, blockers, and the legacy-selector retirement decision (no legacy CSS removed; a later, separately approved plan is required).
