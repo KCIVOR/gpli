@@ -45,7 +45,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-popover.css'); ?>?v=popover-3">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tooltip.css'); ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-shell.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-shell.css'); ?>?v=admin-shell-neutral-chrome-1">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-shell.css'); ?>?v=admin-shell-responsive-8">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dashboard.css'); ?>?v=dash-2">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-courses.css'); ?>?v=courses-22">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-custom-field.css'); ?>?v=customfield-1">

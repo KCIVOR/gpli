@@ -688,3 +688,115 @@
 .gp-ds .start_ajax_loading .ajax_loaderBar {
   background-color: var(--gp-primary);
 }
+
+/* ========== Responsive shell — Phase 4 of the responsive remediation ==========
+   Baseline (2026-09-22, admin session): every backend page overflowed at 390/360
+   (topbar-right 393px wide over a 350px bar) and by 3px at 768. Rules below are
+   scoped to the shared shell and counter recorded hyper-admin-theme.css conflicts. */
+
+/* hyper-admin-theme.css `body[data-layout="detached"] .content-page` keeps
+   `width: 100%` plus `margin-right: -15px`, so the content box ends 15px past its
+   wrapper and pushes the page 3px wider than a 768px viewport. */
+@media (max-width: 991.98px) {
+  .gp-ds[data-layout="detached"] .content-page {
+    margin-right: 0;
+  }
+}
+
+/* The collapsed (`.enlarged`) icon rail: hyper-admin-theme.css
+   `body[data-layout="detached"].enlarged .wrapper .left-side-menu` forces
+   `position: relative`, so the DS `top: 80px` (meant for sticky) shifted the rail
+   80px down, leaving a gap under the topbar. Restore the sticky intent. */
+.gp-ds[data-layout="detached"].enlarged .wrapper .left-side-menu {
+  position: sticky;
+}
+
+/* Selectors below repeat `.navbar-custom.topnav-navbar` to outrank this file's
+   own topbar group above (`.gp-ds .navbar-custom.topnav-navbar-dark`, 0,4,0). */
+
+/* Phone topbar: the right-hand menu (theme, language, apps, bell, user) was wider
+   than the bar and, because `.gp-admin-topbar-left` may shrink to 0, it covered
+   the menu button and logo — leaving no way to open the sidebar. */
+@media (max-width: 767.98px) {
+  .gp-ds .navbar-custom.topnav-navbar.gp-admin-topbar {
+    padding: 0 12px;
+  }
+
+  .gp-ds .navbar-custom.topnav-navbar.gp-admin-topbar .container-fluid {
+    gap: 8px;
+    padding-inline: 0;
+  }
+
+  .gp-ds .gp-admin-topbar-left {
+    flex: 0 0 auto;
+  }
+
+  .gp-ds .gp-admin-topbar-right {
+    min-width: 0;
+    gap: 0;
+  }
+
+  .gp-ds .gp-admin-topbar .gp-admin-user-meta {
+    display: none;
+  }
+
+  .gp-ds .gp-admin-topbar .nav-user {
+    padding-inline: 4px;
+  }
+}
+
+/* Narrow phones: at 390px the wide logo plus five topbar items still exceed the
+   bar. Use the header's own compact logo (`.topnav-logo-sm`) and tighter icon
+   padding rather than hiding any control. */
+@media (max-width: 575.98px) {
+  .gp-ds .gp-admin-topbar .topnav-logo-lg {
+    display: none;
+  }
+
+  .gp-ds .gp-admin-topbar .topnav-logo-sm {
+    display: inline-block;
+  }
+
+  .gp-ds .navbar-custom .topbar-right-menu .nav-link:not(.nav-user),
+  .gp-ds .topbar-dropdown .nav-link:not(.nav-user),
+  .gp-ds .notification-list .noti-icon {
+    padding-inline: 4px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  /* hyper-admin-theme.css gives the menu button a 60px box for an 18px icon and the
+     logo link a 20px right padding; on a phone that is ~60px of dead space. */
+  .gp-ds .gp-admin-topbar .button-menu-mobile {
+    width: auto;
+    padding-inline: 4px;
+  }
+
+  .gp-ds .gp-admin-topbar .topnav-logo {
+    padding-right: 0;
+  }
+}
+
+/* ≤399px (360px phones): five topbar items still exceeded the bar by ~13px. */
+@media (max-width: 399.98px) {
+  .gp-ds .navbar-custom.topnav-navbar.gp-admin-topbar {
+    padding: 0 4px;
+  }
+
+  .gp-ds .gp-admin-topbar .gp-theme-row {
+    margin-right: 0; /* the pill carries a 10px right margin from the legacy topbar menu */
+  }
+
+  .gp-ds .gp-admin-topbar .nav-user {
+    /* !important counters this file's own `.gp-admin-topbar .nav-user { padding: ... !important }`
+       (itself countering hyper-admin-theme.css `.nav-user`) */
+    padding-right: 4px !important;
+  }
+}
+
+/* The menu button's three bars come from the dark Hyper topbar
+   (`.navbar-custom .button-menu-mobile .lines span`, 80% white) and vanished on the
+   DS's light topbar — the button worked but could not be seen. */
+.gp-ds .gp-admin-topbar .button-menu-mobile .lines span {
+  background-color: var(--gp-fg);
+}
