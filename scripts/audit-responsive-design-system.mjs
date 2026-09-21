@@ -9,6 +9,7 @@ const opt = (k, d) => { const i = args.indexOf(`--${k}`); return i >= 0 ? args[i
 const baseUrl = opt('base-url', 'http://localhost/academy').replace(/\/$/, '');
 const themeArg = opt('theme', 'both');
 const onlyRoute = opt('route', null);
+const asRole = opt('as', null); // run public routes with tmp/auth/<role>.json (logged-in header and drawer)
 const outDir = 'tmp/responsive-audit';
 
 // Under `npx -p playwright`, the package's .bin dir is on PATH; resolve the module from there.
@@ -193,14 +194,23 @@ async function shellProbes(page, row, vp, baseUrl, path, outDir, tag) {
       const box = document.querySelector('.mobile-search');
       const r = box && box.getBoundingClientRect();
       const bg = box && getComputedStyle(box).backgroundColor;
-      return { fieldVisible: !!f && f.getBoundingClientRect().width > 0, right: r && r.right, transparent: !bg || bg === 'rgba(0, 0, 0, 0)', legacy: scan('.gp-site-header') };
+      const fr = f && f.getBoundingClientRect(); const btn = document.querySelector('.mobile-search .search-btn'); const br = btn && btn.getBoundingClientRect(); return { fieldVisible: !!f && f.getBoundingClientRect().width > 0, left: r && r.left, right: r && r.right, fieldRight: fr && fr.right, fieldLeft: fr && fr.left, btnRight: br && br.right, z: box && Number(getComputedStyle(box).zIndex), transparent: !bg || bg === 'rgba(0, 0, 0, 0)', legacy: scan('.gp-site-header') };
     }, [legacyScan.toString()]);
     if (!s.fieldVisible) fail('search field not visible after opening');
     if (s.right > vp.width + 1) fail('search overlay wider than viewport');
+    if (s.left < -1 || s.right < vp.width - 1) fail('search overlay does not span the screen (' + Math.round(s.left) + '..' + Math.round(s.right) + ' of ' + vp.width + ')');
+    if (s.fieldLeft < 0 || s.fieldRight > vp.width || s.btnRight > vp.width) fail('search field or button outside the screen');
+    if (s.z >= 1045) fail('search overlay z-index ' + s.z + ' would sit above the navigation drawer (1045)');
     if (s.transparent) fail('search overlay has no DS surface (floats over page text)');
     if (s.legacy.length) fail('legacy purple in open search: ' + s.legacy.join(', '));
     await page.screenshot({ path: outDir + '/' + tag + '-search.png', clip: { x: 0, y: 0, width: vp.width, height: 260 } });
-    // drawer
+    // drawer opened on top of an open search panel
+    await page.click('.menu-offcanves .btn-bar', { timeout: 5000 });
+    await page.waitForTimeout(700);
+    const covered = await page.evaluate(() => { const hit = document.elementFromPoint(20, 100); return !!hit && !!hit.closest('#offcanvasWithBothOptions'); });
+    if (!covered) fail('open search panel sits on top of the navigation drawer');
+    await page.screenshot({ path: outDir + '/' + tag + '-search-and-drawer.png', clip: { x: 0, y: 0, width: vp.width, height: 420 } });
+    // drawer alone
     await page.goto(baseUrl + path, { waitUntil: 'networkidle' });
     await page.click('.menu-offcanves .btn-bar', { timeout: 5000 });
     await page.waitForTimeout(700);
@@ -209,7 +219,7 @@ async function shellProbes(page, row, vp, baseUrl, path, outDir, tag) {
       const contrast = eval('(' + contrastSrc + ')');
       const dr = document.querySelector('#offcanvasWithBothOptions');
       const r = dr.getBoundingClientRect();
-      const links = ['.offcanves-btn .signUp-btn', '.offcanves-btn .logIn-btn', '.btn-toggle-list', '.btn-toggle'].map((s) => document.querySelector('#offcanvasWithBothOptions ' + s)).filter(Boolean);
+      const links = ['.offcanves-btn .signUp-btn', '.offcanves-btn .logIn-btn', '.btn-toggle-list', '.btn-toggle', '.user-details h4', '.user-details p'].map((s) => document.querySelector('#offcanvasWithBothOptions ' + s)).filter(Boolean);
       return { l: r.left, r: r.right, w: r.width, legacy: scan('#offcanvasWithBothOptions'), low: links.map((e) => [e.className.split(' ')[0], contrast(e)]).filter(([, c]) => c !== null && c < 4.5) };
     }, [legacyScan.toString(), contrastOf.toString()]);
     if (d.r > vp.width + 1 || d.l < -1) fail('drawer outside viewport');
@@ -240,7 +250,7 @@ for (const theme of runThemes) {
       continue;
     }
     for (const vp of vpList) {
-      const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, ...(route.role !== 'public' ? { storageState: authFile } : {}) });
+      const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, ...(route.role !== 'public' ? { storageState: authFile } : asRole ? { storageState: 'tmp/auth/' + asRole + '.json' } : {}) });
       await context.addInitScript((t) => { try { localStorage.setItem('gp-ds-theme', t); } catch {} }, theme);
       const page = await context.newPage();
       const consoleErrors = [];
@@ -278,7 +288,7 @@ for (const theme of runThemes) {
         if (!m.wrapperFound) row.failures.push(`wrapper ${route.wrapper} missing`);
         if (m.scrollWidth > m.innerWidth) row.failures.push(`page overflow ${m.scrollWidth}>${m.innerWidth}`);
         if (m.theme !== theme) row.failures.push(`theme mismatch (${m.theme})`);
-        const shot = `${outDir}/${route.name}-${theme}-${vp.width}.png`;
+        const shot = `${outDir}/${route.name}${asRole ? '-as-' + asRole : ''}-${theme}-${vp.width}.png`;
         await page.screenshot({ path: shot, fullPage: false });
         row.screenshot = shot;
         if (route.role === 'public' && !args.includes('--no-shell')) await shellProbes(page, row, vp, baseUrl, route.path, outDir, `${route.name}-${theme}-${vp.width}`);

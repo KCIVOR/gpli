@@ -800,11 +800,40 @@
    overlay (z-index raised by responsive.css); give it a DS surface so the
    search field does not float over page text. */
 @media (max-width: 991px) {
+  /* style.css `.inline-form` is an absolutely positioned wrapper (left: -13px) and
+     `.inline-form .mobile-search` adds margin-left: -20px, so the overlay started 33px
+     left of the screen and ended 33px short of the right edge (hero showed through).
+     The wrapper only holds the overlay, so take it out of positioning and let the
+     overlay anchor to the full-width navbar instead. */
+  .gp-ds header.gp-site-header .inline-form {
+    position: static;
+    margin: 0;
+  }
+
   .gp-ds header.gp-site-header .inline-form .mobile-search {
+    left: 0;
     right: 0;
+    width: auto;
+    margin: 0;
+    /* responsive.css raises this to 2147483647, which put the open search panel on top
+       of the navigation drawer (Bootstrap offcanvas z-index 1045). */
+    z-index: 1030;
     background: var(--gp-surface);
     border-bottom: 1px solid var(--gp-border);
     box-shadow: var(--gp-shadow-card);
+  }
+
+  /* style.css `.inline-form .form-control { margin: 0 27px }` and
+     `.inline-form .search-btn { right: 5px }` were tuned for the old, 33px-shifted
+     overlay; with the overlay now full width they pushed the field 27px right (off
+     screen at 390px). Fill the panel's padding box and seat the button inside the field. */
+  .gp-ds header.gp-site-header .inline-form .mobile-search .form-control {
+    margin: 0;
+    width: 100%;
+  }
+
+  .gp-ds header.gp-site-header .inline-form .mobile-search .search-btn {
+    right: 26px;
   }
 }
 
@@ -821,6 +850,15 @@
 .gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .logIn-btn {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Logged-in drawer header: style.css `.offcanves-profile` keeps a light grey fill
+   (var(--hover-color)) while the drawer forces the name and email to white, so in light
+   mode they were white on near-white. The drawer is a fixed navy panel in both themes;
+   let the profile block sit on it like the rest of the drawer. */
+.gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-profile {
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 /* custom.css `.btn-toggle::after` draws a rgba(0,0,0,.5) chevron SVG — near
