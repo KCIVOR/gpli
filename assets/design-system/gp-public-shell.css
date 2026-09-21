@@ -780,6 +780,55 @@
   color: var(--gp-fg);
 }
 
+/* ---- Responsive shell (≤991px) — Phase 1 of the responsive remediation ----
+   Each rule below counters a recorded legacy conflict (baseline 2026-09-22). */
+
+/* style.css `.m-cross-icon, .m-search-icon` keep the old purple border and
+   `.search-item span:hover` the same purple fill. */
+.gp-ds header.gp-site-header .m-search-icon,
+.gp-ds header.gp-site-header .m-cross-icon {
+  border-color: var(--gp-border-strong);
+  border-radius: var(--gp-radius);
+}
+
+.gp-ds header.gp-site-header .search-item span:hover {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg);
+}
+
+/* style.css `.inline-form .mobile-search` is a transparent, left-anchored
+   overlay (z-index raised by responsive.css); give it a DS surface so the
+   search field does not float over page text. */
+@media (max-width: 991px) {
+  .gp-ds header.gp-site-header .inline-form .mobile-search {
+    right: 0;
+    background: var(--gp-surface);
+    border-bottom: 1px solid var(--gp-border);
+    box-shadow: var(--gp-shadow-card);
+  }
+}
+
+/* Drawer auth buttons: style.css `.signUp-btn` (var(--color-4) purple) and
+   `.logIn-btn` (var(--bg-white-2) fill) combined with the drawer's forced
+   white text left "Login" white-on-near-white. The drawer is a fixed navy
+   panel in both themes, so use fixed-contrast tokens. */
+.gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .signUp-btn {
+  background: var(--gp-on-primary);
+  /* !important counters style.css `.signUp-btn { color: var(--color-9) !important }` */
+  color: var(--gp-accent) !important;
+}
+
+.gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .logIn-btn {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* custom.css `.btn-toggle::after` draws a rgba(0,0,0,.5) chevron SVG — near
+   invisible on the navy drawer. Invert it rather than re-drawing the icon. */
+.gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle::after {
+  filter: invert(1);
+}
+
 .gp-ds header.gp-site-header .inline-form .form-control {
   background: var(--gp-surface-sunk) !important;
   color: var(--gp-fg) !important;
