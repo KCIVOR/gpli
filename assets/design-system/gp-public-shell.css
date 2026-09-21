@@ -826,6 +826,14 @@
     margin: 0;
   }
 
+  /* Once static, the (empty) open form became a third flex item in the header row and, with
+     `justify-content: space-between`, pushed the close and menu buttons toward the logo whenever
+     search was opened. `display: contents` takes the form's own box out of the row while its
+     overlay child still anchors to the navbar; legacy `.inline-form { display: none }` still hides
+     it when search is closed. */
+  .gp-ds header.gp-site-header .inline-form.active {
+    display: contents;
+  }
 
   .gp-ds header.gp-site-header .inline-form .mobile-search {
     left: 0;
