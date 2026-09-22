@@ -747,10 +747,11 @@
   }
 }
 
-/* Mobile offcanvas → navy drawer */
+/* Mobile offcanvas → theme-aware navigation drawer */
 .gp-ds header.gp-site-header .mobile-view-offcanves .offcanvas {
-  background: var(--gp-accent) !important;
-  color: var(--gp-on-primary);
+  background: var(--gp-surface) !important;
+  border-right: 1px solid var(--gp-border);
+  color: var(--gp-fg);
 }
 
 .gp-ds header.gp-site-header .mobile-view-offcanves .offcanvas-header,
@@ -763,17 +764,29 @@
 .gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle-list,
 .gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle,
 .gp-ds header.gp-site-header .mobile-view-offcanves a,
-.gp-ds header.gp-site-header .mobile-view-offcanves .user-details h4,
+.gp-ds header.gp-site-header .mobile-view-offcanves .user-details h4 {
+  color: var(--gp-fg) !important;
+}
+
 .gp-ds header.gp-site-header .mobile-view-offcanves .user-details p {
-  /* Off-white, not var(--gp-fg): this drawer is a fixed --gp-accent navy panel
-     in both themes, so its text needs a fixed light color too — --gp-fg would
-     go near-black in light mode and disappear against the navy background. */
-  color: rgba(255, 255, 255, 0.92) !important;
+  color: var(--gp-fg-muted) !important;
 }
 
 .gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .logIn-btn,
 .gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .signUp-btn {
+  align-items: center;
   border-radius: var(--gp-radius);
+  box-sizing: border-box;
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  width: 100%;
+}
+
+.gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn {
+  gap: 12px;
 }
 
 .gp-ds header.gp-site-header .mobile-view-offcanves .gp-header-tools {
@@ -849,34 +862,52 @@
   }
 }
 
-/* Drawer auth buttons: style.css `.signUp-btn` (var(--color-4) purple) and
-   `.logIn-btn` (var(--bg-white-2) fill) combined with the drawer's forced
-   white text left "Login" white-on-near-white. The drawer is a fixed navy
-   panel in both themes, so use fixed-contrast tokens. */
+/* Drawer auth buttons override the legacy purple Sign up and filled Login styles. */
 .gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .signUp-btn {
-  background: var(--gp-on-primary);
-  /* !important counters style.css `.signUp-btn { color: var(--color-9) !important }` */
-  color: var(--gp-accent) !important;
+  background: var(--gp-primary);
+  /* !important overrides the legacy Sign up text color. */
+  color: var(--gp-on-primary) !important;
 }
 
 .gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .logIn-btn {
   background: transparent;
-  border-color: rgba(255, 255, 255, 0.45);
+  border-color: var(--gp-border);
+  color: var(--gp-fg) !important;
 }
 
-/* Logged-in drawer header: style.css `.offcanves-profile` keeps a light grey fill
-   (var(--hover-color)) while the drawer forces the name and email to white, so in light
-   mode they were white on near-white. The drawer is a fixed navy panel in both themes;
-   let the profile block sit on it like the rest of the drawer. */
+/* Keep the logged-in profile aligned with the drawer surface. */
 .gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-profile {
   background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid var(--gp-border);
 }
 
-/* custom.css `.btn-toggle::after` draws a rgba(0,0,0,.5) chevron SVG — near
-   invisible on the navy drawer. Invert it rather than re-drawing the icon. */
+/* Preserve the legacy chevron asset (custom.css draws it as a dark rgba(0,0,0,.5) SVG): fine on the
+   light drawer, invisible on the dark one, so invert it there rather than re-drawing the icon. */
 .gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle::after {
+  filter: none;
+}
+
+.gp-ds[data-theme="dark"] header.gp-site-header .mobile-view-offcanves .btn-toggle::after {
   filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .gp-ds[data-theme="system"] header.gp-site-header .mobile-view-offcanves .btn-toggle::after {
+    filter: invert(1);
+  }
+}
+
+/* Keep navigation interactions on the same neutral surface as the admin sidebar. */
+.gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle:hover,
+.gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle:focus {
+  background: var(--gp-surface-sunk);
+  color: var(--gp-fg) !important;
+}
+
+.gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle-nav a:hover,
+.gp-ds header.gp-site-header .mobile-view-offcanves .btn-toggle-nav a:focus {
+  background: var(--gp-surface-sunk) !important;
+  color: var(--gp-fg) !important;
 }
 
 /* Phone search field = the desktop header field: same underline input, same magnifier on

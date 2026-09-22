@@ -237,7 +237,8 @@
           <?php endif; ?>
         </ul>
         <?php $gp_header_use_ids = false;
-        $gp_header_show_theme = true; // set explicitly: the desktop header (same request) turns it off
+        // The shared footer owns the only theme switch on every viewport.
+        $gp_header_show_theme = false;
         include "gp_header_tools.php"; ?>
       </div>
 
