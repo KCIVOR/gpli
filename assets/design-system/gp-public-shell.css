@@ -775,12 +775,18 @@
 .gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .logIn-btn,
 .gp-ds header.gp-site-header .mobile-view-offcanves .offcanves-btn .signUp-btn {
   align-items: center;
-  border-radius: var(--gp-radius);
+  /* !important beats style.css:1220's leftover ".logIn-btn { border-radius: 5px !important }",
+     which otherwise mismatches this button's corners against Sign up's DS radius. */
+  border-radius: var(--gp-radius) !important;
   box-sizing: border-box;
   display: flex;
   font-size: 14px;
   justify-content: center;
   min-height: 40px;
+  /* !important beats style.css:1207's leftover ".offcanves-btn a { margin: 0 20px !important }",
+     which otherwise stacks 20px of margin on each side on top of this rule's width: 100%,
+     overflowing the button past the drawer's own edge. */
+  margin: 0 !important;
   padding: 8px 14px;
   width: 100%;
 }

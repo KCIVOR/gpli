@@ -26,7 +26,7 @@
 <script src="<?php echo base_url('assets/backend/js/vendor/bootstrap-tagsinput.min.js'); ?>" charset="utf-8"></script>
 <script src="<?php echo base_url() . 'assets/frontend/default-new/js/bootstrap.bundle.min.js'; ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/gp-bs5-admin-bridge.js'); ?>"></script>
-<script src="<?php echo base_url('assets/design-system/gp-admin-sidebar.js'); ?>?v=1"></script>
+<script src="<?php echo base_url('assets/design-system/gp-admin-sidebar.js'); ?>?v=2"></script>
 <script src="<?php echo base_url('assets/backend/js/bootstrap-tagsinput.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/backend/js/vendor/dropzone.min.js'); ?>" charset="utf-8"></script>
 <script src="<?php echo base_url('assets/backend/js/ui/component.fileupload.js'); ?>" charset="utf-8"></script>

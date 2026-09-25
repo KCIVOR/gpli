@@ -45,3 +45,7 @@
 [admin-newsletters wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
 [admin-newsletters phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
 [admin-blog wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-blog phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-frontend-settings wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-frontend-settings phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+ALLDONE

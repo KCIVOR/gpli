@@ -435,3 +435,36 @@
     display: none;
   }
 }
+
+/* SCORM live-player iframe surround — avoid a plain-white gutter/flash
+   around the third-party iframe content in dark mode. */
+.gp-ds .gp-scorm-frame-wrap {
+  display: block;
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  overflow: hidden;
+}
+.gp-ds .gp-scorm-frame-wrap iframe {
+  display: block;
+  border: 0;
+}
+
+/* Certificate add-on's course-completion progress ring (jQuery-plugin-progressbar,
+   application/views/lessons/certificate_progress.php) — not SCORM-specific, it
+   renders on every course type's lesson page via bottom_tabs.php, but was found
+   stark white/unthemed while auditing the SCORM player in dark mode. The track
+   and arc colors are set as inline styles by the plugin's JS, so they need
+   !important to override; the center text circle is plain CSS and doesn't. */
+.gp-ds .progress-bar .background,
+.gp-ds .progress-bar .left {
+  background-color: var(--gp-border) !important;
+}
+.gp-ds .progress-bar .rotate,
+.gp-ds .progress-bar .right {
+  background-color: var(--gp-success) !important;
+}
+.gp-ds .progress-bar div span {
+  background-color: var(--gp-surface);
+  color: var(--gp-fg);
+}

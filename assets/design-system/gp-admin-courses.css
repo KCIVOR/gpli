@@ -1785,3 +1785,51 @@
 .gp-ds .gp-course-wizard :is(#curriculum, .gp-addon-tab) .alert p {
   color: var(--gp-fg-muted);
 }
+
+/* SCORM provider-tile selection — replace leftover Hyper rgb(0,208,79)/#bcbcbc
+   (assets/backend/css/main.css:357-366) with DS tokens; higher specificity
+   than main.css's unscoped rule wins regardless of stylesheet load order. */
+.gp-ds .course-provider-logo:hover,
+.gp-ds .course-provider-logo-checked {
+  border: 1px solid var(--gp-success);
+  box-shadow: var(--gp-shadow-card);
+}
+
+/* SCORM curriculum-panel alerts — instructor course_edit.php has no
+   .gp-course-wizard ancestor (unlike admin's, course_edit.php:21/:762), so the
+   existing .gp-course-wizard :is(#curriculum, ...) rules (line ~1752) never
+   match there. This duplicate, wizard-independent rule covers #curriculum on
+   both admin and instructor pages; on admin it's redundant with the existing
+   rule (same values, higher-specificity original still wins, no conflict). */
+.gp-ds #curriculum .alert-success {
+  background: var(--gp-success-soft);
+  border-color: var(--gp-success-border);
+  color: var(--gp-success);
+}
+.gp-ds #curriculum .alert-info {
+  background: var(--gp-info-soft);
+  border-color: var(--gp-info-border);
+  color: var(--gp-info);
+}
+.gp-ds #curriculum .alert-heading {
+  font-family: var(--gp-font-head);
+  font-weight: 800;
+  color: var(--gp-fg);
+}
+.gp-ds #curriculum .alert p {
+  color: var(--gp-fg-muted);
+}
+
+/* SCORM preview/player iframe surround — avoid a plain-white gutter/flash
+   around the third-party iframe content in dark mode. */
+.gp-ds .gp-scorm-frame-wrap {
+  display: block;
+  background: var(--gp-surface-sunk);
+  border: 1px solid var(--gp-border);
+  border-radius: var(--gp-radius);
+  overflow: hidden;
+}
+.gp-ds .gp-scorm-frame-wrap iframe {
+  display: block;
+  border: 0;
+}

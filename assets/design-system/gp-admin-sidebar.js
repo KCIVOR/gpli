@@ -26,11 +26,16 @@
     var toggle = document.querySelector('.gp-admin-topbar .button-menu-mobile, .button-menu-mobile');
     if (!toggle) return;
 
+    // The section of the current page is already marked open (its dropdown is hidden only by the rail's
+    // CSS). Replaying the click there would toggle it shut, so in that case just expand the sidebar.
+    var alreadyOpen = hasSubMenu.classList.contains('in') || hasSubMenu.classList.contains('show');
+
     // Expand the sidebar first (theme handler, synchronous), then replay the click on the same link.
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
     toggle.click();
+    if (alreadyOpen) return;
 
     replaying = true;
     try {

@@ -26,3 +26,38 @@
 [admin-coupons wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
 [admin-coupons phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
 [admin-course-edit wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-course-edit phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-system-settings wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-system-settings phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-payment-settings wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-payment-settings phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-profile wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-profile phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-revenue wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-revenue phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-instructor-revenue wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-instructor-revenue phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-blog-category wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-blog-category phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-badges wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-badges phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-newsletters wide] 8 rows, 1 not passing -> tmp/responsive-audit/results-both.json
+[admin-newsletters wide] FAIL admin-newsletters light 1440: console errors: 1 (Failed to load resource: net::ERR_NO_BUFFER_SPACE)
+[admin-newsletters phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-blog wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-blog phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-frontend-settings wide] 8 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-frontend-settings phone] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-dashboard rail] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+[admin-courses rail] 4 rows, 4 not passing -> tmp/responsive-audit/results-both.json
+[admin-courses rail] FAIL admin-courses light 1024: admin shell: sidebar expanded but the dropdown did not open
+[admin-courses rail] FAIL admin-courses light 768: admin shell: sidebar expanded but the dropdown did not open
+[admin-courses rail] FAIL admin-courses dark 1024: admin shell: sidebar expanded but the dropdown did not open
+[admin-courses rail] FAIL admin-courses dark 768: admin shell: sidebar expanded but the dropdown did not open
+[admin-users rail] 4 rows, 4 not passing -> tmp/responsive-audit/results-both.json
+[admin-users rail] FAIL admin-users light 1024: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-users rail] FAIL admin-users light 768: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-users rail] FAIL admin-users dark 1024: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-users rail] FAIL admin-users dark 768: console errors: 8 (Bootstrap doesn't allow more than one instance per element. Bound instance: bs.tooltip.)
+[admin-enrol-history rail] 4 rows, 0 not passing -> tmp/responsive-audit/results-both.json
+ALLDONE
