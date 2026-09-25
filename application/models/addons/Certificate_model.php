@@ -41,8 +41,13 @@ class Certificate_model extends CI_Model
 			redirect(site_url('addons/certificate/settings'), 'refresh');
 		}
 
-		$this->db->where('key', 'certificate_template');
-		$this->db->update('settings', $data);
+		if ($this->db->get_where('settings', array('key' => 'certificate_template'))->num_rows() > 0) {
+			$this->db->where('key', 'certificate_template');
+			$this->db->update('settings', $data);
+		} else {
+			$data['key'] = 'certificate_template';
+			$this->db->insert('settings', $data);
+		}
 		$this->session->set_flashdata('flash_message', get_phrase('certificate_template_has_been_updated'));
 		redirect(site_url('addons/certificate/settings'), 'refresh');
 	}
@@ -58,8 +63,11 @@ class Certificate_model extends CI_Model
 					$this->session->set_flashdata('error_message', get_phrase('file_size_has_to_be_less_than_1MB'));
 					redirect(site_url('addons/certificate/settings'), 'refresh');
 				}
-				move_uploaded_file($_FILES['certificate_template']['tmp_name'], 'uploads/certificates/template.jpg');
-				$this->session->set_flashdata('flash_message', get_phrase('template_updated_successfully'));
+				if (move_uploaded_file($_FILES['certificate_template']['tmp_name'], 'uploads/certificates/template.jpg')) {
+					$this->session->set_flashdata('flash_message', get_phrase('template_updated_successfully'));
+				} else {
+					$this->session->set_flashdata('error_message', get_phrase('invalid_file'));
+				}
 				redirect(site_url('addons/certificate/settings'), 'refresh');
 			}
 

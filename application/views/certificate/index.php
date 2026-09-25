@@ -66,7 +66,20 @@
             $instructor = $instructor_row['first_name'].' '.$instructor_row['last_name'];
             $student = $student_row['first_name'].' '.$student_row['last_name'];
 
-            $certificate_template= str_replace("..\..\uploads/certificates/template.jpg","..\uploads/certificates/template.jpg",remove_js(htmlspecialchars_decode(get_settings('certificate-text-positons'))));
+            $template_image_path = 'uploads/certificates/template.jpg';
+            $template_image_version = file_exists($template_image_path) ? filemtime($template_image_path) : time();
+            $certificate_template= str_replace("..\..\uploads/certificates/template.jpg","..\uploads/certificates/template.jpg?v=".$template_image_version,remove_js(htmlspecialchars_decode(get_settings('certificate-text-positons'))));
+
+            // Always render the live "Certificate Template Text" setting instead of the
+            // stale copy frozen inside certificate-text-positons, so a text update takes
+            // effect immediately without requiring a re-save on the text position page.
+            $certificate_template = preg_replace_callback(
+                '/(class="[^"]*\bcertificate_text\b[^"]*"[^>]*>)(.*?)(<\/div>)/s',
+                function($matches) {
+                    return $matches[1] . get_settings('certificate_template') . $matches[3];
+                },
+                $certificate_template
+            );
 
             $certificate_template =  str_replace("{date}", date('d/m/Y'), $certificate_template);
             $certificate_template =  str_replace("{student}", $student, $certificate_template);
