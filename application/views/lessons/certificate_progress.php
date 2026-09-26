@@ -1,7 +1,12 @@
 
 <?php $gp_certificate_url = $this->certificate_model->get_certificate_url($this->session->userdata('user_id'), $course_id); ?>
+<?php
+// Display % matches My Courses (SCORM shows the player's %); completion below still uses course_progress()
+$gp_status = course_status($course_id);
+$gp_display = $gp_status['percent'] ?? 0;
+?>
 
-<div class="progress-bar" data-percent="<?php echo course_progress($course_id); ?>" data-duration="1000" data-color="#ccc, #198754"><span><?php echo course_progress($course_id); ?>%</span></div>
+<div class="progress-bar" data-percent="<?php echo $gp_display; ?>" data-duration="1000" data-color="#ccc, #198754"><span><?php echo $gp_display; ?>%</span></div>
 
 <?php if($gp_certificate_url != '#'):?>
     <div class="alert alert-success mt-5" id="certificate-alert-success" role="alert">
@@ -25,7 +30,7 @@
     <div class="alert alert-info mt-5" id="certificate-alert-warning" role="alert">
         <h4 class="alert-heading"><?php echo get_phrase('Notice'); ?></h4>
         <hr>
-        <p> <?php echo get_phrase('you have completed'); ?> <span id="progression"><?php echo course_progress($course_id); ?></span>% <?php echo get_phrase('of_the_course'); ?> </p>
+        <p> <?php echo get_phrase('you have completed'); ?> <span id="progression"><?php echo $gp_display; ?></span>% <?php echo get_phrase('of_the_course'); ?> </p>
         <p><?php echo get_phrase('you_can_download_the_course_completion_certificate_after_completing_the_course'); ?></p>
     </div>
 <?php endif;?>

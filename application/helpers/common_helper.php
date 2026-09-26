@@ -631,6 +631,92 @@ if (!function_exists('course_progress')) {
     }
 }
 
+// Articulate Rise keeps its own overall % inside suspend_data ({"v":2,"d":[LZW codes]}).
+// Returns 0-100, or null when the data isn't in that format.
+if (!function_exists('scorm_rise_progress_percent')) {
+    function scorm_rise_progress_percent($suspend_data)
+    {
+        if (!is_string($suspend_data) || $suspend_data === '' || strlen($suspend_data) > 1048576) return null;
+        $wrapper = json_decode($suspend_data, true);
+        if (!is_array($wrapper) || !isset($wrapper['d']) || !is_array($wrapper['d']) || count($wrapper['d']) === 0) return null;
+        $codes = $wrapper['d'];
+        $dict = []; $next = 256;
+        $w = mb_chr((int) $codes[0], 'UTF-8'); $out = $w;
+        for ($i = 1, $n = count($codes); $i < $n; $i++) {
+            $k = (int) $codes[$i];
+            if ($k < 256)              $entry = mb_chr($k, 'UTF-8');
+            elseif (isset($dict[$k]))  $entry = $dict[$k];
+            elseif ($k === $next)      $entry = $w . mb_substr($w, 0, 1, 'UTF-8');
+            else return null;
+            $out .= $entry;
+            $dict[$next++] = $w . mb_substr($entry, 0, 1, 'UTF-8');
+            $w = $entry;
+        }
+        $data = json_decode($out, true);
+        $p = $data['progress']['p'] ?? null;
+        return is_numeric($p) ? max(0, min(100, (int) $p)) : null;
+    }
+}
+
+// Read-only status of one enrolment: not_started | in_progress | completed | expired.
+// Returns ['status', 'percent' (int|null = no % known), 'completed_date', 'certificate_url'].
+if (!function_exists('course_status')) {
+    function course_status($course_id, $user_id = "", $expiry_date = null)
+    {
+        $CI = &get_instance();
+        if ($user_id == "") {
+            $user_id = $CI->session->userdata('user_id');
+        }
+
+        $result = ['status' => 'not_started', 'percent' => 0, 'completed_date' => null, 'certificate_url' => null];
+        $progress = course_progress($course_id, $user_id);
+
+        // Expired wins over everything, but the card keeps its bar
+        if ($expiry_date > 0 && $expiry_date < time()) {
+            $result['status'] = 'expired';
+            $result['percent'] = (int) round($progress);
+            return $result;
+        }
+
+        if ($progress >= 100) {
+            $result['status'] = 'completed';
+            $result['percent'] = 100;
+            $completed_date = $CI->crud_model->get_watch_histories($user_id, $course_id)->row('completed_date');
+            $result['completed_date'] = $completed_date > 0 ? (int) $completed_date : null;
+            if (addon_status('certificate')) {
+                $CI->load->model('addons/Certificate_model', 'certificate_model');
+                $url = $CI->certificate_model->get_certificate_url($user_id, $course_id);
+                $result['certificate_url'] = ($url && $url != '#') ? $url : null;
+            }
+            return $result;
+        }
+
+        $course = $CI->crud_model->get_course_by_id($course_id)->row_array();
+        if (isset($course['course_type']) && $course['course_type'] == 'scorm') {
+            // SCORM: "started" lives in scorm_tracking; the % is the player's own (display only)
+            $row = $CI->db->get_where('scorm_tracking', ['course_id' => $course_id, 'student_id' => $user_id])->row_array();
+            if (!empty($row) && (!empty($row['suspend_data']) || !empty($row['lesson_location']))) {
+                $p = null;
+                try {
+                    $p = scorm_rise_progress_percent($row['suspend_data']);
+                } catch (\Throwable $e) {
+                    $p = null;
+                }
+                $result['status'] = 'in_progress';
+                $result['percent'] = ($p === null) ? null : min(99, $p);
+            }
+            return $result;
+        }
+
+        // Normal course: at least one valid completed lesson
+        if (count(course_progress($course_id, $user_id, 'completed_lesson_ids')) > 0) {
+            $result['status'] = 'in_progress';
+            $result['percent'] = (int) round($progress);
+        }
+        return $result;
+    }
+}
+
 
 // RANDOM NUMBER GENERATOR FOR ELSEWHERE
 if (!function_exists('random')) {

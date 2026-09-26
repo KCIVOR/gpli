@@ -93,7 +93,14 @@ if($language_dirs){
 			</a>
 			<a class="gp-lesson-title-link" href="<?php echo site_url('home/course/'.slugify($course_details['title']).'/'.$course_details['id']); ?>">
 				<span class="gp-lesson-course-name"><?php echo $course_details['title']; ?></span>
-				<?php if(isset($watch_history) && !empty($watch_history['completed_lesson']) && is_array(json_decode($watch_history['completed_lesson'], true))): ?>
+				<?php if($course_details['course_type'] == 'scorm'): ?>
+					<?php $gp_status = course_status($course_details['id']); ?>
+					<?php if($gp_status['status'] == 'completed'): ?>
+						<span class="gp-lesson-progress"><?php echo '100% '.get_phrase('Completed'); ?></span>
+					<?php elseif($gp_status['status'] == 'in_progress'): ?>
+						<span class="gp-lesson-progress"><?php echo $gp_status['percent'] !== null ? $gp_status['percent'].'% '.get_phrase('Completed') : get_phrase('In progress'); ?></span>
+					<?php endif; ?>
+				<?php elseif(isset($watch_history) && !empty($watch_history['completed_lesson']) && is_array(json_decode($watch_history['completed_lesson'], true))): ?>
 					<span class="gp-lesson-progress"><?php echo $watch_history['course_progress'].'% '.get_phrase('Completed'); ?> (<?php echo count(json_decode($watch_history['completed_lesson'], true)) ?>/<?php echo $number_of_lessons; ?>)</span>
 				<?php endif; ?>
 			</a>
