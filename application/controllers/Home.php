@@ -1616,6 +1616,38 @@ class Home extends CI_Controller
         echo $this->crud_model->update_watch_history_manually();
     }
 
+    // Captures the score/status a SCORM package reports through its own runtime API
+    // (see gpScormCommit in scorm_course_content_body.php) so the certificate can
+    // require a minimum score instead of just "lesson checkbox ticked".
+    public function save_scorm_progress()
+    {
+        if (! $this->session->userdata('user_login')) {
+            return;
+        }
+        $this->load->model('addons/Scorm_model', 'scorm_model');
+        $this->scorm_model->save_scorm_progress();
+
+        // The package reported a final outcome — mark the lesson complete the same
+        // way the manual "Mark as Complete" checkbox does (course_progress, and the
+        // certificate-eligibility check, now gated on score via Certificate_model).
+        $lesson_status = strtolower(html_escape($this->input->post('lesson_status')));
+        if (in_array($lesson_status, ['completed', 'passed'], true)) {
+            $lesson_id = (int) $this->input->post('lesson_id');
+            $course_id = (int) $this->input->post('course_id');
+            $user_id   = (int) $this->session->userdata('user_id');
+
+            // update_watch_history_manually TOGGLES completion (it's built for the
+            // checkbox's onchange event) — only call it if this lesson isn't already
+            // marked complete, otherwise a second "completed" report from the package
+            // would flip it back to incomplete.
+            $watch_history  = $this->crud_model->get_watch_histories($user_id, $course_id)->row('completed_lesson');
+            $completed_lesson_ids = json_decode($watch_history, true);
+            if (! is_array($completed_lesson_ids) || ! in_array($lesson_id, $completed_lesson_ids)) {
+                $this->crud_model->update_watch_history_manually($lesson_id, $course_id, $user_id);
+            }
+        }
+    }
+
     public function set_flashdata_for_js($index = "", $message = "")
     {
         $this->session->set_flashdata($index, get_phrase($message));

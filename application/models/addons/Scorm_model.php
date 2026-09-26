@@ -74,6 +74,55 @@ class Scorm_model extends CI_Model
 		}
 	}
 
+	public function save_scorm_progress() {
+		$course_id  = (int) $this->input->post('course_id');
+		$student_id = (int) $this->session->userdata('user_id');
+
+		if ($course_id <= 0 || $student_id <= 0) {
+			return;
+		}
+
+		// lesson_location/suspend_data are the package's own opaque bookmark/resume
+		// data — never html_escape() these, they must round-trip byte-for-byte back
+		// into LMSGetValue or the package's own resume logic will fail to parse them.
+		$lesson_status   = $this->input->post('lesson_status');
+		$score_raw       = $this->input->post('score_raw');
+		$lesson_location = $this->input->post('lesson_location');
+		$suspend_data    = $this->input->post('suspend_data');
+
+		$data = ['date_updated' => strtotime(date('d M Y'))];
+		// Only touch fields that were actually sent this commit — an intermediate
+		// resume-data-only commit shouldn't blank out a previously saved score.
+		if ($lesson_status !== null && $lesson_status !== '') {
+			$data['lesson_status'] = html_escape($lesson_status);
+		}
+		if ($score_raw !== null && $score_raw !== '') {
+			$data['score_raw'] = (int) $score_raw;
+		}
+		if ($lesson_location !== null && $lesson_location !== '') {
+			$data['lesson_location'] = $lesson_location;
+		}
+		if ($suspend_data !== null && $suspend_data !== '') {
+			$data['suspend_data'] = $suspend_data;
+		}
+
+		$existing = $this->db->get_where('scorm_tracking', ['course_id' => $course_id, 'student_id' => $student_id]);
+		if ($existing->num_rows() > 0) {
+			$this->db->where('course_id', $course_id);
+			$this->db->where('student_id', $student_id);
+			$this->db->update('scorm_tracking', $data);
+		} else {
+			$data['course_id']  = $course_id;
+			$data['student_id'] = $student_id;
+			$data['date_added'] = strtotime(date('d M Y'));
+			$this->db->insert('scorm_tracking', $data);
+		}
+	}
+
+	public function get_scorm_progress($course_id = "", $student_id = "") {
+		return $this->db->get_where('scorm_tracking', ['course_id' => $course_id, 'student_id' => $student_id])->row_array();
+	}
+
 	public static function deleteDir($dirPath) {
 	    if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
 	        $dirPath .= '/';

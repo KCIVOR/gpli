@@ -111,13 +111,17 @@
                           <i class="fas fa-lock" title="<?php echo get_phrase('Complete previous lesson to unlock it'); ?>" data-bs-toggle="tooltip"></i>
                         <?php else: ?>
                           <?php $is_lesson_completed = in_array($lesson['id'], $completed_lessons); ?>
-                          <?php if($is_lesson_completed && $lesson['lesson_type'] == 'video' || $is_lesson_completed && $lesson['lesson_type'] == 'quiz' || $is_lesson_completed && $lesson['lesson_type'] == 'audio'): ?>
+                          <?php if($is_lesson_completed && $lesson['lesson_type'] == 'video' || $is_lesson_completed && $lesson['lesson_type'] == 'quiz' || $is_lesson_completed && $lesson['lesson_type'] == 'audio' || $is_lesson_completed && $lesson['lesson_type'] == 'scorm'): ?>
                             <i class="fas fa-check" title="<?php echo get_phrase('Completed'); ?>" data-bs-toggle="tooltip"></i>
                           <?php else: ?>
                             <?php if($lesson['lesson_type'] == 'video' || $lesson['lesson_type'] == 'audio' || $lesson['lesson_type'] == 'wasabi'): ?>
                               <i class="fas fa-play me-2" title="<?php echo get_phrase('Play Now'); ?>" data-bs-toggle="tooltip"></i>
                             <?php elseif($lesson['lesson_type'] == 'quiz'): ?>
                               <i class="fas fa-question" title="<?php echo get_phrase('Start Now'); ?>" data-bs-toggle="tooltip"></i>
+                            <?php elseif($lesson['lesson_type'] == 'scorm'): ?>
+                              <!-- SCORM completion is reported by the package itself (see scorm_course_content_body.php),
+                                   not self-ticked, so this is a status icon, not a checkbox. -->
+                              <i class="fas fa-play me-2" title="<?php echo get_phrase('Start Now'); ?>" data-bs-toggle="tooltip"></i>
                             <?php else: ?>
                               <div class="checkbox checkbox-box">
                                 <input class="lesson_checkbox" type="checkbox" onchange="actionTo('<?php echo site_url('home/update_watch_history_manually?lesson_id='.$lesson['id'].'&course_id='.$course_details['id']); ?>', 'post', event);" <?php echo $chekbox; ?>>
@@ -127,9 +131,19 @@
                         <?php endif; ?>
                       <?php else: ?>
 
-                        <div class="checkbox checkbox-box">
-                          <input class="lesson_checkbox" type="checkbox" onchange="actionTo('<?php echo site_url('home/update_watch_history_manually?lesson_id='.$lesson['id'].'&course_id='.$course_details['id']); ?>', 'post', event);" <?php echo $chekbox; ?>>
-                        </div>
+                        <?php if($lesson['lesson_type'] == 'scorm'): ?>
+                          <!-- SCORM completion is reported by the package itself (see scorm_course_content_body.php),
+                               not self-ticked, so this is a status icon, not a checkbox. -->
+                          <?php if(in_array($lesson['id'], $completed_lessons)): ?>
+                            <i class="fas fa-check" title="<?php echo get_phrase('Completed'); ?>" data-bs-toggle="tooltip"></i>
+                          <?php else: ?>
+                            <i class="fas fa-play me-2" title="<?php echo get_phrase('Start Now'); ?>" data-bs-toggle="tooltip"></i>
+                          <?php endif; ?>
+                        <?php else: ?>
+                          <div class="checkbox checkbox-box">
+                            <input class="lesson_checkbox" type="checkbox" onchange="actionTo('<?php echo site_url('home/update_watch_history_manually?lesson_id='.$lesson['id'].'&course_id='.$course_details['id']); ?>', 'post', event);" <?php echo $chekbox; ?>>
+                          </div>
+                        <?php endif; ?>
                       <?php endif; ?>
 
 

@@ -1,8 +1,14 @@
 <?php
 	$scorm_course_content_url = "";
-	if(file_exists("uploads/scorm/courses/".$scorm_curriculum['identifier'].'/scormcontent/index.html')):
-		// Articulate Rise (and other tools that nest content under scormcontent/) export their real
-		// entry point here instead of at the package root, so check for it before the per-provider guesses.
+	if(file_exists("uploads/scorm/courses/".$scorm_curriculum['identifier'].'/scormdriver/indexAPI.html')):
+		// The package's own imsmanifest.xml declares this as its real launch resource for a
+		// reason: it's the file that actually performs the LMS handshake (LMSInitialize, score/
+		// status reporting, resume) before showing the content — going straight to scormcontent/
+		// index.html below skips that connection entirely, so prefer this whenever it exists.
+		$scorm_course_content_url = "uploads/scorm/courses/".$scorm_curriculum['identifier'].'/scormdriver/indexAPI.html';
+	elseif(file_exists("uploads/scorm/courses/".$scorm_curriculum['identifier'].'/scormcontent/index.html')):
+		// No driver wrapper in this package — fall back to the raw content directly (no SCORM
+		// API connection is possible in this case; score/resume simply won't be reported).
 		$scorm_course_content_url = "uploads/scorm/courses/".$scorm_curriculum['identifier'].'/scormcontent/index.html';
 	elseif($scorm_curriculum['scorm_provider'] == 'ispring'):
 		if(file_exists("uploads/scorm/courses/".$scorm_curriculum['identifier'].'/index_scorm.html')){
@@ -41,8 +47,110 @@
 	    </div>
 	</div>
 <?php endif ?>
+<?php
+	$gp_scorm_saved_progress = [];
+	if (addon_status('scorm_course') && $this->session->userdata('user_login')) {
+		$this->load->model('addons/Scorm_model', 'scorm_model');
+		$gp_scorm_saved_progress = $this->scorm_model->get_scorm_progress($course_details['id'], $this->session->userdata('user_id')) ?: [];
+	}
+	$gp_scorm_json_flags = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+?>
 <script type="text/javascript">
 	'use strict';
+	// SCORM 1.2 runtime API — the package's own driver looks for `window.API` on this
+	// (its parent) window and calls these methods directly; without this, any quiz/score
+	// (and, for resume, the package's own bookmark/suspend_data) has nowhere to report
+	// to or read back from, so progress is silently dropped and every visit restarts.
+	(function () {
+		// Seeded with whatever was saved last time, so LMSGetValue can answer the
+		// package's own "where was I?" questions on init instead of always saying
+		// "nowhere, start over".
+		var gpScormData = {
+			// Tells the package whether this is a first-time attempt or a returning
+			// student — without this, the driver won't even look at the saved
+			// bookmark/suspend_data below, regardless of whether it's populated.
+			'cmi.core.entry': <?php echo json_encode(empty($gp_scorm_saved_progress) ? 'ab-initio' : 'resume', $gp_scorm_json_flags); ?>,
+			'cmi.core.lesson_status': <?php echo json_encode($gp_scorm_saved_progress['lesson_status'] ?? '', $gp_scorm_json_flags); ?>,
+			'cmi.core.score.raw': <?php echo json_encode(isset($gp_scorm_saved_progress['score_raw']) ? (string) $gp_scorm_saved_progress['score_raw'] : '', $gp_scorm_json_flags); ?>,
+			'cmi.core.lesson_location': <?php echo json_encode($gp_scorm_saved_progress['lesson_location'] ?? '', $gp_scorm_json_flags); ?>,
+			'cmi.suspend_data': <?php echo json_encode($gp_scorm_saved_progress['suspend_data'] ?? '', $gp_scorm_json_flags); ?>
+		};
+		var gpScormCourseId = <?php echo (int) $course_details['id']; ?>;
+		var gpScormLessonId = <?php echo (int) $lesson_details['id']; ?>;
+		var gpScormCommitUrl = '<?php echo site_url('home/save_scorm_progress'); ?>';
+		var gpScormCommitted = false;
+		var gpScormCommitTimer = null;
+
+		function gpScormDoCommit() {
+			var status = gpScormData['cmi.core.lesson_status'] || '';
+			var score = gpScormData['cmi.core.score.raw'] || '';
+			var location = gpScormData['cmi.core.lesson_location'] || '';
+			var suspendData = gpScormData['cmi.suspend_data'] || '';
+			if (status === '' && score === '' && location === '' && suspendData === '') return;
+
+			var params = new URLSearchParams({
+				course_id: gpScormCourseId,
+				lesson_id: gpScormLessonId,
+				lesson_status: status,
+				score_raw: score,
+				lesson_location: location,
+				suspend_data: suspendData
+			});
+
+			// sendBeacon survives the page actually closing, unlike a normal AJAX call
+			// which the browser can cancel mid-flight once the tab is gone — matters
+			// most for the beforeunload/LMSFinish flush, but safe to use everywhere.
+			if (navigator.sendBeacon) {
+				var blob = new Blob([params.toString()], { type: 'application/x-www-form-urlencoded' });
+				navigator.sendBeacon(gpScormCommitUrl, blob);
+			} else if (window.jQuery) {
+				jQuery.post(gpScormCommitUrl, {
+					course_id: gpScormCourseId,
+					lesson_id: gpScormLessonId,
+					lesson_status: status,
+					score_raw: score,
+					lesson_location: location,
+					suspend_data: suspendData
+				});
+			}
+		}
+
+		// Resume data (bookmark/suspend_data) can be set very frequently during normal
+		// navigation — debounce so we save "where they are" without firing an AJAX call
+		// on every single slide transition. The final LMSFinish/beforeunload calls flush
+		// immediately (see below) so nothing is lost if the tab closes mid-debounce.
+		function gpScormCommit(immediate) {
+			if (immediate) {
+				clearTimeout(gpScormCommitTimer);
+				gpScormDoCommit();
+				return 'true';
+			}
+			if (gpScormCommitted) return 'true';
+			gpScormCommitted = true;
+			clearTimeout(gpScormCommitTimer);
+			gpScormCommitTimer = setTimeout(function () {
+				gpScormCommitted = false;
+				gpScormDoCommit();
+			}, 1500);
+			return 'true';
+		}
+
+		window.API = {
+			LMSInitialize: function () { return 'true'; },
+			LMSFinish: function () { return gpScormCommit(true); },
+			LMSGetValue: function (key) { return gpScormData[key] !== undefined ? gpScormData[key] : ''; },
+			LMSSetValue: function (key, value) {
+				gpScormData[key] = value;
+				return 'true';
+			},
+			LMSCommit: function () { return gpScormCommit(); },
+			LMSGetLastError: function () { return '0'; },
+			LMSGetErrorString: function () { return ''; },
+			LMSGetDiagnostic: function () { return ''; }
+		};
+
+		window.addEventListener('beforeunload', function () { gpScormCommit(true); });
+	})();
 	//For Scorm course body
 	$(document).ready(function(){
 	  var width = $('#scorm_iframe').width();
