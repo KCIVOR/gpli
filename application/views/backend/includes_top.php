@@ -51,7 +51,7 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-custom-field.css'); ?>?v=customfield-1">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-video-player.css'); ?>?v=video-player-1">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-user-custom-field.css'); ?>?v=user-customfield-1">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-report.css'); ?>?v=report-3">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-report.css'); ?>?v=report-4">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-enrol.css'); ?>?v=enrol-3">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-users.css'); ?>?v=users-5">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-admin-message.css'); ?>?v=message-1">

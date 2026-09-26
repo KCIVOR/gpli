@@ -387,6 +387,70 @@ class User extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    public function learner_progress()
+    {
+        if ($this->session->userdata('user_login') != true) {
+            redirect(site_url('login'), 'refresh');
+        }
+
+        // Scope comes from the session only: courses this instructor is listed on
+        $user_id = (int) $this->session->userdata('user_id');
+        $courses = $this->db->select('id, title')
+            ->where('FIND_IN_SET(' . $this->db->escape((string) $user_id) . ', user_id) >', 0, false)
+            ->order_by('title', 'ASC')
+            ->get('course')->result_array();
+        $allowed_course_ids = array_map('intval', array_column($courses, 'id'));
+
+        $filters = $this->_learner_progress_filters();
+        if ($this->input->get('export') === 'csv') {
+            $this->_learner_progress_export($filters, $allowed_course_ids);
+        }
+
+        $page_data['filters']    = $filters;
+        $page_data['report']     = $this->crud_model->learner_progress_rows($filters, $allowed_course_ids);
+        $page_data['courses']    = $courses;
+        $page_data['page_name']  = 'learner_progress';
+        $page_data['page_title'] = get_phrase('Learner progress');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    // Read and validate the learner progress filters from GET (underscore = not routable)
+    private function _learner_progress_filters()
+    {
+        $valid_date = function ($value) {
+            $value = trim((string) $value);
+            $date  = DateTime::createFromFormat('Y-m-d', $value);
+            return ($date && $date->format('Y-m-d') === $value) ? $value : '';
+        };
+
+        $status = (string) $this->input->get('status');
+        if (! in_array($status, ['not_started', 'in_progress', 'completed', 'expired'], true)) {
+            $status = '';
+        }
+        $page = (int) $this->input->get('page');
+
+        return [
+            'course_id'     => max(0, (int) $this->input->get('course_id')),
+            'student'       => mb_substr(trim((string) $this->input->get('student')), 0, 100),
+            'status'        => $status,
+            'enrolled_from' => $valid_date($this->input->get('enrolled_from')),
+            'enrolled_to'   => $valid_date($this->input->get('enrolled_to')),
+            'page'          => $page >= 1 ? $page : 1,
+            'per_page'      => 50,
+        ];
+    }
+
+    // Stream the learner progress CSV and stop
+    private function _learner_progress_export($filters, $allowed_course_ids = null)
+    {
+        $filters['per_page'] = 0; // every filtered row, not just one page
+        $report              = $this->crud_model->learner_progress_rows($filters, $allowed_course_ids);
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="learner_progress_' . date('Y-m-d') . '.csv"');
+        echo $this->crud_model->learner_progress_csv($report['rows']);
+        exit;
+    }
+
     public function preview($course_id = '')
     {
         if ($this->session->userdata('user_login') != 1)

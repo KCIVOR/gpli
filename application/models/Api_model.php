@@ -599,10 +599,18 @@ class Api_model extends CI_Model
 			$course_details = $this->crud_model->get_course_by_id($my_courses_id['course_id'])->row_array();
 			array_push($my_courses, $course_details);
 		}
+		// Enrolment expiry per course, so the status matches the website's My Courses
+		$expiry_by_course = array();
+		foreach ($my_courses_ids as $my_courses_id) {
+			$expiry_by_course[$my_courses_id['course_id']] = $my_courses_id['expiry_date'];
+		}
 		$my_courses = $this->course_data($my_courses);
 		foreach ($my_courses as $key => $my_course) {
 			if (isset($my_course['id']) && $my_course['id'] > 0) {
-				$my_courses[$key]['completion'] = round(course_progress($my_course['id'], $user_id));
+				$expiry = isset($expiry_by_course[$my_course['id']]) ? $expiry_by_course[$my_course['id']] : null;
+				$course_status = course_status($my_course['id'], $user_id, $expiry);
+				$my_courses[$key]['completion'] = (int) ($course_status['percent'] ?? 0);
+				$my_courses[$key]['status'] = $course_status['status'];
 				$my_courses[$key]['total_number_of_lessons'] = $this->crud_model->get_lessons('course', $my_course['id'])->num_rows();
 				$my_courses[$key]['total_number_of_completed_lessons'] = $this->get_completed_number_of_lesson($user_id, 'course', $my_course['id']);
 			}
@@ -1160,7 +1168,10 @@ class Api_model extends CI_Model
 		$my_bundle_course_details = $this->course_data($my_bundle_course_details);
 		foreach ($my_bundle_course_details as $key => $my_course) {
 			if (isset($my_course['id']) && $my_course['id'] > 0) {
-				$my_bundle_course_details[$key]['completion'] = round(course_progress($my_course['id'], $user_id));
+				// Bundle validity is checked above, so no enrolment expiry here
+				$course_status = course_status($my_course['id'], $user_id, null);
+				$my_bundle_course_details[$key]['completion'] = (int) ($course_status['percent'] ?? 0);
+				$my_bundle_course_details[$key]['status'] = $course_status['status'];
 				$my_bundle_course_details[$key]['total_number_of_lessons'] = $this->crud_model->get_lessons('course', $my_course['id'])->num_rows();
 				$my_bundle_course_details[$key]['total_number_of_completed_lessons'] = $this->get_completed_number_of_lesson($user_id, 'course', $my_course['id']);
 			}

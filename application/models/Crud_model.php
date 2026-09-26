@@ -215,6 +215,173 @@ class Crud_model extends CI_Model
         return $this->db->get('enrol');
     }
 
+    /**
+     * Learner progress report rows (admin + instructor report, CSV export).
+     *
+     * $filters keys (already validated by the controller):
+     *   course_id (int), student (string), status (not_started|in_progress|completed|expired),
+     *   enrolled_from / enrolled_to ('Y-m-d'), page (int >= 1), per_page (int, 0 = all rows)
+     * $allowed_course_ids: null = every course (admin), array = only these courses (instructor).
+     *
+     * Returns ['rows', 'summary', 'total', 'capped', 'page', 'pages'].
+     */
+    public function learner_progress_rows($filters = [], $allowed_course_ids = null)
+    {
+        $cap      = 2000;
+        $statuses = ['not_started', 'in_progress', 'completed', 'expired'];
+
+        $this->db->select('e.id AS enrol_id, e.user_id, e.course_id, e.date_added, e.expiry_date, u.first_name, u.last_name, u.email, c.title AS course_title, c.course_type');
+        $this->db->from('enrol e');
+        $this->db->join('users u', 'u.id = e.user_id');
+        $this->db->join('course c', 'c.id = e.course_id');
+
+        if ($allowed_course_ids !== null) {
+            $allowed_course_ids = array_map('intval', (array) $allowed_course_ids);
+            $this->db->where_in('e.course_id', $allowed_course_ids ?: [0]);
+        }
+        if (! empty($filters['course_id'])) {
+            $this->db->where('e.course_id', (int) $filters['course_id']);
+        }
+        if (isset($filters['student']) && trim($filters['student']) !== '') {
+            // Grouped so the ORs can never escape the course scope above
+            $student = trim($filters['student']);
+            $this->db->group_start();
+            $this->db->like('u.first_name', $student);
+            $this->db->or_like('u.last_name', $student);
+            $this->db->or_like('u.email', $student);
+            $this->db->group_end();
+        }
+        if (! empty($filters['enrolled_from'])) {
+            $this->db->where('e.date_added >=', strtotime($filters['enrolled_from'] . ' 00:00:00'));
+        }
+        if (! empty($filters['enrolled_to'])) {
+            $this->db->where('e.date_added <=', strtotime($filters['enrolled_to'] . ' 23:59:59'));
+        }
+        $this->db->order_by('e.date_added', 'DESC');
+        $this->db->limit($cap + 1);
+        $enrolments = $this->db->get()->result_array();
+
+        $capped = count($enrolments) > $cap;
+        if ($capped) {
+            $enrolments = array_slice($enrolments, 0, $cap);
+        }
+
+        $summary = ['enrolled' => 0, 'not_started' => 0, 'in_progress' => 0, 'completed' => 0, 'expired' => 0, 'certificates' => 0];
+        $rows    = [];
+        foreach ($enrolments as $enrolment) {
+            $status = course_status($enrolment['course_id'], $enrolment['user_id'], $enrolment['expiry_date']);
+
+            $watch_history = $this->db->get_where('watch_histories', ['course_id' => $enrolment['course_id'], 'student_id' => $enrolment['user_id']])->row_array();
+            $last_activity = (! empty($watch_history['date_updated'])) ? (int) $watch_history['date_updated'] : 0;
+
+            $score = null;
+            if ($enrolment['course_type'] == 'scorm') {
+                $tracking = $this->db->get_where('scorm_tracking', ['course_id' => $enrolment['course_id'], 'student_id' => $enrolment['user_id']])->row_array();
+                if (! empty($tracking)) {
+                    if ($tracking['score_raw'] !== null && $tracking['score_raw'] !== '') {
+                        $score = (int) $tracking['score_raw'];
+                    }
+                    // SCORM date_updated is day precision only
+                    if (! empty($tracking['date_updated']) && (int) $tracking['date_updated'] > $last_activity) {
+                        $last_activity = (int) $tracking['date_updated'];
+                    }
+                }
+            }
+
+            $rows[] = [
+                'enrol_id'        => (int) $enrolment['enrol_id'],
+                'user_id'         => (int) $enrolment['user_id'],
+                'course_id'       => (int) $enrolment['course_id'],
+                'student_name'    => trim($enrolment['first_name'] . ' ' . $enrolment['last_name']),
+                'email'           => $enrolment['email'],
+                'course_title'    => $enrolment['course_title'],
+                'course_type'     => $enrolment['course_type'],
+                'status'          => $status['status'],
+                'percent'         => $status['percent'],
+                'score'           => $score,
+                'enrolled'        => (int) $enrolment['date_added'],
+                'expiry_date'     => $enrolment['expiry_date'] > 0 ? (int) $enrolment['expiry_date'] : null,
+                'last_activity'   => $last_activity > 0 ? $last_activity : null,
+                'completed_date'  => $status['completed_date'],
+                'certificate_url' => $status['certificate_url'],
+            ];
+
+            $summary['enrolled']++;
+            $summary[$status['status']]++;
+            if (! empty($status['certificate_url'])) {
+                $summary['certificates']++;
+            }
+        }
+
+        // Status filter after the summary, so the tiles always describe the whole filtered set
+        if (! empty($filters['status']) && in_array($filters['status'], $statuses, true)) {
+            $wanted = $filters['status'];
+            $rows   = array_values(array_filter($rows, function ($row) use ($wanted) {
+                return $row['status'] === $wanted;
+            }));
+        }
+
+        $total    = count($rows);
+        $per_page = isset($filters['per_page']) ? (int) $filters['per_page'] : 50;
+        $page     = (isset($filters['page']) && (int) $filters['page'] >= 1) ? (int) $filters['page'] : 1;
+        $pages    = 1;
+        if ($per_page > 0) {
+            $pages = max(1, (int) ceil($total / $per_page));
+            $page  = min($page, $pages);
+            $rows  = array_slice($rows, ($page - 1) * $per_page, $per_page);
+        }
+
+        return [
+            'rows'    => $rows,
+            'summary' => $summary,
+            'total'   => $total,
+            'capped'  => $capped,
+            'page'    => $page,
+            'pages'   => $pages,
+        ];
+    }
+
+    /**
+     * CSV text for learner_progress_rows() rows: UTF-8 BOM, quoted cells,
+     * formula-safe (cells starting with = + - @ get a leading apostrophe).
+     */
+    public function learner_progress_csv($rows = [])
+    {
+        $cell = function ($value) {
+            $value = (string) $value;
+            if ($value !== '' && in_array($value[0], ['=', '+', '-', '@'], true)) {
+                $value = "'" . $value;
+            }
+            return '"' . str_replace('"', '""', $value) . '"';
+        };
+
+        $status_labels = [
+            'not_started' => get_phrase('Not started'),
+            'in_progress' => get_phrase('In progress'),
+            'completed'   => get_phrase('Completed'),
+            'expired'     => get_phrase('Expired'),
+        ];
+
+        $lines   = [];
+        $lines[] = implode(',', array_map($cell, ['Student', 'Email', 'Course', 'Status', 'Progress %', 'Test score', 'Enrolled', 'Last activity', 'Completed on', 'Certificate URL']));
+        foreach ($rows as $row) {
+            $lines[] = implode(',', array_map($cell, [
+                $row['student_name'],
+                $row['email'],
+                html_entity_decode($row['course_title'], ENT_QUOTES, 'UTF-8'), // titles are stored HTML-encoded
+                isset($status_labels[$row['status']]) ? $status_labels[$row['status']] : $row['status'],
+                $row['percent'] === null ? '' : $row['percent'],
+                $row['score'] === null ? '' : $row['score'],
+                date('Y-m-d', $row['enrolled']),
+                $row['last_activity'] ? date('Y-m-d', $row['last_activity']) : '',
+                $row['completed_date'] ? date('Y-m-d', $row['completed_date']) : '',
+                $row['certificate_url'] ? $row['certificate_url'] : '',
+            ]));
+        }
+
+        return "\xEF\xBB\xBF" . implode("\r\n", $lines) . "\r\n";
+    }
+
     public function get_revenue_by_user_type($timestamp_start = "", $timestamp_end = "", $revenue_type = "")
     {
         $course_ids    = [];

@@ -485,6 +485,65 @@ class Admin extends CI_Controller
         $this->load->view('backend/index', $page_data);
     }
 
+    public function learner_progress()
+    {
+        if ($this->session->userdata('admin_login') != true) {
+            redirect(site_url('login'), 'refresh');
+        }
+
+        // CHECK ACCESS PERMISSION
+        check_permission('enrolment');
+
+        $filters = $this->_learner_progress_filters();
+        if ($this->input->get('export') === 'csv') {
+            $this->_learner_progress_export($filters);
+        }
+
+        $page_data['filters']    = $filters;
+        $page_data['report']     = $this->crud_model->learner_progress_rows($filters);
+        $page_data['courses']    = $this->db->select('id, title')->order_by('title', 'ASC')->get('course')->result_array();
+        $page_data['page_name']  = 'learner_progress';
+        $page_data['page_title'] = get_phrase('Learner progress');
+        $this->load->view('backend/index', $page_data);
+    }
+
+    // Read and validate the learner progress filters from GET (underscore = not routable)
+    private function _learner_progress_filters()
+    {
+        $valid_date = function ($value) {
+            $value = trim((string) $value);
+            $date  = DateTime::createFromFormat('Y-m-d', $value);
+            return ($date && $date->format('Y-m-d') === $value) ? $value : '';
+        };
+
+        $status = (string) $this->input->get('status');
+        if (! in_array($status, ['not_started', 'in_progress', 'completed', 'expired'], true)) {
+            $status = '';
+        }
+        $page = (int) $this->input->get('page');
+
+        return [
+            'course_id'     => max(0, (int) $this->input->get('course_id')),
+            'student'       => mb_substr(trim((string) $this->input->get('student')), 0, 100),
+            'status'        => $status,
+            'enrolled_from' => $valid_date($this->input->get('enrolled_from')),
+            'enrolled_to'   => $valid_date($this->input->get('enrolled_to')),
+            'page'          => $page >= 1 ? $page : 1,
+            'per_page'      => 50,
+        ];
+    }
+
+    // Stream the learner progress CSV and stop
+    private function _learner_progress_export($filters, $allowed_course_ids = null)
+    {
+        $filters['per_page'] = 0; // every filtered row, not just one page
+        $report              = $this->crud_model->learner_progress_rows($filters, $allowed_course_ids);
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename="learner_progress_' . date('Y-m-d') . '.csv"');
+        echo $this->crud_model->learner_progress_csv($report['rows']);
+        exit;
+    }
+
     public function enrol_student($param1 = "")
     {
         if ($this->session->userdata('admin_login') != true) {
@@ -3443,65 +3502,6 @@ class Admin extends CI_Controller
         $page_data['enrol_history'] = $this->crud_model->enrol_history($course_id);
 
         $this->load->view('backend/admin/course_enrol_list', $page_data);
-    }
-
-    public function export_student_progress_csv($course_id)
-    {
-        // Get the enrolments for the given course
-        $enrolments = $this->db->where('course_id', $course_id)->get('enrol')->result_array();
-
-        // Initialize an array to hold the CSV data
-        $csv_data = '"ID","Enrolment ID","Student","Date Enrolled","Last Seen","Completed On","Progress","Completed Lessons","Watched Duration"' . "\n";
-
-        // Initialize incremental ID
-        $incremental_id = 1;
-
-        // Loop through each enrolment and fetch the relevant data
-        foreach ($enrolments as $enrolment) {
-            // Fetch student data
-            $student = $this->user_model->get_all_user($enrolment['user_id'])->row_array();
-
-            // Fetch watch history for the student
-            $watch_history = $this->db->where('course_id', $course_id)->where('student_id', $enrolment['user_id'])->get('watch_histories')->row_array();
-
-            // Handle completed lessons and course progress
-            $completed_lesson_arr = isset($watch_history['completed_lesson']) ? json_decode($watch_history['completed_lesson'], true) : [];
-            $completed_lesson     = is_array($completed_lesson_arr) ? count($completed_lesson_arr) : 0;
-            $course_progress      = isset($watch_history['course_progress']) ? $watch_history['course_progress'] : 0;
-
-            // Format dates in d-m-Y format
-            $enrollment_date = date('d-m-Y', $enrolment['date_added']);
-            $last_seen       = isset($watch_history['date_updated']) ? date('d-m-Y, H:i a', $watch_history['date_updated']) : 'Not started yet';
-            $completed_date  = isset($watch_history['completed_date']) ? date('d-m-Y', $watch_history['completed_date']) : 'Not completed yet';
-
-                                         // Get watched duration
-            $total_watched_duration = 0; // seconds
-            $watched_durations      = $this->db->get_where('watched_duration', ['watched_student_id' => $enrolment['user_id'], 'watched_course_id' => $course_id]);
-            foreach ($watched_durations->result_array() as $watched_duration) {
-                $total_watched_duration += count(json_decode($watched_duration['watched_counter'], true)) * 5;
-            }
-            $watched_duration = seconds_to_time_format($total_watched_duration);
-
-            // Prepare the data for the CSV row with Incremental ID
-            $csv_data .= '"' . $incremental_id . '",';
-            $csv_data .= '"' . $enrolment['id'] . '",';
-            $csv_data .= '"' . $student['first_name'] . ' ' . $student['last_name'] . '",';
-            $csv_data .= '"' . $enrollment_date . '",';
-            $csv_data .= '"' . $last_seen . '",';
-            $csv_data .= '"' . $completed_date . '",';
-            $csv_data .= '"' . $course_progress . '%",';
-            $csv_data .= '"' . $completed_lesson . ' out of 10",';
-            $csv_data .= '"' . $watched_duration . '"' . "\n";
-
-            // Increment the ID for the next row
-            $incremental_id++;
-        }
-
-        // Set the headers to trigger a file download
-        header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="student_progress.csv"');
-        echo $csv_data;
-        exit;
     }
 
     public function export_admins_csv()

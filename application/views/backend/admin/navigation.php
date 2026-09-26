@@ -299,9 +299,9 @@
         <?php endif; ?>
 
         <?php if (has_permission('enrolment')): ?>
-        <li class="side-nav-item<?php if ($page_name == 'enrol_history' || $page_name == 'enrol_student'): ?> active<?php endif; ?>">
+        <li class="side-nav-item<?php if ($page_name == 'enrol_history' || $page_name == 'enrol_student' || $page_name == 'learner_progress'): ?> active<?php endif; ?>">
             <a href="javascript: void(0);"
-                class="side-nav-link                                    				                                                    <?php if ($page_name == 'enrol_history' || $page_name == 'enrol_student'): ?> active<?php endif; ?>">
+                class="side-nav-link                                    				                                                    <?php if ($page_name == 'enrol_history' || $page_name == 'enrol_student' || $page_name == 'learner_progress'): ?> active<?php endif; ?>">
                 <i class="dripicons-network-3"></i>
                 <span> <?php echo get_phrase('Enrollments'); ?> </span>
                 <span class="menu-arrow"></span>
@@ -318,6 +318,12 @@
                            }
                            ?>">
                     <a href="<?php echo site_url('admin/enrol_history'); ?>"><?php echo get_phrase('enrol_history'); ?></a>
+                </li>
+                <li class="<?php if ($page_name == 'learner_progress') {
+                                   echo 'active';
+                           }
+                           ?>">
+                    <a href="<?php echo site_url('admin/learner_progress'); ?>"><?php echo get_phrase('Learner progress'); ?></a>
                 </li>
             </ul>
         </li>

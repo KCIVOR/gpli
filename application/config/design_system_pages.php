@@ -129,6 +129,7 @@ $config['gp_ds_admin_pages'] = [
     // Phase 3 Batch 10 — specialized
     'coupons',
     'enrol_history',
+    'learner_progress',
     'instructor_payout',
     'admin_revenue',
     'instructor_revenue',
@@ -205,6 +206,7 @@ $config['gp_ds_user_pages'] = [
     // Phase 3 Batch 3
     'courses-server-side',
     'sales_report',
+    'learner_progress',
     'payout_report',
     'payment_settings',
     'invoice',

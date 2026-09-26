@@ -143,6 +143,12 @@ $status_wise_courses = $this->crud_model->get_status_wise_courses();
 					</a>
 				</li>
 				<li class="side-nav-item">
+					<a href="<?php echo site_url('user/learner_progress'); ?>" class="side-nav-link <?php if ($page_name == 'learner_progress') echo 'active'; ?>">
+						<i class="dripicons-graduation"></i>
+						<span><?php echo get_phrase('Learner progress'); ?></span>
+					</a>
+				</li>
+				<li class="side-nav-item">
 					<a href="<?php echo site_url('user/payout_report'); ?>" class="side-nav-link <?php if ($page_name == 'payout_report' || $page_name == 'invoice') echo 'active'; ?>">
 						<i class="dripicons-shopping-bag"></i>
 						<span><?php echo get_phrase('payout_report'); ?></span>
