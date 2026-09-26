@@ -31,7 +31,9 @@ class Certificate extends CI_Controller
     }
 
     function position($param1 = ""){
-        $certificate_text_positions = htmlspecialchars($this->input->post('text_positions', false));
+        // Drop the display-only ?v= cache-buster so the saved layout keeps the plain image path
+        // that views/certificate/index.php looks for.
+        $certificate_text_positions = htmlspecialchars(preg_replace('/(uploads\/certificates\/template\.jpg)\?v=\d+/', '$1', (string) $this->input->post('text_positions', false)));
         if($param1 == 'save'){
             $this->db->where('key', 'certificate-text-positons');
             $row = $this->db->get('settings');

@@ -83,6 +83,10 @@
           </style>
           <?php
             $preview_template = remove_js(htmlspecialchars_decode(get_settings('certificate-text-positons')));
+            // Version the template image by its file time so a newly uploaded template shows
+            // here straight away instead of the browser's cached copy.
+            $gp_template_version = file_exists('uploads/certificates/template.jpg') ? filemtime('uploads/certificates/template.jpg') : time();
+            $preview_template = str_replace('uploads/certificates/template.jpg"', 'uploads/certificates/template.jpg?v=' . $gp_template_version . '"', $preview_template);
             $preview_template = preg_replace_callback(
                 '/(class="[^"]*\bcertificate_text\b[^"]*"[^>]*>)(.*?)(<\/div>)/s',
                 function($matches) {

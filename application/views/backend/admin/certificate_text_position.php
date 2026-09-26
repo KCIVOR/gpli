@@ -44,7 +44,12 @@
 <body style="display: flex;">
 	<div style="width: 750px; position: relative; text-align: center;">
 		<div class="certificate-text-position">
-			<?php echo remove_js(htmlspecialchars_decode(get_settings('certificate-text-positons'))); ?>
+			<?php
+				// Version the template image so a newly uploaded template shows instead of the
+				// browser's cached copy (the ?v= is stripped again on save, see Certificate::position).
+				$gp_template_version = file_exists('uploads/certificates/template.jpg') ? filemtime('uploads/certificates/template.jpg') : time();
+				echo str_replace('uploads/certificates/template.jpg"', 'uploads/certificates/template.jpg?v=' . $gp_template_version . '"', remove_js(htmlspecialchars_decode(get_settings('certificate-text-positons'))));
+			?>
 		</div>
 		<button class="submit-button" onclick="save_position();"><?php echo get_phrase('update'); ?></button>
 	</div>
