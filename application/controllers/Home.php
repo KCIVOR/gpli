@@ -1624,6 +1624,11 @@ class Home extends CI_Controller
         if (! $this->session->userdata('user_login')) {
             return;
         }
+        // Only enrolled students record progress (admin/instructor previews don't).
+        $course_id = (int) $this->input->post('course_id');
+        if (enroll_status($course_id) !== 'valid') {
+            return;
+        }
         $this->load->model('addons/Scorm_model', 'scorm_model');
         $this->scorm_model->save_scorm_progress();
 
@@ -1632,8 +1637,11 @@ class Home extends CI_Controller
         // certificate-eligibility check, now gated on score via Certificate_model).
         $lesson_status = strtolower(html_escape($this->input->post('lesson_status')));
         if (in_array($lesson_status, ['completed', 'passed'], true)) {
-            $lesson_id = (int) $this->input->post('lesson_id');
-            $course_id = (int) $this->input->post('course_id');
+            // Never trust a lesson id from the browser — find the course's SCORM lesson.
+            $lesson_id = $this->scorm_model->get_scorm_lesson_id($course_id);
+            if ($lesson_id <= 0) {
+                return;
+            }
             $user_id   = (int) $this->session->userdata('user_id');
 
             // update_watch_history_manually TOGGLES completion (it's built for the
@@ -1643,8 +1651,29 @@ class Home extends CI_Controller
             $watch_history  = $this->crud_model->get_watch_histories($user_id, $course_id)->row('completed_lesson');
             $completed_lesson_ids = json_decode($watch_history, true);
             if (! is_array($completed_lesson_ids) || ! in_array($lesson_id, $completed_lesson_ids)) {
-                $this->crud_model->update_watch_history_manually($lesson_id, $course_id, $user_id);
+                $this->crud_model->update_watch_history_manually($lesson_id, $course_id, $user_id, true);
+            } elseif (addon_status('certificate')) {
+                // Already complete: the score can arrive in a later commit than the
+                // pass, so re-check the certificate (it never creates duplicates).
+                $this->load->model('addons/Certificate_model', 'certificate_model');
+                $this->certificate_model->check_certificate_eligibility($course_id, $user_id);
             }
+
+            // Reply with the new state so the course page can update itself without a
+            // reload (see gpScormShowResult in scorm_course_content_body.php).
+            $completed_lesson_ids = course_progress($course_id, $user_id, 'completed_lesson_ids');
+            $certificate_url      = '#';
+            if (addon_status('certificate')) {
+                $this->load->model('addons/Certificate_model', 'certificate_model');
+                $certificate_url = $this->certificate_model->get_certificate_url($user_id, $course_id);
+            }
+            header('Content-Type: application/json');
+            echo json_encode([
+                'course_progress'   => (int) round(course_progress($course_id, $user_id)),
+                'completed_lessons' => count($completed_lesson_ids),
+                'total_lessons'     => $this->crud_model->get_lessons('course', $course_id)->num_rows(),
+                'certificate_url'   => $certificate_url,
+            ]);
         }
     }
 

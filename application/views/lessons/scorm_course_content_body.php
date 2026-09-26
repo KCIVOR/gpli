@@ -35,6 +35,13 @@
 ?>
 <?php if(addon_status('scorm_course')): ?>
 	<div class="col-lg-12 p-0 border-0">
+		<!-- Shown by gpScormShowResult() the moment the package's pass is saved, so the
+		     student doesn't have to reload the page to see their progress/certificate. -->
+		<div class="alert alert-success mt-4 mb-0 d-none" id="gp-scorm-passed-alert" role="alert">
+			<h4 class="alert-heading"><?= get_phrase('congratulations'); ?>!</h4>
+			<p class="mb-2"><?= get_phrase('you_have_passed_this_course'); ?>.</p>
+			<a class="btn bg-success text-white px-4 d-none" id="gp-scorm-certificate-btn" target="_blank" href="#"><?= get_phrase('Get Certificate'); ?></a>
+		</div>
 		<div class="gp-scorm-frame-wrap">
 		<iframe class="mt-5" sandbox="allow-scripts allow-forms allow-pointer-lock allow-same-origin" id="scorm_iframe" frameBorder="0" src="<?= base_url($scorm_course_content_url); ?>" width="100%" title="Scorm course"></iframe>
 		</div>
@@ -54,6 +61,13 @@
 		$gp_scorm_saved_progress = $this->scorm_model->get_scorm_progress($course_details['id'], $this->session->userdata('user_id')) ?: [];
 	}
 	$gp_scorm_json_flags = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+	$gp_scorm_certificate_url = '#';
+	if (addon_status('certificate') && $this->session->userdata('user_login')) {
+		// Loaded here, after the view started, so it must be reached through the CI instance.
+		$gp_CI = &get_instance();
+		$gp_CI->load->model('addons/Certificate_model', 'certificate_model');
+		$gp_scorm_certificate_url = $gp_CI->certificate_model->get_certificate_url($this->session->userdata('user_id'), $course_details['id']);
+	}
 ?>
 <script type="text/javascript">
 	'use strict';
@@ -76,12 +90,52 @@
 			'cmi.suspend_data': <?php echo json_encode($gp_scorm_saved_progress['suspend_data'] ?? '', $gp_scorm_json_flags); ?>
 		};
 		var gpScormCourseId = <?php echo (int) $course_details['id']; ?>;
-		var gpScormLessonId = <?php echo (int) $lesson_details['id']; ?>;
 		var gpScormCommitUrl = '<?php echo site_url('home/save_scorm_progress'); ?>';
 		var gpScormCommitted = false;
 		var gpScormCommitTimer = null;
+		var gpScormCertificateTabUrl = '<?php echo site_url('addons/certificate/certificate_progress/' . $course_details['id']); ?>';
+		// What the page showed on load — the banner/tab refresh only fire when this changes,
+		// so a student revisiting an already-passed course isn't greeted again.
+		var gpScormLastProgress = <?php echo (int) ($watch_history['course_progress'] ?? 0); ?>;
+		var gpScormLastCertificateUrl = <?php echo json_encode($gp_scorm_certificate_url, $gp_scorm_json_flags); ?>;
 
-		function gpScormDoCommit() {
+		function gpScormIsFinished() {
+			var status = (gpScormData['cmi.core.lesson_status'] || '').toLowerCase();
+			return status === 'passed' || status === 'completed';
+		}
+
+		// Called with the server's reply to a save — updates the page in place so the
+		// student sees their new progress and certificate without reloading.
+		function gpScormShowResult(result) {
+			if (!result || !window.jQuery) return;
+			var $ = window.jQuery;
+			if (result.course_progress !== null && result.course_progress !== undefined) {
+				var $progress = $('.gp-lesson-progress');
+				var label = result.course_progress + '% <?php echo get_phrase('Completed'); ?>';
+				if ($progress.length) {
+					$progress.text(label);
+				} else {
+					$('.gp-lesson-title-link').append($('<span class="gp-lesson-progress"></span>').text(label));
+				}
+			}
+			var progressChanged = result.course_progress != gpScormLastProgress;
+			var certificateChanged = result.certificate_url && result.certificate_url !== gpScormLastCertificateUrl;
+			gpScormLastProgress = result.course_progress;
+			if (certificateChanged) gpScormLastCertificateUrl = result.certificate_url;
+
+			if (result.course_progress >= 100 && (progressChanged || certificateChanged)) {
+				$('#gp-scorm-passed-alert').removeClass('d-none');
+			}
+			if (result.certificate_url && result.certificate_url !== '#') {
+				$('#gp-scorm-certificate-btn').attr('href', result.certificate_url).removeClass('d-none');
+			}
+			// Refresh the Certificate tab's content so it isn't stale if it was opened earlier.
+			if ((progressChanged || certificateChanged) && $('#certificate-content').length && typeof actionTo === 'function') {
+				actionTo(gpScormCertificateTabUrl);
+			}
+		}
+
+		function gpScormDoCommit(unloading) {
 			var status = gpScormData['cmi.core.lesson_status'] || '';
 			var score = gpScormData['cmi.core.score.raw'] || '';
 			var location = gpScormData['cmi.core.lesson_location'] || '';
@@ -90,23 +144,34 @@
 
 			var params = new URLSearchParams({
 				course_id: gpScormCourseId,
-				lesson_id: gpScormLessonId,
 				lesson_status: status,
 				score_raw: score,
 				lesson_location: location,
 				suspend_data: suspendData
 			});
 
+			// Once the package reports a pass, use a normal AJAX call so we can read the
+			// server's reply and update the page right away (see gpScormShowResult).
+			if (!unloading && gpScormIsFinished() && window.jQuery) {
+				jQuery.post(gpScormCommitUrl, {
+					course_id: gpScormCourseId,
+					lesson_status: status,
+					score_raw: score,
+					lesson_location: location,
+					suspend_data: suspendData
+				}, gpScormShowResult, 'json');
+				return;
+			}
+
 			// sendBeacon survives the page actually closing, unlike a normal AJAX call
 			// which the browser can cancel mid-flight once the tab is gone — matters
-			// most for the beforeunload/LMSFinish flush, but safe to use everywhere.
+			// most for the beforeunload flush, but safe to use everywhere.
 			if (navigator.sendBeacon) {
 				var blob = new Blob([params.toString()], { type: 'application/x-www-form-urlencoded' });
 				navigator.sendBeacon(gpScormCommitUrl, blob);
 			} else if (window.jQuery) {
 				jQuery.post(gpScormCommitUrl, {
 					course_id: gpScormCourseId,
-					lesson_id: gpScormLessonId,
 					lesson_status: status,
 					score_raw: score,
 					lesson_location: location,
@@ -119,19 +184,23 @@
 		// navigation — debounce so we save "where they are" without firing an AJAX call
 		// on every single slide transition. The final LMSFinish/beforeunload calls flush
 		// immediately (see below) so nothing is lost if the tab closes mid-debounce.
-		function gpScormCommit(immediate) {
+		// A pass is saved after a short 300ms wait instead of 1500ms — just long enough for
+		// the package's separate pass/score calls to land in the same save.
+		function gpScormCommit(immediate, unloading) {
 			if (immediate) {
 				clearTimeout(gpScormCommitTimer);
-				gpScormDoCommit();
+				gpScormCommitted = false;
+				gpScormDoCommit(unloading);
 				return 'true';
 			}
-			if (gpScormCommitted) return 'true';
+			// A pass arriving while a normal 1500ms save is waiting cuts the wait short.
+			if (gpScormCommitted && !gpScormIsFinished()) return 'true';
 			gpScormCommitted = true;
 			clearTimeout(gpScormCommitTimer);
 			gpScormCommitTimer = setTimeout(function () {
 				gpScormCommitted = false;
 				gpScormDoCommit();
-			}, 1500);
+			}, gpScormIsFinished() ? 300 : 1500);
 			return 'true';
 		}
 
@@ -149,7 +218,7 @@
 			LMSGetDiagnostic: function () { return ''; }
 		};
 
-		window.addEventListener('beforeunload', function () { gpScormCommit(true); });
+		window.addEventListener('beforeunload', function () { gpScormCommit(true, true); });
 	})();
 	//For Scorm course body
 	$(document).ready(function(){

@@ -1129,6 +1129,11 @@ class Crud_model extends CI_Model
             $this->db->where('course_id', $course_id);
             $this->db->delete('scorm_curriculum');
 
+            // DELETE THE SCORM LESSON AND ITS SECTION
+            $this->db->delete('lesson', ['course_id' => $course_id]);
+            $this->db->where('course_id', $course_id);
+            $this->db->delete('section');
+
             if ($scorm_query->num_rows() > 0) {
                 //deleted previews course directory
                 $this->scorm_model->deleteDir('uploads/scorm/courses/' . $scorm_query->row('identifier'));
@@ -3823,7 +3828,7 @@ class Crud_model extends CI_Model
     }
 
     // code of mark this lesson as completed
-    public function update_watch_history_manually($lesson_id = "", $course_id = "", $user_id = "")
+    public function update_watch_history_manually($lesson_id = "", $course_id = "", $user_id = "", $from_scorm_package = false)
     {
         $is_completed = 0;
         if ($lesson_id == "") {
@@ -3835,6 +3840,14 @@ class Crud_model extends CI_Model
         if ($user_id == "") {
             $user_id = $this->session->userdata('user_id');
         }
+        // A SCORM lesson can only be completed by the package's own report (Home::save_scorm_progress).
+        if (! $from_scorm_package && $this->db->get_where('lesson', ['id' => $lesson_id])->row('lesson_type') == 'scorm') {
+            return json_encode(['lesson_id' => $lesson_id, 'course_progress' => null, 'is_completed' => 0]);
+        }
+        $total_lesson = $this->db->get_where('lesson', ['course_id' => $course_id])->num_rows();
+        if ($total_lesson == 0) {
+            return json_encode(['lesson_id' => $lesson_id, 'course_progress' => 0, 'is_completed' => 0]);
+        }
         $query           = $this->db->get_where('watch_histories', ['course_id' => $course_id, 'student_id' => $user_id]);
         $course_progress = $query->row('course_progress');
         if ($query->num_rows() > 0) {
@@ -3845,7 +3858,6 @@ class Crud_model extends CI_Model
 
             if (! in_array($lesson_id, $lesson_ids)) {
                 array_push($lesson_ids, $lesson_id);
-                $total_lesson    = $this->db->get_where('lesson', ['course_id' => $course_id])->num_rows();
                 $course_progress = (100 / $total_lesson) * count($lesson_ids);
 
                 if ($course_progress >= 100 && $query->row('completed_date') == null) {
@@ -3861,7 +3873,6 @@ class Crud_model extends CI_Model
                 if (($key = array_search($lesson_id, $lesson_ids)) !== false) {
                     unset($lesson_ids[$key]);
                 }
-                $total_lesson    = $this->db->get_where('lesson', ['course_id' => $course_id])->num_rows();
                 $course_progress = (100 / $total_lesson) * count($lesson_ids);
 
                 if ($course_progress >= 100 && $query->row('completed_date') == null) {
@@ -3880,7 +3891,6 @@ class Crud_model extends CI_Model
                 $this->certificate_model->check_certificate_eligibility($course_id, $user_id);
             }
         } else {
-            $total_lesson    = $this->db->get_where('lesson', ['course_id' => $course_id])->num_rows();
             $course_progress = (100 / $total_lesson);
 
             $insert_data['course_id']          = $course_id;
@@ -3888,8 +3898,17 @@ class Crud_model extends CI_Model
             $insert_data['completed_lesson']   = json_encode([$lesson_id]);
             $insert_data['course_progress']    = $course_progress;
             $insert_data['watching_lesson_id'] = $lesson_id;
-            $insert_data['date_added']         = $course_progress;
+            $insert_data['completed_date']     = $course_progress >= 100 ? time() : null;
+            $insert_data['quiz_result']        = '';
+            $insert_data['date_added']         = time();
             $this->db->insert('watch_histories', $insert_data);
+            $is_completed = 1;
+
+            // CHECK IF THE USER IS ELIGIBLE FOR CERTIFICATE (first finish, e.g. a 1-lesson course)
+            if (addon_status('certificate') && $course_progress >= 100) {
+                $this->load->model('addons/Certificate_model', 'certificate_model');
+                $this->certificate_model->check_certificate_eligibility($course_id, $user_id);
+            }
         }
 
         return json_encode(['lesson_id' => $lesson_id, 'course_progress' => round($course_progress), 'is_completed' => $is_completed]);
@@ -4368,6 +4387,11 @@ class Crud_model extends CI_Model
         }
 
         if ($course_details['enable_drip_content'] != true) {
+            return json_encode(['lesson_id' => $data['watched_lesson_id'], 'course_progress' => null, 'is_completed' => null]);
+        }
+
+        // A SCORM lesson has no duration and can only be completed by the package's own report.
+        if ($this->db->get_where('lesson', ['id' => $data['watched_lesson_id']])->row('lesson_type') == 'scorm') {
             return json_encode(['lesson_id' => $data['watched_lesson_id'], 'course_progress' => null, 'is_completed' => null]);
         }
 

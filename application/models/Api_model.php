@@ -982,7 +982,7 @@ class Api_model extends CI_Model
 
 			$this->load->model('addons/Certificate_model', 'certificate_model');
 			$course_progress = course_progress($course_id, $user_id);
-			if ($course_progress == 100) {
+			if ($course_progress == 100 && $this->certificate_model->passes_scorm_gate($course_id, $user_id)) {
 				$checker = array(
 					'course_id' => $course_id,
 					'student_id' => $user_id
@@ -1379,6 +1379,10 @@ class Api_model extends CI_Model
             $this->db->insert('watched_duration', $data);
         }
 
+        // A SCORM lesson has no duration and can only be completed by the package's own report.
+        if ($this->db->get_where('lesson', array('id' => $data['watched_lesson_id']))->row('lesson_type') == 'scorm') {
+            return array('lesson_id' => $data['watched_lesson_id'], 'course_progress' => round($course_progress), 'is_completed' => $is_completed, 'number_of_completed_lessons' => $number_of_completed_lessons);
+        }
 
         $drip_content_settings = json_decode(get_settings('drip_content_settings'), true);
         $lesson_total_duration = $this->db->get_where('lesson', array('id' => $data['watched_lesson_id']))->row('duration');

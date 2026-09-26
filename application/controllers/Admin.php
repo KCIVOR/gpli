@@ -2841,6 +2841,10 @@ class Admin extends CI_Controller
         if ($course_progress >= 100) {
             $this->certificate_model->check_certificate_eligibility($course_id, $user_id);
             $certificate = $this->db->get_where('certificates', ['course_id' => $course_id, 'student_id' => $user_id]);
+            if ($certificate->num_rows() == 0) {
+                $this->session->set_flashdata('error_message', get_phrase('This student has not passed the final test (80%) yet'));
+                redirect(site_url('admin/course_form/course_edit/' . $course_id . '?tab=academic_progress'));
+            }
             redirect(site_url('certificate/' . $certificate->row('shareable_url')));
         } else {
             $this->session->set_flashdata('error_message', get_phrase('The course is not compleated yet'));

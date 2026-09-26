@@ -12,17 +12,24 @@ class Certificate_model extends CI_Model
 	/*
 	* CERTIFICATE OPERATIONS
 	*/
-	// If the course progress is 100%, create certificate
-	function check_certificate_eligibility($course_id = "", $user_id = ""){
-		// For SCORM courses that report a quiz score through the package's own runtime,
-		// require at least 80% before issuing — "lesson checkbox ticked" isn't enough on
-		// its own. Courses with no SCORM curriculum, or whose package never reports a
-		// score (no quiz authored), fall through unaffected.
+	// For SCORM courses, require a reported quiz score of at least 80% before issuing —
+	// "lesson complete" isn't enough on its own. All client packages end in a scored
+	// Post Test, so a missing score also blocks. Courses with no SCORM curriculum pass.
+	// Shared by the web and mobile certificate paths.
+	public function passes_scorm_gate($course_id = "", $user_id = ""){
 		if ($this->db->get_where('scorm_curriculum', ['course_id' => $course_id])->num_rows() > 0) {
 			$score_raw = $this->db->get_where('scorm_tracking', ['course_id' => $course_id, 'student_id' => $user_id])->row('score_raw');
-			if ($score_raw !== null && $score_raw < 80) {
-				return;
+			if ($score_raw === null || (int) $score_raw < 80) {
+				return false;
 			}
+		}
+		return true;
+	}
+
+	// If the course progress is 100%, create certificate
+	function check_certificate_eligibility($course_id = "", $user_id = ""){
+		if (! $this->passes_scorm_gate($course_id, $user_id)) {
+			return;
 		}
 
 		$checker = array(

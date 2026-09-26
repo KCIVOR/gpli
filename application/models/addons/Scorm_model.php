@@ -66,10 +66,12 @@ class Scorm_model extends CI_Model
 					$this->db->where('course_id', $course_id);
 					$this->db->update('scorm_curriculum', $data);
 					$this->session->set_flashdata('flash_message', get_phrase('scorm_course_uploaded_successfully'));
+					$this->ensure_scorm_lesson($course_id);
 					return 'success';
 				}else{
 					$this->db->insert('scorm_curriculum', $data);
 					$this->session->set_flashdata('flash_message', get_phrase('scorm_course_uploaded_successfully'));
+					$this->ensure_scorm_lesson($course_id);
 					return 'success';
 				}
 			}else{
@@ -78,6 +80,28 @@ class Scorm_model extends CI_Model
 		}else{
 			return get_phrase('please_select_a_course_provider');
 		}
+	}
+
+	public function get_scorm_lesson_id($course_id) {
+		return (int) $this->db->select('id')->where(['course_id' => $course_id, 'lesson_type' => 'scorm'])
+			->order_by('id', 'asc')->limit(1)->get('lesson')->row('id');
+	}
+
+	// A SCORM course is tracked as one lesson so the normal progress/certificate code works.
+	public function ensure_scorm_lesson($course_id) {
+		if ($this->get_scorm_lesson_id($course_id) > 0) return;
+		$section_id = (int) $this->db->select('id')->where('course_id', $course_id)->order_by('order', 'asc')->limit(1)->get('section')->row('id');
+		if ($section_id <= 0) {
+			$this->db->insert('section', ['course_id' => $course_id, 'title' => 'Course Content', 'order' => 1]);
+			$section_id = $this->db->insert_id();
+			$sections = json_decode($this->db->get_where('course', ['id' => $course_id])->row('section'), true);
+			$sections = is_array($sections) ? $sections : [];
+			$sections[] = $section_id;
+			$this->db->where('id', $course_id)->update('course', ['section' => json_encode($sections)]);
+		}
+		$title = $this->db->get_where('course', ['id' => $course_id])->row('title');
+		$this->db->insert('lesson', ['course_id' => $course_id, 'section_id' => $section_id, 'title' => $title,
+			'lesson_type' => 'scorm', 'order' => 1, 'date_added' => time()]);
 	}
 
 	public function save_scorm_progress() {

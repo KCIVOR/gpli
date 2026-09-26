@@ -56,7 +56,8 @@ class Certificate extends CI_Controller
             $course_progress = $this->crud_model->get_watch_histories($user_id, $course_id)->row('course_progress');
             if ($course_progress >= 100) {
                 $this->certificate_model->check_certificate_eligibility($course_id, $user_id);
-                echo 1;
+                // The SCORM score gate may have blocked it — only report ready if a certificate exists.
+                echo certificate_eligibility($course_id) ? 1 : 0;
             }else{
                 echo 0;
             }
