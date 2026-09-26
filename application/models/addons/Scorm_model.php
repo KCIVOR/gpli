@@ -26,7 +26,9 @@ class Scorm_model extends CI_Model
         $this->scorm_model->deleteDir('uploads/scorm/courses/'.$scorm_query->row('identifier'));
 	}
 
-	public function add_curriculum($course_id = "") {
+	// $assembled_zip: path of a zip already put together from chunks (see
+	// Scorm::upload_chunk). When empty, the zip comes from a normal $_FILES upload.
+	public function add_curriculum($course_id = "", $assembled_zip = "") {
 		$data['scorm_provider'] = html_escape($this->input->post('scorm_provider'));
 		$data['identifier'] = md5(rand(10000, 99999));
 		$data['course_id'] = $course_id;
@@ -41,9 +43,13 @@ class Scorm_model extends CI_Model
 			mkdir('uploads/scorm/courses', 0777, true);
 
 		if($data['scorm_provider'] == 'ispring' || $data['scorm_provider'] == 'articulate' || $data['scorm_provider'] == 'adobe_captivate'){
-			if (!empty($_FILES['scorm_zip']['name'])) {
+			if ($assembled_zip != "" || !empty($_FILES['scorm_zip']['name'])) {
 				$path = "uploads/scorm/zip/".$data['identifier'].'.zip';
-				move_uploaded_file($_FILES['scorm_zip']['tmp_name'], $path);
+				if ($assembled_zip != "") {
+					rename($assembled_zip, $path);
+				} else {
+					move_uploaded_file($_FILES['scorm_zip']['tmp_name'], $path);
+				}
 				//Unzip uploaded update file and remove zip file.
 				$zip = new ZipArchive;
 				$res = $zip->open($path);
