@@ -31,6 +31,11 @@ class Certificate extends CI_Controller
     }
 
     function position($param1 = ""){
+        // Admins only: the saved layout is rendered on every student's certificate.
+        if ($this->session->userdata('admin_login') != true) {
+            redirect(site_url('login'), 'refresh');
+        }
+
         // Drop the display-only ?v= cache-buster so the saved layout keeps the plain image path
         // that views/certificate/index.php looks for.
         $certificate_text_positions = htmlspecialchars(preg_replace('/(uploads\/certificates\/template\.jpg)\?v=\d+/', '$1', (string) $this->input->post('text_positions', false)));

@@ -65,6 +65,7 @@
           @import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
           @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap%27');
           @import url('https://fonts.googleapis.com/css2?family=Miss+Fajardose&display=swap%27');
+          @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
         </style>
         <label><?php echo ucwords(get_phrase('certificate_text_position')); ?></label>
         <p class="text-muted font-13">

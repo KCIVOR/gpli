@@ -21,6 +21,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap%27');
         @import url('https://fonts.googleapis.com/css2?family=Miss+Fajardose&display=swap%27');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
         .download{
             padding: 12px 15px;
             background-color: #2d32d5;
@@ -81,7 +82,10 @@
                 $certificate_template
             );
 
-            $certificate_template =  str_replace("{date}", date('d/m/Y'), $certificate_template);
+            // {date} = when the student completed the course (not today's date, which changed
+            // every time the certificate was opened). Falls back to today if none is recorded.
+            $completed_date = $this->db->get_where('watch_histories', ['course_id' => $certificate['course_id'], 'student_id' => $certificate['student_id']])->row('completed_date');
+            $certificate_template =  str_replace("{date}", date('m/d/Y', $completed_date > 0 ? (int) $completed_date : time()), $certificate_template);
             $certificate_template =  str_replace("{student}", $student, $certificate_template);
             $certificate_template =  str_replace("{instructor}", $instructor, $certificate_template);
             $certificate_template =  str_replace("{course}", $course['title'], $certificate_template);
@@ -89,6 +93,12 @@
             $certificate_template =  str_replace("{course_level}", '<i class="far fa-chart-bar"></i> '.ucfirst($level), $certificate_template);
             $certificate_template =  str_replace("{total_duration}",site_phrase('total_duration').' '. $course_duration, $certificate_template);
              $certificate_template =  str_replace("{total_lesson}", site_phrase('total_lesson').' '.$lesson_count, $certificate_template);
+
+            // Tags added for custom boxes in the text position editor
+            $score_raw = $this->db->get_where('scorm_tracking', ['course_id' => $certificate['course_id'], 'student_id' => $certificate['student_id']])->row('score_raw');
+            $certificate_template = str_replace("{certificate_id}", html_escape(strtoupper(explode('.', $certificate['shareable_url'])[0])), $certificate_template);
+            $certificate_template = str_replace("{score}", $score_raw !== null ? (int) $score_raw . '%' : '', $certificate_template);
+            $certificate_template = str_replace("{student_email}", html_escape($student_row['email']), $certificate_template);
             
 
 
