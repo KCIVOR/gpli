@@ -1,51 +1,15 @@
-name: Auto Deploy to Production (cPanel)
+name: Deploy to CyberPanel (SSH/rsync)
 
-# Ships this repo's production files to public_html/lms using cPanel's
-# native Git Version Control feature — not FTPS, not SFTP. The actual
-# file sync happens server-side, on the same machine, via a plain
-# `rsync` command defined in .cpanel.yml, so there's no per-file network
-# round-trip the way there is with FTP/SFTP. This step just tells cPanel
-# "pull the latest commit, then run that rsync" over its own HTTPS API.
-#
-# History of every transport that came before this one, in order, and
-# why each was replaced (kept here so nobody re-discovers the same dead
-# ends this project already worked through):
-#   - SSH/rsync directly from CI: fails because Shell Access is disabled
-#     on this cPanel account — SSH auth succeeds, but command execution
-#     ("rsync --server", which rsync needs on the remote end) is rejected
-#     with "Shell access is not enabled on your account!"
-#   - FTPS (SamKirkland/FTP-Deploy-Action), tried on two different FTP
-#     accounts on this same physical server: both hit a passive-mode/NAT
-#     bug where the control connection stays alive while data-channel
-#     transfers silently stall — instead of failing fast, the job hung
-#     for 2+ hours before erroring with "Server sent FIN packet
-#     unexpectedly, closing connection." Confirmed server-wide, not
-#     account-specific, by reproducing it on both accounts.
-#   - SFTP (lftp mirror + CPANEL_SSH_KEY): worked, but is inherently slow
-#     for a repo this size (~9,000 tracked files) because SFTP pays a
-#     network round-trip per file just to check whether it changed,
-#     before any transfer even starts. Also hit a real lftp 4.9.2 bug
-#     where --exclude-glob and mirror:exclude-regex both silently did
-#     nothing combined with `mirror --reverse` — caused a near-miss where
-#     the entire .git directory almost got fully uploaded to the live
-#     web root (caught and cancelled in time).
-#   - This (cPanel Git deploy): clone and deploy-task execution BOTH run
-#     through cPanel's own mechanism, independent of the disabled Shell
-#     Access restriction — confirmed by testing directly. The rsync copy
-#     from the cloned repo (repositories/gpli) into public_html/lms
-#     happens on the same filesystem, so it's fast regardless of file
-#     count, with none of FTP/SFTP's per-file network overhead.
-#
-# Deliberately did NOT use a third-party GitHub Action for the trigger
-# step (there's a "cpanel-deploy-action" on the Marketplace that does
-# this) — its source wasn't fully auditable from here, and this credential
-# is powerful enough that "can't verify what it does with the token" was
-# reason enough to write the ~15 lines ourselves instead. The two API
-# calls below were confirmed by reading that action's actual source code
-# first, not guessed.
+# Ships this repo's production files to gpli.tech's public_html/lms via
+# rsync over SSH. rsync runs WITHOUT --delete on purpose — it can only
+# create or update files, never remove them, so it structurally cannot wipe
+# uploads/, backups/, or logs even if the exclude list below is incomplete.
+# Never add --delete to this without showing the user exactly what it would
+# remove.
 #
 # Database schema changes are NEVER part of this workflow on purpose —
-# those stay manual, reviewed SQL applied by hand in phpMyAdmin. See
+# those stay manual, reviewed SQL applied by hand in phpMyAdmin, even though
+# SSH access would technically make automating them possible. See
 # DEPLOYMENT.md for the full policy.
 
 on:
@@ -57,33 +21,49 @@ concurrency:
   group: production-deployment
   cancel-in-progress: true
 
-env:
-  CPANEL_HOST: https://startuplab.cc:2083
-  CPANEL_USERNAME: startuplabcc
-  REPOSITORY_ROOT: /home/startuplabcc/repositories/gpli
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Update cPanel's clone from GitHub
-        run: |
-          response=$(curl -sS -w '\n%{http_code}' \
-            -H "Authorization: cpanel ${CPANEL_USERNAME}:${{ secrets.CPANEL_TOKEN }}" \
-            "${CPANEL_HOST}/execute/VersionControl/update?repository_root=${REPOSITORY_ROOT}&branch=main")
-          status="${response##*$'\n'}"
-          body="${response%$'\n'*}"
-          echo "$body"
-          [ "$status" = "200" ] || { echo "::error::cPanel update call returned HTTP $status"; exit 1; }
-          echo "$body" | jq -e '.status == 1' > /dev/null || { echo "::error::cPanel reported the update failed — see response body above"; exit 1; }
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Run the deploy task (.cpanel.yml)
+      - name: Setup SSH
         run: |
-          response=$(curl -sS -w '\n%{http_code}' \
-            -H "Authorization: cpanel ${CPANEL_USERNAME}:${{ secrets.CPANEL_TOKEN }}" \
-            "${CPANEL_HOST}/execute/VersionControlDeployment/create?repository_root=${REPOSITORY_ROOT}")
-          status="${response##*$'\n'}"
-          body="${response%$'\n'*}"
-          echo "$body"
-          [ "$status" = "200" ] || { echo "::error::cPanel deploy call returned HTTP $status"; exit 1; }
-          echo "$body" | jq -e '.status == 1' > /dev/null || { echo "::error::cPanel reported the deploy failed — see response body above"; exit 1; }
+          mkdir -p ~/.ssh
+          printf "%s" "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          # Some hosts hand out keys in a format ssh-agent/rsync mishandle
+          # until re-encoded to PEM — this is a no-op if the key is already
+          # in the right format.
+          ssh-keygen -p -m PEM -f ~/.ssh/deploy_key -N "" -q
+          ssh-keyscan -H 201.18.210.251 >> ~/.ssh/known_hosts
+
+      - name: Deploy via rsync
+        run: |
+          rsync -avz \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o LogLevel=ERROR -T -o UserKnownHostsFile=/dev/null" \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='.gitignore' \
+            --exclude='.claude' \
+            --exclude='node_modules' \
+            --exclude='application/config/database.php' \
+            --exclude='uploads/' \
+            --exclude='backups/' \
+            --exclude='application/logs/' \
+            --exclude='*.log' \
+            --exclude='*.md' \
+            --exclude='docs' \
+            --exclude='assets/design-system/reference' \
+            --exclude='assets/design-system/dropdown-bs5-verify.html' \
+            --exclude='assets/design-system/email-preview.html' \
+            --exclude='geeseprojdesignsystem.html' \
+            --exclude='.DS_Store' \
+            --exclude='Thumbs.db' \
+            --exclude='desktop.ini' \
+            --exclude='certificate.zip' \
+            --exclude='themes' \
+            --exclude='.ftpquota' \
+            ./ \
+            gplit1020@201.18.210.251:/home/gpli.tech/public_html/lms/
