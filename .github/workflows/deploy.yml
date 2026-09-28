@@ -65,4 +65,4 @@ jobs:
             --exclude='themes' \
             --exclude='.ftpquota' \
             ./ \
-            gplit1020@201.18.210.251:/home/gpli.tech/public_html/lms/
+            gplit1020@201.18.210.251:/home/gpli.tech/public_html/
