@@ -33,10 +33,6 @@ jobs:
           mkdir -p ~/.ssh
           printf "%s" "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          # Some hosts hand out keys in a format ssh-agent/rsync mishandle
-          # until re-encoded to PEM — this is a no-op if the key is already
-          # in the right format.
-          ssh-keygen -p -m PEM -f ~/.ssh/deploy_key -N "" -q
           ssh-keyscan -H 201.18.210.251 >> ~/.ssh/known_hosts
 
       - name: Deploy via rsync
