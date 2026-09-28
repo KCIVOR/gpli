@@ -31,7 +31,10 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          printf "%s" "${{ secrets.CPANEL_SSH_KEY }}" > ~/.ssh/deploy_key
+          # The secret holds the private key base64-encoded (not raw PEM/
+          # OpenSSH text) specifically to survive copy-paste into GitHub's
+          # secret UI without line-ending corruption.
+          printf "%s" "${{ secrets.CPANEL_SSH_KEY }}" | base64 -d > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H 201.18.210.251 >> ~/.ssh/known_hosts
 
