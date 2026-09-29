@@ -74,9 +74,51 @@
                                         'attrs' => ['onclick' => 'checkRequiredFields()'],
                                     ], true); ?>
                                 </form>
+
+                                <hr class="my-4">
+                                <h5 class="mb-2"><?php echo get_phrase('Test SMTP connection'); ?></h5>
+                                <p class="text-muted mb-2"><small><?php echo get_phrase('Save your settings first, then send a test email using the saved settings.'); ?></small></p>
+                                <div class="form-group">
+                                    <label for="smtp_test_email"><?php echo get_phrase('Send test email to'); ?></label>
+                                    <input type="email" id="smtp_test_email" class="form-control" value="<?php echo html_escape($this->session->userdata('email') ?: get_settings('system_email')); ?>">
+                                </div>
+                                <?php echo gp_ds_button(get_phrase('Send test email'), [
+                                    'variant' => 'secondary',
+                                    'type' => 'button',
+                                    'attrs' => ['id' => 'smtp_test_btn', 'onclick' => 'sendSmtpTest()'],
+                                ], true); ?>
+                                <pre id="smtp_test_debug" class="mt-3 p-2 bg-light border" style="display:none; max-height:260px; overflow:auto; white-space:pre-wrap; font-size:12px;"></pre>
                             </div>
                         </div>
                     </div>
+                    <script>
+                        function sendSmtpTest() {
+                            var btn = $('#smtp_test_btn');
+                            var debugBox = $('#smtp_test_debug');
+                            btn.prop('disabled', true);
+                            debugBox.hide().text('');
+                            $.ajax({
+                                url: '<?php echo site_url('admin/notification_settings/test_smtp'); ?>',
+                                type: 'POST',
+                                data: {test_email: $('#smtp_test_email').val()},
+                                dataType: 'json',
+                                success: function (res) {
+                                    if (res.status) {
+                                        success_notify(res.message);
+                                    } else {
+                                        error_notify(res.message);
+                                        if (res.debug) { debugBox.text(res.debug).show(); }
+                                    }
+                                },
+                                error: function () {
+                                    error_notify('<?php echo get_phrase('failed_to_send_test_email'); ?>');
+                                },
+                                complete: function () {
+                                    btn.prop('disabled', false);
+                                }
+                            });
+                        }
+                    </script>
                     <div class="tab-pane <?php  echo $tab == 'email-template' ? 'show active':''; ?>" id="emailTemplate">
 
                         <?php

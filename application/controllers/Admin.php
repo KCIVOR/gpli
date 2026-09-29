@@ -821,6 +821,23 @@ class Admin extends CI_Controller
             redirect(site_url('admin/notification_settings'), 'refresh');
         }
 
+        if ($param1 == 'test_smtp') {
+            $to = trim((string) $this->input->post('test_email'));
+            if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
+                echo json_encode(['status' => false, 'message' => get_phrase('please_enter_a_valid_email_address')]);
+                return;
+            }
+            $subject = get_settings('system_name') . ' - SMTP test';
+            $message = '<p>' . get_phrase('this_is_a_test_email_your_smtp_settings_are_working') . '</p>';
+            if ($this->email_model->send_smtp_mail($message, $subject, $to)) {
+                echo json_encode(['status' => true, 'message' => get_phrase('test_email_sent_successfully_please_check_the_inbox_and_spam_folder')]);
+            } else {
+                $debug = strip_tags($this->email->print_debugger(['headers']));
+                echo json_encode(['status' => false, 'message' => get_phrase('failed_to_send_test_email'), 'debug' => trim($debug)]);
+            }
+            return;
+        }
+
         if ($param1 == 'notification_enable_diable') {
             echo $this->crud_model->notification_enable_diable();
             return;
