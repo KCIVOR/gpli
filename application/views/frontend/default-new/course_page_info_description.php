@@ -3,27 +3,32 @@
     <?php echo $course_details['description']; ?>
 </div>
 
+<?php
+    $outcomes = array_filter((array) json_decode($course_details['outcomes']), function ($item) { return trim((string) $item) !== ''; });
+    $requirements = array_filter((array) json_decode($course_details['requirements']), function ($item) { return trim((string) $item) !== ''; });
+?>
+
+<?php if (!empty($outcomes)) : ?>
 <div class="course-description">
     <h3 class="description-head"><?php echo get_phrase('What will i learn?') ?></h3>
     <ul class="step-down">
-        <?php foreach (json_decode($course_details['outcomes']) as $outcome) : ?>
-            <?php if ($outcome != "") : ?>
-                <li><?php echo $outcome; ?></li>
-            <?php endif; ?>
+        <?php foreach ($outcomes as $outcome) : ?>
+            <li><?php echo $outcome; ?></li>
         <?php endforeach; ?>
     </ul>
 </div>
+<?php endif; ?>
 
+<?php if (!empty($requirements)) : ?>
 <div class="course-description requirements">
     <h3 class="description-head"><?php echo get_phrase('Requirements') ?></h3>
     <ul>
-        <?php foreach (json_decode($course_details['requirements']) as $requirement) : ?>
-            <?php if ($requirement != "") : ?>
-                <li><?php echo $requirement; ?></li>
-            <?php endif; ?>
+        <?php foreach ($requirements as $requirement) : ?>
+            <li><?php echo $requirement; ?></li>
         <?php endforeach; ?>
     </ul>
 </div>
+<?php endif; ?>
 
 <?php $faqs = json_decode($course_details['faqs'], true);
     $counter = 0;
