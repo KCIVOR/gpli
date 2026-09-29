@@ -832,8 +832,13 @@ class Admin extends CI_Controller
             if ($this->email_model->send_smtp_mail($message, $subject, $to)) {
                 echo json_encode(['status' => true, 'message' => get_phrase('test_email_sent_successfully_please_check_the_inbox_and_spam_folder')]);
             } else {
-                $debug = strip_tags($this->email->print_debugger(['headers']));
-                echo json_encode(['status' => false, 'message' => get_phrase('failed_to_send_test_email'), 'debug' => trim($debug)]);
+                $debug = trim(html_entity_decode(strip_tags($this->email->print_debugger(['headers'])), ENT_QUOTES));
+                // Put the server's actual complaint on top so it isn't buried in the handshake log
+                $errors = preg_grep('/Failed|Error|^\s*5\d\d[ -]/i', preg_split('/\r?\n/', $debug));
+                if (!empty($errors)) {
+                    $debug = "PROBLEM:\n" . implode("\n", $errors) . "\n\nFULL LOG:\n" . $debug;
+                }
+                echo json_encode(['status' => false, 'message' => get_phrase('failed_to_send_test_email'), 'debug' => $debug]);
             }
             return;
         }
