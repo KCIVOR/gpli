@@ -1104,11 +1104,10 @@ class Home extends CI_Controller
         $this->load->view('frontend/' . get_frontend_settings('theme') . '/index', $page_data);
     }
 
+    // Refund policy page is hidden for now; its text stays editable in admin.
     public function refund_policy()
     {
-        $page_data['page_name']  = 'refund_policy';
-        $page_data['page_title'] = site_phrase('refund_policy');
-        $this->load->view('frontend/' . get_frontend_settings('theme') . '/index', $page_data);
+        redirect(site_url('home'), 'refresh');
     }
 
     public function privacy_policy()
