@@ -1311,20 +1311,20 @@ class Crud_model extends CI_Model
         }
     }
 
-    public function get_top_categories($limit = "10", $category_column = "category_id")
+    public function get_top_categories($limit = "10", $category_column = "category_id", $statuses = ['active'])
     {
         $query = $this->db
             ->select($category_column . ", count(*) AS course_number", false)
             ->from("course")
             ->group_by($category_column)
             ->order_by("course_number", "DESC")
-            ->where('status', 'active')
+            ->where_in('status', $statuses)
             ->limit($limit)
             ->get();
         return $query->result_array();
     }
 
-    public function get_top_courses($limit = 50)
+    public function get_top_courses($limit = 50, $statuses = ['active'])
     {
         $scorm_status = addon_status('scorm_course');
         $h5p_status   = addon_status('h5p');
@@ -1340,7 +1340,7 @@ class Crud_model extends CI_Model
         $this->db->group_end();
 
         $this->db->where('is_top_course', 1);
-        $this->db->where('status', 'active');
+        $this->db->where_in('status', $statuses);
         $this->db->limit($limit);
         return $this->db->get('course');
     }

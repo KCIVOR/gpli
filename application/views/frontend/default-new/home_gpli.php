@@ -7,7 +7,8 @@
  * Top Facilitators, and testimonials pull real data the same way
  * home_elegant.php does — never the sample file's own placeholder figures.
  */
-$gpli_total_courses    = $this->db->where('status', 'active')->get('course')->num_rows();
+$gpli_listed_statuses  = ['active', 'private'];
+$gpli_total_courses    = $this->db->where_in('status', $gpli_listed_statuses)->get('course')->num_rows();
 $gpli_total_categories = $this->db->get('category')->num_rows();
 $gpli_total_students   = $this->db->where('is_instructor', 0)->get('users')->num_rows();
 
@@ -142,7 +143,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
 
   <!-- CATEGORIES (real data) -->
   <?php if (get_frontend_settings('top_category_section') == 1): ?>
-  <?php $top_categories = $this->crud_model->get_top_categories(8, 'sub_category_id'); ?>
+  <?php $top_categories = $this->crud_model->get_top_categories(8, 'sub_category_id', $gpli_listed_statuses); ?>
   <?php if (!empty($top_categories)): ?>
   <section class="section-pad gp-landing">
     <div class="container">
@@ -216,7 +217,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
 
   <!-- TOP COURSES (real data) -->
   <?php if (get_frontend_settings('top_course_section') == 1): ?>
-  <?php $top_courses = $this->crud_model->get_top_courses()->result_array(); ?>
+  <?php $top_courses = $this->crud_model->get_top_courses(50, $gpli_listed_statuses)->result_array(); ?>
   <?php if (!empty($top_courses)): ?>
   <section class="section-pad bg-muted gp-landing">
     <div class="container">
