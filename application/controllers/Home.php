@@ -1269,6 +1269,11 @@ class Home extends CI_Controller
     {
         $course_details = $this->crud_model->get_course_by_id($course_id)->row_array();
 
+        if ($course_details['status'] == 'private') {
+            $this->session->set_flashdata('error_message', get_phrase('Your instructor will enroll you in this course'));
+            redirect(site_url('home/course/' . slugify($course_details['title']) . '/' . $course_id), 'refresh');
+        }
+
         if ($this->session->userdata('user_login') == 1) {
             $this->crud_model->enrol_to_free_course($course_id, $this->session->userdata('user_id'));
             redirect(site_url('home/course/' . slugify($course_details['title']) . '/' . $course_id), 'refresh');
@@ -1512,7 +1517,7 @@ class Home extends CI_Controller
     //FOR MOBILE
     public function get_enrolled_to_free_course_mobile($course_id = "", $user_id = "", $get_request = "")
     {
-        if ($get_request == "true") {
+        if ($get_request == "true" && $this->crud_model->get_course_by_id($course_id)->row('status') != 'private') {
             $this->crud_model->enrol_to_free_course_mobile($course_id, $user_id);
         }
     }

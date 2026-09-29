@@ -208,7 +208,17 @@ $number_of_quiz = $this->db->get_where('lesson', ['course_id' => $course_details
                                     ]); ?>
                                 <?php endif; ?>
                             <?php else : ?>
-                                <?php if ($course_details['is_free_course'] == 1) : ?>
+                                <?php if ($course_details['status'] == 'private') : ?>
+                                    <?php gp_ds_button(get_phrase('Enroll Now'), [
+                                        'tag' => 'button',
+                                        'attrs' => [
+                                            'disabled' => 'disabled',
+                                            'aria-disabled' => 'true',
+                                            'title' => get_phrase('Your instructor will enroll you in this course'),
+                                        ],
+                                    ]); ?>
+                                    <small class="d-block text-muted mt-2"><?php echo get_phrase('Your instructor will enroll you in this course'); ?></small>
+                                <?php elseif ($course_details['is_free_course'] == 1) : ?>
                                     <?php gp_ds_button(get_phrase('Enroll Now'), [
                                         'href' => site_url('home/get_enrolled_to_free_course/' . $course_details['id']),
                                     ]); ?>
