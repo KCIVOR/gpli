@@ -447,6 +447,34 @@ $gp_landing_extras_data = gp_landing_extras();
                                         <?php endforeach; ?>
                                     </div>
 
+                                    <h4 class="mt-3"><?php echo get_phrase('Courses by function — landing cards'); ?></h4>
+                                    <div class="row">
+                                        <div class="col-md-4 form-group">
+                                            <label><?php echo get_phrase('Show on landing page'); ?></label>
+                                            <select class="form-control" name="landing[function_cards_mode]">
+                                                <option value="manual" <?php echo $extras['function_cards_mode'] === 'manual' ? 'selected' : ''; ?>><?php echo get_phrase('Manual cards (below)'); ?></option>
+                                                <option value="system" <?php echo $extras['function_cards_mode'] === 'system' ? 'selected' : ''; ?>><?php echo get_phrase('From the system (live categories)'); ?></option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-8 form-group d-flex align-items-end">
+                                            <small class="text-muted"><?php echo get_phrase('Manual cards are not clickable. Clear a title to remove that card; fill a blank row to add one.'); ?></small>
+                                        </div>
+                                    </div>
+                                    <?php $gpli_cards = array_merge($extras['function_cards'], array_fill(0, 4, ['title' => '', 'text' => '', 'count' => ''])); ?>
+                                    <?php foreach ($gpli_cards as $i => $card): ?>
+                                    <div class="row">
+                                        <div class="col-md-3 form-group mb-2">
+                                            <input type="text" class="form-control" placeholder="<?php echo get_phrase('Title'); ?>" name="landing[function_cards][<?php echo $i; ?>][title]" value="<?php echo htmlspecialchars($card['title'] ?? ''); ?>">
+                                        </div>
+                                        <div class="col-md-7 form-group mb-2">
+                                            <input type="text" class="form-control" placeholder="<?php echo get_phrase('Description'); ?>" name="landing[function_cards][<?php echo $i; ?>][text]" value="<?php echo htmlspecialchars($card['text'] ?? ''); ?>">
+                                        </div>
+                                        <div class="col-md-2 form-group mb-2">
+                                            <input type="text" class="form-control" placeholder="<?php echo get_phrase('Course count'); ?>" name="landing[function_cards][<?php echo $i; ?>][count]" value="<?php echo htmlspecialchars($card['count'] ?? ''); ?>">
+                                        </div>
+                                    </div>
+                                    <?php endforeach; ?>
+
                                     <h4 class="mt-3"><?php echo get_phrase('Leadership quiz banner'); ?></h4>
                                     <div class="row">
                                         <div class="col-md-3 form-group">

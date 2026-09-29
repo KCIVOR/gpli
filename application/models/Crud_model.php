@@ -5424,6 +5424,25 @@ class Crud_model extends CI_Model
         }
         $merged = array_replace_recursive($current, $posted);
 
+        if (isset($posted['function_cards']) && is_array($posted['function_cards'])) {
+            $cards = [];
+            foreach ($posted['function_cards'] as $card) {
+                $title = isset($card['title']) ? trim((string) $card['title']) : '';
+                if ($title === '') {
+                    continue;
+                }
+                $cards[] = [
+                    'title' => $title,
+                    'text'  => isset($card['text']) ? trim((string) $card['text']) : '',
+                    'count' => isset($card['count']) ? trim((string) $card['count']) : '',
+                ];
+            }
+            $merged['function_cards'] = $cards;
+        }
+        if (! in_array($merged['function_cards_mode'] ?? '', ['manual', 'system'], true)) {
+            $merged['function_cards_mode'] = 'manual';
+        }
+
         if (! empty($_FILES['landing_media']['name']) && is_array($_FILES['landing_media']['name'])) {
             if (! is_dir('uploads/home-pages')) {
                 mkdir('uploads/home-pages', 0777, true);

@@ -144,7 +144,43 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
   </section>
 
   <!-- CATEGORIES (real data) -->
-  <?php if (get_frontend_settings('top_category_section') == 1): ?>
+  <?php if (get_frontend_settings('top_category_section') == 1 && $extras['function_cards_mode'] === 'manual'): ?>
+  <?php
+    $gpli_fn_icons = [
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M17 20v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2M10 10a4 4 0 100-8 4 4 0 000 8zM23 20v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>',
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 15l4-5 3 3 5-7"/>',
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M3 11l18-8-8 18-2-8-8-2z"/>',
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M12 2l9 4.5v11L12 22l-9-4.5v-11L12 2z M12 22V12M21 6.5L12 12 3 6.5"/>',
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/>',
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>',
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M9 11a4 4 0 100-8 4 4 0 000 8zM3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2M17 8l2 2 4-4"/>',
+      '<path stroke-linecap="round" stroke-linejoin="round" d="M12 20V10M18 20V4M6 20v-6"/>',
+    ];
+  ?>
+  <?php if (!empty($extras['function_cards'])): ?>
+  <section class="section-pad gp-landing" id="lms-courses">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow"><?php echo get_phrase('The Library'); ?></div>
+        <h2><?php echo gpli_two_tone_heading(get_phrase('Courses by Function'), 1, 'red'); ?></h2>
+        <p><?php echo get_phrase('Function-specific courses carefully curated to match your company requirements.'); ?></p>
+      </div>
+      <div class="g4">
+        <?php foreach (array_values($extras['function_cards']) as $gpli_fn_i => $gpli_fn): ?>
+        <div class="fn-card">
+          <div class="fn-icon"><svg viewBox="0 0 24 24"><?php echo $gpli_fn_icons[$gpli_fn_i % count($gpli_fn_icons)]; ?></svg></div>
+          <h3><?php echo htmlspecialchars($gpli_fn['title'] ?? ''); ?></h3>
+          <p><?php echo htmlspecialchars($gpli_fn['text'] ?? ''); ?></p>
+          <?php if (($gpli_fn['count'] ?? '') !== ''): ?>
+          <span class="fn-count"><?php echo htmlspecialchars($gpli_fn['count']); ?> <?php echo get_phrase('courses'); ?></span>
+          <?php endif; ?>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+  <?php elseif (get_frontend_settings('top_category_section') == 1): ?>
   <?php $top_categories = $this->crud_model->get_top_categories(8, 'sub_category_id', $gpli_listed_statuses); ?>
   <?php if (!empty($top_categories)): ?>
   <section class="section-pad gp-landing">

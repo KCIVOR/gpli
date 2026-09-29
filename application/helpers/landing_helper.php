@@ -35,6 +35,17 @@ function gp_landing_extras()
             'video_url_3' => '', 'video_title_3' => 'Stop Losing Top Talent: The 24/7 Solution That Actually Works', 'video_tag_3' => 'Featured',
         ],
         'function_blurbs' => [],
+        'function_cards_mode' => 'manual',
+        'function_cards' => [
+            ['title' => 'HR Courses', 'text' => 'Covers recruitment, diversity, inclusion, and retention.', 'count' => '16'],
+            ['title' => 'Sales Courses', 'text' => 'Build your sales skills with expert coaching, prospecting, and techniques for closing.', 'count' => '20'],
+            ['title' => 'Marketing Courses', 'text' => 'Master digital marketing with courses on digital strategy, brand, and communications.', 'count' => '18'],
+            ['title' => 'Operations', 'text' => 'Improve your business operations with project and process management skills.', 'count' => '19'],
+            ['title' => 'Customer Support', 'text' => 'Deliver outstanding service with courses on service excellence and communication.', 'count' => '16'],
+            ['title' => 'Leadership', 'text' => 'Develop effective managers with leadership, ethics, and change management courses.', 'count' => '11'],
+            ['title' => 'Management', 'text' => 'Train effective managers with courses in time management, delegation, and more.', 'count' => '14'],
+            ['title' => 'Professional Development', 'text' => 'Enhance core professional skills like communication, assertiveness, and mindfulness.', 'count' => '18'],
+        ],
         'section_bg' => [
             'trio' => '', 'functions' => '', 'categories' => '', 'quiz' => '',
             'why' => '', 'instructors' => '', 'dual' => '', 'cta_band' => '',
@@ -73,6 +84,12 @@ function gp_landing_extras()
         ],
     ];
     $merged = array_replace_recursive($defaults, $data);
+
+    // A saved card list replaces the defaults outright; a recursive merge would
+    // re-add default cards past the end of a shorter saved list.
+    if (isset($data['function_cards']) && is_array($data['function_cards'])) {
+        $merged['function_cards'] = array_values($data['function_cards']);
+    }
 
     // Migrate the old single-video fields (before the media strip supported
     // 3 videos) into slot 3, so a site that already saved a video keeps
