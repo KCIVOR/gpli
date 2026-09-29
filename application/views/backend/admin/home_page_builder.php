@@ -410,6 +410,7 @@ $gp_landing_extras_data = gp_landing_extras();
                                             <input type="text" class="form-control" placeholder="<?php echo get_phrase('Sub text'); ?>" name="landing[hero][stats][<?php echo $i; ?>][sub]" value="<?php echo htmlspecialchars($stat['sub']); ?>">
                                         </div>
                                         <?php endforeach; ?>
+                                        <div class="col-12"><small class="text-muted"><?php echo get_phrase('Leave a number blank to show the live count.'); ?></small></div>
                                     </div>
 
                                     <h4 class="mt-3"><?php echo get_phrase('Feature trio'); ?></h4>
@@ -498,6 +499,7 @@ $gp_landing_extras_data = gp_landing_extras();
                                             <input type="text" class="form-control" placeholder="<?php echo get_phrase('Label'); ?>" name="landing[why][stats][<?php echo $i; ?>][lbl]" value="<?php echo htmlspecialchars($stat['lbl']); ?>">
                                         </div>
                                         <?php endforeach; ?>
+                                        <div class="col-12"><small class="text-muted"><?php echo get_phrase('Leave a number blank to show the live count.'); ?></small></div>
                                     </div>
 
                                     <h4 class="mt-3"><?php echo get_phrase('CTA band'); ?></h4>

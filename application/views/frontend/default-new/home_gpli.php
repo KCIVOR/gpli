@@ -2,20 +2,27 @@
 <?php
 /**
  * GP Leadership Institute — homepage.
- * Marketing copy/layout hardcoded from the client-provided landing page
- * design (gpli-lms-landing-package/index.html); Top Courses, Categories,
- * Top Facilitators, and testimonials pull real data the same way
- * home_elegant.php does — never the sample file's own placeholder figures.
+ * Layout from the client-provided landing page design
+ * (gpli-lms-landing-package/index.html). Stat numbers are admin-set in Home
+ * Page Builder because GPLI's catalogue is larger than what is migrated so
+ * far; Top Courses, Categories, Top Facilitators and testimonials are live data.
  */
 $gpli_listed_statuses  = ['active', 'private'];
 $gpli_total_courses    = $this->db->where_in('status', $gpli_listed_statuses)->get('course')->num_rows();
-$gpli_total_categories = $this->db->get('category')->num_rows();
+$gpli_total_categories = $this->db->where('parent', 0)->count_all_results('category');
 $gpli_total_students   = $this->db->where('is_instructor', 0)->get('users')->num_rows();
 
 // Admin-edited copy/media (Home Page Builder → hero/trio/media/quiz/why/CTA
 // fields). Falls back to the same default English copy this page always
 // had when nothing has been saved yet.
 $extras = gp_landing_extras();
+
+// Admin's saved stat number wins; a blank number falls back to the live count.
+function gpli_stat_num($stats, $index, $live)
+{
+    $num = isset($stats[$index]['num']) ? trim((string) $stats[$index]['num']) : '';
+    return htmlspecialchars($num !== '' ? $num : (string) $live);
+}
 
 // Admin-uploaded section backgrounds (Home Page Builder screen) — optional;
 // each falls back to its default look when nothing has been uploaded. The
@@ -85,31 +92,26 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
         </form>
       </div>
       <?php
-        // Numbers 1-3 always show the real, live counts (courses/categories/
-        // students) rather than the admin's saved "num" — those are kept
-        // accurate automatically instead of needing a manual update every
-        // time a course is added. Only the labels/sub-text are admin-edited.
-        // Stat 4 ("SME") has no live count, so it's fully admin-controlled.
         $gpli_hero_stats = $extras['hero']['stats'];
       ?>
       <div class="hero-stats">
         <div class="stat">
-          <div class="num"><?php echo $gpli_total_courses; ?>+</div>
+          <div class="num"><?php echo gpli_stat_num($gpli_hero_stats, 0, $gpli_total_courses); ?></div>
           <div class="lbl"><?php echo htmlspecialchars($gpli_hero_stats[0]['lbl'] ?? 'Expert Courses'); ?></div>
           <div class="sub"><?php echo htmlspecialchars($gpli_hero_stats[0]['sub'] ?? ''); ?></div>
         </div>
         <div class="stat">
-          <div class="num"><?php echo $gpli_total_categories; ?></div>
+          <div class="num"><?php echo gpli_stat_num($gpli_hero_stats, 1, $gpli_total_categories); ?></div>
           <div class="lbl"><?php echo htmlspecialchars($gpli_hero_stats[1]['lbl'] ?? 'Business Functions'); ?></div>
           <div class="sub"><?php echo htmlspecialchars($gpli_hero_stats[1]['sub'] ?? ''); ?></div>
         </div>
         <div class="stat">
-          <div class="num"><?php echo $gpli_total_students; ?>+</div>
+          <div class="num"><?php echo gpli_stat_num($gpli_hero_stats, 2, $gpli_total_students); ?></div>
           <div class="lbl"><?php echo htmlspecialchars($gpli_hero_stats[2]['lbl'] ?? 'Learners'); ?></div>
           <div class="sub"><?php echo htmlspecialchars($gpli_hero_stats[2]['sub'] ?? ''); ?></div>
         </div>
         <div class="stat">
-          <div class="num"><?php echo htmlspecialchars($gpli_hero_stats[3]['num'] ?? 'SME'); ?></div>
+          <div class="num"><?php echo gpli_stat_num($gpli_hero_stats, 3, 'SME'); ?></div>
           <div class="lbl"><?php echo htmlspecialchars($gpli_hero_stats[3]['lbl'] ?? 'Focused Content'); ?></div>
           <div class="sub"><?php echo htmlspecialchars($gpli_hero_stats[3]['sub'] ?? ''); ?></div>
         </div>
@@ -318,19 +320,19 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
       <?php $gpli_why_stats = $extras['why']['stats']; ?>
       <div class="why-stats">
         <div class="stat">
-          <div class="num"><?php echo $gpli_total_courses; ?>+</div>
+          <div class="num"><?php echo gpli_stat_num($gpli_why_stats, 0, $gpli_total_courses); ?></div>
           <div class="lbl"><?php echo htmlspecialchars($gpli_why_stats[0]['lbl'] ?? 'Professional Courses'); ?></div>
         </div>
         <div class="stat">
-          <div class="num"><?php echo $gpli_total_categories; ?></div>
+          <div class="num"><?php echo gpli_stat_num($gpli_why_stats, 1, $gpli_total_categories); ?></div>
           <div class="lbl"><?php echo htmlspecialchars($gpli_why_stats[1]['lbl'] ?? 'Business Functions'); ?></div>
         </div>
         <div class="stat">
-          <div class="num"><?php echo $gpli_total_students; ?>+</div>
+          <div class="num"><?php echo gpli_stat_num($gpli_why_stats, 2, $gpli_total_students); ?></div>
           <div class="lbl"><?php echo htmlspecialchars($gpli_why_stats[2]['lbl'] ?? 'Learners'); ?></div>
         </div>
         <div class="stat">
-          <div class="num"><?php echo htmlspecialchars($gpli_why_stats[3]['num'] ?? 'SME'); ?></div>
+          <div class="num"><?php echo gpli_stat_num($gpli_why_stats, 3, 'SME'); ?></div>
           <div class="lbl"><?php echo htmlspecialchars($gpli_why_stats[3]['lbl'] ?? 'Focused Content'); ?></div>
         </div>
       </div>
