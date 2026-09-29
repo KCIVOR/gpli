@@ -2,7 +2,7 @@
     $gp_auth_system = get_settings('system_name');
     $gp_auth_title = site_phrase(get_frontend_settings('banner_title'));
     $gp_auth_sub = site_phrase(get_frontend_settings('banner_sub_title'));
-    $gp_auth_course_count = (int) $this->db->where('status', 'active')->count_all_results('course');
+    $gp_auth_course_count = (int) $this->db->where_in('status', $this->crud_model->public_listing_statuses())->count_all_results('course');
     $gp_auth_category_count = (int) $this->db->count_all('category');
     $gp_auth_learner_count = (int) $this->db->where('role_id', 2)->count_all_results('users');
 

@@ -264,7 +264,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
               <span class="tc-price"><?php echo currency($top_course['price']); ?></span>
               <?php endif; ?>
               <div class="tc-actions">
-                <a class="btn btn-primary" style="padding:10px 18px;" href="<?php echo site_url('home/course/' . rawurlencode(slugify($top_course['title'])) . '/' . $top_course['id']); ?>"><?php echo get_phrase('Enroll Now'); ?></a>
+                <a class="btn btn-primary" style="padding:10px 18px;" href="<?php echo site_url('home/course/' . rawurlencode(slugify($top_course['title'])) . '/' . $top_course['id']); ?>"><?php echo get_phrase($top_course['status'] == 'private' ? 'View Course' : 'Enroll Now'); ?></a>
               </div>
             </div>
           </div>

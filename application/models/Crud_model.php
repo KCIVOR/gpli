@@ -1245,7 +1245,7 @@ class Crud_model extends CI_Model
             $this->db->or_where('course_type', 'h5p');
         }
         $this->db->group_end();
-        $this->db->where('status', 'active');
+        $this->db->where_in('status', $this->public_listing_statuses());
 
         $this->db->group_start();
         $this->db->like('title', $search_string);
@@ -1322,6 +1322,13 @@ class Crud_model extends CI_Model
             ->limit($limit)
             ->get();
         return $query->result_array();
+    }
+
+    // Statuses a visitor may see in public course listings. Private courses are
+    // listed but not self-enrollable (see Home::handle_cart_items / handle_buy_now).
+    public function public_listing_statuses()
+    {
+        return ['active', 'private'];
     }
 
     public function get_top_courses($limit = 50, $statuses = ['active'])
@@ -3421,7 +3428,7 @@ class Crud_model extends CI_Model
             $this->db->group_end();
 
             $this->db->group_start();
-            $this->db->where('c.status', 'active');
+            $this->db->where_in('c.status', $this->public_listing_statuses());
             $this->db->group_end();
 
             $this->db->from('course c')->join('rating r', 'r.ratable_id = c.id', 'left');
@@ -3508,7 +3515,7 @@ class Crud_model extends CI_Model
         $this->db->group_end();
 
         $this->db->group_start();
-        $this->db->where('c.status', 'active');
+        $this->db->where_in('c.status', $this->public_listing_statuses());
         $this->db->group_end();
 
         $this->db->from('course c')->join('rating r', 'r.ratable_id = c.id', 'left');
@@ -4635,7 +4642,7 @@ class Crud_model extends CI_Model
     public function get_active_course_by_category_id($category_id = "", $category_id_type = "category_id")
     {
         $this->db->where($category_id_type, $category_id);
-        $this->db->where('status', 'active');
+        $this->db->where_in('status', $this->public_listing_statuses());
         return $this->db->get('course');
     }
 
@@ -4645,7 +4652,7 @@ class Crud_model extends CI_Model
         if ($course_id > 0) {
             $this->db->where('id', $course_id = "");
         }
-        $this->db->where('status', 'active');
+        $this->db->where_in('status', $this->public_listing_statuses());
         return $this->db->get('course');
     }
 
@@ -5271,7 +5278,7 @@ class Crud_model extends CI_Model
         $this->db->group_end();
 
         $this->db->group_start();
-        $this->db->where('status', 'active');
+        $this->db->where_in('status', $this->public_listing_statuses());
         $this->db->group_end();
 
         $this->db->limit($limit);

@@ -74,7 +74,7 @@
                                <?php if(is_purchased($course['id'])): ?>
                                 <span class="enrollBtn checkPropagation" onclick="redirectTo('<?php echo site_url('home/lesson/'.slugify($course['title']).'/'.$course['id']) ?>');"><i class="far fa-play-circle text-white"></i> <?php echo get_phrase('Start Now'); ?></span>
                                 <?php else: ?>
-                                    <span class="enrollBtn"><?php echo site_phrase('Enroll Now')?></span>
+                                    <span class="enrollBtn"><?php echo $course['status'] == 'private' ? site_phrase('View Course') : site_phrase('Enroll Now'); ?></span>
                                 <?php endif; ?>
                             </div>
                         </div>

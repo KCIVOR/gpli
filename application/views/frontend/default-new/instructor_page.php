@@ -2,11 +2,23 @@
 $instructor_details = $this->user_model->get_all_user($instructor_id)->row_array();
 $social_links  = json_decode($instructor_details['social_links'], true);
 $course_ids = $this->crud_model->get_instructor_wise_courses($instructor_id, 'simple_array');
+if (! empty($course_ids)) {
+    $course_ids = array_column(
+        $this->db->select('id')
+            ->where_in('id', $course_ids)
+            ->where_in('status', $this->crud_model->public_listing_statuses())
+            ->get('course')->result_array(),
+        'id'
+    );
+}
 
-$this->db->select('user_id');
-$this->db->distinct();
-$this->db->where_in('course_id', $course_ids);
-$total_students = $this->db->get('enrol')->num_rows();
+$total_students = 0;
+if (! empty($course_ids)) {
+    $this->db->select('user_id');
+    $this->db->distinct();
+    $this->db->where_in('course_id', $course_ids);
+    $total_students = $this->db->get('enrol')->num_rows();
+}
 ?>
 
 <?php include "breadcrumb.php"; ?>
@@ -188,7 +200,7 @@ $total_students = $this->db->get('enrol')->num_rows();
 															<?php if(is_purchased($course['id'])): ?>
 																<span class="enrollBtn checkPropagation" onclick="redirectTo('<?php echo site_url('home/lesson/'.slugify($course['title']).'/'.$course['id']) ?>');"><i class="far fa-play-circle text-white"></i> <?php echo get_phrase('Start Now'); ?></span>
 															<?php else: ?>
-																<span class="enrollBtn"><?php echo site_phrase('Enroll Now')?></span>
+																<span class="enrollBtn"><?php echo $course['status'] == 'private' ? site_phrase('View Course') : site_phrase('Enroll Now'); ?></span>
 															<?php endif; ?>
 														</div>
 				                                    </div>

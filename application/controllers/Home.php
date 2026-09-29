@@ -151,7 +151,7 @@ class Home extends CI_Controller
                 $this->db->or_where('course_type', 'h5p');
             }
             $this->db->group_end();
-            $this->db->where('status', 'active');
+            $this->db->where_in('status', $this->crud_model->public_listing_statuses());
             $total_rows         = $this->db->get('course')->num_rows();
             $config             = [];
             $config             = pagintaion($total_rows, 9);
@@ -169,7 +169,7 @@ class Home extends CI_Controller
             $this->db->group_end();
 
             $this->db->group_start();
-            $this->db->where('status', 'active');
+            $this->db->where_in('status', $this->crud_model->public_listing_statuses());
             $this->db->group_end();
             //sorting randomly
             //$this->db->order_by(6, 'RANDOM');
@@ -565,6 +565,10 @@ class Home extends CI_Controller
     }
     public function handle_cart_items($course_id = "", $identifier = "")
     {
+        if ($this->is_private_course($course_id)) {
+            echo json_encode(['error' => get_phrase('Your instructor will enroll you in this course')]);
+            return;
+        }
         if (! $this->session->userdata('cart_items')) {
             $this->session->set_userdata('cart_items', []);
         }
@@ -606,6 +610,10 @@ class Home extends CI_Controller
     }
     public function handle_buy_now($course_id = "")
     {
+        if ($this->is_private_course($course_id)) {
+            echo json_encode(['error' => get_phrase('Your instructor will enroll you in this course')]);
+            return;
+        }
         if (! $this->session->userdata('cart_items')) {
             $this->session->set_userdata('cart_items', []);
         }
@@ -641,6 +649,10 @@ class Home extends CI_Controller
         }
 
         $course_id           = $this->input->post('course_id');
+        if ($this->is_private_course($course_id)) {
+            $this->load->view('frontend/' . get_frontend_settings('theme') . '/cart_items');
+            return;
+        }
         $previous_cart_items = $this->session->userdata('cart_items');
         if (! in_array($course_id, $previous_cart_items)) {
             array_push($previous_cart_items, $course_id);
@@ -1393,6 +1405,11 @@ class Home extends CI_Controller
             $data['quiz_result']        = json_encode([$quiz_id => $obtained_marks]);
             $this->db->insert('watch_histories', $data);
         }
+    }
+
+    private function is_private_course($course_id)
+    {
+        return $this->crud_model->get_course_by_id($course_id)->row('status') == 'private';
     }
 
     private function access_denied_courses($course_id)
