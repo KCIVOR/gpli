@@ -326,7 +326,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
           <div class="eyebrow"><?php echo htmlspecialchars($extras['quiz']['eyebrow']); ?></div>
           <h2><?php echo gpli_two_tone_heading($extras['quiz']['title'], 2, 'red'); ?></h2>
           <p><?php echo htmlspecialchars($extras['quiz']['text']); ?></p>
-          <a class="btn btn-white" href="<?php echo gp_landing_url($extras['quiz']['button_url'] !== '' ? $extras['quiz']['button_url'] : 'home/courses'); ?>"><?php echo htmlspecialchars($extras['quiz']['button_label']); ?> →</a>
+          <a class="btn btn-white" href="<?php echo htmlspecialchars(gp_landing_url($extras['quiz']['button_url'] !== '' ? $extras['quiz']['button_url'] : 'home/courses')); ?>"<?php echo $extras['quiz']['button_url'] !== '' ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo htmlspecialchars($extras['quiz']['button_label']); ?> →</a>
         </div>
         <div class="quiz-badge">
           <div class="ql1">GP LEADERSHIP</div>
