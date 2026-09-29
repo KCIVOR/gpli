@@ -3,7 +3,7 @@
     $twitter  = get_frontend_settings('twitter');
     $linkedin = get_frontend_settings('linkedin');
     if (! isset($top_10_categories)) {
-        $top_10_categories = $this->crud_model->get_top_categories(6, 'sub_category_id');
+        $top_10_categories = $this->crud_model->get_top_categories(6, 'sub_category_id', $this->crud_model->public_listing_statuses());
     }
     $custom_page_menus = $this->crud_model->get_custom_pages('', 'footer');
 ?>
@@ -35,6 +35,7 @@
                 </div>
             </div>
 
+            <?php if (! empty($top_10_categories)): ?>
             <div class="gp-footer-col">
                 <h4><?php echo get_phrase('top_categories'); ?></h4>
                 <ul>
@@ -48,6 +49,7 @@
                     <?php endforeach; ?>
                 </ul>
             </div>
+            <?php endif; ?>
 
             <div class="gp-footer-col">
                 <h4><?php echo get_phrase('useful_links'); ?></h4>

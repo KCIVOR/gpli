@@ -119,6 +119,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
     </div>
   </section>
 
+  <?php if (gp_landing_toggle('feature_trio_section')): ?>
   <!-- FEATURE TRIO -->
   <?php
     // Icons stay fixed per position (not admin-editable); title/text pull
@@ -142,9 +143,11 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
   <!-- CATEGORIES (real data) -->
-  <?php if (get_frontend_settings('top_category_section') == 1 && $extras['function_cards_mode'] === 'manual'): ?>
+  <?php $gpli_show_functions = get_frontend_settings('top_category_section') == 1 && gp_landing_toggle('function_grid_section'); ?>
+  <?php if ($gpli_show_functions && $extras['function_cards_mode'] === 'manual'): ?>
   <?php
     $gpli_fn_icons = [
       '<path stroke-linecap="round" stroke-linejoin="round" d="M17 20v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2M10 10a4 4 0 100-8 4 4 0 000 8zM23 20v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>',
@@ -180,7 +183,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
     </div>
   </section>
   <?php endif; ?>
-  <?php elseif (get_frontend_settings('top_category_section') == 1): ?>
+  <?php elseif ($gpli_show_functions): ?>
   <?php $top_categories = $this->crud_model->get_top_categories(8, 'sub_category_id', $gpli_listed_statuses); ?>
   <?php if (!empty($top_categories)): ?>
   <section class="section-pad gp-landing">
@@ -208,6 +211,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
   <?php endif; ?>
   <?php endif; ?>
 
+  <?php if (gp_landing_toggle('media_strip_section')): ?>
   <!-- PHOTO / VIDEO STRIP -->
   <?php
     // Each thumbnail falls back to the original default photo when nothing
@@ -252,6 +256,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
   <!-- TOP COURSES (real data) -->
   <?php if (get_frontend_settings('top_course_section') == 1): ?>
@@ -314,6 +319,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
   <?php endif; ?>
   <?php endif; ?>
 
+  <?php if (gp_landing_toggle('quiz_banner_section')): ?>
   <!-- LEADERSHIP QUIZ -->
   <section class="section-pad bg-muted gp-landing">
     <div class="container">
@@ -336,7 +342,9 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
+  <?php if (gp_landing_toggle('why_section')): ?>
   <!-- WHY GPLI -->
   <section class="section-pad bg-blue-soft gp-landing">
     <div class="container">
@@ -374,7 +382,9 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
+  <?php if (get_frontend_settings('top_instructor_section') == 1): ?>
   <!-- TOP FACILITATORS (real instructors) -->
   <?php $instructors = $this->user_model->get_instructor_list()->result_array(); ?>
   <?php if (!empty($instructors)): ?>
@@ -397,6 +407,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
       </div>
     </div>
   </section>
+  <?php endif; ?>
   <?php endif; ?>
 
   <!-- DUAL CTA -->
@@ -447,6 +458,7 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
   <?php endif; ?>
   <?php endif; ?>
 
+  <?php if (gp_landing_toggle('cta_band_section')): ?>
   <!-- CTA BAND -->
   <section class="cta-band gpli-bg-primary gp-landing<?php echo $gpli_cta_bg['class']; ?>"<?php echo $gpli_cta_bg['style']; ?>>
     <div class="ph-flock" aria-hidden="true">
@@ -464,5 +476,6 @@ function gpli_two_tone_heading($phrase, $tail_words = 1, $tone = 'blue')
       <p style="margin-top:22px;font-size:13px;color:rgba(255,255,255,.75);"><?php echo htmlspecialchars($extras['cta_band']['footnote']); ?></p>
     </div>
   </section>
+  <?php endif; ?>
 
 </div>
