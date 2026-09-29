@@ -2,9 +2,6 @@
     $facebook = get_frontend_settings('facebook');
     $twitter  = get_frontend_settings('twitter');
     $linkedin = get_frontend_settings('linkedin');
-    if (! isset($top_10_categories)) {
-        $top_10_categories = $this->crud_model->get_top_categories(6, 'sub_category_id', $this->crud_model->public_listing_statuses());
-    }
     $custom_page_menus = $this->crud_model->get_custom_pages('', 'footer');
 ?>
 <footer class="lms2-footer-section gp-site-footer">
@@ -34,22 +31,6 @@
                     <?php endif; ?>
                 </div>
             </div>
-
-            <?php if (! empty($top_10_categories)): ?>
-            <div class="gp-footer-col">
-                <h4><?php echo get_phrase('top_categories'); ?></h4>
-                <ul>
-                    <?php foreach ($top_10_categories as $key => $top_10_category):
-                        if ($key == 6) {
-                            break;
-                        }
-                        $category_details = $this->crud_model->get_category_details_by_id($top_10_category['sub_category_id'])->row_array();
-                    ?>
-                        <li><a href="<?php echo site_url('home/courses?category=' . $category_details['slug']); ?>"><?php echo $category_details['name']; ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <?php endif; ?>
 
             <div class="gp-footer-col">
                 <h4><?php echo get_phrase('useful_links'); ?></h4>

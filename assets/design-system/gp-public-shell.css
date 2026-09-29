@@ -1091,7 +1091,7 @@
 
 .gp-ds footer.gp-site-footer .gp-footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr 1.35fr;
+  grid-template-columns: 1.6fr 1fr 1fr 1.35fr;
   gap: 48px;
   align-items: start;
 }
