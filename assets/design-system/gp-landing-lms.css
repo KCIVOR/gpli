@@ -67,46 +67,52 @@
 
 /* ========== Hero ========== */
 .gp-ds .gpli-home .page-hero.ph-light {
-  background: linear-gradient(180deg, var(--gp-surface) 0%, var(--gp-surface-sunk) 100%);
+  position: relative;
+  overflow: hidden;
+  background: var(--gp-bg);
   color: var(--gp-fg);
-  padding: 76px 24px 0;
+  padding: 0;
 }
 
 /* Admin-uploaded section background photos (Home Page Builder screen: hero,
    quiz banner, closing CTA band). The photo URL is set inline via a PHP
-   style="" attribute since it comes from the database; the tint overlay
-   stays here as a token-based ::before so it still flips correctly between
-   light/dark instead of being baked into that inline style.
+   style="" attribute since it comes from the database.
 
-   Two different tints, not one, because these sections aren't the same
-   kind of surface: the hero is a theme-following light/dark card (dark
-   text on it), so its scrim uses --gp-surface, which itself flips between
-   near-white and near-black. The quiz banner and CTA band are permanently
-   navy with permanently white text regardless of theme, so tinting them
-   with --gp-surface would wash them white in light mode and break that
-   white text — they use --gp-accent (navy) instead, which doesn't flip. */
+   Hero: a solid --gp-bg panel covers the left 56% so the copy sits on clean
+   ground in both themes, and the photo shows on the right. The inline
+   background-size/position are overridden here. Without an uploaded photo
+   there is no split: the hero is a plain --gp-bg band.
+
+   The quiz banner and CTA band are permanently navy with permanently white
+   text regardless of theme, so their scrims use navy, which doesn't flip. */
 .gp-ds .gpli-home .page-hero.ph-light.has-bg-photo {
-  position: relative;
-  background-color: var(--gp-surface);
+  background-color: var(--gp-bg);
+  background-size: cover !important; /* inline override */
+  background-position: 72% center !important; /* inline override */
 }
 
 .gp-ds .gpli-home .page-hero.ph-light.has-bg-photo::before {
   content: "";
   position: absolute;
-  inset: 0;
-  /* A flat, fairly opaque scrim rather than fading to the raw photo in the
-     middle — the hero's search box and paragraph text sit there and need
-     reliable contrast against ANY uploaded photo, not just light/low-detail
-     ones. --gp-surface is near-white in light mode, near-black in dark, so
-     this still reads as "photo behind glass" rather than hiding it outright. */
-  background: var(--gp-surface);
-  opacity: 0.86;
+  inset: 0 auto 0 0;
+  width: 56%;
+  background: var(--gp-bg);
   z-index: 0;
 }
 
+/* Bottom scrim on the photo half, behind the stat card. */
+.gp-ds .gpli-home .page-hero.ph-light.has-bg-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 56%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(15, 30, 61, 0.45), rgba(15, 30, 61, 0) 55%);
+}
+
 .gp-ds .gpli-home .page-hero.ph-light.has-bg-photo .ph-grid {
-  position: relative;
-  z-index: 1;
+  min-height: 760px;
+  padding-bottom: 44px;
 }
 
 .gp-ds .gpli-home .quiz-banner.has-bg-photo,
@@ -132,15 +138,22 @@
 
 .gp-ds .gpli-home .ph-grid {
   position: relative;
-  max-width: 900px;
+  z-index: 1;
+  max-width: 1290px;
   margin: 0 auto;
-  padding-bottom: 64px;
+  padding: 96px 24px 72px;
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  column-gap: 48px;
+  align-items: end;
 }
 
 .gp-ds .gpli-home .ph-copy {
-  max-width: 900px;
-  text-align: center;
-  margin: 0 auto;
+  grid-column: 1;
+  align-self: center;
+  max-width: 590px;
+  margin: 0;
+  text-align: left;
 }
 
 .gp-ds .gpli-home .eyebrow {
@@ -174,12 +187,14 @@
 }
 
 .gp-ds .gpli-home .ph-grid h1 {
+  margin: 24px 0 20px;
   font-family: var(--gp-font-head);
   color: var(--gp-heading);
-  font-size: clamp(32px, 4.4vw, 52px);
+  font-size: clamp(40px, 5vw, 64px);
   font-weight: 800;
-  letter-spacing: -1px;
-  line-height: 1.1;
+  letter-spacing: -0.03em;
+  line-height: 1.03;
+  text-wrap: balance;
 }
 
 .gp-ds .gpli-home .ph-grid h1 .accent-gold {
@@ -187,72 +202,197 @@
 }
 
 .gp-ds .gpli-home .ph-sub {
+  max-width: 50ch;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.6;
   color: var(--gp-fg-muted);
-  max-width: 640px;
-  margin: 18px auto 0;
-  font-size: 17px;
-  line-height: 1.65;
 }
 
 .gp-ds .gpli-home .ph-actions {
   display: flex;
-  gap: 14px;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 30px;
+  gap: 12px;
+  justify-content: flex-start;
+  margin-top: 36px;
 }
 
+/* Search is one attached field, lighter than the two hero actions. */
 .gp-ds .gpli-home .hero-search {
+  position: relative;
   display: flex;
-  gap: 10px;
-  max-width: 480px;
-  margin: 28px auto 0;
+  align-items: center;
+  gap: 6px;
+  max-width: 470px;
+  margin: 40px 0 0;
+  padding: 6px;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 12px;
 }
 
-.gp-ds .gpli-home .hero-search input {
+.gp-ds .gpli-home .hero-search:focus-within {
+  border-color: var(--gp-focus-ring);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gp-focus-ring) 22%, transparent);
+}
+
+/* Search glyph drawn with a mask so it takes the muted text token. */
+.gp-ds .gpli-home .hero-search::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  background: var(--gp-fg-muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.gp-ds .gpli-home .hero-search .btn {
+  padding: 0 18px;
+  height: 42px;
+}
+
+/* Matches the specificity of the shared text-input rule in
+   gp-components-core.css so this field keeps its own shape. */
+.gp-ds .gpli-home .hero-search input[type="text"]:not(.form-control) {
   flex: 1;
   min-width: 0;
-  padding: 13px 16px;
-  border-radius: var(--gp-radius);
-  border: 1px solid var(--gp-border-strong);
-  background: var(--gp-surface);
+  height: 42px;
+  padding: 0 12px 0 40px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
   color: var(--gp-fg);
   font-family: var(--gp-font-body);
-  font-size: 14px;
+  font-size: 15px;
+  outline: none;
 }
 
+/* Stat card: bridges the copy panel and the photo. */
 .gp-ds .gpli-home .hero-stats {
+  grid-column: 2;
+  justify-self: start;
+  width: min(440px, 100%);
+  margin: 0 0 0 -64px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 44px;
-  text-align: center;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  text-align: left;
+  background: var(--gp-surface);
+  border: 1px solid var(--gp-border);
+  border-radius: 16px;
+  box-shadow: 0 30px 60px -30px rgba(15, 30, 61, 0.45);
+}
+
+.gp-ds .gpli-home .page-hero:not(.has-bg-photo) .hero-stats {
+  align-self: center;
+  margin-left: 0;
+  box-shadow: var(--gp-shadow-card);
+}
+
+.gp-ds .gpli-home .hero-stats .stat {
+  padding: 24px 26px;
+}
+
+.gp-ds .gpli-home .hero-stats .stat:nth-child(odd) {
+  border-right: 1px solid var(--gp-border);
+}
+
+.gp-ds .gpli-home .hero-stats .stat:nth-child(-n+2) {
+  border-bottom: 1px solid var(--gp-border);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gp-ds .gpli-home .hero-stats {
+    animation: gpli-hero-stats-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
+  }
+}
+
+@keyframes gpli-hero-stats-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
 }
 
 .gp-ds .gpli-home .hero-stats .stat .num {
   font-family: var(--gp-font-head);
-  font-size: 30px;
+  font-size: 38px;
   font-weight: 800;
-  color: var(--gp-primary);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gp-heading);
+  font-variant-numeric: tabular-nums;
 }
 
 .gp-ds .gpli-home .hero-stats .stat .lbl {
-  font-family: var(--gp-font-head);
-  font-weight: 700;
-  font-size: 13px;
+  margin-top: 10px;
+  font-family: var(--gp-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
   color: var(--gp-fg);
-  margin-top: 4px;
 }
 
 .gp-ds .gpli-home .hero-stats .stat .sub {
-  font-size: 12px;
-  color: var(--gp-fg-muted);
   margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--gp-fg-muted);
 }
 
-@media (max-width: 640px) {
-  .gp-ds .gpli-home .hero-stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (max-width: 900px) {
+  /* Photo becomes a fixed-height band. The pseudo-element inherits the
+     admin-uploaded image, so any aspect ratio works. */
+  .gp-ds .gpli-home .page-hero.ph-light.has-bg-photo::before {
+    inset: 0;
+    width: 100%;
+  }
+
+  .gp-ds .gpli-home .page-hero.ph-light.has-bg-photo::after {
+    inset: 0 0 auto 0;
+    height: 260px;
+    background: inherit;
+    background-size: cover !important;
+    background-position: center 35% !important;
+    background-repeat: no-repeat;
+  }
+
+  .gp-ds .gpli-home .ph-grid {
+    grid-template-columns: 1fr;
+    padding: 48px 16px 56px;
+  }
+
+  .gp-ds .gpli-home .page-hero.ph-light.has-bg-photo .ph-grid {
+    min-height: 0;
+    padding: 300px 16px 56px;
+  }
+
+  .gp-ds .gpli-home .ph-copy {
+    max-width: none;
+  }
+
+  .gp-ds .gpli-home .hero-stats,
+  .gp-ds .gpli-home .page-hero:not(.has-bg-photo) .hero-stats {
+    grid-column: 1;
+    width: 100%;
+    margin: 40px 0 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .gp-ds .gpli-home .hero-stats .stat {
+    padding: 20px 18px;
+  }
+
+  .gp-ds .gpli-home .hero-stats .stat .num {
+    font-size: 30px;
+  }
+
+  .gp-ds .gpli-home .ph-actions .btn {
+    flex: 1;
   }
 }
 
