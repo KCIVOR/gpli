@@ -29,7 +29,7 @@
 }
 
 .gp-ds .gpli-home .gpli-bg-primary {
-  background: var(--gp-accent);
+  background: var(--gp-accent-2);
   color: #fff;
 }
 
@@ -120,7 +120,7 @@
 
 .gp-ds .gpli-home .cta-band.has-bg-photo {
   position: relative;
-  background-color: var(--gp-accent);
+  background-color: var(--gp-accent-2);
 }
 
 .gp-ds .gpli-home .quiz-banner.has-bg-photo {
@@ -137,14 +137,14 @@
   background: linear-gradient(90deg, rgba(15, 30, 61, 0.97) 0%, rgba(15, 30, 61, 0.9) 55%, rgba(15, 30, 61, 0.62) 100%);
 }
 
+/* CTA scrim: strongest behind the copy on the left. */
 .gp-ds .gpli-home .cta-band.has-bg-photo::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--gp-accent);
-  opacity: 0.78;
   z-index: 0;
   border-radius: inherit;
+  background: linear-gradient(100deg, rgba(15, 30, 61, 0.96) 30%, rgba(15, 30, 61, 0.78));
 }
 /* Content/z-index layering (chevrons above the scrim, text above the
    chevrons) is already handled by the .ph-flock and ".cta-band .container,
@@ -1256,16 +1256,18 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
-  text-align: center;
+  text-align: left;
 }
 
 .gp-ds .gpli-home .instr-avatar {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
+  width: auto;
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0;
+  border-radius: 14px;
   overflow: hidden;
-  margin: 0 auto 14px;
-  box-shadow: var(--gp-shadow-card);
+  background: var(--gp-surface-sunk);
+  box-shadow: none;
 }
 
 .gp-ds .gpli-home .instr-avatar img {
@@ -1275,84 +1277,93 @@
 }
 
 .gp-ds .gpli-home .instr-card h3 {
+  margin: 16px 0 2px;
   font-family: var(--gp-font-head);
-  color: var(--gp-fg);
-  font-size: 15px;
-  font-weight: 800;
+  color: var(--gp-heading);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: capitalize;
 }
 
 .gp-ds .gpli-home .instr-card .role {
+  margin-top: 0;
   color: var(--gp-fg-muted);
-  font-size: 12.5px;
-  margin-top: 4px;
+  font-size: 14px;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1080px) {
   .gp-ds .gpli-home .instr-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 /* ========== Testimonials ========== */
+/* Masonry columns, so quotes of different lengths don't leave gaps. */
 .gp-ds .gpli-home .testi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  display: block;
+  columns: 3;
+  column-gap: 24px;
 }
 
 .gp-ds .gpli-home .testi {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 24px;
+  padding: 30px;
   background: var(--gp-surface);
   border: 1px solid var(--gp-border);
-  border-top: 4px solid var(--gp-secondary);
   border-radius: 16px;
-  padding: 30px 26px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--gp-shadow-card);
+  box-shadow: none;
 }
 
 .gp-ds .gpli-home .testi .stars {
   color: var(--gp-gold-deep);
   letter-spacing: 2px;
-  margin-bottom: 14px;
+  margin-bottom: 0;
 }
 
 .gp-ds .gpli-home .testi p {
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: var(--gp-fg-muted);
-  font-style: italic;
-  margin-bottom: 20px;
+  margin: 14px 0 22px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--gp-fg);
+  font-style: normal;
 }
 
 .gp-ds .gpli-home .testi .who {
-  font-family: var(--gp-font-head);
-  font-weight: 800;
-  color: var(--gp-link);
-  font-size: 14px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: auto;
+  gap: 12px;
+  margin-top: 0;
+  font-family: var(--gp-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gp-heading);
+  text-transform: capitalize;
 }
 
 .gp-ds .gpli-home .testi .who::before {
-  content: "";
-  width: 24px;
-  height: 2px;
-  background: currentColor;
+  content: none;
 }
 
 .gp-ds .gpli-home .testi .who img {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
+  background: var(--gp-surface-sunk);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
   .gp-ds .gpli-home .testi-grid {
-    grid-template-columns: 1fr;
+    columns: 2;
+  }
+}
+
+@media (max-width: 560px) {
+  .gp-ds .gpli-home .testi-grid {
+    columns: 1;
   }
 }
 
@@ -1364,32 +1375,43 @@
 }
 
 .gp-ds .gpli-home .dual-card {
-  border-radius: 18px;
-  padding: 40px 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 290px;
+  padding: 44px;
+  border-radius: 20px;
   color: #fff;
 }
 
 .gp-ds .gpli-home .dual-card.learner {
-  background: var(--gp-primary);
+  background: var(--gp-action);
 }
 
 .gp-ds .gpli-home .dual-card.facilitator {
-  background: var(--gp-secondary);
+  background: var(--gp-accent-2);
 }
 
 .gp-ds .gpli-home .dual-card h3 {
+  margin: 0 0 12px;
   font-family: var(--gp-font-head);
   color: #fff;
-  font-size: 21px;
+  font-size: 28px;
   font-weight: 800;
-  margin-bottom: 10px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .gp-ds .gpli-home .dual-card p {
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 14.5px;
+  max-width: 40ch;
+  margin: 0 0 28px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 15px;
   line-height: 1.6;
-  margin-bottom: 22px;
+}
+
+.gp-ds .gpli-home .dual-card .btn {
+  margin-top: auto;
 }
 
 @media (max-width: 760px) {
@@ -1398,33 +1420,84 @@
   }
 }
 
+@media (max-width: 560px) {
+  .gp-ds .gpli-home .dual-card {
+    padding: 32px 26px;
+  }
+}
+
 /* ========== CTA band ========== */
+/* Heading and copy on the left, actions bottom-right, footnote full width
+   under a hairline. The footnote has no class; it is the last <p>. */
 .gp-ds .gpli-home .cta-band {
-  text-align: center;
-  padding: 88px 24px;
+  padding: 112px 0;
+  text-align: left;
   color: #fff;
+}
+
+.gp-ds .gpli-home .cta-band .container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  column-gap: 48px;
 }
 
 .gp-ds .gpli-home .cta-band h2 {
+  grid-column: 1;
+  margin: 0;
   font-family: var(--gp-font-head);
   color: #fff;
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(32px, 3.8vw, 50px);
   font-weight: 800;
-  margin-bottom: 14px;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
 }
 
-.gp-ds .gpli-home .cta-band p {
-  color: rgba(255, 255, 255, 0.88);
-  max-width: 600px;
-  margin: 0 auto 30px;
-  font-size: 16px;
+.gp-ds .gpli-home .cta-band h2 + p {
+  grid-column: 1;
+  max-width: 46ch;
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
 }
 
 .gp-ds .gpli-home .cta-actions {
   display: flex;
-  gap: 14px;
-  justify-content: center;
   flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.gp-ds .gpli-home .cta-band .cta-actions {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: end;
+  justify-self: end;
+}
+
+.gp-ds .gpli-home .cta-band .container > p:last-child {
+  grid-column: 1 / -1;
+  max-width: none;
+  margin: 48px 0 0 !important; /* inline override */
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+@media (max-width: 900px) {
+  .gp-ds .gpli-home .cta-band {
+    padding: 80px 0;
+  }
+
+  .gp-ds .gpli-home .cta-band .container {
+    grid-template-columns: 1fr;
+  }
+
+  .gp-ds .gpli-home .cta-band .cta-actions {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+    justify-content: flex-start;
+    margin-top: 32px;
+  }
 }
 
 /* ========== Buttons (reuse site .btn shape, GPLI variants) ========== */
