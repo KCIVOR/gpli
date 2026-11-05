@@ -40,7 +40,7 @@ if ($language_dirs) {
 
     .builder-blocks {
         zoom: 20%;
-        border: 8px solid #c4cdde;
+        border: 8px solid var(--gp-border-strong);
         margin: 2px;
         border-radius: 12px;
         cursor: pointer;
@@ -49,7 +49,7 @@ if ($language_dirs) {
     }
 
     .builder-blocks:hover {
-        border: 8px solid #97a8e4;
+        border: 8px solid var(--gp-focus-ring);
     }
 
     .builder-blocks>* {
@@ -92,7 +92,7 @@ if ($language_dirs) {
 
     [builder-block-identifier]:hover,
     [builder-block-identifier].selected-block {
-        border: 2px dashed #737373;
+        border: 2px dashed var(--gp-border-strong);
         cursor: move;
     }
 
@@ -144,8 +144,8 @@ if ($language_dirs) {
     .builder-editable-wraper:focus::after {
         content: "\f617";
         background-color: #b9b9b97d;
-        color: #000;
-        border: 2px dotted #a6a6a6;
+        color: var(--gp-fg);
+        border: 2px dotted var(--gp-border-strong);
         width: calc(100% + 8px);
         margin-left: -5px;
         font-size: 18px;
@@ -161,7 +161,7 @@ if ($language_dirs) {
     }
 
     .parent:hover {
-        outline: 2px dashed black;
+        outline: 2px dashed var(--gp-border-strong);
         display: block;
     }
 
@@ -191,11 +191,11 @@ if ($language_dirs) {
 
 
     .editor_top_bar {
-        background-color: #121729;
+        background-color: var(--gp-heading);
     }
 
     .editor_title {
-        color: #faf4ff;
+        color: var(--gp-on-action);
         font-size: 14px;
     }
 
@@ -205,7 +205,7 @@ if ($language_dirs) {
 
     .placeholder_block {
         text-align: center;
-        outline: 2px dashed #c1b4d8;
+        outline: 2px dashed var(--gp-border-strong);
         padding: 50px;
         margin-top: 50px;
         border-radius: 10px;
@@ -215,7 +215,7 @@ if ($language_dirs) {
         margin-top: 10px;
         font-size: 16px;
         margin-bottom: 20px;
-        color: #12172a;
+        color: var(--gp-fg);
     }
 
     .toast {
@@ -227,7 +227,7 @@ if ($language_dirs) {
     .ui-sortable-placeholder,
     .drop-placeholder {
         display: inline-block;
-        border: 3px dashed #c1b4d8;
+        border: 3px dashed var(--gp-border-strong);
         visibility: visible !important;
         background: transparent;
         height: 40px;
@@ -280,8 +280,8 @@ if ($language_dirs) {
         position: absolute;
         top: -12px;
         right: -16px;
-        background: #ff1010;
-        color: white;
+        background: var(--gp-danger);
+        color: var(--gp-on-action);
         border-radius: 50%;
         width: 20px;
         height: 20px;
@@ -294,8 +294,8 @@ if ($language_dirs) {
     }
 
     .remove-dropped-item:hover {
-        background: #c10909;
-        color: white;
+        background: var(--gp-secondary-hover);
+        color: var(--gp-on-action);
     }
 
     button,

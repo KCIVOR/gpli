@@ -55,6 +55,6 @@
 
 <style type="text/css">
     .calendar-time select{
-        color: #787878 !important;
+        color: var(--gp-fg-muted) !important;
     }
 </style>

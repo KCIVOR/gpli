@@ -150,7 +150,7 @@
   letter-spacing: -0.5px;
   line-height: 1.15;
   margin-bottom: 10px;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
 }
 
 .gp-ds .gp-auth-sub {
@@ -200,7 +200,7 @@
 .gp-ds .gp-auth-form textarea {
   width: 100%;
   border: none;
-  border-bottom: 1px solid var(--gp-border-strong);
+  border-bottom: 1px solid var(--gp-field-border);
   padding: 6px 72px 12px 0;
   font-family: var(--gp-font-body);
   font-size: 15.5px;
@@ -261,8 +261,15 @@
 .gp-ds .gp-auth-form textarea:focus {
   outline: none;
   box-shadow: none;
-  border-bottom-color: var(--gp-gold-deep);
+  border-bottom-color: var(--gp-focus-ring);
   border-bottom-width: 2px;
+}
+
+/* Keyboard users need an indicator that remains visible beyond the underline. */
+.gp-ds .gp-auth-form input:focus-visible,
+.gp-ds .gp-auth-form textarea:focus-visible {
+  outline: 2px solid var(--gp-focus-ring);
+  outline-offset: 3px;
 }
 
 .gp-ds[data-theme="dark"] .gp-auth-form input,
@@ -277,7 +284,7 @@
 .gp-ds[data-theme="dark"] .gp-auth-form input:-webkit-autofill:active {
   -webkit-text-fill-color: var(--gp-fg) !important;
   caret-color: var(--gp-fg);
-  border-bottom-color: var(--gp-border-strong);
+  border-bottom-color: var(--gp-field-border);
   transition: background-color 99999s ease-out 0s;
   box-shadow: 0 0 0 1000px var(--gp-bg) inset !important;
   -webkit-box-shadow: 0 0 0 1000px var(--gp-bg) inset !important;
@@ -329,7 +336,7 @@
   margin-top: 10px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--gp-primary);
+  color: var(--gp-link);
   text-decoration: none;
 }
 
@@ -386,20 +393,20 @@
 }
 
 .gp-ds .gp-auth-foot a {
-  color: var(--gp-primary);
+  color: var(--gp-link);
   font-weight: 700;
   text-decoration: none;
 }
 
 .gp-ds[data-theme="dark"] .gp-auth-forgot,
 .gp-ds[data-theme="dark"] .gp-auth-foot a {
-  color: var(--gp-info);
+  color: var(--gp-link);
 }
 
 @media (prefers-color-scheme: dark) {
   .gp-ds[data-theme="system"] .gp-auth-forgot,
   .gp-ds[data-theme="system"] .gp-auth-foot a {
-    color: var(--gp-info);
+    color: var(--gp-link);
   }
 }
 

@@ -11,22 +11,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ::-moz-selection { background-color: #E13300; color: white; }
 
 body {
-	background-color: #fff;
+	background-color: #F8FAFC;
 	margin: 40px;
 	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
+	color: #1F2937;
 }
 
 a {
-	color: #003399;
+	color: #2563EB;
 	background-color: transparent;
 	font-weight: normal;
 }
 
 h1 {
-	color: #444;
+	color: #1B2A4A;
 	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
+	border-bottom: 1px solid #E5E7EB;
 	font-size: 19px;
 	font-weight: normal;
 	margin: 0 0 14px 0;
@@ -36,9 +36,9 @@ h1 {
 code {
 	font-family: Consolas, Monaco, Courier New, Courier, monospace;
 	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
+	background-color: #F8FAFC;
+	border: 1px solid #E5E7EB;
+	color: #1F2937;
 	display: block;
 	margin: 14px 0 14px 0;
 	padding: 12px 10px 12px 10px;
@@ -46,8 +46,8 @@ code {
 
 #container {
 	margin: 10px;
-	border: 1px solid #D0D0D0;
-	box-shadow: 0 0 8px #D0D0D0;
+	border: 1px solid #E5E7EB;
+	box-shadow: 0 0 8px #E5E7EB;
 }
 
 p {

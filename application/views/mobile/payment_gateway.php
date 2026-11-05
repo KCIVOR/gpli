@@ -2,6 +2,8 @@
 body{
     padding-top: 50px;
     padding-bottom: 50px;
+    background-color: var(--gp-bg);
+    color: var(--gp-fg);
 }
 
 .payment-header-text{
@@ -16,8 +18,8 @@ body{
     line-height: 35px;
     text-align: center;
     font-size: 25px;
-    background-color: #F1EAE9;
-    color: #a45e72;
+    background-color: var(--gp-surface);
+    color: var(--gp-fg);
     border-radius: 5px;
 }
 .close-btn-light:hover{
@@ -27,8 +29,8 @@ body{
     line-height: 35px;
     text-align: center;
     font-size: 25px;
-    background-color: #a45e72;
-    color: #FFFFFF;
+    background-color: var(--gp-action-hover);
+    color: var(--gp-on-action);
     border-radius: 5px;
 }
 
@@ -52,8 +54,8 @@ body{
     margin-right: 18px;
     margin-top: 8px;
 
-    color: #00B491;
-    background-color: #DEF6F3;
+    color: var(--gp-on-action);
+    background-color: var(--gp-action);
     border-radius: 5px;
     float: left;
 }
@@ -65,18 +67,18 @@ body{
 }
 .item-price{
     float: right;
-    color: #00B491;
+    color: var(--gp-action);
 }
 .by-owner{
     font-size: 11px;
-    color: #76767E;
+    color: var(--gp-fg-muted);
     display:block;
     margin-top: -3px;
 }
 
 .total{
     border-radius: 8px 0px 0px 8px;
-    background-color: #DBF3F0;
+    background-color: var(--gp-surface);
     padding: 10px;
     padding-left: 30px;
     padding-right: 30px;
@@ -84,7 +86,7 @@ body{
 }
 .total-price{
     border-radius: 0px 8px 8px 0px;
-    background-color: #CCD4DD;
+    background-color: var(--gp-surface);
     padding: 10px;
     padding-left: 25px;
     padding-right: 25px;
@@ -96,18 +98,18 @@ body{
 }
 
 .payment-button{
-    background-color: #1DBDA0;
+    background-color: var(--gp-action);
     border-radius: 8px;
     padding: 10px;
     padding-left: 30px;
     padding-right: 30px;
-    color: #fff;
+    color: var(--gp-on-action);
     border: none;
     font-size: 18px;
 }
 
 .payment-gateway{
-    border: 2px solid #D3DCDD;
+    border: 2px solid var(--gp-field-border);
     border-radius: 5px;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -115,7 +117,7 @@ body{
     cursor: pointer;
 }
 .payment-gateway:hover{
-    border: 2px solid #00D04F;
+    border: 2px solid var(--gp-action);
     border-radius: 5px;
     padding-top: 15px;
     padding-bottom: 15px;
@@ -371,29 +373,29 @@ $total_price_of_checking_out = $this->session->userdata('total_price_of_checking
     function selectedPaymentGateway(gateway){
         if(gateway == 'paypal'){
 
-            $(".payment-gateway").css("border","2px solid #D3DCDD");
+            $(".payment-gateway").css("border","2px solid var(--gp-field-border)");
             $('.tick-icon').hide();
             $('.form').hide();
 
-            $(".paypal").css("border","2px solid #00D04F");
+            $(".paypal").css("border","2px solid var(--gp-action)");
             $('.paypal-icon').show();
             $('.paypal-form').show();
         }else if(gateway == 'stripe'){
 
-            $(".payment-gateway").css("border","2px solid #D3DCDD");
+            $(".payment-gateway").css("border","2px solid var(--gp-field-border)");
             $('.tick-icon').hide();
             $('.form').hide();
 
-            $(".stripe").css("border","2px solid #00D04F");
+            $(".stripe").css("border","2px solid var(--gp-action)");
             $('.stripe-icon').show();
             $('.stripe-form').show();
         }else if(gateway == 'razorpay'){
 
-            $(".payment-gateway").css("border","2px solid #D3DCDD");
+            $(".payment-gateway").css("border","2px solid var(--gp-field-border)");
             $('.tick-icon').hide();
             $('.form').hide();
 
-            $(".razorpay").css("border","2px solid #00D04F");
+            $(".razorpay").css("border","2px solid var(--gp-action)");
             $('.razorpay-icon').show();
             $('.razorpay-form').show();
         }

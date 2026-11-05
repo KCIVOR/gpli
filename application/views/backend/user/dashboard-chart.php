@@ -64,8 +64,8 @@
                  ],
                  datasets: [{
                      label: "<?php echo get_phrase('this_year'); ?>",
-                     backgroundColor: "rgba(0, 59, 166, 0.18)",
-                     borderColor: "#003BA6",
+                     backgroundColor: "rgba(37, 99, 235, 0.18)",
+                     borderColor: "#2563EB",
                      data: [
                          <?php foreach ($month_wise_income as $income): ?>
                         "<?php echo $income; ?>",
@@ -117,7 +117,7 @@
                  labels: ["<?php echo get_phrase('active_course'); ?>", "<?php echo get_phrase('pending_course'); ?>"],
                  datasets: [{
                      data: [<?php echo $number_of_active_course; ?>, <?php echo $number_of_pending_course; ?>],
-                     backgroundColor: ["#003BA6", "#FCD01C"],
+                     backgroundColor: ["#2563EB", "#FCD01C"],
                      borderColor: "transparent",
                      borderWidth: "2"
                  }]

@@ -41,7 +41,7 @@
             <div class="form-group mb-2">
                 <div class="wrapper-image-preview">
                     <div class="box" style="width: 250px;">
-                        <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/certificates/template.jpg').'?v='.(file_exists('uploads/certificates/template.jpg') ? filemtime('uploads/certificates/template.jpg') : time()); ?>); background-color: #F5F5F5;"></div>
+                        <div class="js--image-preview" style="background-image: url(<?php echo base_url('uploads/certificates/template.jpg').'?v='.(file_exists('uploads/certificates/template.jpg') ? filemtime('uploads/certificates/template.jpg') : time()); ?>); background-color: var(--gp-surface-sunk);"></div>
                         <div class="upload-options">
                             <label for="certificate_template" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('certificate_template'); ?></label>
                             <input id="certificate_template" style="visibility:hidden;" type="file" class="image-upload" name="certificate_template" accept="image/*" required>

@@ -31,7 +31,7 @@
 
     var useDark = mode === 'dark';
     document.documentElement.style.colorScheme = useDark ? 'dark' : 'light';
-    document.documentElement.style.backgroundColor = useDark ? '#111015' : '#FBFAF7';
+    document.documentElement.style.backgroundColor = useDark ? '#111015' : '#F8FAFC';
 
     document.querySelectorAll('[data-gp-theme]').forEach(function(btn) {
       btn.classList.toggle('active', btn.getAttribute('data-gp-theme') === mode);

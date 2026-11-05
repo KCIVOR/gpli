@@ -34,6 +34,19 @@ li {
   margin: 0;
 }
 
+/* The player also backs the mobile bridge. Keep visible learning headings on
+   the GPLI heading role while preserving its existing layout and controls. */
+.gp-ds .course-playing h1,
+.gp-ds .course-playing h2,
+.gp-ds .course-playing h3,
+.gp-ds .course-playing h4,
+.gp-ds .course-playing h5,
+.gp-ds .course-playing h6,
+.gp-ds .course-playing .cp-title,
+.gp-ds .course-playing-sidebar > .title {
+  color: var(--gp-heading);
+}
+
 p {
   margin-bottom: 0;
 }

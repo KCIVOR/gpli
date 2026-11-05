@@ -6,35 +6,47 @@
 
 .gp-ds {
   /* ========== Brand Colors ========== */
-  --gp-primary: #003BA6;
-  --gp-primary-2: #4772BF;
-  --gp-primary-3: #809DD2;
+  /* GPLI palette roles. Keep status colors below independent from actions. */
+  --gp-action: #2563EB;
+  --gp-action-hover: #1D4ED8;
+  --gp-on-action: #FFFFFF;
+  --gp-link: #2563EB;
+  --gp-heading: #1B2A4A;
+  --gp-field-border: #E5E7EB;
+  --gp-placeholder: rgb(29 33 37 / 75%);
+  --gp-outline-action: var(--gp-link);
+  --gp-focus-ring: var(--gp-link);
+
+  /* Legacy bridge: existing components can inherit the action role safely. */
+  --gp-primary: var(--gp-action);
+  --gp-primary-2: var(--gp-action-hover);
+  --gp-primary-3: #93B4FF;
   --gp-secondary: #CD182A;
   --gp-secondary-hover: #90111D;
-  --gp-accent: #00215D;
-  --gp-accent-2: #001946;
+  --gp-accent: #1B2A4A;
+  --gp-accent-2: #0F1E3D;
   --gp-gold: #FCD01C;
   --gp-gold-light: #D6E0F1;
   --gp-gold-deep: #00328B;
-  --gp-blue-solid: #00328B;
+  --gp-blue-solid: var(--gp-action);
 
   /* ========== Neutrals (Light Mode) ========== */
-  --gp-paper: #F5F5F2;
+  --gp-paper: #F8FAFC;
   /* --gp-ink and --gp-text have no dark-mode override — deprecated for new use.
      Use --gp-fg / --gp-fg-muted / --gp-fg-faint instead (see gp-landing.css:5-6).
      Kept only for two frozen pairings where the paired background is equally
      unthemed: gp-admin-shell.css .side-nav .badge, gp-tooltip.css .tooltip-inner. */
   --gp-ink: #0d0d0c;
   --gp-text: #6B6B6B;
-  --gp-line: #E7E5DF;
-  --gp-bg: #FBFAF7;
+  --gp-line: #E5E7EB;
+  --gp-bg: #F8FAFC;
   --gp-surface: #ffffff;
-  --gp-surface-sunk: #F3F1EB;
-  --gp-border: #E4E1D8;
-  --gp-border-strong: #CFCBBE;
-  --gp-fg: #171613;
-  --gp-fg-muted: #6B6B65;
-  --gp-fg-faint: #9C988D;
+  --gp-surface-sunk: #F1F5F9;
+  --gp-border: #E5E7EB;
+  --gp-border-strong: #D1D5DB;
+  --gp-fg: #1F2937;
+  --gp-fg-muted: #6B7280;
+  --gp-fg-faint: #9CA3AF;
   --gp-code-bg: #12141c;
   --gp-code-fg: #d8dcec;
 
@@ -78,6 +90,15 @@
 /* System mode only — never auto-dark on partial migrations (default is light) */
 @media (prefers-color-scheme: dark) {
   .gp-ds[data-theme="system"] {
+    --gp-action: #2563EB;
+    --gp-action-hover: #1D4ED8;
+    --gp-on-action: #FFFFFF;
+    --gp-link: #93B4FF;
+    --gp-heading: #EDEBE6;
+    --gp-field-border: #3c3a45;
+    --gp-placeholder: #A7A4B0;
+    --gp-outline-action: var(--gp-link);
+    --gp-focus-ring: var(--gp-link);
     --gp-bg: #111015;
     --gp-surface: #17161c;
     --gp-surface-sunk: #0c0c10;
@@ -138,6 +159,15 @@
 }
 
 .gp-ds[data-theme="dark"] {
+  --gp-action: #2563EB;
+  --gp-action-hover: #1D4ED8;
+  --gp-on-action: #FFFFFF;
+  --gp-link: #93B4FF;
+  --gp-heading: #EDEBE6;
+  --gp-field-border: #3c3a45;
+  --gp-placeholder: #A7A4B0;
+  --gp-outline-action: var(--gp-link);
+  --gp-focus-ring: var(--gp-link);
   --gp-bg: #111015;
   --gp-surface: #17161c;
   --gp-surface-sunk: #0c0c10;

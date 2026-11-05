@@ -189,7 +189,7 @@
 <style>
     .block_text_editor {
         width: 100%;
-        border: 1px solid #e2dcff;
+        border: 1px solid var(--gp-field-border);
         border-radius: 6px;
         padding: 6px;
         font-size: 12px;
@@ -202,39 +202,39 @@
 
     .block_editor_number_first {
         width: 50px;
-        border: 1px solid #e2dcff;
+        border: 1px solid var(--gp-field-border);
         border-radius: 5px 0px 0px 5px;
         margin-right: -5px;
         font-size: 12px;
         padding: 0px 0px 0px 8px;
-        color: #585858;
+        color: var(--gp-fg-muted);
     }
 
     .block_editor_number_middle {
         width: 50px;
-        border: 1px solid #e2dcff;
+        border: 1px solid var(--gp-field-border);
         border-radius: 0px 0px 0px 0px;
         margin-right: -5px;
         font-size: 12px;
         padding: 0px 0px 0px 8px;
-        color: #585858;
+        color: var(--gp-fg-muted);
     }
 
     .block_editor_number_last {
         width: 50px;
-        border: 1px solid #e2dcff;
+        border: 1px solid var(--gp-field-border);
         border-radius: 0px 5px 5px 0px;
         margin-right: -5px;
         font-size: 12px;
         padding: 0px 0px 0px 8px;
-        color: #585858;
+        color: var(--gp-fg-muted);
     }
 
     .block_editor_select {
-        border: 1px solid #e2dcff;
+        border: 1px solid var(--gp-field-border);
         border-radius: 5px 5px 5px 5px;
         font-size: 12px;
-        color: #585858;
+        color: var(--gp-fg-muted);
         height: 25px;
         margin: 5px;
     }

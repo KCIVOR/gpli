@@ -13,7 +13,7 @@
   text-transform: uppercase;
   letter-spacing: 0.16em;
   word-spacing: 0;
-  color: var(--gp-secondary);
+  color: var(--gp-link);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -23,7 +23,7 @@
   content: "";
   width: 22px;
   height: 2px;
-  background: var(--gp-secondary);
+  background: var(--gp-link);
   display: inline-block;
 }
 
@@ -46,7 +46,7 @@
   font-weight: 800;
   letter-spacing: 0;
   word-spacing: 0.12em;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin-top: 10px;
   font-size: clamp(1.5rem, 2.6vw, 2.1rem);
 }
@@ -169,7 +169,7 @@
   font-weight: 800;
   letter-spacing: 0;
   word-spacing: 0.12em;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   font-size: clamp(2.1rem, 4.6vw, 3.1rem);
   line-height: 1.1;
   margin: 0;
@@ -514,7 +514,7 @@
 }
 
 .gp-ds .gp-landing-fn-card:hover { border-color: var(--gp-primary); transform: translateY(-2px); }
-.gp-ds .gp-landing-fn-card h3 { font-family: var(--gp-font-head); font-size: 1rem; color: var(--gp-fg); margin: 0; }
+.gp-ds .gp-landing-fn-card h3 { font-family: var(--gp-font-head); font-size: 1rem; color: var(--gp-heading); margin: 0; }
 .gp-ds .gp-landing-fn-card p { color: var(--gp-fg-muted); font-size: 0.86rem; margin: 0; flex: 1; }
 .gp-ds .gp-landing-fn-card span { font-size: 0.78rem; font-weight: 700; color: var(--gp-primary); text-transform: uppercase; letter-spacing: 0.04em; }
 
@@ -600,7 +600,7 @@
   font-family: var(--gp-font-head);
 }
 
-.gp-ds .gp-landing-why-tile h4 { font-size: 0.98rem; color: var(--gp-fg); margin: 0 0 4px; }
+.gp-ds .gp-landing-why-tile h4 { font-size: 0.98rem; color: var(--gp-heading); margin: 0 0 4px; }
 .gp-ds .gp-landing-why-tile p { color: var(--gp-fg-muted); font-size: 0.9rem; margin: 0; }
 
 .gp-ds .gp-landing-why-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -619,7 +619,7 @@
 /* ---------- Instructor cards ---------- */
 .gp-ds .gp-landing-instr-card { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .gp-ds .gp-landing-instr-card img { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; margin-bottom: 6px; }
-.gp-ds .gp-landing-instr-card h3 { font-size: 0.96rem; color: var(--gp-fg); margin: 0; }
+.gp-ds .gp-landing-instr-card h3 { font-size: 0.96rem; color: var(--gp-heading); margin: 0; }
 .gp-ds .gp-landing-instr-card p { font-size: 0.82rem; color: var(--gp-fg-muted); margin: 0; }
 
 /* ---------- Dual CTA ---------- */
@@ -639,7 +639,7 @@
 .gp-ds .gp-landing-dual-card.gp-landing-dual-learn p { color: rgba(255, 255, 255, 0.8); }
 .gp-ds .gp-landing-dual-card.gp-landing-dual-teach { background: var(--gp-surface); border: 1px solid var(--gp-border); }
 .gp-ds .gp-landing-dual-card.gp-landing-dual-teach p { color: var(--gp-fg-muted); }
-.gp-ds .gp-landing-dual-card h3 { font-family: var(--gp-font-head); font-size: 1.2rem; margin: 0; color: var(--gp-fg); }
+.gp-ds .gp-landing-dual-card h3 { font-family: var(--gp-font-head); font-size: 1.2rem; margin: 0; color: var(--gp-heading); }
 
 /* ---------- CTA band ---------- */
 .gp-ds .gp-landing-cta-band { background: var(--gp-accent-2); color: var(--gp-on-primary); text-align: center; border-radius: 0; }
@@ -685,7 +685,7 @@
   font-family: var(--gp-font-head);
   font-weight: 700;
   font-size: 1rem;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin: 0 0 6px;
 }
 
@@ -724,7 +724,7 @@
   font-family: var(--gp-font-head);
   font-weight: 700;
   font-size: 1rem;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
 }
 
 .gp-ds .gp-landing-faq-num {

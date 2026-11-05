@@ -22,13 +22,13 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--gp-secondary);
+  color: var(--gp-link);
 }
 
 .gp-ds .gp-faq-page-intro h2 {
   font-family: var(--gp-font-head);
   font-weight: 800;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin: 10px 0 0;
   font-size: clamp(1.5rem, 2.6vw, 2.1rem);
 }

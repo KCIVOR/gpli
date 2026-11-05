@@ -1,4 +1,4 @@
-body { background-color:#ECF0F1;}
+body { background-color:#FFFFFF;}
 .position {
   float: left;
   margin: 100px 20px;
@@ -31,24 +31,24 @@ body { background-color:#ECF0F1;}
   background-color: white;
 }
 
-.progress-bar .background { background-color: #b3cef6; }
+.progress-bar .background { background-color: #E5E7EB; }
 
 .progress-bar .rotate {
   clip: rect(0 100px 200px 0);
-  background-color: #4b86db;
+  background-color: #2563EB;
 }
 
 .progress-bar .left {
   clip: rect(0 100px 200px 0);
   opacity: 1;
-  background-color: #b3cef6;
+  background-color: #E5E7EB;
 }
 
 .progress-bar .right {
   clip: rect(0 100px 200px 0);
   transform: rotate(180deg);
   opacity: 0;
-  background-color: #4b86db;
+  background-color: #2563EB;
 }
  @keyframes 
 toggle {  0% {

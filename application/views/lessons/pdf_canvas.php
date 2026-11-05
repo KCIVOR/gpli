@@ -18,7 +18,7 @@
         text-align: center;
     }
     #navigation_controls{
-        background-color: #4b9d8a;
+        background-color: #2563EB;
         position: fixed;
         bottom: 0;
         left: 0;
@@ -30,7 +30,7 @@
         width: 50%;
         max-width: 200px;
         height: 100%;
-        background-color: #754ffe;
+        background-color: var(--gp-action);
         border: none;
         cursor: pointer;
         color: #fff;
@@ -40,7 +40,7 @@
         width: 50%;
         max-width: 200px;
         height: 100%;
-        background-color: #754ffe;
+        background-color: var(--gp-action);
         border: none;
         cursor: pointer;
         color: #fff;
@@ -50,7 +50,7 @@
         height: 48px;
         width: 100%;
         border: none;
-        background-color: #754ffe;
+        background-color: var(--gp-action);
         text-align: center;
         font-weight: 900;
         font-size: 18px;

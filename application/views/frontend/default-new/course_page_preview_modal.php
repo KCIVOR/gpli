@@ -14,7 +14,7 @@
 
 <?php if (strtolower(strtolower($provider)) == 'youtube') : ?>
 <!------------- PLYR.IO ------------>
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/global/plyr/plyr.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/global/plyr/plyr.css?v=gpli-hover-1">
 
 <div class="plyr__video-embed" id="player">
   <iframe height="500" src="<?php echo $course_details['video_url']; ?>?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1" allowfullscreen allowtransparency allow="autoplay"></iframe>
@@ -27,7 +27,7 @@
 <!------------- PLYR.IO ------------>
 <?php elseif (strtolower($provider) == 'vimeo') : ?>
 <!------------- PLYR.IO ------------>
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/global/plyr/plyr.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/global/plyr/plyr.css?v=gpli-hover-1">
 <div class="plyr__video-embed" id="player">
   <iframe height="500" src="https://player.vimeo.com/video/<?php echo $video_details['video_id']; ?>?loop=false&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=0&amp;gesture=media" allowfullscreen allowtransparency allow="autoplay"></iframe>
 </div>
@@ -39,7 +39,7 @@
 <!------------- PLYR.IO ------------>
 <?php else : ?>
 <!------------- PLYR.IO ------------>
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/global/plyr/plyr.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/global/plyr/plyr.css?v=gpli-hover-1">
 <video poster="<?php echo $this->crud_model->get_course_thumbnail_url($course_details['id']); ?>" id="player" playsinline controls>
   <?php if (get_video_extension($course_details['video_url']) == 'mp4') : ?>
     <source src="<?php echo $course_details['video_url']; ?>" type="video/mp4">

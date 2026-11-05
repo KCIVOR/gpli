@@ -34,7 +34,7 @@ if($language_dirs){
 		    font-size: 15px;
 		    font-weight: 500;
 		    line-height: 34px;
-		    color: #737982;
+		    color: #6B7280;
 		    transition: all 0.3s;
 		}
 		.course-content-items .item a > i{
@@ -43,12 +43,12 @@ if($language_dirs){
 		    width: 29px;
 		    padding: 10.5px 11.5px;
 		    font-size: 8px;
-		    background-color: rgba(115, 121, 130, 0.2);
-		    color: #6f7a8b;
+		    background-color: #E5E7EB;
+		    color: #6B7280;
 		}
 		.course-content-items .item.active a > i{
 		    background-color: #fff;
-		    color: #1663d4;
+		    color: #2563EB;
 		}
 		.course-content-items .item a .checkbox, .course-content-items .item .checkbox{
 			min-height: 20.5px;
@@ -72,13 +72,13 @@ if($language_dirs){
 			color: #fff;
 		}
 		.lesson_checkbox, .lesson_checkbox:hover{
-			accent-color: #e3e4e6;
+			accent-color: #E5E7EB;
 		}
 	</style>
 </head>
 
 <body class="gp-ds">
-<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=no-system-1"></script>
+<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=gpli-palette-2"></script>
 <?php $full_page = $this->session->userdata('full_page_layout'); ?>
 <?php
 	$number_of_lessons = $this->crud_model->get_lessons('course', $course_details['id'])->num_rows();

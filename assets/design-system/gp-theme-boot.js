@@ -1,7 +1,7 @@
 /**
  * Apply saved theme before first paint.
  * Must load without defer/async. Safe to run in <head> and again after <body>.
- * Colors match --gp-bg in gp-tokens.css (light #FBFAF7 / dark #111015).
+ * Colors match --gp-bg in gp-tokens.css (light #F8FAFC / dark #111015).
  */
 (function () {
   'use strict';
@@ -21,7 +21,7 @@
   var useDark = theme === 'dark';
 
   root.style.colorScheme = useDark ? 'dark' : 'light';
-  root.style.backgroundColor = useDark ? '#111015' : '#FBFAF7';
+  root.style.backgroundColor = useDark ? '#111015' : '#F8FAFC';
 
   if (document.body) {
     document.body.setAttribute('data-theme', theme);

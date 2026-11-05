@@ -108,10 +108,8 @@
 .gp-ds .gp-student-page h1,
 .gp-ds .gp-student-page h3,
 .gp-ds .gp-student-page h4,
-.gp-ds .gp-student-page h5,
-.gp-ds .gp-student-page label,
-.gp-ds .gp-student-page p,
-.gp-ds .gp-student-page span {
+.gp-ds .gp-student-page h5 {
+  color: var(--gp-heading) !important;
   letter-spacing: normal;
   word-spacing: normal;
 }
@@ -650,7 +648,7 @@
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
-  color: inherit;
+  color: inherit !important;
 }
 
 .gp-ds .gp-student-tile .courses-icon {

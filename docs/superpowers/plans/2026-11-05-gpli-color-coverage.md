@@ -1,0 +1,1318 @@
+# GPLI.tech frontend color audit and coverage checklist
+
+Baseline: develop at 3432251. Static source inventory completed on 5 November 2026. The local origin `http://localhost/academy` was restored on 5 November 2026 and returned HTTP 200. Runtime verification remains open for authenticated states and full route coverage.
+
+Tracked application view files: **577**. A file can be a page, shared shell, partial, error, email, or directory index.
+
+For each view record its URL or parent/opener, role, flags, data state, light/dark applicability, verification evidence, and disposition. Accept inherited colors when verified. Mark nonvisual, disabled or external ownership with evidence.
+
+## Phase 1 evidence
+
+- [x] Branch recorded as `develop` at `3432251`.
+- [x] Tracked source inventory reconciled. The 577 checked-in view files listed below match Git exactly.
+- [x] Controller entry-candidate and explicit route-alias inventory recorded below.
+- [x] Database discovery for the current active theme and homepage: `default-new` is active, the `gpli` homepage is the sole enabled homepage variant, and Certificate plus SCORM are enabled. Active gateway UI remains a verification boundary requiring test-mode flows.
+- [x] Guest browser computed-style baseline: `http://localhost/academy/` returns HTTP 200 and renders with `.gp-ds`. Its current primary action is `#003BA6` on white; body and heading text are `#171613`; the page background is `#FBFAF7`. The automated browser screenshot endpoint timed out, so a manual screenshot remains optional supporting evidence rather than a substitution for computed values.
+- [x] Representative browser coverage for all roles: fresh local test sessions load the administrator dashboard, instructor dashboard and student My Courses page with HTTP 200, the `.gp-ds` shell and `#003BA6` as the current primary token. Full per-route/state capture remains part of the open ledger work.
+- [ ] State inventory for empty, populated, error, expired, disabled, drawers, modals and AJAX fragments. Requires a running preview and test fixtures.
+
+Historical reference only. `tmp/responsive-audit/results-light.json` now records a current blocked administrator-dashboard run because the saved session expired. `results-both.json` recorded duplicate Bootstrap tooltip-instance errors on the admin-instructors route at 768px and 1024px in September 2026. These are not palette changes and remain outside the color-only implementation scope.
+
+**Phase 1 closeout, 5 November 2026:** The static scope inventory, active configuration discovery and representative guest/admin/instructor/student baseline are complete. The coverage ledger remains the source of truth for exhaustive per-route, state and viewport evidence, which is verified during Phase 4 after palette changes. Existing course-detail, refund-policy and tooltip findings are recorded as non-palette baseline issues and are not changed by this work.
+
+## backend (270)
+
+- [ ] `application/views/backend/admin/about.php`
+- [ ] `application/views/backend/admin/about_this_addon.php`
+- [ ] `application/views/backend/admin/academy_cloud.php`
+- [ ] `application/views/backend/admin/academy_cloud_type_lesson_add.php`
+- [ ] `application/views/backend/admin/academy_cloud_type_lesson_edit.php`
+- [ ] `application/views/backend/admin/active_courses.php` — inline CSS
+- [ ] `application/views/backend/admin/add_custom_page.php`
+- [ ] `application/views/backend/admin/add_newsletter.php`
+- [ ] `application/views/backend/admin/addon_add.php`
+- [ ] `application/views/backend/admin/addon_update.php`
+- [ ] `application/views/backend/admin/addons.php`
+- [ ] `application/views/backend/admin/admin_add.php` — inline CSS
+- [ ] `application/views/backend/admin/admin_edit.php` — inline CSS
+- [ ] `application/views/backend/admin/admin_permission.php` — literal color candidate
+- [ ] `application/views/backend/admin/admin_revenue.php`
+- [ ] `application/views/backend/admin/admins.php`
+- [ ] `application/views/backend/admin/ajax_get_section.php`
+- [ ] `application/views/backend/admin/ajax_get_sub_category.php`
+- [ ] `application/views/backend/admin/announcement_add.php`
+- [ ] `application/views/backend/admin/announcement_edit.php`
+- [ ] `application/views/backend/admin/announcements.php`
+- [ ] `application/views/backend/admin/application_details.php`
+- [ ] `application/views/backend/admin/application_list.php`
+- [ ] `application/views/backend/admin/audio_type_lesson_add.php`
+- [ ] `application/views/backend/admin/audio_type_lesson_edit.php`
+- [ ] `application/views/backend/admin/available_addon.php` — embedded content
+- [ ] `application/views/backend/admin/available_addons.php`
+- [ ] `application/views/backend/admin/badges.php` — inline CSS, configured content
+- [ ] `application/views/backend/admin/badges_add.php`
+- [ ] `application/views/backend/admin/badges_edit.php`
+- [ ] `application/views/backend/admin/bbb_live_class.php`
+- [ ] `application/views/backend/admin/bbb_live_class_settings.php`
+- [ ] `application/views/backend/admin/blog.php`
+- [ ] `application/views/backend/admin/blog_add.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/admin/blog_category.php`
+- [ ] `application/views/backend/admin/blog_category_add.php`
+- [ ] `application/views/backend/admin/blog_category_edit.php`
+- [ ] `application/views/backend/admin/blog_edit.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/admin/blog_settings.php` — configured content
+- [ ] `application/views/backend/admin/categories.php`
+- [ ] `application/views/backend/admin/category_add.php`
+- [ ] `application/views/backend/admin/category_edit.php`
+- [ ] `application/views/backend/admin/certificate_settings.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/admin/certificate_text_position.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/backend/admin/change_course_author.php`
+- [ ] `application/views/backend/admin/contact.php`
+- [ ] `application/views/backend/admin/contact_reply_form.php`
+- [ ] `application/views/backend/admin/coupon_add.php`
+- [ ] `application/views/backend/admin/coupon_edit.php`
+- [ ] `application/views/backend/admin/coupons.php`
+- [ ] `application/views/backend/admin/course_add.php` — inline CSS
+- [ ] `application/views/backend/admin/course_add_shortcut.php` — inline CSS
+- [ ] `application/views/backend/admin/course_details.php`
+- [ ] `application/views/backend/admin/course_edit.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/admin/course_enrol_list.php`
+- [ ] `application/views/backend/admin/course_media_add.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/backend/admin/course_media_edit.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/backend/admin/courses-server-side.php`
+- [ ] `application/views/backend/admin/courses.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/admin/curriculum.php`
+- [ ] `application/views/backend/admin/custom_field.php` — literal color candidate, inline CSS, embedded content
+- [ ] `application/views/backend/admin/custom_field_add.php`
+- [ ] `application/views/backend/admin/custom_field_edit.php` — inline CSS
+- [ ] `application/views/backend/admin/custom_field_section_edit.php`
+- [ ] `application/views/backend/admin/custom_field_section_sorting.php`
+- [ ] `application/views/backend/admin/custom_page.php`
+- [ ] `application/views/backend/admin/dashboard-chart.php` — literal color candidate
+- [ ] `application/views/backend/admin/dashboard.php`
+- [ ] `application/views/backend/admin/data_center.php`
+- [ ] `application/views/backend/admin/document_type_lesson_add.php`
+- [ ] `application/views/backend/admin/document_type_lesson_edit.php`
+- [ ] `application/views/backend/admin/dragula.php`
+- [ ] `application/views/backend/admin/drip_content_settings.php`
+- [ ] `application/views/backend/admin/edit_custom_page.php`
+- [ ] `application/views/backend/admin/edit_email_template.php`
+- [ ] `application/views/backend/admin/edit_newsletter.php`
+- [ ] `application/views/backend/admin/enrol_history.php`
+- [ ] `application/views/backend/admin/enrol_student.php`
+- [ ] `application/views/backend/admin/frontend_settings.php` — inline CSS, configured content
+- [ ] `application/views/backend/admin/google_drive_video_lesson_add.php`
+- [ ] `application/views/backend/admin/google_drive_video_lesson_edit.php`
+- [ ] `application/views/backend/admin/home_page_add.php`
+- [ ] `application/views/backend/admin/home_page_builder.php` — inline CSS, configured content
+- [ ] `application/views/backend/admin/home_page_builder/css.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/backend/admin/home_page_builder/index.php` — configured content
+- [ ] `application/views/backend/admin/home_page_builder/js.php` — inline CSS
+- [ ] `application/views/backend/admin/home_page_builder/modal.php` — inline CSS
+- [ ] `application/views/backend/admin/home_page_builder/page_elements.php`
+- [ ] `application/views/backend/admin/home_page_builder/page_layout_edit_image_and_text.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/admin/home_page_builder/page_layout_edit_offcanvas.php`
+- [ ] `application/views/backend/admin/home_page_builder/page_layout_edit_offcanvas_body.php`
+- [ ] `application/views/backend/admin/home_page_builder/preview.php` — inline CSS, configured content
+- [ ] `application/views/backend/admin/home_page_edit.php`
+- [ ] `application/views/backend/admin/html5_type_lesson_add.php`
+- [ ] `application/views/backend/admin/html5_type_lesson_edit.php`
+- [ ] `application/views/backend/admin/iframe_type_lesson_add.php`
+- [ ] `application/views/backend/admin/iframe_type_lesson_edit.php`
+- [ ] `application/views/backend/admin/image_type_lesson_add.php`
+- [ ] `application/views/backend/admin/image_type_lesson_edit.php`
+- [ ] `application/views/backend/admin/instructor_add.php` — inline CSS
+- [ ] `application/views/backend/admin/instructor_edit.php` — inline CSS
+- [ ] `application/views/backend/admin/instructor_payout.php`
+- [ ] `application/views/backend/admin/instructor_revenue.php`
+- [ ] `application/views/backend/admin/instructor_settings.php` — inline CSS
+- [ ] `application/views/backend/admin/instructors.php`
+- [ ] `application/views/backend/admin/instructors_pending_blog.php`
+- [ ] `application/views/backend/admin/invoice.php` — configured content
+- [ ] `application/views/backend/admin/learner_progress.php`
+- [ ] `application/views/backend/admin/lesson_add.php`
+- [ ] `application/views/backend/admin/lesson_edit.php`
+- [ ] `application/views/backend/admin/lesson_types.php`
+- [ ] `application/views/backend/admin/lessons.php`
+- [ ] `application/views/backend/admin/mail_on_course_status_changing_modal.php`
+- [ ] `application/views/backend/admin/manage_language.php`
+- [ ] `application/views/backend/admin/manage_profile.php`
+- [ ] `application/views/backend/admin/message.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/admin/message_home.php`
+- [ ] `application/views/backend/admin/message_new.php`
+- [ ] `application/views/backend/admin/message_read.php` — inline CSS
+- [ ] `application/views/backend/admin/navigation.php`
+- [ ] `application/views/backend/admin/newsletter_history.php`
+- [ ] `application/views/backend/admin/newsletter_statistics.php`
+- [ ] `application/views/backend/admin/newsletters.php` — inline CSS
+- [ ] `application/views/backend/admin/notification_settings.php` — inline CSS
+- [ ] `application/views/backend/admin/open_ai_settings.php`
+- [ ] `application/views/backend/admin/payment_settings.php`
+- [ ] `application/views/backend/admin/paypal_checkout_for_instructor_revenue.php` — token loader, configured content
+- [ ] `application/views/backend/admin/pending_courses.php`
+- [ ] `application/views/backend/admin/preview_scorm_course.php` — literal color candidate, inline CSS, embedded content
+- [ ] `application/views/backend/admin/purchase_history.php`
+- [ ] `application/views/backend/admin/question_add.php`
+- [ ] `application/views/backend/admin/question_edit.php`
+- [ ] `application/views/backend/admin/quiz_add.php`
+- [ ] `application/views/backend/admin/quiz_edit.php`
+- [ ] `application/views/backend/admin/quiz_fields_type_wize.php` — inline CSS
+- [ ] `application/views/backend/admin/quiz_questions.php`
+- [ ] `application/views/backend/admin/razorpay_checkout.php` — token loader
+- [ ] `application/views/backend/admin/resource_file_edit.php` — inline CSS
+- [ ] `application/views/backend/admin/resource_files.php` — inline CSS
+- [ ] `application/views/backend/admin/review_add.php`
+- [ ] `application/views/backend/admin/review_edit.php`
+- [ ] `application/views/backend/admin/save_purchase_code_form.php`
+- [ ] `application/views/backend/admin/scorm_course_uploading_form.php`
+- [ ] `application/views/backend/admin/scorm_curriculum.php`
+- [ ] `application/views/backend/admin/scorm_scripts.php` — literal color candidate
+- [ ] `application/views/backend/admin/section_add.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/admin/section_edit.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/admin/send_newsletter.php`
+- [ ] `application/views/backend/admin/seo_settings.php` — inline CSS
+- [ ] `application/views/backend/admin/shortcut_add_student.php`
+- [ ] `application/views/backend/admin/shortcut_enrol_student.php`
+- [ ] `application/views/backend/admin/sitemap_settings.php`
+- [ ] `application/views/backend/admin/social_login.php`
+- [ ] `application/views/backend/admin/sort_lesson.php`
+- [ ] `application/views/backend/admin/sort_section.php`
+- [ ] `application/views/backend/admin/stripe_checkout_for_instructor_revenue.php`
+- [ ] `application/views/backend/admin/student_academic_progress.php` — inline CSS
+- [ ] `application/views/backend/admin/student_academic_quiz_result.php`
+- [ ] `application/views/backend/admin/sub_categories.php` — inline CSS
+- [ ] `application/views/backend/admin/sub_category_add.php`
+- [ ] `application/views/backend/admin/sub_category_edit.php`
+- [ ] `application/views/backend/admin/subscribed_user.php`
+- [ ] `application/views/backend/admin/system_settings.php` — inline CSS
+- [ ] `application/views/backend/admin/text_type_lesson_add.php`
+- [ ] `application/views/backend/admin/text_type_lesson_edit.php`
+- [ ] `application/views/backend/admin/theme_settings.php` — configured content
+- [ ] `application/views/backend/admin/transaction.php`
+- [ ] `application/views/backend/admin/upload_theme.php`
+- [ ] `application/views/backend/admin/user_add.php` — inline CSS
+- [ ] `application/views/backend/admin/user_edit.php` — inline CSS
+- [ ] `application/views/backend/admin/users.php`
+- [ ] `application/views/backend/admin/video_player.php` — inline CSS, embedded content
+- [ ] `application/views/backend/admin/video_type_lesson_add.php`
+- [ ] `application/views/backend/admin/video_type_lesson_edit.php`
+- [ ] `application/views/backend/admin/vimeo_type_lesson_add.php` — inline CSS
+- [ ] `application/views/backend/admin/vimeo_type_lesson_edit.php` — inline CSS
+- [ ] `application/views/backend/admin/wasabi_settings.php`
+- [ ] `application/views/backend/admin/wasabi_storage_type_lesson_add.php`
+- [ ] `application/views/backend/admin/wasabi_storage_type_lesson_edit.php`
+- [ ] `application/views/backend/admin/youtube_type_lesson_add.php` — inline CSS
+- [ ] `application/views/backend/admin/youtube_type_lesson_edit.php` — inline CSS
+- [ ] `application/views/backend/common_scripts.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/footer.php`
+- [ ] `application/views/backend/header.php` — configured content
+- [ ] `application/views/backend/header_notification.php`
+- [ ] `application/views/backend/includes_bottom.php` — literal color candidate
+- [ ] `application/views/backend/includes_top.php` — token loader, configured content
+- [ ] `application/views/backend/index.php`
+- [ ] `application/views/backend/init.php`
+- [ ] `application/views/backend/metas.php`
+- [ ] `application/views/backend/modal.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/user/academy_cloud_type_lesson_add.php`
+- [ ] `application/views/backend/user/academy_cloud_type_lesson_edit.php`
+- [ ] `application/views/backend/user/application_details.php`
+- [ ] `application/views/backend/user/application_form.php`
+- [ ] `application/views/backend/user/application_list.php`
+- [ ] `application/views/backend/user/audio_type_lesson_add.php`
+- [ ] `application/views/backend/user/audio_type_lesson_edit.php`
+- [ ] `application/views/backend/user/bbb_live_class.php`
+- [ ] `application/views/backend/user/become_an_instructor.php`
+- [ ] `application/views/backend/user/blog.php`
+- [ ] `application/views/backend/user/blog_add.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/user/blog_edit.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/user/course_add.php` — inline CSS
+- [ ] `application/views/backend/user/course_add_shortcut.php` — inline CSS
+- [ ] `application/views/backend/user/course_edit.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/user/course_media_add.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/backend/user/course_media_edit.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/backend/user/courses-server-side.php`
+- [ ] `application/views/backend/user/courses.php` — inline CSS
+- [ ] `application/views/backend/user/curriculum.php`
+- [ ] `application/views/backend/user/custom_field.php` — inline CSS, embedded content
+- [ ] `application/views/backend/user/custom_field_add.php` — inline CSS
+- [ ] `application/views/backend/user/custom_field_edit.php` — inline CSS
+- [ ] `application/views/backend/user/custom_field_section_edit.php`
+- [ ] `application/views/backend/user/custom_field_section_sorting.php`
+- [ ] `application/views/backend/user/dashboard-chart.php` — literal color candidate
+- [ ] `application/views/backend/user/dashboard.php`
+- [ ] `application/views/backend/user/document_type_lesson_add.php`
+- [ ] `application/views/backend/user/document_type_lesson_edit.php`
+- [ ] `application/views/backend/user/google_drive_video_lesson_add.php`
+- [ ] `application/views/backend/user/google_drive_video_lesson_edit.php`
+- [ ] `application/views/backend/user/html5_type_lesson_add.php`
+- [ ] `application/views/backend/user/html5_type_lesson_edit.php`
+- [ ] `application/views/backend/user/iframe_type_lesson_add.php`
+- [ ] `application/views/backend/user/iframe_type_lesson_edit.php`
+- [ ] `application/views/backend/user/image_type_lesson_add.php`
+- [ ] `application/views/backend/user/image_type_lesson_edit.php`
+- [ ] `application/views/backend/user/instructor_revenue.php`
+- [ ] `application/views/backend/user/invoice.php`
+- [ ] `application/views/backend/user/learner_progress.php`
+- [ ] `application/views/backend/user/lesson_add.php`
+- [ ] `application/views/backend/user/lesson_edit.php`
+- [ ] `application/views/backend/user/lesson_types.php`
+- [ ] `application/views/backend/user/lessons.php`
+- [ ] `application/views/backend/user/manage_multiple_choices_options.php`
+- [ ] `application/views/backend/user/navigation.php` — configured content
+- [ ] `application/views/backend/user/payment_settings.php`
+- [ ] `application/views/backend/user/payout_report.php`
+- [ ] `application/views/backend/user/pending_blog.php`
+- [ ] `application/views/backend/user/preview_scorm_course.php` — literal color candidate, inline CSS, embedded content
+- [ ] `application/views/backend/user/question_add.php`
+- [ ] `application/views/backend/user/question_edit.php`
+- [ ] `application/views/backend/user/quiz_add.php`
+- [ ] `application/views/backend/user/quiz_edit.php`
+- [ ] `application/views/backend/user/quiz_fields_type_wize.php` — inline CSS
+- [ ] `application/views/backend/user/quiz_questions.php`
+- [ ] `application/views/backend/user/request_withdrawal.php`
+- [ ] `application/views/backend/user/resource_file_edit.php` — inline CSS
+- [ ] `application/views/backend/user/resource_files.php` — inline CSS
+- [ ] `application/views/backend/user/sales_report.php`
+- [ ] `application/views/backend/user/scorm_course_uploading_form.php`
+- [ ] `application/views/backend/user/scorm_curriculum.php`
+- [ ] `application/views/backend/user/scorm_scripts.php` — literal color candidate
+- [ ] `application/views/backend/user/section_add.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/user/section_edit.php` — literal color candidate, inline CSS
+- [ ] `application/views/backend/user/sort_lesson.php`
+- [ ] `application/views/backend/user/sort_section.php`
+- [ ] `application/views/backend/user/student_academic_progress.php` — inline CSS
+- [ ] `application/views/backend/user/student_academic_quiz_result.php`
+- [ ] `application/views/backend/user/text_type_lesson_add.php`
+- [ ] `application/views/backend/user/text_type_lesson_edit.php`
+- [ ] `application/views/backend/user/video_type_lesson_add.php`
+- [ ] `application/views/backend/user/video_type_lesson_edit.php`
+- [ ] `application/views/backend/user/vimeo_type_lesson_add.php` — inline CSS
+- [ ] `application/views/backend/user/vimeo_type_lesson_edit.php` — inline CSS
+- [ ] `application/views/backend/user/wasabi_storage_type_lesson_add.php`
+- [ ] `application/views/backend/user/wasabi_storage_type_lesson_edit.php`
+- [ ] `application/views/backend/user/youtube_type_lesson_add.php` — inline CSS
+- [ ] `application/views/backend/user/youtube_type_lesson_edit.php` — inline CSS
+
+## certificate (1)
+
+- [ ] `application/views/certificate/index.php` — literal color candidate, inline CSS, configured content
+
+## components (118)
+
+- [ ] `application/views/components/design-system/alert.php`
+- [ ] `application/views/components/design-system/badge.php`
+- [ ] `application/views/components/design-system/button.php`
+- [ ] `application/views/components/design-system/card.php`
+- [ ] `application/views/components/design-system/page_title_card.php`
+- [ ] `application/views/components/design-system/table.php`
+- [ ] `application/views/components/main/about_us_language.php`
+- [ ] `application/views/components/main/blogs_1.php` — literal color candidate
+- [ ] `application/views/components/main/blogs_3.php` — inline CSS
+- [ ] `application/views/components/main/blogs_4.php`
+- [ ] `application/views/components/main/blogs_5.php`
+- [ ] `application/views/components/main/blogs_6.php`
+- [ ] `application/views/components/main/blogs_development.php` — literal color candidate
+- [ ] `application/views/components/main/blogs_fitness.php`
+- [ ] `application/views/components/main/blogs_kindergarten.php` — literal color candidate, configured content
+- [ ] `application/views/components/main/blogs_lamguage.php` — configured content
+- [ ] `application/views/components/main/blogs_university.php` — literal color candidate, configured content
+- [ ] `application/views/components/main/community_kindergarten.php`
+- [ ] `application/views/components/main/community_marketplace.php`
+- [ ] `application/views/components/main/community_university2.php`
+- [ ] `application/views/components/main/courses_cooking2.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/courses_development.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/courses_fitness.php` — inline CSS, configured content
+- [ ] `application/views/components/main/courses_kindergarten.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/courses_language.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/courses_university2.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/cta_band.php`
+- [ ] `application/views/components/main/faq_section.php` — configured content
+- [ ] `application/views/components/main/faq_section_1.php` — configured content
+- [ ] `application/views/components/main/faq_section_2.php` — configured content
+- [ ] `application/views/components/main/faq_section_6.php` — configured content
+- [ ] `application/views/components/main/faq_section_development.php` — configured content
+- [ ] `application/views/components/main/faq_section_kindergarten.php` — configured content
+- [ ] `application/views/components/main/faq_section_marketplace.php` — configured content
+- [ ] `application/views/components/main/feature_trio.php`
+- [ ] `application/views/components/main/footer.php` — inline CSS, configured content
+- [ ] `application/views/components/main/footer2.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/function_grid.php`
+- [ ] `application/views/components/main/header.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/hero_section_1.php` — configured content
+- [ ] `application/views/components/main/hero_section_2.php` — configured content
+- [ ] `application/views/components/main/hero_section_2_1.php`
+- [ ] `application/views/components/main/hero_section_3.php` — configured content
+- [ ] `application/views/components/main/hero_section_4.php` — configured content
+- [ ] `application/views/components/main/hero_section_4_1.php`
+- [ ] `application/views/components/main/hero_section_5.php` — configured content
+- [ ] `application/views/components/main/hero_section_5_1.php`
+- [ ] `application/views/components/main/hero_section_6.php` — configured content
+- [ ] `application/views/components/main/hero_section_6_1.php`
+- [ ] `application/views/components/main/hero_section_7.php` — configured content
+- [ ] `application/views/components/main/hero_section_cooking2.php` — configured content
+- [ ] `application/views/components/main/hero_section_development.php` — literal color candidate, configured content
+- [ ] `application/views/components/main/hero_section_elegant.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/hero_section_fitness.php` — configured content
+- [ ] `application/views/components/main/hero_section_fitness_1.php`
+- [ ] `application/views/components/main/hero_section_kindergarten.php` — literal color candidate, configured content
+- [ ] `application/views/components/main/hero_section_language.php` — configured content
+- [ ] `application/views/components/main/hero_section_marketplace.php` — inline CSS, configured content
+- [ ] `application/views/components/main/hero_section_university2.php` — configured content
+- [ ] `application/views/components/main/home_section_3_1.php`
+- [ ] `application/views/components/main/latest_courses_1.php` — inline CSS, configured content
+- [ ] `application/views/components/main/latest_courses_4.php`
+- [ ] `application/views/components/main/latest_courses_5.php` — literal color candidate, inline CSS
+- [ ] `application/views/components/main/latest_courses_6.php`
+- [ ] `application/views/components/main/media_strip.php` — inline CSS
+- [ ] `application/views/components/main/motivetional_section_1.php` — configured content
+- [ ] `application/views/components/main/motivetional_section_2.php` — configured content
+- [ ] `application/views/components/main/promotional_section_1.php` — configured content
+- [ ] `application/views/components/main/quiz_banner.php`
+- [ ] `application/views/components/main/reviews_section_1.php`
+- [ ] `application/views/components/main/reviews_section_fitness.php`
+- [ ] `application/views/components/main/reviews_section_kindergarten.php` — configured content
+- [ ] `application/views/components/main/reviews_section_language.php` — configured content
+- [ ] `application/views/components/main/reviews_section_marketplace.php` — literal color candidate, configured content
+- [ ] `application/views/components/main/signUp_language.php` — literal color candidate, inline CSS
+- [ ] `application/views/components/main/software_section_cooking2.php`
+- [ ] `application/views/components/main/software_section_development.php`
+- [ ] `application/views/components/main/software_section_down_development.php`
+- [ ] `application/views/components/main/software_section_university2.php`
+- [ ] `application/views/components/main/statistics_4.php` — literal color candidate, inline CSS
+- [ ] `application/views/components/main/statistics_5.php`
+- [ ] `application/views/components/main/statistics_6.php`
+- [ ] `application/views/components/main/statistics_elegant.php`
+- [ ] `application/views/components/main/statistics_fitness.php`
+- [ ] `application/views/components/main/statistics_kindergarten.php`
+- [ ] `application/views/components/main/statistics_marketplace.php`
+- [ ] `application/views/components/main/subscribe_marketplace.php`
+- [ ] `application/views/components/main/top_categories_1.php` — configured content
+- [ ] `application/views/components/main/top_categories_2.php` — inline CSS
+- [ ] `application/views/components/main/top_categories_3.php`
+- [ ] `application/views/components/main/top_categories_4.php` — inline CSS
+- [ ] `application/views/components/main/top_categories_development.php` — literal color candidate, configured content
+- [ ] `application/views/components/main/top_categories_fitness.php`
+- [ ] `application/views/components/main/top_categories_kindergarten.php` — literal color candidate, configured content
+- [ ] `application/views/components/main/top_categories_language.php` — configured content
+- [ ] `application/views/components/main/top_courses_1.php` — inline CSS, configured content
+- [ ] `application/views/components/main/top_courses_4.php`
+- [ ] `application/views/components/main/top_courses_5.php` — literal color candidate, inline CSS
+- [ ] `application/views/components/main/top_courses_6.php`
+- [ ] `application/views/components/main/top_courses_cooking2.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/top_courses_elegant.php`
+- [ ] `application/views/components/main/top_courses_kindergarten.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/top_courses_marketplace.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/components/main/top_instructors_1.php` — configured content
+- [ ] `application/views/components/main/top_instructors_2.php`
+- [ ] `application/views/components/main/top_instructors_3.php` — inline CSS
+- [ ] `application/views/components/main/top_instructors_4.php`
+- [ ] `application/views/components/main/top_instructors_5.php`
+- [ ] `application/views/components/main/top_instructors_7.php`
+- [ ] `application/views/components/main/top_instructors_cooking2.php`
+- [ ] `application/views/components/main/top_instructors_language.php` — literal color candidate
+- [ ] `application/views/components/main/topbar.php` — literal color candidate, configured content
+- [ ] `application/views/components/main/tuition_section_university2.php`
+- [ ] `application/views/components/main/upcoming_courses.php` — inline CSS
+- [ ] `application/views/components/main/upcoming_courses_2.php` — inline CSS
+- [ ] `application/views/components/main/upcoming_courses_5.php`
+- [ ] `application/views/components/main/upcoming_courses_6.php` — literal color candidate, inline CSS
+- [ ] `application/views/components/main/why_section.php`
+
+## email (2)
+
+- [ ] `application/views/email/common_template.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/email/static_common_template.php` — literal color candidate, inline CSS, configured content
+
+## errors (13)
+
+- [ ] `application/views/errors/cli/error_404.php`
+- [ ] `application/views/errors/cli/error_db.php`
+- [ ] `application/views/errors/cli/error_exception.php`
+- [ ] `application/views/errors/cli/error_general.php`
+- [ ] `application/views/errors/cli/error_php.php`
+- [ ] `application/views/errors/cli/index.html`
+- [ ] `application/views/errors/html/error_404.php` — literal color candidate, inline CSS
+- [ ] `application/views/errors/html/error_db.php` — literal color candidate, inline CSS
+- [ ] `application/views/errors/html/error_exception.php` — literal color candidate, inline CSS
+- [ ] `application/views/errors/html/error_general.php` — literal color candidate, inline CSS
+- [ ] `application/views/errors/html/error_php.php` — literal color candidate, inline CSS
+- [ ] `application/views/errors/html/index.html`
+- [ ] `application/views/errors/index.html`
+
+## frontend (115)
+
+- [ ] `application/views/frontend/default-new/404.php`
+- [ ] `application/views/frontend/default-new/about_us.php` — configured content
+- [ ] `application/views/frontend/default-new/account_disable.php`
+- [ ] `application/views/frontend/default-new/badges.php`
+- [ ] `application/views/frontend/default-new/become_a_instructor.php`
+- [ ] `application/views/frontend/default-new/blog_categories.php` — inline CSS
+- [ ] `application/views/frontend/default-new/blog_details.php` — inline CSS
+- [ ] `application/views/frontend/default-new/blog_latest_and_popular.php`
+- [ ] `application/views/frontend/default-new/blog_sidebar.php`
+- [ ] `application/views/frontend/default-new/blogs.php` — inline CSS, configured content
+- [ ] `application/views/frontend/default-new/blogs_all.php`
+- [ ] `application/views/frontend/default-new/breadcrumb.php`
+- [ ] `application/views/frontend/default-new/cart_items.php`
+- [ ] `application/views/frontend/default-new/change_password_from_forgot_password.php` — configured content
+- [ ] `application/views/frontend/default-new/common_scripts.php` — inline CSS
+- [ ] `application/views/frontend/default-new/community_comments.php`
+- [ ] `application/views/frontend/default-new/community_index.php`
+- [ ] `application/views/frontend/default-new/community_my_posts.php`
+- [ ] `application/views/frontend/default-new/community_saved_posts.php`
+- [ ] `application/views/frontend/default-new/community_scripts.php`
+- [ ] `application/views/frontend/default-new/community_shared_post.php`
+- [ ] `application/views/frontend/default-new/community_sidebar.php`
+- [ ] `application/views/frontend/default-new/compare.php` — inline CSS
+- [ ] `application/views/frontend/default-new/contact_us.php` — configured content
+- [ ] `application/views/frontend/default-new/cookie_policy.php` — configured content
+- [ ] `application/views/frontend/default-new/course_page.php`
+- [ ] `application/views/frontend/default-new/course_page_curriculum.php` — inline CSS
+- [ ] `application/views/frontend/default-new/course_page_custom_field_info.php` — literal color candidate, inline CSS, embedded content
+- [ ] `application/views/frontend/default-new/course_page_info_description.php`
+- [ ] `application/views/frontend/default-new/course_page_instructor.php` — literal color candidate
+- [ ] `application/views/frontend/default-new/course_page_preview_modal.php` — embedded content
+- [ ] `application/views/frontend/default-new/course_page_reviews.php`
+- [ ] `application/views/frontend/default-new/courses_page.php`
+- [ ] `application/views/frontend/default-new/courses_page_grid_layout.php`
+- [ ] `application/views/frontend/default-new/courses_page_list_layout.php`
+- [ ] `application/views/frontend/default-new/courses_page_sidebar.php` — literal color candidate
+- [ ] `application/views/frontend/default-new/courses_page_sorting_section.php`
+- [ ] `application/views/frontend/default-new/create_course.php` — configured content
+- [ ] `application/views/frontend/default-new/custom_page_viewer.php`
+- [ ] `application/views/frontend/default-new/eu-cookie.php` — inline CSS, configured content
+- [ ] `application/views/frontend/default-new/facebook_login.php`
+- [ ] `application/views/frontend/default-new/footer.php` — configured content
+- [ ] `application/views/frontend/default-new/forgot_password.php` — configured content
+- [ ] `application/views/frontend/default-new/go_back_to_mobile_app.php` — inline CSS
+- [ ] `application/views/frontend/default-new/gp_auth_visual.php` — configured content
+- [ ] `application/views/frontend/default-new/gp_header_tools.php`
+- [ ] `application/views/frontend/default-new/gp_theme_toggle.php`
+- [ ] `application/views/frontend/default-new/header.php`
+- [ ] `application/views/frontend/default-new/header_lg_device.php` — literal color candidate, configured content
+- [ ] `application/views/frontend/default-new/header_sm_device.php` — inline CSS
+- [ ] `application/views/frontend/default-new/home.php` — configured content
+- [ ] `application/views/frontend/default-new/home_1.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_2.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_3.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_4.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_5.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_6.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_7.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_builder.php`
+- [ ] `application/views/frontend/default-new/home_cooking2.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_cooking2_assets.php` — literal color candidate, inline CSS
+- [ ] `application/views/frontend/default-new/home_development.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_development_assets.php` — literal color candidate, inline CSS
+- [ ] `application/views/frontend/default-new/home_elegant.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_elegant_assets.php` — literal color candidate, inline CSS
+- [ ] `application/views/frontend/default-new/home_fitness.php` — inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_fitness_assets.php` — literal color candidate, inline CSS
+- [ ] `application/views/frontend/default-new/home_gpli.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_gpli_assets.php`
+- [ ] `application/views/frontend/default-new/home_kindergarten.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_kindergarten_assets.php` — literal color candidate, inline CSS
+- [ ] `application/views/frontend/default-new/home_language.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_language_assets.php` — literal color candidate, inline CSS
+- [ ] `application/views/frontend/default-new/home_marketplace.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_marketplace_assets.php` — literal color candidate, inline CSS
+- [ ] `application/views/frontend/default-new/home_university2.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/frontend/default-new/home_university2_assets.php` — literal color candidate, inline CSS
+- [ ] `application/views/frontend/default-new/includes_bottom.php`
+- [ ] `application/views/frontend/default-new/includes_top.php` — token loader
+- [ ] `application/views/frontend/default-new/index.php` — inline CSS, configured content
+- [ ] `application/views/frontend/default-new/init.php`
+- [ ] `application/views/frontend/default-new/instructor_dashboard.php`
+- [ ] `application/views/frontend/default-new/instructor_following.php`
+- [ ] `application/views/frontend/default-new/instructor_page.php` — literal color candidate, inline CSS
+- [ ] `application/views/frontend/default-new/invoice.php` — inline CSS, configured content
+- [ ] `application/views/frontend/default-new/lesson_edit.php`
+- [ ] `application/views/frontend/default-new/live_class_scadule.php`
+- [ ] `application/views/frontend/default-new/logged_in_header.php` — configured content
+- [ ] `application/views/frontend/default-new/logged_out_header.php` — configured content
+- [ ] `application/views/frontend/default-new/login.php` — configured content
+- [ ] `application/views/frontend/default-new/manage_course_details.php` — configured content
+- [ ] `application/views/frontend/default-new/menu.php`
+- [ ] `application/views/frontend/default-new/modal.php` — inline CSS
+- [ ] `application/views/frontend/default-new/my_courses.php` — inline CSS
+- [ ] `application/views/frontend/default-new/my_messages.php` — inline CSS
+- [ ] `application/views/frontend/default-new/my_notifications.php`
+- [ ] `application/views/frontend/default-new/my_wishlist.php`
+- [ ] `application/views/frontend/default-new/new_login_confirmation.php` — inline CSS
+- [ ] `application/views/frontend/default-new/notifications.php` — inline CSS
+- [ ] `application/views/frontend/default-new/payout_settings.php`
+- [ ] `application/views/frontend/default-new/privacy_policy.php` — configured content
+- [ ] `application/views/frontend/default-new/profile_menus.php`
+- [ ] `application/views/frontend/default-new/purchase_history.php`
+- [ ] `application/views/frontend/default-new/refund_policy.php` — configured content
+- [ ] `application/views/frontend/default-new/seo.php`
+- [ ] `application/views/frontend/default-new/shopping_cart.php`
+- [ ] `application/views/frontend/default-new/shopping_cart_inner_view.php`
+- [ ] `application/views/frontend/default-new/sign_up.php` — configured content
+- [ ] `application/views/frontend/default-new/terms_and_condition.php` — configured content
+- [ ] `application/views/frontend/default-new/update_user_photo.php` — inline CSS
+- [ ] `application/views/frontend/default-new/user_credentials.php`
+- [ ] `application/views/frontend/default-new/user_profile.php` — inline CSS
+- [ ] `application/views/frontend/default-new/verification_code.php` — inline CSS, configured content
+- [ ] `application/views/frontend/default-new/website_faq.php` — configured content
+- [ ] `application/views/frontend/default-new/wishlist_items.php`
+
+## index.html (1)
+
+- [ ] `application/views/index.html`
+
+## install (11)
+
+- [ ] `application/views/install/footer.php` — inline CSS
+- [ ] `application/views/install/index.php` — literal color candidate, inline CSS
+- [ ] `application/views/install/main/finalizing_setup.php` — literal color candidate, inline CSS
+- [ ] `application/views/install/main/step0.php` — literal color candidate, inline CSS
+- [ ] `application/views/install/main/step1.php` — literal color candidate, inline CSS
+- [ ] `application/views/install/main/step2.php` — literal color candidate, inline CSS
+- [ ] `application/views/install/main/step3.php` — literal color candidate, inline CSS
+- [ ] `application/views/install/main/step4.php` — literal color candidate, inline CSS
+- [ ] `application/views/install/main/success.php` — literal color candidate, inline CSS
+- [ ] `application/views/install/scripts.php`
+- [ ] `application/views/install/styles.php` — token loader
+
+## lessons (13)
+
+- [ ] `application/views/lessons/bottom_tabs.php` — inline CSS
+- [ ] `application/views/lessons/certificate_progress.php` — literal color candidate
+- [ ] `application/views/lessons/general_course_content_body.php` — inline CSS, embedded content, configured content
+- [ ] `application/views/lessons/includes_bottom.php`
+- [ ] `application/views/lessons/includes_top.php` — token loader
+- [ ] `application/views/lessons/index.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/lessons/pdf_canvas.php` — literal color candidate, inline CSS, configured content
+- [ ] `application/views/lessons/plyr_config.php` — literal color candidate, inline CSS
+- [ ] `application/views/lessons/quiz_answer_sheet.php`
+- [ ] `application/views/lessons/quiz_result.php` — literal color candidate, inline CSS
+- [ ] `application/views/lessons/quiz_view.php` — inline CSS
+- [ ] `application/views/lessons/scorm_course_content_body.php` — literal color candidate, inline CSS, embedded content
+- [ ] `application/views/lessons/sidebar.php` — inline CSS
+
+## mobile (13)
+
+- [ ] `application/views/mobile/includes_bottom.php`
+- [ ] `application/views/mobile/includes_top.php` — token loader
+- [ ] `application/views/mobile/index.php`
+- [ ] `application/views/mobile/live_class.php` — literal color candidate, inline CSS
+- [ ] `application/views/mobile/payment_gateway.php` — literal color candidate, inline CSS
+- [ ] `application/views/mobile/payment_model.php`
+- [ ] `application/views/mobile/quiz.php` — literal color candidate, inline CSS
+- [ ] `application/views/mobile/quiz_answer_sheet.php`
+- [ ] `application/views/mobile/quiz_result.php`
+- [ ] `application/views/mobile/quiz_view.php` — inline CSS
+- [ ] `application/views/mobile/razorpay/razorpay_checkout.php` — literal color candidate, inline CSS
+- [ ] `application/views/mobile/shopping_cart.php` — literal color candidate, inline CSS
+- [ ] `application/views/mobile/stripe/stripe_payment_gateway_form.php` — inline CSS
+
+## payment-global (20)
+
+- [ ] `application/views/payment-global/aamarpay/payment_form.php` — literal color candidate, inline CSS
+- [ ] `application/views/payment-global/bkash/payment_form.php` — literal color candidate, inline CSS
+- [ ] `application/views/payment-global/cashfree/payment_form.php`
+- [ ] `application/views/payment-global/doku/payment_form.php`
+- [ ] `application/views/payment-global/flutterwave/payment_form.php` — literal color candidate, inline CSS
+- [ ] `application/views/payment-global/go_back_to_mobile_app.php` — inline CSS
+- [ ] `application/views/payment-global/includes_bottom.php`
+- [ ] `application/views/payment-global/includes_top.php` — token loader
+- [ ] `application/views/payment-global/index.php` — configured content
+- [ ] `application/views/payment-global/maxicash/payment_form.php` — literal color candidate, inline CSS
+- [ ] `application/views/payment-global/pagseguro/payment_form.php`
+- [ ] `application/views/payment-global/payment_gateway.php`
+- [ ] `application/views/payment-global/paypal/payment_form.php`
+- [ ] `application/views/payment-global/payu/payment_form.php`
+- [ ] `application/views/payment-global/razorpay/payment_form.php`
+- [ ] `application/views/payment-global/skrill/payment_form.php`
+- [ ] `application/views/payment-global/sslcommerz/payment_form.php`
+- [ ] `application/views/payment-global/stripe/payment_form.php`
+- [ ] `application/views/payment-global/tazapay/payment_form.php` — literal color candidate, inline CSS
+- [ ] `application/views/payment-global/xendit/payment_form.php`
+
+## Controller entry candidates
+
+Classify each candidate as a rendered page, fragment, redirect, action, API, or other output. Record real URLs with seeded IDs or slugs and the applicable role.
+
+### `application/controllers/Admin.php`
+
+- [ ] `index` (line 23)
+- [ ] `dashboard` (line 32)
+- [ ] `categories` (line 42)
+- [ ] `category_form` (line 85)
+- [ ] `sub_categories_by_category_id` (line 111)
+- [ ] `sub_category_form` (line 121)
+- [ ] `instructors` (line 142)
+- [ ] `instructor_form` (line 168)
+- [ ] `users` (line 190)
+- [ ] `server_side_users_data` (line 216)
+- [ ] `server_side_instructors_data` (line 314)
+- [ ] `add_shortcut_student` (line 426)
+- [ ] `user_form` (line 440)
+- [ ] `enrol_history` (line 462)
+- [ ] `learner_progress` (line 488)
+- [ ] `enrol_student` (line 547)
+- [ ] `shortcut_enrol_student` (line 565)
+- [ ] `admin_revenue` (line 577)
+- [ ] `instructor_revenue` (line 603)
+- [ ] `invoice` (line 618)
+- [ ] `enrol_history_delete` (line 629)
+- [ ] `purchase_history` (line 643)
+- [ ] `system_settings` (line 654)
+- [ ] `frontend_settings` (line 687)
+- [ ] `payment_settings` (line 791)
+- [ ] `notification_settings` (line 816)
+- [ ] `edit_email_template` (line 862)
+- [ ] `social_login_settings` (line 876)
+- [ ] `instructor_settings` (line 896)
+- [ ] `theme_settings` (line 917)
+- [ ] `theme_actions` (line 931)
+- [ ] `courses` (line 961)
+- [ ] `get_courses` (line 982)
+- [ ] `pending_courses` (line 1209)
+- [ ] `course_actions` (line 1223)
+- [ ] `course_form` (line 1261)
+- [ ] `duplicate_course` (line 1298)
+- [ ] `change_course_status` (line 1318)
+- [ ] `change_course_status_for_admin` (line 1340)
+- [ ] `sections` (line 1350)
+- [ ] `lessons` (line 1372)
+- [ ] `watch_video` (line 1402)
+- [ ] `manage_language` (line 1417)
+- [ ] `update_phrase_with_ajax` (line 1474)
+- [ ] `message` (line 1483)
+- [ ] `manage_profile` (line 1516)
+- [ ] `paypal_checkout_for_instructor_revenue` (line 1538)
+- [ ] `paypal_payment` (line 1560)
+- [ ] `stripe_checkout_for_instructor_revenue` (line 1582)
+- [ ] `stripe_payment` (line 1602)
+- [ ] `razorpay_checkout_for_instructor_revenue` (line 1619)
+- [ ] `preview` (line 1639)
+- [ ] `quizes` (line 1657)
+- [ ] `quiz_questions` (line 1680)
+- [ ] `about` (line 1697)
+- [ ] `install_theme` (line 1709)
+- [ ] `available_addon` (line 1769)
+- [ ] `addon` (line 1806)
+- [ ] `instructor_application` (line 1871)
+- [ ] `instructor_payout` (line 1891)
+- [ ] `admins` (line 1918)
+- [ ] `admin_form` (line 1953)
+- [ ] `permissions` (line 1976)
+- [ ] `assign_permission` (line 2013)
+- [ ] `remove_an_instructor` (line 2026)
+- [ ] `coupons` (line 2072)
+- [ ] `coupon_form` (line 2110)
+- [ ] `quiz_fields_type_wize` (line 2136)
+- [ ] `ajax_get_sub_category` (line 2142)
+- [ ] `ajax_get_section` (line 2149)
+- [ ] `ajax_get_video_details` (line 2155)
+- [ ] `ajax_sort_section` (line 2162)
+- [ ] `ajax_sort_lesson` (line 2167)
+- [ ] `ajax_sort_question` (line 2172)
+- [ ] `add_blog_category` (line 2179)
+- [ ] `edit_blog_category` (line 2184)
+- [ ] `blog_category` (line 2190)
+- [ ] `add_blog` (line 2219)
+- [ ] `edit_blog` (line 2226)
+- [ ] `blog` (line 2234)
+- [ ] `instructors_pending_blog` (line 2259)
+- [ ] `blog_settings` (line 2276)
+- [ ] `save_valid_purchase_code` (line 2290)
+- [ ] `drip_content_settings` (line 2308)
+- [ ] `custom_page` (line 2321)
+- [ ] `add_custom_page` (line 2347)
+- [ ] `edit_custom_page` (line 2354)
+- [ ] `academy_cloud` (line 2363)
+- [ ] `data_center` (line 2380)
+- [ ] `get_select2_user_data` (line 2390)
+- [ ] `get_select2_instructor_data` (line 2403)
+- [ ] `get_select2_course_for_enroll` (line 2417)
+- [ ] `get_select2_general_course` (line 2432)
+- [ ] `instructor_payment` (line 2446)
+- [ ] `open_ai_settings` (line 2452)
+- [ ] `ai_img_download` (line 2463)
+- [ ] `chat_gpt` (line 2469)
+- [ ] `gpt_assistant` (line 2479)
+- [ ] `upload_theme` (line 2485)
+- [ ] `delete_course_review` (line 2494)
+- [ ] `get_my_notification` (line 2505)
+- [ ] `language_import` (line 2535)
+- [ ] `export_language` (line 2580)
+- [ ] `subscribed_user` (line 2592)
+- [ ] `newsletter_add_form` (line 2678)
+- [ ] `newsletter_edit_form` (line 2683)
+- [ ] `newsletter_send_form` (line 2689)
+- [ ] `newsletters` (line 2695)
+- [ ] `newsletter_history` (line 2783)
+- [ ] `newsletter_statistics` (line 2882)
+- [ ] `student_academic_progress` (line 2887)
+- [ ] `student_academic_quiz_result` (line 2896)
+- [ ] `home_page_layout` (line 2910)
+- [ ] `student_certificate` (line 2918)
+- [ ] `contact` (line 2936)
+- [ ] `update_language_direction` (line 3069)
+- [ ] `resource_files` (line 3088)
+- [ ] `cronjob` (line 3136)
+- [ ] `wasabi_settings` (line 3224)
+- [ ] `bbb_live_class_settings` (line 3277)
+- [ ] `save_bbb_meeting` (line 3296)
+- [ ] `start_bbb_meeting` (line 3316)
+- [ ] `change_course_author` (line 3372)
+- [ ] `seo_settings` (line 3389)
+- [ ] `sitemap_settings` (line 3403)
+- [ ] `export_enrol_history_csv` (line 3470)
+- [ ] `enrol_list` (line 3518)
+- [ ] `export_admins_csv` (line 3529)
+- [ ] `review_add` (line 3573)
+- [ ] `review_edit` (line 3577)
+- [ ] `review` (line 3582)
+- [ ] `badges` (line 3592)
+- [ ] `badges_add` (line 3643)
+- [ ] `badges_edit` (line 3649)
+- [ ] `custom_field_add` (line 3661)
+- [ ] `custom_field_section_update` (line 3851)
+- [ ] `custom_field_section_delete` (line 3874)
+- [ ] `custom_field_item_update` (line 3883)
+- [ ] `custom_field_item_delete` (line 3957)
+- [ ] `custom_field_section_sort_update` (line 3992)
+- [ ] `home_page_builder` (line 4019)
+- [ ] `gpli_assign_course_thumbnails` (line 4102)
+- [ ] `gpli_section_background_update` (line 4216)
+- [ ] `gpli_section_background_remove` (line 4227)
+- [ ] `home_page` (line 4238)
+- [ ] `preview_home_page` (line 4244)
+- [ ] `home_page_layout_update` (line 4250)
+- [ ] `encode_some_special_characters` (line 4469)
+- [ ] `decode_some_special_characters` (line 4485)
+- [ ] `decodeContent` (line 4502)
+- [ ] `upload_page_builder_image` (line 4511)
+- [ ] `developer_file_elements` (line 4530)
+- [ ] `getDomSelectorPath` (line 4596)
+- [ ] `announcements` (line 4624)
+- [ ] `announcement_form` (line 4650)
+
+### `application/controllers/Api.php`
+
+- [ ] `web_redirect_to_buy_course_get` (line 23)
+- [ ] `top_courses_get` (line 88)
+- [ ] `app_logo_get` (line 94)
+- [ ] `all_categories_get` (line 107)
+- [ ] `categories_get` (line 113)
+- [ ] `sub_categories_get` (line 119)
+- [ ] `category_wise_course_get` (line 126)
+- [ ] `languages_get` (line 133)
+- [ ] `filter_course_get` (line 139)
+- [ ] `courses_by_search_string_get` (line 145)
+- [ ] `system_settings_get` (line 151)
+- [ ] `login_get` (line 157)
+- [ ] `new_login_confirmation_post` (line 167)
+- [ ] `signup_post` (line 222)
+- [ ] `verify_email_address_post` (line 229)
+- [ ] `resend_verification_code_post` (line 236)
+- [ ] `course_object_by_id_get` (line 242)
+- [ ] `my_courses_get` (line 248)
+- [ ] `my_wishlist_get` (line 262)
+- [ ] `sections_get` (line 276)
+- [ ] `section_wise_lessons_get` (line 290)
+- [ ] `toggle_wishlist_items_get` (line 303)
+- [ ] `lesson_details_get` (line 314)
+- [ ] `course_details_by_id_get` (line 329)
+- [ ] `submit_quiz_post` (line 347)
+- [ ] `save_course_progress_get` (line 382)
+- [ ] `upload_user_image_post` (line 395)
+- [ ] `update_userdata_post` (line 420)
+- [ ] `update_password_post` (line 436)
+- [ ] `userdata_get` (line 451)
+- [ ] `certificate_addon_get` (line 465)
+- [ ] `GetTokenData` (line 482)
+- [ ] `token_data_get` (line 502)
+- [ ] `enroll_free_course_get` (line 524)
+- [ ] `addon_status_get` (line 571)
+- [ ] `zoom_live_class_get` (line 581)
+- [ ] `forgot_password_post` (line 615)
+- [ ] `bundles_get` (line 640)
+- [ ] `bundle_courses_get` (line 646)
+- [ ] `my_bundles_get` (line 662)
+- [ ] `my_bundle_course_details_get` (line 675)
+- [ ] `web_redirect_to_buy_bundle_get` (line 688)
+- [ ] `forum_add_questions_post` (line 729)
+- [ ] `forum_questions_get` (line 741)
+- [ ] `search_forum_questions_get` (line 750)
+- [ ] `add_questions_reply_post` (line 759)
+- [ ] `forum_child_questions_get` (line 771)
+- [ ] `forum_question_vote_get` (line 780)
+- [ ] `forum_question_delete_get` (line 791)
+- [ ] `update_watch_history_post` (line 804)
+- [ ] `quiz_mobile_web_view_get` (line 814)
+- [ ] `zoom_mobile_web_view_get` (line 822)
+- [ ] `lesson_mobile_web_view_get` (line 829)
+- [ ] `account_disable_post` (line 836)
+
+### `application/controllers/Api_files.php`
+
+- [ ] `file_content_get` (line 27)
+- [ ] `offline_video_for_mobile_app_get` (line 227)
+- [ ] `get_remote_file_size` (line 245)
+- [ ] `get_html_from_docx_file` (line 255)
+- [ ] `token_data_get` (line 312)
+
+### `application/controllers/Api_instructor.php`
+
+- [ ] `token_data_get` (line 23)
+- [ ] `login_post` (line 44)
+- [ ] `change_password_post` (line 52)
+- [ ] `forgot_password_post` (line 70)
+- [ ] `change_profile_photo_post` (line 94)
+- [ ] `userdata_get` (line 107)
+- [ ] `update_userdata_post` (line 121)
+- [ ] `courses_get` (line 135)
+- [ ] `add_course_form_get` (line 147)
+- [ ] `add_course_post` (line 153)
+- [ ] `edit_course_form_get` (line 165)
+- [ ] `update_course_post` (line 177)
+- [ ] `update_course_status_get` (line 190)
+- [ ] `edit_course_requirements_get` (line 204)
+- [ ] `update_course_requirements_post` (line 216)
+- [ ] `edit_course_outcomes_get` (line 228)
+- [ ] `update_course_outcomes_post` (line 240)
+- [ ] `delete_course_get` (line 252)
+- [ ] `section_and_lesson_get` (line 265)
+- [ ] `sections_get` (line 277)
+- [ ] `add_section_post` (line 289)
+- [ ] `update_section_post` (line 301)
+- [ ] `delete_section_post` (line 313)
+- [ ] `add_lesson_post` (line 327)
+- [ ] `lesson_all_data_get` (line 338)
+- [ ] `update_lesson_post` (line 347)
+- [ ] `delete_lesson_get` (line 359)
+- [ ] `sort_post` (line 371)
+- [ ] `course_pricing_form_get` (line 385)
+- [ ] `update_course_price_post` (line 397)
+- [ ] `sales_report_get` (line 409)
+- [ ] `details_of_sales_report_get` (line 420)
+- [ ] `payout_report_get` (line 430)
+- [ ] `add_withdrawal_request_post` (line 441)
+- [ ] `delete_withdrawal_request_get` (line 453)
+- [ ] `live_class_get` (line 466)
+- [ ] `save_live_class_data_post` (line 477)
+- [ ] `addon_status_get` (line 488)
+- [ ] `live_class_settings_get` (line 498)
+- [ ] `live_class_settings_post` (line 509)
+
+### `application/controllers/Blog.php`
+
+- [ ] `index` (line 24)
+- [ ] `blogs` (line 34)
+- [ ] `categories` (line 94)
+- [ ] `details` (line 102)
+- [ ] `add_blog_comment` (line 117)
+- [ ] `update_blog_comment` (line 129)
+- [ ] `delete_comment` (line 141)
+
+### `application/controllers/Checker.php`
+
+- [ ] `get_class` (line 23)
+- [ ] `get_image_url` (line 41)
+- [ ] `get_system_info` (line 53)
+- [ ] `get_students_of_class` (line 62)
+- [ ] `get_student_profile_information` (line 112)
+- [ ] `get_student_mark_information` (line 155)
+- [ ] `get_teachers` (line 184)
+- [ ] `get_teacher_profile` (line 202)
+- [ ] `get_parents` (line 212)
+- [ ] `get_parent_profile` (line 229)
+- [ ] `get_accounting` (line 239)
+- [ ] `get_attendance` (line 255)
+- [ ] `get_class_routine` (line 292)
+- [ ] `get_subject_name` (line 323)
+- [ ] `get_event_calendar` (line 333)
+- [ ] `get_exam_list` (line 341)
+- [ ] `get_subject_of_class` (line 354)
+- [ ] `get_marks` (line 383)
+- [ ] `get_loggedin_user_profile` (line 414)
+- [ ] `update_user_image` (line 431)
+- [ ] `update_user_info` (line 443)
+- [ ] `update_user_password` (line 457)
+- [ ] `get_total_summary` (line 484)
+- [ ] `getdata` (line 506)
+- [ ] `get_children_of_parent` (line 516)
+- [ ] `get_child_class_routine` (line 525)
+- [ ] `get_child_exam_marks` (line 528)
+- [ ] `get_child_accounting` (line 531)
+- [ ] `get_own_subjects` (line 535)
+- [ ] `get_own_class_routine` (line 538)
+- [ ] `get_own_marks` (line 541)
+- [ ] `get_single_student_accounting` (line 544)
+- [ ] `login` (line 553)
+- [ ] `reset_password` (line 661)
+- [ ] `get_notices` (line 721)
+- [ ] `get_message_threads` (line 737)
+- [ ] `get_messages` (line 763)
+- [ ] `get_receivers` (line 782)
+- [ ] `send_new_message` (line 841)
+- [ ] `send_reply` (line 870)
+- [ ] `validate_auth_key` (line 886)
+
+### `application/controllers/Data_center.php`
+
+- [ ] `index` (line 43)
+- [ ] `demo_importer` (line 52)
+- [ ] `exportDatabase` (line 133)
+- [ ] `backup_sql` (line 138)
+- [ ] `run_demo_sql` (line 198)
+- [ ] `extract_zip_file` (line 223)
+- [ ] `download_zip_file` (line 236)
+- [ ] `delete_dir` (line 249)
+- [ ] `deleteDir` (line 260)
+- [ ] `create_backup_file` (line 278)
+- [ ] `copyAllFilesAndFolders` (line 290)
+- [ ] `language_import` (line 320)
+
+### `application/controllers/Files.php`
+
+- [ ] `index` (line 29)
+- [ ] `get_remote_file_size` (line 163)
+- [ ] `get_html_from_docx_file` (line 174)
+
+### `application/controllers/Home.php`
+
+- [ ] `index` (line 37)
+- [ ] `home` (line 42)
+- [ ] `shopping_cart` (line 58)
+- [ ] `courses` (line 76)
+- [ ] `set_layout_to_session` (line 214)
+- [ ] `course` (line 222)
+- [ ] `instructor_page` (line 259)
+- [ ] `toggle_following` (line 347)
+- [ ] `my_courses` (line 357)
+- [ ] `my_messages` (line 368)
+- [ ] `my_notifications` (line 390)
+- [ ] `my_wishlist` (line 397)
+- [ ] `purchase_history` (line 409)
+- [ ] `profile` (line 432)
+- [ ] `instructor_following` (line 453)
+- [ ] `update_profile` (line 468)
+- [ ] `handleWishList` (line 494)
+- [ ] `toggleWishlistItems` (line 511)
+- [ ] `handleCartItems` (line 544)
+- [ ] `handle_cart_items` (line 566)
+- [ ] `handle_buy_now` (line 611)
+- [ ] `handleCartItemForBuyNowButton` (line 645)
+- [ ] `refreshWishList` (line 664)
+- [ ] `apply_coupon` (line 669)
+- [ ] `refreshShoppingCart` (line 680)
+- [ ] `refreshShoppingCartItem` (line 687)
+- [ ] `isLoggedIn` (line 693)
+- [ ] `payment` (line 706)
+- [ ] `paypal_checkout` (line 718)
+- [ ] `paypal_payment` (line 731)
+- [ ] `stripe_checkout` (line 764)
+- [ ] `stripe_payment` (line 779)
+- [ ] `razorpay_checkout` (line 818)
+- [ ] `razorpay_payment` (line 832)
+- [ ] `lesson` (line 886)
+- [ ] `pdf_canvas` (line 969)
+- [ ] `my_courses_by_category` (line 982)
+- [ ] `search` (line 990)
+- [ ] `my_courses_by_search_string` (line 1027)
+- [ ] `get_my_wishlists_by_search_string` (line 1035)
+- [ ] `reload_my_wishlists` (line 1043)
+- [ ] `get_course_details` (line 1050)
+- [ ] `rate_course` (line 1057)
+- [ ] `remove_rating` (line 1081)
+- [ ] `about_us` (line 1093)
+- [ ] `terms_and_condition` (line 1100)
+- [ ] `refund_policy` (line 1108)
+- [ ] `privacy_policy` (line 1113)
+- [ ] `cookie_policy` (line 1119)
+- [ ] `dashboard` (line 1127)
+- [ ] `create_course` (line 1145)
+- [ ] `edit_course` (line 1156)
+- [ ] `course_action` (line 1173)
+- [ ] `sections` (line 1198)
+- [ ] `manage_lessons` (line 1226)
+- [ ] `lesson_editing_form` (line 1244)
+- [ ] `download` (line 1257)
+- [ ] `get_enrolled_to_free_course` (line 1279)
+- [ ] `login` (line 1299)
+- [ ] `sign_up` (line 1309)
+- [ ] `forgot_password` (line 1321)
+- [ ] `submit_quiz` (line 1333)
+- [ ] `save_quiz_result` (line 1379)
+- [ ] `invoice` (line 1428)
+- [ ] `compare` (line 1444)
+- [ ] `page_not_found` (line 1462)
+- [ ] `check_course_progress` (line 1470)
+- [ ] `site_language` (line 1476)
+- [ ] `switch_language` (line 1484)
+- [ ] `course_purchase` (line 1493)
+- [ ] `get_enrolled_to_free_course_mobile` (line 1534)
+- [ ] `payment_success_mobile` (line 1542)
+- [ ] `payment_gateway_mobile` (line 1563)
+- [ ] `go_course_playing_page` (line 1571)
+- [ ] `preview_free_lesson` (line 1584)
+- [ ] `course_preview` (line 1590)
+- [ ] `play_lesson` (line 1596)
+- [ ] `closed_back_to_mobile_ber` (line 1622)
+- [ ] `update_watch_history_with_duration` (line 1629)
+- [ ] `update_watch_history_manually` (line 1635)
+- [ ] `save_scorm_progress` (line 1643)
+- [ ] `set_flashdata_for_js` (line 1701)
+- [ ] `view_answer_sheet` (line 1706)
+- [ ] `quiz_mobile_web_view` (line 1716)
+- [ ] `live_class_mobile_web_view` (line 1734)
+- [ ] `check_gift_user` (line 1755)
+- [ ] `course_payment` (line 1776)
+- [ ] `gift_to_user_id` (line 1812)
+- [ ] `subscribe_to_our_newsletter` (line 1828)
+- [ ] `get_compare_course_select2` (line 1864)
+- [ ] `faq` (line 1889)
+- [ ] `contact_us` (line 1896)
+- [ ] `dark_and_light_mode` (line 1949)
+- [ ] `coupon_offer_100_percent` (line 1960)
+- [ ] `get_my_notification` (line 1985)
+- [ ] `course_playing_page_layout` (line 2013)
+- [ ] `become_an_instructor` (line 2024)
+- [ ] `payout_settings` (line 2065)
+- [ ] `lesson_mobile_web_view_get` (line 2085)
+- [ ] `offline_video_for_mobile_app` (line 2127)
+- [ ] `account_disable` (line 2142)
+- [ ] `sendEmailToAssignedAddresses` (line 2168)
+- [ ] `badges` (line 2178)
+- [ ] `posts` (line 2305)
+- [ ] `toggle_like` (line 2353)
+- [ ] `shared_post` (line 2371)
+- [ ] `add_comment` (line 2398)
+- [ ] `toggle_save` (line 2417)
+- [ ] `my_posts` (line 2436)
+- [ ] `saved_posts` (line 2449)
+- [ ] `remove_saved_post` (line 2463)
+- [ ] `download_announcement_file` (line 2480)
+
+### `application/controllers/Install.php`
+
+- [ ] `index` (line 18)
+- [ ] `step0` (line 25)
+- [ ] `step1` (line 33)
+- [ ] `step2` (line 41)
+- [ ] `validate_purchase_code` (line 52)
+- [ ] `step3` (line 71)
+- [ ] `check_purchase_code_verification` (line 111)
+- [ ] `check_database_connection` (line 123)
+- [ ] `step4` (line 138)
+- [ ] `configure_database` (line 157)
+- [ ] `run_blank_sql` (line 168)
+- [ ] `finalizing_setup` (line 191)
+- [ ] `success` (line 224)
+- [ ] `configure_routes` (line 249)
+
+### `application/controllers/Login.php`
+
+- [ ] `index` (line 25)
+- [ ] `sign_up` (line 35)
+- [ ] `validate_login` (line 48)
+- [ ] `new_login_confirmation` (line 72)
+- [ ] `fb_validate_login` (line 110)
+- [ ] `register` (line 121)
+- [ ] `logout` (line 223)
+- [ ] `forgot_password_request` (line 230)
+- [ ] `forgot_password` (line 242)
+- [ ] `change_password` (line 260)
+- [ ] `resend_verification_code` (line 308)
+- [ ] `verify_email_address` (line 317)
+- [ ] `check_recaptcha_with_ajax` (line 344)
+
+### `application/controllers/Modal.php`
+
+- [ ] `popup` (line 23)
+
+### `application/controllers/Page.php`
+
+- [ ] `index` (line 23)
+
+### `application/controllers/Payment.php`
+
+- [ ] `index` (line 32)
+- [ ] `success_course_payment` (line 39)
+- [ ] `success_instructor_payment` (line 83)
+- [ ] `create_stripe_payment` (line 126)
+- [ ] `create_ssl_commerz_payment` (line 233)
+- [ ] `create_payu_payment` (line 325)
+- [ ] `create_xendit_payment` (line 420)
+- [ ] `create_doku_payment` (line 479)
+- [ ] `doku_ipn` (line 556)
+- [ ] `pay_by_cashfree` (line 612)
+- [ ] `create_maxicash_payment` (line 675)
+- [ ] `aamarpay_payment_link` (line 719)
+- [ ] `tazapay_payment_form` (line 775)
+
+### `application/controllers/Sign_up.php`
+
+- [ ] `index` (line 24)
+- [ ] `verification_code` (line 41)
+
+### `application/controllers/Sitemap.php`
+
+- [ ] `index` (line 23)
+
+### `application/controllers/Updater.php`
+
+- [ ] `index` (line 34)
+- [ ] `update` (line 44)
+
+### `application/controllers/User.php`
+
+- [ ] `instructor_approval` (line 30)
+- [ ] `get_protected_routes` (line 41)
+- [ ] `instructor_authorization` (line 53)
+- [ ] `index` (line 65)
+- [ ] `dashboard` (line 74)
+- [ ] `courses` (line 85)
+- [ ] `get_courses` (line 102)
+- [ ] `course_actions` (line 277)
+- [ ] `course_form` (line 320)
+- [ ] `payout_settings` (line 348)
+- [ ] `sales_report` (line 368)
+- [ ] `learner_progress` (line 390)
+- [ ] `preview` (line 454)
+- [ ] `sections` (line 470)
+- [ ] `lessons` (line 492)
+- [ ] `quizes` (line 532)
+- [ ] `quiz_questions` (line 555)
+- [ ] `manage_profile` (line 576)
+- [ ] `invoice` (line 581)
+- [ ] `become_an_instructor` (line 593)
+- [ ] `payout_report` (line 624)
+- [ ] `withdrawal` (line 662)
+- [ ] `ajax_get_video_details` (line 679)
+- [ ] `quiz_fields_type_wize` (line 689)
+- [ ] `is_the_course_belongs_to_current_instructor` (line 696)
+- [ ] `ajax_sort_section` (line 756)
+- [ ] `ajax_sort_lesson` (line 761)
+- [ ] `ajax_sort_question` (line 766)
+- [ ] `remove_an_instructor` (line 775)
+- [ ] `add_blog` (line 819)
+- [ ] `edit_blog` (line 826)
+- [ ] `blog` (line 834)
+- [ ] `pending_blog` (line 871)
+- [ ] `check_validity` (line 886)
+- [ ] `start_quiz` (line 901)
+- [ ] `submit_quiz_answer` (line 933)
+- [ ] `finish_quize_submission` (line 1020)
+- [ ] `ai_img_download` (line 1056)
+- [ ] `chat_gpt` (line 1062)
+- [ ] `gpt_assistant` (line 1072)
+- [ ] `student_academic_progress` (line 1078)
+- [ ] `student_academic_quiz_result` (line 1091)
+- [ ] `student_certificate` (line 1105)
+- [ ] `resource_files` (line 1125)
+- [ ] `save_bbb_meeting` (line 1174)
+- [ ] `start_bbb_meeting` (line 1198)
+- [ ] `join_bbb_meeting` (line 1246)
+- [ ] `custom_field_add` (line 1268)
+- [ ] `custom_field_section_update` (line 1458)
+- [ ] `custom_field_section_delete` (line 1481)
+- [ ] `custom_field_item_update` (line 1490)
+- [ ] `custom_field_item_delete` (line 1564)
+- [ ] `custom_field_section_sort_update` (line 1599)
+
+### `application/controllers/View.php`
+
+- [ ] `load` (line 20)
+
+### `application/controllers/addons/Certificate.php`
+
+- [ ] `position` (line 33)
+- [ ] `check_certificate_eligibility` (line 58)
+- [ ] `generate_certificate` (line 76)
+- [ ] `download` (line 81)
+- [ ] `settings` (line 97)
+- [ ] `check_addon_status` (line 115)
+- [ ] `get_certificate_url` (line 127)
+- [ ] `send_course_completion_mail` (line 134)
+- [ ] `certificate_progress` (line 140)
+
+### `application/controllers/addons/Scorm.php`
+
+- [ ] `add_curriculum` (line 15)
+- [ ] `upload_chunk` (line 31)
+- [ ] `remove_curriculum` (line 81)
+
+## Explicit aliases
+
+- [ ] `$route['default_controller'] = 'home';`
+- [ ] `$route['404_override']       = 'home/page_not_found';`
+- [ ] `$route['certificate/(:any)'] = "addons/certificate/generate_certificate/$1";`
+- [ ] `$route['course_bundles/(:any)']               = "addons/course_bundles/index/$1";`
+- [ ] `$route['course_bundles']                      = "addons/course_bundles";`
+- [ ] `$route['course_bundles/search/(:any)']        = "addons/course_bundles/search/$1";`
+- [ ] `$route['course_bundles/search/(:any)/(:any)'] = "addons/course_bundles/search/$1/$1";`
+- [ ] `$route['bundle_details/(:any)/(:any)']        = "addons/course_bundles/bundle_details/$1";`
+- [ ] `$route['bundle_details/(:any)']               = "addons/course_bundles/bundle_details/$1/$1";`
+- [ ] `$route['course_bundles/buy/(:any)']           = "addons/course_bundles/buy/$1";`
+- [ ] `$route['home/my_bundles']                     = "addons/course_bundles/my_bundles";`
+- [ ] `$route['home/bundle_invoice/(:any)']          = "addons/course_bundles/invoice/$1";`
+- [ ] `$route['ebook/ebook_details/(:any)/(:any)'] = "addons/ebook/ebook_details/$1/$2";`
+- [ ] `$route['ebook']                             = "addons/ebook/ebooks";`
+- [ ] `$route['ebook_manager/all_ebooks']          = "addons/ebook_manager/all_ebooks";`
+- [ ] `$route['ebook_manager/add_ebook']           = "addons/ebook_manager/add_ebook";`
+- [ ] `$route['ebook_manager/payment_history']     = "addons/ebook_manager/payment_history";`
+- [ ] `$route['ebook_manager/category']            = "addons/ebook_manager/category";`
+- [ ] `$route['ebook/buy/(:any)']                  = "addons/ebook/buy/$1";`
+- [ ] `$route['home/my_ebooks']                    = "addons/ebook/my_ebooks";`
+- [ ] `$route['blogs']        = "blog/blogs";`
+- [ ] `$route['blogs/(:any)'] = "blog/blogs/$1";`
+- [ ] `$route['page/(:any)'] = "page/index/$1";`
+- [ ] `$route['tutors']                    = "addons/tutor_booking/list_of_tuitions";`
+- [ ] `$route['tutors/(:any)']             = "addons/tutor_booking/list_of_tuitions/$1";`
+- [ ] `$route['tutor/filter']              = "addons/tutor_booking/list_of_tuitions_after_filter";`
+- [ ] `$route['schedules_bookings/(:any)'] = "addons/tutor_booking/tutor_details/$1";`
+- [ ] `$route['my_bookings']               = "addons/tutor_booking/booked_schedules_student";`
+- [ ] `$route['sitemap.xml'] = 'sitemap';`
+- [ ] `$route['translate_uri_dashes'] = false;`
+
+## Upgrade overlays and standalone HTML candidates
+
+Classify product pages, shipped upgrade replacements, and non-product reference or vendor demos.
+
+- [ ] `assets/design-system/dropdown-bs5-verify.html`
+- [ ] `assets/design-system/email-preview.html`
+- [ ] `assets/design-system/reference/dashboard.html`
+- [ ] `assets/design-system/reference/geeseprojdesignsystem.html`
+- [ ] `assets/design-system/reference/login.html`
+- [ ] `assets/design-system/scratch-test.html`
+- [ ] `assets/frontend/default-new/css/fonts/custom/epilogue/demo.html`
+- [ ] `assets/frontend/default-new/css/fonts/custom/general-sans/demo.html`
+- [ ] `assets/frontend/default-new/css/fonts/custom/roboto/demo.html`
+- [ ] `assets/frontend/default-new/css/fonts/custom/sf-pro-display/demo.html`
+- [ ] `assets/global/uicons-regular-rounded/how-to-use.html`
+- [ ] `assets/global/uicons-regular-rounded/webfonts/uicons-regular-rounded.html`
+- [ ] `docs/superpowers/plans/2026-09-14-landing-page-ds-output-sample.html`
+- [ ] `docs/superpowers/plans/landing_page_preview.html`
+- [ ] `docs/superpowers/previews/landing-expected.html`
+- [ ] `geeseprojdesignsystem.html`
+- [ ] `update/update_7.2/application/views/backend/admin/announcement_add.php`
+- [ ] `update/update_7.2/application/views/backend/admin/announcement_edit.php`
+- [ ] `update/update_7.2/application/views/backend/admin/announcements.php`
+- [ ] `update/update_7.2/application/views/backend/admin/navigation.php`
+- [ ] `update/update_7.2/application/views/components/main/footer.php`
+- [ ] `update/update_7.2/application/views/components/main/footer2.php`
+- [ ] `update/update_7.2/application/views/frontend/default-new/community_comments.php`
+- [ ] `update/update_7.2/application/views/frontend/default-new/community_index.php`
+- [ ] `update/update_7.2/application/views/frontend/default-new/community_my_posts.php`
+- [ ] `update/update_7.2/application/views/frontend/default-new/community_saved_posts.php`
+- [ ] `update/update_7.2/application/views/frontend/default-new/community_scripts.php`
+- [ ] `update/update_7.2/application/views/frontend/default-new/community_shared_post.php`
+- [ ] `update/update_7.2/application/views/frontend/default-new/community_sidebar.php`
+- [ ] `update/update_7.2/application/views/frontend/default-new/footer.php`
+- [ ] `update/update_7.2/application/views/lessons/bottom_tabs.php`
+
+## Runtime reconciliation
+
+- [ ] Enumerate configured home variants, custom pages and generated builder sections from the test installation.
+- [ ] Enumerate installed add-ons, themes, gateway modes and embedded SCORM content. Add entries that are absent from the repository.
+- [ ] Expand URLs by role, access level and visual state. Include every modal, AJAX fragment, preview, failure state and gateway return.
+- [ ] Cross-check navigation, sitemap, explicit aliases and controller entry candidates. Record exact URL or opener and disposition.
+- [ ] Resolve all reachable app-owned rows with current visual evidence before claiming 100% page coverage.
+

@@ -60,7 +60,7 @@
   font-weight: 800;
   letter-spacing: -0.5px;
   line-height: 1.15;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin: 0;
 }
 
@@ -805,5 +805,5 @@
 .gp-ds .gp-catalog .courses-d-flex-text h5,
 .gp-ds .gp-catalog .courses-card-body:hover .courses-text h5,
 .gp-ds .gp-catalog-head h1 {
-  color: var(--gp-fg) !important;
+  color: var(--gp-heading) !important;
 }

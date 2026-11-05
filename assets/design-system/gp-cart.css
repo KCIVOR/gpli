@@ -73,7 +73,7 @@
   font-weight: 800;
   letter-spacing: -0.5px;
   line-height: 1.15;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin: 0;
 }
 
@@ -147,7 +147,7 @@
   font-size: 15px;
   font-weight: 700;
   line-height: 1.35;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin: 0 0 6px;
 }
 
@@ -224,7 +224,7 @@
   font-family: var(--gp-font-head);
   font-size: 16px;
   font-weight: 800;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin: 0 0 8px;
 }
 

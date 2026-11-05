@@ -33,14 +33,14 @@
 .gp-ds a.btn-primary,
 .gp-ds button.btn-primary,
 .gp-ds .btn-primary:visited {
-  --bs-btn-color: #fff;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-active-color: #fff;
-  --bs-btn-disabled-color: #fff;
-  background: var(--gp-primary);
-  background-color: var(--gp-primary);
-  border-color: var(--gp-primary);
-  color: #fff !important;
+  --bs-btn-color: var(--gp-on-action);
+  --bs-btn-hover-color: var(--gp-on-action);
+  --bs-btn-active-color: var(--gp-on-action);
+  --bs-btn-disabled-color: var(--gp-on-action);
+  background: var(--gp-action);
+  background-color: var(--gp-action);
+  border-color: var(--gp-action);
+  color: var(--gp-on-action) !important;
 }
 
 .gp-ds .btn-primary:hover,
@@ -53,16 +53,16 @@
 .gp-ds button.btn-primary:hover,
 .gp-ds button.btn-primary:focus,
 .gp-ds button.btn-primary:active {
-  background: var(--gp-accent);
-  background-color: var(--gp-accent);
-  border-color: var(--gp-accent);
-  color: #fff !important;
+  background: var(--gp-action-hover);
+  background-color: var(--gp-action-hover);
+  border-color: var(--gp-action-hover);
+  color: var(--gp-on-action) !important;
 }
 
 .gp-ds .btn-primary i,
 .gp-ds .btn-primary svg,
 .gp-ds .btn-primary svg path {
-  color: #fff !important;
+  color: var(--gp-on-action) !important;
   fill: currentColor !important;
 }
 
@@ -86,14 +86,14 @@
 .gp-ds .btn-outline,
 .gp-ds .btn-outline-primary {
   background: transparent;
-  border-color: var(--gp-accent);
-  color: var(--gp-accent);
+  border-color: var(--gp-outline-action);
+  color: var(--gp-outline-action);
 }
 
 .gp-ds .btn-outline:hover,
 .gp-ds .btn-outline-primary:hover {
-  background: var(--gp-accent);
-  color: #fff;
+  background: var(--gp-outline-action);
+  color: var(--gp-on-action);
 }
 
 .gp-ds .btn-quiet {
@@ -118,7 +118,7 @@
 .gp-ds button.btn-outline-primary:focus-visible,
 .gp-ds a.btn-quiet:focus-visible,
 .gp-ds button.btn-quiet:focus-visible {
-  outline: 3px solid var(--gp-primary);
+  outline: 3px solid var(--gp-focus-ring);
   outline-offset: 2px;
 }
 
@@ -361,6 +361,21 @@
 }
 
 /* ========== FORM FIELDS (Section 07) ========== */
+/* Bootstrap fields are the default control surface in admin, instructor and
+   student pages. Keep their values on the shared GPLI field roles. */
+.gp-ds .form-control,
+.gp-ds .form-select {
+  background-color: var(--gp-surface);
+  border-color: var(--gp-field-border);
+  color: var(--gp-fg);
+}
+
+.gp-ds .form-control:focus,
+.gp-ds .form-select:focus {
+  border-color: var(--gp-focus-ring);
+  box-shadow: 0 0 0 0.2rem rgb(37 99 235 / 20%);
+}
+
 /* Underline fields only when not Bootstrap/Hyper controls. */
 .gp-ds label:not(.col-form-label):not(.form-check-label):not(.custom-control-label):not(.custom-file-label):not(.btn) {
   font-family: var(--gp-font-head);
@@ -384,7 +399,7 @@
 .gp-ds input[type="search"]:not(.form-control) {
   width: 100%;
   border: none;
-  border-bottom: 1px solid var(--gp-border-strong);
+  border-bottom: 1px solid var(--gp-field-border);
   padding: 4px 0 12px;
   font-family: var(--gp-font-body);
   font-size: 15.5px;
@@ -401,7 +416,7 @@
 .gp-ds input[type="tel"]:not(.form-control):focus,
 .gp-ds input[type="search"]:not(.form-control):focus {
   outline: none;
-  border-bottom-color: var(--gp-gold-deep);
+  border-bottom-color: var(--gp-focus-ring);
   border-bottom-width: 2px;
 }
 
@@ -409,7 +424,7 @@
 .gp-ds textarea:not(.form-control):not(.note-codable) {
   width: 100%;
   border: none;
-  border-bottom: 1px solid var(--gp-border-strong);
+  border-bottom: 1px solid var(--gp-field-border);
   padding: 4px 0 12px;
   font-family: var(--gp-font-body);
   font-size: 15.5px;
@@ -426,7 +441,7 @@
 .gp-ds select:not(.form-control):not(.form-select):focus,
 .gp-ds textarea:not(.form-control):focus {
   outline: none;
-  border-bottom-color: var(--gp-gold-deep);
+  border-bottom-color: var(--gp-focus-ring);
   border-bottom-width: 2px;
 }
 
@@ -436,12 +451,19 @@
   border-bottom-color: var(--gp-danger);
 }
 
+.gp-ds input::placeholder,
+.gp-ds textarea::placeholder {
+  color: var(--gp-placeholder);
+  opacity: 1;
+}
+
 /* Select2 is leftover Hyper JS — restyle with tokens only (dropdown appends to body) */
 .gp-ds .select2-container--default .select2-selection--single,
 .gp-ds .select2-container--default .select2-selection--multiple,
 .gp-ds .select2-container .select2-selection--multiple {
   background-color: var(--gp-surface) !important;
-  border: 1px solid var(--gp-border) !important;
+  border: 1px solid var(--gp-field-border) !important;
+  border-color: var(--gp-field-border) !important;
   border-radius: var(--gp-radius) !important;
   min-height: 38px;
   color: var(--gp-fg);
@@ -460,7 +482,8 @@
 
 .gp-ds .select2-dropdown {
   background: var(--gp-surface);
-  border: 1px solid var(--gp-border);
+  border: 1px solid var(--gp-field-border);
+  border-color: var(--gp-field-border);
   border-radius: var(--gp-radius);
   box-shadow: var(--gp-shadow-card);
   color: var(--gp-fg);

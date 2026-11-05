@@ -8,7 +8,7 @@
 <!-- Animation CSS -->
 <link rel="stylesheet" href="<?php echo site_url('assets/playing-page/') ?>css/animate.min.css" />
 <!-- Main CSS -->
-<link href="<?php echo site_url('assets/playing-page/') ?>css/style.css" rel="stylesheet" />
+<link href="<?php echo site_url('assets/playing-page/') ?>css/style.css?v=gpli-palette-3" rel="stylesheet" />
 
 <?php if(addon_status('certificate')): ?>
 	<!-- Progress Bar Css -->
@@ -27,14 +27,14 @@
 
 <link rel="stylesheet" href="<?php echo base_url() . 'assets/frontend/default-new/summernote-0.8.20-dist/summernote-lite.min.css'; ?>">
 
-<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=no-system-1"></script>
+<script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=gpli-palette-2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css') . '?v=color-bridge-1'; ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-base.css'); ?>">
-<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-components-core.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-tokens.css') . '?v=gpli-palette-2'; ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-base.css') . '?v=gpli-palette-2'; ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-components-core.css') . '?v=gpli-palette-2'; ?>">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-shell.css'); ?>?v=lesson-topbar-3">
 <link rel="stylesheet" href="<?php echo base_url('assets/design-system/gp-dark-surfaces.css'); ?>">
-<script src="<?php echo base_url('assets/design-system/gp-theme-toggle.js'); ?>?v=no-system-1" defer></script>
+<script src="<?php echo base_url('assets/design-system/gp-theme-toggle.js'); ?>?v=gpli-palette-2" defer></script>
 
 <script src="<?php echo base_url('assets/backend/js/jquery-3.3.1.min.js'); ?>"></script>

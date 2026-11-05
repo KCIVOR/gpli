@@ -51,8 +51,8 @@
 }
 
  .dragable-item {
-	background: #dfedffb5;
-    color: #010101;
+	background: var(--gp-info-soft);
+    color: var(--gp-fg);
 	padding: 14px 12px;
 	border-radius: 5px;
 	margin-bottom: 10px;
@@ -60,19 +60,19 @@
 }
 
 .ui-sortable-placeholder {
-    background: #e0e0e0;
-    border: 2px dashed #ccc;
+    background: var(--gp-surface-sunk);
+    border: 2px dashed var(--gp-border-strong);
     height: 40px;
 }
 .notes {
 	font-size: 12px;
-	color: #010101;
-	background: #797c8b30;
+	color: var(--gp-fg);
+	background: var(--gp-surface-sunk);
 	border-radius: 3px;
 	padding: 7px 13px;
 }
 .singleFaq {
-	border-bottom: 1px solid #dbd5d5;
+	border-bottom: 1px solid var(--gp-border);
 	padding-bottom: 10px;
 	margin-bottom: 15px;
     position: relative;
@@ -104,8 +104,8 @@
 	height: 30px;
 	width: 30px;
 	border-radius: 4px;
-	border: 1px solid #e0e5f3;
-    background: #fff;
+	border: 1px solid var(--gp-border);
+    background: var(--gp-surface);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -116,8 +116,8 @@
     font-size: 15px;
 }
 .accor_wrap li a:hover{
-    color: #1982FE;
-    border-color: #1982FE;
+    color: var(--gp-link);
+    border-color: var(--gp-link);
 }
 .accor_wrap:hover ul{
     visibility: visible;
@@ -133,7 +133,7 @@
 }
 .accor_wrap .accordion-button {
 	padding: 14px 17px;
-    border: 1px solid #e5e1e1 !important;
+    border: 1px solid var(--gp-border) !important;
     border-radius: 5px;
 }
 .accordion-button:not(.collapsed) {
@@ -143,7 +143,7 @@
     font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  color: var(--darkColor);
+  color: var(--gp-fg);
 }
 
 .accordion-button::after {
@@ -154,12 +154,12 @@
 	transform: inherit;
 }
 .accordion-body {
-	border: 1px solid #e5e1e1 !important;
+	border: 1px solid var(--gp-border) !important;
 	border-top: 0 !important;
 	border-radius: 0 0 5px 5px;
 }
 .accordion-button:not(.collapsed) {
-	color: var(--darkColor);
+	color: var(--gp-fg);
 }
 .carousel-caption  h5 {
 	font-size: 19px;
@@ -177,7 +177,7 @@
     left: 6px;
     width: 20px;
 	z-index: 999;
-	color: #ff4625;
+	color: var(--gp-danger);
 	visibility: hidden;
 	opacity: 0;
 	transition: .5s;
@@ -191,8 +191,8 @@
 }
 .eControll i {
 	font-size: 12px;
-	border: 1px solid var(--skinColor);
-	color: var(--skinColor);
+	border: 1px solid var(--gp-link);
+	color: var(--gp-link);
 	height: 26px;
 	width: 26px;
 	line-height: 24px;

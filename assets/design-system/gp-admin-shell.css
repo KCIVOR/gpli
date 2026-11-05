@@ -26,6 +26,19 @@
   min-width: 0;
 }
 
+/* Admin and instructor content share the same page-title markup. Page-family
+   styles may set the old generic foreground, so preserve the GPLI heading
+   role at the shell boundary without changing their layout. */
+.gp-ds .content-page .header-title,
+.gp-ds .content-page .page-title,
+.gp-ds .content-page h1,
+.gp-ds .content-page h2,
+.gp-ds .content-page h3,
+.gp-ds .content-page h4,
+.gp-ds .content-page h5 {
+  color: var(--gp-heading) !important;
+}
+
 /* ========== Topbar — 64px neutral surface, sticky ========== */
 .gp-ds .navbar-custom.topnav-navbar,
 .gp-ds .navbar-custom.topnav-navbar-dark,

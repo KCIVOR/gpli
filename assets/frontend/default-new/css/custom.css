@@ -340,9 +340,9 @@
 /*Start courses page*/
 .list-btn:hover,
 .list-btn.active {
-    background-color: var(--color-4);
+    background-color: var(--gp-action-hover);
     color: var(--color-9);
-    border: 1.5px solid var(--color-4);
+    border: 1.5px solid var(--gp-action-hover);
 }
 
 .list-btn svg path {
@@ -396,9 +396,9 @@
 
 .pagenation .active,
 .page-item.active .page-link {
-    background-color: #754FFE;
+    background-color: var(--gp-action-hover);
     color: #fff;
-    box-shadow: 0px 7px 18px -8px #754ffe;
+    box-shadow: 0px 7px 18px -8px var(--gp-action-hover);
 }
 
 .page-item:last-child:not(.active) .page-link,
@@ -421,8 +421,8 @@
 .page-item a:hover {
     z-index: 2;
     color: #fff;
-    background-color: var(--color-4);
-    border-color: var(--color-4);
+    background-color: var(--gp-action-hover);
+    border-color: var(--gp-action-hover);
 }
 
 /*End pegination*/
@@ -472,7 +472,7 @@
 .social-btn:hover,
 .social-btn:focus {
     color: var(--bg-white-2);
-    background-color: var(--color-4);
+    background-color: var(--gp-action-hover);
     transition: .5s;
 }
 
@@ -662,7 +662,7 @@ ul.step-down li:last-child::before {
 
 .course-right-section .button a:hover,
 .course-right-section .button a.active {
-    background-color: var(--color-4);
+    background-color: var(--gp-action-hover);
     color: #fff;
 }
 
@@ -759,7 +759,7 @@ ul.step-down li:last-child::before {
 }
 
 .blog-search-input.form-control:focus {
-    border-color: #754ffe !important;
+    border-color: var(--gp-focus-ring) !important;
 }
 
 /*End Blog page*/
@@ -775,7 +775,7 @@ ul.step-down li:last-child::before {
 }
 
 .btn-primary:hover {
-    background-color: var(--color-4);
+    background-color: var(--gp-action-hover);
 }
 
 /*Button end*/
@@ -844,7 +844,7 @@ ul.step-down li:last-child::before {
 
 .btn-profile-menu:hover,
 .btn-profile-menu.active {
-    background-color: var(--color-4);
+    background-color: var(--gp-action-hover);
     color: var(--color-9);
     transition: .5s;
 }
@@ -1260,7 +1260,7 @@ ul.step-down li:last-child::before {
 
 .course-left-side .nav-link.active svg *,
 .course-left-side .nav-link:hover svg * {
-    fill: var(--color-4);
+    fill: var(--gp-link);
 }
 
 .instructor .instructor-icon i {
@@ -1442,7 +1442,7 @@ ul.step-down li:last-child::before {
 }
 
 .btn-fill:hover {
-    background: #754FFE;
+    background: var(--gp-action-hover);
     color: #fff;
 }
 
@@ -1465,7 +1465,7 @@ ul.step-down li:last-child::before {
 }
 
 .follow-btn:hover {
-    background-color: #754FFE;
+    background-color: var(--gp-action-hover);
     color: #fff;
 }
 

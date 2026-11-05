@@ -1005,7 +1005,7 @@
   font-family: var(--gp-font-head);
   font-weight: 800;
   letter-spacing: 0;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin: 0;
   font-size: clamp(1.4rem, 2.8vw, 1.9rem);
 }
@@ -1145,7 +1145,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gp-secondary);
+  color: var(--gp-link);
   margin: 0 0 18px;
 }
 

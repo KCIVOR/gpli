@@ -39,7 +39,7 @@
   font-weight: 800;
   letter-spacing: -0.5px;
   line-height: 1.15;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin: 0 0 10px;
 }
 
@@ -124,7 +124,7 @@
   font-family: var(--gp-font-head);
   font-size: 18px !important;
   font-weight: 800;
-  color: var(--gp-fg) !important;
+  color: var(--gp-heading) !important;
   margin: 0 0 12px;
 }
 
@@ -190,7 +190,7 @@
 }
 
 .gp-ds .gp-course-page .cusImageText h5 {
-  color: var(--gp-fg) !important;
+  color: var(--gp-heading) !important;
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 10px;
@@ -659,7 +659,7 @@
   letter-spacing: -0.2px;
   word-spacing: normal;
   line-height: 1.35;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin: 0;
 }
 

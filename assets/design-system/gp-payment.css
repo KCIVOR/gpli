@@ -42,7 +42,7 @@
   letter-spacing: -0.5px;
   word-spacing: normal;
   line-height: 1.15;
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   margin: 0;
 }
 
@@ -250,10 +250,10 @@
   float: none;
   margin: 0;
   padding: 15px 26px;
-  border: 2px solid var(--gp-primary);
+  border: 2px solid var(--gp-action);
   border-radius: var(--gp-radius);
-  background: var(--gp-primary) !important;
-  color: #fff !important;
+  background: var(--gp-action) !important;
+  color: var(--gp-on-action) !important;
   font-family: var(--gp-font-head);
   font-weight: 800;
   font-size: 13px;
@@ -264,9 +264,9 @@
 
 .gp-ds .gp-payment-page .payment-button:hover,
 .gp-ds .gp-payment-page .payment-button:focus {
-  background: var(--gp-accent) !important;
-  border-color: var(--gp-accent);
-  color: #fff !important;
+  background: var(--gp-action-hover) !important;
+  border-color: var(--gp-action-hover);
+  color: var(--gp-on-action) !important;
 }
 
 .gp-ds .gp-payment-page .payment-button:disabled {

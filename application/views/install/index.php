@@ -16,7 +16,7 @@
 <div class="page-container horizontal-menu">
 
 
-	<header class="navbar navbar-fixed-top" style="min-height: 80px; background: linear-gradient(135deg,#0F2027 0,#2C5364 60%) !important;">
+	<header class="navbar navbar-fixed-top" style="min-height: 80px;">
 		<div class="navbar-inner">
 			<!-- logo -->
 			<div class="navbar-brand">

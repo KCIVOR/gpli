@@ -146,7 +146,7 @@
 
 .gp-ds .gpli-home .ph-grid h1 {
   font-family: var(--gp-font-head);
-  color: var(--gp-fg);
+  color: var(--gp-heading);
   font-size: clamp(32px, 4.4vw, 52px);
   font-weight: 800;
   letter-spacing: -1px;
@@ -240,7 +240,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gp-secondary);
+  color: var(--gp-link);
   margin-bottom: 12px;
 }
 
@@ -262,7 +262,7 @@
 }
 
 .gp-ds .gpli-home .gp-two-tone-red {
-  color: var(--gp-secondary);
+  color: var(--gp-link);
 }
 
 .gp-ds .gpli-home .section-head p {
@@ -879,7 +879,7 @@
 .gp-ds .gpli-home .testi .who {
   font-family: var(--gp-font-head);
   font-weight: 800;
-  color: var(--gp-secondary);
+  color: var(--gp-link);
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -1005,9 +1005,9 @@
 }
 
 .gp-ds .gpli-home .btn-primary:hover {
-  background: var(--gp-accent);
-  border-color: var(--gp-accent);
-  color: #fff;
+  background: var(--gp-action-hover);
+  border-color: var(--gp-action-hover);
+  color: var(--gp-on-action);
 }
 
 .gp-ds .gpli-home .btn-outline-blue {
@@ -1017,8 +1017,9 @@
 }
 
 .gp-ds .gpli-home .btn-outline-blue:hover {
-  background: var(--gp-accent);
-  color: #fff;
+  background: var(--gp-action-hover);
+  border-color: var(--gp-action-hover);
+  color: var(--gp-on-action);
 }
 
 .gp-ds .gpli-home .btn-white {

@@ -24,13 +24,18 @@
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
         .download{
             padding: 12px 15px;
-            background-color: #2d32d5;
+            background-color: #2563EB;
             border-radius: 5px;
-            color: #fff;
+            color: #FFFFFF;
             text-decoration: none;
             border: none;
             cursor: pointer;
             margin-top: 100px;
+        }
+        .download:hover,
+        .download:focus {
+            background-color: #1D4ED8;
+            color: #FFFFFF;
         }
    </style>
 </head>

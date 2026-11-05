@@ -39,7 +39,7 @@
         echo $gp_ds_active ? ' gp-ds' : '';
     ?>">
         <?php if (!empty($gp_ds_active)): ?>
-        <script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=no-system-1"></script>
+        <script src="<?php echo base_url('assets/design-system/gp-theme-boot.js'); ?>?v=gpli-palette-2"></script>
         <?php endif; ?>
         <?php
             //user wishlist items

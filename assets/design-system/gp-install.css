@@ -15,7 +15,7 @@
 
 .gp-ds.page-body .navbar-brand,
 .gp-ds.page-body .navbar-brand.pull-right {
-  color: var(--gp-fg);
+  color: var(--gp-on-primary);
   font-family: var(--gp-font-head);
   font-weight: 800;
 }
@@ -36,9 +36,18 @@
 
 .gp-ds.page-body .btn-info,
 .gp-ds.page-body .btn-primary {
-  background: var(--gp-primary);
-  border-color: var(--gp-primary);
-  color: #fff;
+  background: var(--gp-action);
+  border-color: var(--gp-action);
+  color: var(--gp-on-action);
+}
+
+.gp-ds.page-body .btn-info:hover,
+.gp-ds.page-body .btn-info:focus,
+.gp-ds.page-body .btn-primary:hover,
+.gp-ds.page-body .btn-primary:focus {
+  background: var(--gp-action-hover);
+  border-color: var(--gp-action-hover);
+  color: var(--gp-on-action);
 }
 
 .gp-ds.page-body .form-control,
@@ -50,7 +59,7 @@
 }
 
 .gp-ds.page-body a {
-  color: var(--gp-primary);
+  color: var(--gp-link);
 }
 
 /* Minimal gp_ds_alert styles — install does not load gp-components-core.css */

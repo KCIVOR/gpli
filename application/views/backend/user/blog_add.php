@@ -37,7 +37,7 @@
 						<label for="banner"><?php echo get_phrase('blog_banner'); ?></label>
 						<div class="wrapper-image-preview" style="margin-left: -6px;">
 							<div class="box" style="width: 300px;">
-								<div class="js--image-preview" style="background-image: url('<?php echo base_url('uploads/blog/banner/placeholder.png') ?>'); background-color: #F5F5F5; background-size: cover; background-position: center;"></div>
+								<div class="js--image-preview" style="background-image: url('<?php echo base_url('uploads/blog/banner/placeholder.png') ?>'); background-color: var(--gp-surface-sunk); background-size: cover; background-position: center;"></div>
 								<div class="upload-options">
 									<label for="banner" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('choose_a_banner'); ?> <br> <small>(2000 x 500)</small> </label>
 									<input id="banner" style="visibility:hidden;" type="file" class="image-upload" name="banner" accept="image/*">
@@ -50,7 +50,7 @@
 						<label for="thumbnail"><?php echo get_phrase('blog_thumbnail'); ?></label>
 						<div class="wrapper-image-preview" style="margin-left: -6px;">
 							<div class="box" style="width: 300px;">
-								<div class="js--image-preview" style="background-image: url('<?php echo base_url('uploads/blog/thumbnail/placeholder.png') ?>'); background-color: #F5F5F5; background-size: cover; background-position: center;"></div>
+								<div class="js--image-preview" style="background-image: url('<?php echo base_url('uploads/blog/thumbnail/placeholder.png') ?>'); background-color: var(--gp-surface-sunk); background-size: cover; background-position: center;"></div>
 								<div class="upload-options">
 									<label for="thumbnail" class="btn"> <i class="mdi mdi-camera"></i> <?php echo get_phrase('choose_a_thumbnail'); ?> <br> <small>(800 x 500)</small> </label>
 									<input id="thumbnail" style="visibility:hidden;" type="file" class="image-upload" name="thumbnail" accept="image/*">

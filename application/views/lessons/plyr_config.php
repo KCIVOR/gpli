@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?php echo base_url(); ?>assets/global/plyr/plyr.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/global/plyr/plyr.css?v=gpli-hover-1">
 <script src="<?php echo base_url(); ?>assets/global/plyr/plyr.js"></script>
 <script>
     var player = new Plyr('#player', {
@@ -73,7 +73,7 @@
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        stroke: #ddd; /* Border color */
+        stroke: #E5E7EB; /* Border color */
         stroke-width: 7;
         fill: none;
     }
@@ -85,7 +85,7 @@
         border-radius: 50%;
         stroke-dasharray: 440; /* Circumference of the circle */
         stroke-dashoffset: 440;
-        stroke: #6610f2; /* Progress color */
+        stroke: #2563EB; /* Progress color */
         stroke-width: 7;
         fill: none;
         transition: stroke-dashoffset 5s linear;
