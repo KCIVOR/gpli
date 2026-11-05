@@ -152,3 +152,40 @@ These show in the preview but are CMS content, edited in the admin by whoever ma
 - The testimonials heading phrase reads "What the people thinks about us". Fix it in Language settings.
 - One review contains a mis-encoded dash (`ÔÇö`).
 - The footer still shows the template's "Creativeitem" copyright, demo phone number and demo email.
+
+## Execution record, 6 November 2026
+
+All nine phases were executed on `feature/landing-layout-refresh`, one commit per phase:
+
+| Phase | Commit | Result |
+|---|---|---|
+| 0 | `ccb0bfe`, `0982bfb` (on `develop`), `17f49f7` | Pending palette work committed separately on `develop`. Branch created. Baseline metrics saved to `tmp/landing-refresh/before/metrics-1440.json`. Cache key was `gpli-red-audit-1`. |
+| 1 | `0b11dd3` | Section rhythm, two-column section heads, sentence-case labels with the flock chevron. |
+| 2 | `e6a715e` | Split hero with bridging stat card; no-photo fallback, dark mode and the 390px band verified. |
+| 3 | `bafa11c` | Ruled feature strip; single-panel catalog. Dividers verified at 4 and 2 columns with 8 and 6 cards. |
+| 4 | `38fd13e` | Asymmetric media strip. Works with live slots (1 and 3 video, 2 photo). |
+| 5 | `394bd1e` | Quiz banner, Why GPLI, V-formation chevrons. |
+| 6 | `9a65a2c` | Facilitators, navy facilitator card (red removed), masonry testimonials, split CTA band. |
+| 7 | `1f3366d` | Contrast fixes; cache key bumped to `landing-layout-1`. |
+
+**Verification**
+- Code files changed vs `develop`: exactly `gp-landing-lms.css` and `home_gpli_assets.php` (cache key line only). The other two branch files are this plan and the preview.
+- Selector scope check: one hit, a comment line. No unscoped selectors. Braces balanced (234/234).
+- Top course card, category chip and button blocks are byte-identical to `develop`.
+- No horizontal overflow at 1440, 1280, 1024, 900, 768, 560, 390 and 360 px.
+- Contrast check over every text element on the page passes in light and dark after the Phase 7 fixes.
+- Keyboard: hero buttons show a 3px focus ring; the search field shows a focus border and ring.
+- Only literal colors left in the file: `#fff`, white rgba on navy, navy rgba scrims/shadows, plus one pre-existing shadow in the untouched Top course card block. No `--gp-secondary` (red) left.
+- `/home/courses`, `/login` and `/home/shopping_cart` return 200 and do not load the landing stylesheet.
+
+**Decisions and deviations**
+- Container width kept at 1290px.
+- `.bg-muted` sections now use the page background (transparent), so a band following another section reads as one surface.
+- `.gp-landing` sections on this page opt out of the 48vh floor from `gp-landing.css`, via a scoped rule. `gp-landing.css` itself is unchanged.
+- Testimonial stars now use `--gp-link` instead of `--gp-gold-deep`. The old token has no dark-mode value and measured 1.57:1 on the dark surface. This deviates from "keep the current star color".
+- The hero label pill uses a half-strength `--gp-info-soft` tint (`color-mix`) so the link blue stays above 4.5:1 in light mode.
+- The hero search input selector matches the specificity of the shared text-input rule in `gp-components-core.css`, so the field keeps its shape without editing that file.
+- The feature media photo fills its box instead of sizing it, so uploaded images of any shape don't stretch the strip.
+- Baseline and after screenshots could not be saved as files: the browser pane can't write to disk, and the device shell can't reach `localhost`. Layout metrics were saved as JSON instead, and screenshots were reviewed during the session. For the same reason `scripts/audit-responsive-design-system.mjs` was not run; the overflow, contrast and focus checks above replace it.
+- Not exercised live: Top Courses (off) and auto-mode category chips (manual mode is active). Their CSS blocks are unchanged, but they now inherit the left-aligned section head and the new section rhythm. Check both when either is switched on.
+- During Phase 0 the palette commit was first stored with CRLF line endings in 37 files. It was fixed forward in `0982bfb` (content unchanged). Every later commit was made with `core.autocrlf=true` and checked for CRLF before committing.
