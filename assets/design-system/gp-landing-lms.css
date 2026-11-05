@@ -19,11 +19,13 @@
 }
 
 .gp-ds .gpli-home .section-pad {
-  padding: 88px 0;
+  padding: 104px 0;
 }
 
+/* Muted sections share the page background, so a band that follows another
+   section reads as one continuous surface instead of a stack of tints. */
 .gp-ds .gpli-home .bg-muted {
-  background: var(--gp-surface-sunk);
+  background: transparent;
 }
 
 .gp-ds .gpli-home .gpli-bg-primary {
@@ -43,6 +45,24 @@
    to the section's own padding + content instead of the viewport. */
 .gp-ds .gpli-home section.gp-landing-compact {
   min-height: 0;
+}
+
+/* Every landing section sizes to its own content on this page (the 48vh
+   floor from gp-landing.css leaves empty bands around short sections). */
+.gp-ds .gpli-home section.gp-landing {
+  min-height: 0;
+}
+
+/* Sections that directly follow another band drop their top padding so the
+   two read as one rhythm. The media strip sets padding-top inline. */
+.gp-ds .gpli-home section:has(.lms-strip) {
+  padding-top: 0 !important; /* inline override */
+}
+
+.gp-ds .gpli-home section:has(.quiz-banner),
+.gp-ds .gpli-home section:has(.dual-cta),
+.gp-ds .gpli-home section:has(.testi-grid) {
+  padding-top: 0;
 }
 
 /* ========== Hero ========== */
@@ -124,24 +144,33 @@
 }
 
 .gp-ds .gpli-home .eyebrow {
-  font-family: var(--gp-font-head);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gp-gold-deep);
-  margin-bottom: 16px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 14px;
+  gap: 10px;
+  margin: 0;
+  padding: 7px 14px 7px 12px;
+  border-radius: 999px;
+  background: var(--gp-info-soft);
+  color: var(--gp-link);
+  font-family: var(--gp-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-.gp-ds .gpli-home .eyebrow::before {
+/* Flock chevron: the Geese Project mark, used as the label glyph. */
+.gp-ds .gpli-home .eyebrow::before,
+.gp-ds .gpli-home .section-eyebrow::before {
   content: "";
-  height: 1px;
-  width: 36px;
-  background: var(--gp-gold-deep);
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-top: 3px;
+  border-left: 2px solid currentColor;
+  border-top: 2px solid currentColor;
+  background: none;
+  transform: rotate(45deg);
 }
 
 .gp-ds .gpli-home .ph-grid h1 {
@@ -228,47 +257,80 @@
 }
 
 /* ========== Section headings ========== */
+/* Left-aligned: label and heading on the left, description on the right. */
 .gp-ds .gpli-home .section-head {
-  text-align: center;
-  max-width: 820px;
-  margin: 0 auto 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 64px;
+  align-items: end;
+  max-width: none;
+  margin: 0 0 48px;
+  text-align: left;
+}
+
+.gp-ds .gpli-home .section-head .section-eyebrow,
+.gp-ds .gpli-home .section-head h2 {
+  grid-column: 1;
 }
 
 .gp-ds .gpli-home .section-eyebrow {
-  font-family: var(--gp-font-head);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  justify-self: start;
+  margin-bottom: 14px;
+  font-family: var(--gp-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--gp-link);
-  margin-bottom: 12px;
 }
 
 .gp-ds .gpli-home .section-head h2 {
+  margin: 0;
   font-family: var(--gp-font-head);
-  color: var(--gp-fg);
-  font-size: clamp(28px, 4vw, 42px);
+  color: var(--gp-heading);
+  font-size: clamp(30px, 3.4vw, 44px);
   font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1.15;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+  text-wrap: balance;
 }
 
-/* Brand two-tone heading accent — pairs with the red .section-eyebrow /
-   .eyebrow above each heading so the page reads in both brand colors,
-   not just one. Hardcoded headings only: never wrap DB-driven text
-   (course titles, instructor names, review copy) in this. */
-.gp-ds .gpli-home .gp-two-tone-blue {
-  color: var(--gp-primary);
-}
-
+/* Two-tone heading accent. Both spans use the link role so the accent
+   flips with the theme. Hardcoded headings only: never wrap DB-driven
+   text (course titles, instructor names, review copy) in this. */
+.gp-ds .gpli-home .gp-two-tone-blue,
 .gp-ds .gpli-home .gp-two-tone-red {
   color: var(--gp-link);
 }
 
 .gp-ds .gpli-home .section-head p {
-  font-size: 16px;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: end;
+  max-width: 46ch;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.6;
   color: var(--gp-fg-muted);
-  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .gp-ds .gpli-home .section-pad {
+    padding: 72px 0;
+  }
+
+  .gp-ds .gpli-home .section-head {
+    grid-template-columns: 1fr;
+  }
+
+  .gp-ds .gpli-home .section-head p {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 14px;
+  }
 }
 
 /* ========== Feature trio ========== */
@@ -707,9 +769,6 @@
   justify-content: flex-start;
 }
 
-.gp-ds .gpli-home .quiz-banner .eyebrow::before {
-  background: var(--gp-gold-light);
-}
 
 .gp-ds .gpli-home .quiz-banner h2 {
   font-family: var(--gp-font-head);
