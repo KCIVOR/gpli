@@ -33,8 +33,11 @@
   color: #fff;
 }
 
+/* Why GPLI: a white band set off by hairlines (both themes via tokens). */
 .gp-ds .gpli-home .bg-blue-soft {
-  background: var(--gp-info-soft);
+  background: var(--gp-surface);
+  border-top: 1px solid var(--gp-border);
+  border-bottom: 1px solid var(--gp-border);
 }
 
 /* .gp-landing (gp-landing.css) forces every section to at least 48vh tall
@@ -115,13 +118,25 @@
   padding-bottom: 44px;
 }
 
-.gp-ds .gpli-home .quiz-banner.has-bg-photo,
 .gp-ds .gpli-home .cta-band.has-bg-photo {
   position: relative;
   background-color: var(--gp-accent);
 }
 
-.gp-ds .gpli-home .quiz-banner.has-bg-photo::before,
+.gp-ds .gpli-home .quiz-banner.has-bg-photo {
+  background-color: var(--gp-accent-2);
+}
+
+/* Quiz scrim: solid behind the copy, lighter toward the badge. */
+.gp-ds .gpli-home .quiz-banner.has-bg-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(15, 30, 61, 0.97) 0%, rgba(15, 30, 61, 0.9) 55%, rgba(15, 30, 61, 0.62) 100%);
+}
+
 .gp-ds .gpli-home .cta-band.has-bg-photo::before {
   content: "";
   position: absolute;
@@ -1040,114 +1055,199 @@
 }
 
 /* ========== Quiz banner ========== */
+/* Permanently navy in both themes, so text is white and accents use the
+   light blue that reads on navy. */
 .gp-ds .gpli-home .quiz-banner {
   position: relative;
   overflow: hidden;
-  background: var(--gp-accent);
-  border-radius: 20px;
-  padding: 48px;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
+  gap: 48px;
+  padding: 72px 64px;
+  border-radius: 22px;
+  background: var(--gp-accent-2);
   color: #fff;
 }
 
 .gp-ds .gpli-home .quiz-banner .eyebrow {
-  color: var(--gp-gold-light);
-  justify-content: flex-start;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--gp-primary-3);
 }
 
-
 .gp-ds .gpli-home .quiz-banner h2 {
+  margin: 22px 0 14px;
   font-family: var(--gp-font-head);
   color: #fff;
-  font-size: clamp(24px, 3vw, 32px);
+  font-size: clamp(30px, 3.4vw, 44px);
   font-weight: 800;
-  margin-bottom: 12px;
+  letter-spacing: -0.022em;
+  line-height: 1.1;
+}
+
+.gp-ds .gpli-home .quiz-banner h2 .gp-two-tone-blue,
+.gp-ds .gpli-home .quiz-banner h2 .gp-two-tone-red {
+  color: var(--gp-primary-3);
 }
 
 .gp-ds .gpli-home .quiz-banner p {
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 460px;
-  font-size: 15px;
+  max-width: 46ch;
+  margin: 0 0 32px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 17px;
   line-height: 1.6;
-  margin-bottom: 22px;
 }
 
+/* The institute lockup, framed like a seal. */
 .gp-ds .gpli-home .quiz-badge {
-  text-align: center;
+  justify-self: end;
+  padding: 30px 34px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 4px;
+  text-align: left;
   font-family: var(--gp-font-head);
 }
 
 .gp-ds .gpli-home .quiz-badge .ql1 {
-  color: var(--gp-gold-light);
+  color: #fff;
   font-weight: 800;
-  font-size: 15px;
-  letter-spacing: 0.08em;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
 }
 
 .gp-ds .gpli-home .quiz-badge .ql2 {
-  color: #fff;
-  font-weight: 800;
-  font-size: 20px;
-  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.4;
+  letter-spacing: 0.42em;
 }
 
 .gp-ds .gpli-home .quiz-badge .ql3 {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 11.5px;
-  margin-top: 6px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--gp-font-body);
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .gp-ds .gpli-home .quiz-banner {
+    grid-template-columns: 1fr;
+    padding: 48px 28px;
+  }
+
+  .gp-ds .gpli-home .quiz-badge {
+    justify-self: start;
+  }
 }
 
 /* ========== Why-us tiles + stats ========== */
+/* Reasons as a ruled list on the left, the numbers in a navy panel on the
+   right. Scoped to .bg-blue-soft so the Top Courses .g3 grid is untouched. */
+.gp-ds .gpli-home .bg-blue-soft .container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 64px;
+}
+
+.gp-ds .gpli-home .bg-blue-soft .section-head {
+  grid-column: 1 / -1;
+}
+
+.gp-ds .gpli-home .bg-blue-soft .g3 {
+  display: block;
+}
+
 .gp-ds .gpli-home .tile {
-  background: var(--gp-surface);
-  border: 1px solid var(--gp-border);
-  border-radius: 14px;
-  padding: 26px 22px;
-  text-align: center;
+  padding: 26px 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--gp-border);
+  border-radius: 0;
+  text-align: left;
+}
+
+.gp-ds .gpli-home .tile:last-child {
+  border-bottom: 1px solid var(--gp-border);
 }
 
 .gp-ds .gpli-home .tile h3 {
+  margin: 0 0 6px;
   font-family: var(--gp-font-head);
-  color: var(--gp-fg);
-  font-size: 16px;
-  font-weight: 800;
-  margin-bottom: 8px;
+  color: var(--gp-heading);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 .gp-ds .gpli-home .tile p {
+  margin: 0;
   color: var(--gp-fg-muted);
-  font-size: 13.5px;
+  font-size: 15px;
   line-height: 1.6;
 }
 
 .gp-ds .gpli-home .why-stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 48px;
-  text-align: center;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 0;
+  align-self: start;
+  text-align: left;
+  border-radius: 20px;
+  background: var(--gp-accent-2);
+  color: #fff;
+  overflow: hidden;
+}
+
+.gp-ds .gpli-home .why-stats .stat {
+  padding: 36px 34px;
+}
+
+.gp-ds .gpli-home .why-stats .stat:nth-child(odd) {
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.gp-ds .gpli-home .why-stats .stat:nth-child(-n+2) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .gp-ds .gpli-home .why-stats .num {
   font-family: var(--gp-font-head);
-  font-size: 28px;
+  font-size: 48px;
   font-weight: 800;
-  color: var(--gp-primary);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
 }
 
 .gp-ds .gpli-home .why-stats .lbl {
-  font-size: 13px;
-  color: var(--gp-fg-muted);
-  margin-top: 4px;
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.72);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
+  .gp-ds .gpli-home .bg-blue-soft .container {
+    grid-template-columns: 1fr;
+  }
+
   .gp-ds .gpli-home .why-stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 560px) {
+  .gp-ds .gpli-home .why-stats .stat {
+    padding: 28px 22px;
+  }
+
+  .gp-ds .gpli-home .why-stats .num {
+    font-size: 36px;
   }
 }
 
@@ -1391,41 +1491,38 @@
 }
 
 /* ========== Decorative flock chevrons (matches design-system reference) ========== */
+/* A thin V drawn on ::before, so the inline transform: scale() on each
+   .ph-chevron still positions and sizes it. */
 .gp-ds .gpli-home .ph-flock {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.35;
+  opacity: 1;
 }
 
 .gp-ds .gpli-home .ph-chevron {
   position: absolute;
-  width: 40px;
-  height: 22px;
-}
-
-.gp-ds .gpli-home .ph-chevron::before,
-.gp-ds .gpli-home .ph-chevron::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 22px;
-  height: 3px;
-  background: var(--gp-gold);
-  border-radius: 2px;
+  width: 34px;
+  height: 20px;
 }
 
 .gp-ds .gpli-home .ph-chevron::before {
-  left: 0;
-  transform: rotate(28deg);
-  transform-origin: left center;
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  width: 18px;
+  height: 18px;
+  border-left: 2px solid rgba(255, 255, 255, 0.24);
+  border-top: 2px solid rgba(255, 255, 255, 0.24);
+  background: none;
+  border-radius: 0;
+  transform: rotate(45deg);
 }
 
 .gp-ds .gpli-home .ph-chevron::after {
-  right: 0;
-  transform: rotate(-28deg);
-  transform-origin: right center;
+  content: none;
 }
 
 .gp-ds .gpli-home .cta-band .container,
