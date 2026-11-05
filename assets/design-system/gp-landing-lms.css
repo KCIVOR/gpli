@@ -178,7 +178,8 @@
   margin: 0;
   padding: 7px 14px 7px 12px;
   border-radius: 999px;
-  background: var(--gp-info-soft);
+  /* Half-strength tint keeps the link blue above 4.5:1 in light mode. */
+  background: color-mix(in srgb, var(--gp-info-soft) 55%, var(--gp-surface));
   color: var(--gp-link);
   font-family: var(--gp-font-body);
   font-size: 14px;
@@ -1317,8 +1318,10 @@
   box-shadow: none;
 }
 
+/* --gp-gold-deep has no dark-mode value and drops to 1.6:1 on the dark
+   surface; the link role flips with the theme. */
 .gp-ds .gpli-home .testi .stars {
-  color: var(--gp-gold-deep);
+  color: var(--gp-link);
   letter-spacing: 2px;
   margin-bottom: 0;
 }
