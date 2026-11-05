@@ -474,50 +474,83 @@
 }
 
 /* ========== Feature trio ========== */
+/* A ruled proof strip directly under the hero. */
+.gp-ds .gpli-home section.gp-landing-compact {
+  padding: 0 !important; /* inline override */
+  background: var(--gp-surface);
+  border-bottom: 1px solid var(--gp-border);
+}
+
 .gp-ds .gpli-home .feat-trio {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
-  text-align: center;
+  gap: 0;
+  text-align: left;
+}
+
+.gp-ds .gpli-home .feat {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  column-gap: 16px;
+  align-content: start;
+  padding: 32px 32px 32px 0;
+}
+
+.gp-ds .gpli-home .feat + .feat {
+  padding-left: 32px;
+  border-left: 1px solid var(--gp-border);
 }
 
 .gp-ds .gpli-home .feat-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
+  grid-row: span 2;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border-radius: 10px;
   background: var(--gp-info-soft);
-  color: var(--gp-primary);
+  color: var(--gp-link);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
 }
 
 .gp-ds .gpli-home .feat-icon svg {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
 }
 
 .gp-ds .gpli-home .feat-trio h3 {
+  margin: 0 0 4px;
   font-family: var(--gp-font-head);
-  color: var(--gp-fg);
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 8px;
+  color: var(--gp-heading);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 .gp-ds .gpli-home .feat-trio p {
+  margin: 0;
   color: var(--gp-fg-muted);
   font-size: 14px;
+  line-height: 1.5;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .gp-ds .gpli-home .feat-trio {
     grid-template-columns: 1fr;
-    gap: 28px;
+  }
+
+  .gp-ds .gpli-home .feat,
+  .gp-ds .gpli-home .feat + .feat {
+    padding: 24px 0;
+    border-left: 0;
+  }
+
+  .gp-ds .gpli-home .feat + .feat {
+    border-top: 1px solid var(--gp-border);
   }
 }
 
@@ -617,22 +650,14 @@
   gap: 24px;
 }
 
-.gp-ds .gpli-home .g4 {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-}
-
 @media (max-width: 900px) {
-  .gp-ds .gpli-home .g3,
-  .gp-ds .gpli-home .g4 {
+  .gp-ds .gpli-home .g3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 560px) {
-  .gp-ds .gpli-home .g3,
-  .gp-ds .gpli-home .g4 {
+  .gp-ds .gpli-home .g3 {
     grid-template-columns: 1fr;
   }
 }
@@ -779,23 +804,48 @@
 }
 
 /* ========== Function / category cards ========== */
-.gp-ds .gpli-home .fn-card {
+/* One bordered catalog panel with shared dividers. The cards are not links
+   in the template, so they get no hover state. */
+.gp-ds .gpli-home .g4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
   background: var(--gp-surface);
   border: 1px solid var(--gp-border);
-  border-radius: 14px;
-  padding: 26px 22px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.gp-ds .gpli-home .fn-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 248px;
+  padding: 30px 28px 26px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  border-right: 1px solid var(--gp-border);
+  border-bottom: 1px solid var(--gp-border);
+}
+
+.gp-ds .gpli-home .fn-card:nth-child(4n) {
+  border-right: 0;
+}
+
+.gp-ds .gpli-home .fn-card:nth-last-child(-n+4) {
+  border-bottom: 0;
 }
 
 .gp-ds .gpli-home .fn-icon {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
   background: var(--gp-info-soft);
-  color: var(--gp-primary);
+  color: var(--gp-link);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin: 0;
 }
 
 .gp-ds .gpli-home .fn-icon svg {
@@ -807,36 +857,70 @@
 }
 
 .gp-ds .gpli-home .fn-card h3 {
+  margin: 22px 0 8px;
   font-family: var(--gp-font-head);
-  color: var(--gp-fg);
-  font-size: 16px;
-  font-weight: 800;
-  margin-bottom: 8px;
+  color: var(--gp-heading);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 .gp-ds .gpli-home .fn-card p {
+  margin: 0;
   color: var(--gp-fg-muted);
-  font-size: 13.5px;
-  line-height: 1.6;
-  margin-bottom: 14px;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .gp-ds .gpli-home .fn-count {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: var(--gp-font-head);
-  font-weight: 700;
-  font-size: 12.5px;
-  color: var(--gp-primary);
+  margin-top: auto;
+  padding-top: 22px;
+  font-family: var(--gp-font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gp-link);
+  font-variant-numeric: tabular-nums;
 }
 
-.gp-ds .gpli-home .fn-count svg {
-  width: 14px;
-  height: 14px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
+@media (max-width: 1080px) {
+  .gp-ds .gpli-home .g4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gp-ds .gpli-home .fn-card:nth-child(4n) {
+    border-right: 1px solid var(--gp-border);
+  }
+
+  .gp-ds .gpli-home .fn-card:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .gp-ds .gpli-home .fn-card:nth-last-child(-n+4) {
+    border-bottom: 1px solid var(--gp-border);
+  }
+
+  .gp-ds .gpli-home .fn-card:nth-last-child(-n+2) {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .gp-ds .gpli-home .g4 {
+    grid-template-columns: 1fr;
+  }
+
+  .gp-ds .gpli-home .fn-card,
+  .gp-ds .gpli-home .fn-card:nth-child(4n),
+  .gp-ds .gpli-home .fn-card:nth-last-child(-n+4),
+  .gp-ds .gpli-home .fn-card:nth-last-child(-n+2) {
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--gp-border);
+  }
+
+  .gp-ds .gpli-home .fn-card:last-child {
+    border-bottom: 0;
+  }
 }
 
 /* ========== Category chips ========== */
