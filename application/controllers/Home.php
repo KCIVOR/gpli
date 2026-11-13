@@ -1590,6 +1590,10 @@ class Home extends CI_Controller
     public function course_preview($course_id = "")
     {
         $page_data['course_details'] = $this->crud_model->get_course_by_id($course_id)->row_array();
+        if (! $this->crud_model->can_view_course_preview($page_data['course_details'])) {
+            return $this->output->set_status_header(403)->set_output('Forbidden');
+        }
+
         $this->load->view('frontend/' . get_frontend_settings('theme') . '/course_page_preview_modal', $page_data);
     }
 

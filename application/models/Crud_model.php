@@ -5076,9 +5076,25 @@ class Crud_model extends CI_Model
         $this->db->delete('custom_page');
     }
 
-    public function is_course_instructor($course_id = "", $user_id = "0")
+    public function can_view_course_preview($course_details)
     {
-        $course_details = $this->get_course_by_id($course_id)->row_array();
+        $user_id = $this->session->userdata('user_id');
+        if (empty($course_details) || ! $user_id) {
+            return false;
+        }
+
+        if ($this->session->userdata('admin_login')) {
+            return true;
+        }
+
+        return $this->session->userdata('user_login')
+            && ($this->is_course_instructor($course_details['id'], $user_id, $course_details)
+                || enroll_status($course_details['id'], $user_id) === 'valid');
+    }
+
+    public function is_course_instructor($course_id = "", $user_id = "0", $course_details = null)
+    {
+        $course_details = $course_details ?? $this->get_course_by_id($course_id)->row_array();
 
         if ($course_details['creator'] == $user_id) {
             return true;

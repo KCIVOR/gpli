@@ -123,9 +123,11 @@ $number_of_quiz = $this->db->get_where('lesson', ['course_id' => $course_details
             <aside class="gp-course-aside">
                 <div class="gp-course-buy">
                     <div class="gp-course-media">
-                        <div class="gp-course-play" onclick="lesson_preview('<?php echo site_url('home/course_preview/' . $course_details['id']); ?>', '<?php echo get_phrase($course_details['title']) ?>')">
-                            <i class="fa-solid fa-play"></i>
-                        </div>
+                        <?php if ($this->crud_model->can_view_course_preview($course_details)) : ?>
+                            <div class="gp-course-play" onclick="lesson_preview('<?php echo site_url('home/course_preview/' . $course_details['id']); ?>', '<?php echo get_phrase($course_details['title']) ?>')">
+                                <i class="fa-solid fa-play"></i>
+                            </div>
+                        <?php endif; ?>
                         <img loading="lazy" src="<?php echo $this->crud_model->get_course_thumbnail_url($course_details['id']); ?>" alt="">
                         <div class="courses-icon <?php if (in_array($course_details['id'], $my_wishlist_items)) echo 'red-heart'; ?>" id="coursesWishlistIcon<?php echo $course_details['id']; ?>">
                             <i class="fa-solid fa-heart cursor-pointer checkPropagation" onclick="actionTo('<?php echo site_url('home/toggleWishlistItems/' . $course_details['id']); ?>')"></i>
